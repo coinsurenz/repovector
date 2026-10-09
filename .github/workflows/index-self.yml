@@ -1,0 +1,40 @@
+# This repository indexes itself with its own action, built from source on each push.
+# Needs repository secrets: PINECONE_API_KEY (and a Pinecone index named repo-vector created
+# with llama-text-embed-v2, or flip REPO_VECTOR_CREATE_INDEX to true for the first run).
+name: index-self
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: repo-vector-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci && npm run build
+      - id: index
+        uses: ./
+        env:
+          REPO_VECTOR_STORE: pinecone
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          REPO_VECTOR_INDEX: repo-vector
+          REPO_VECTOR_CREATE_INDEX: "false"
+          REPO_VECTOR_EMBEDDING_PROVIDER: pinecone
+          REPO_VECTOR_EMBEDDING_MODEL: llama-text-embed-v2
+          REPO_VECTOR_EXCLUDE: "test/fixtures/**"
+      - run: echo "Indexed ${{ steps.index.outputs.sha }} (${{ steps.index.outputs.mode }}, ${{ steps.index.outputs.files_indexed }} files)"

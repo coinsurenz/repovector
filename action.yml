@@ -1,0 +1,32 @@
+name: repo-vector
+description: Re-index this repository into a vector database (Pinecone or Postgres/pgvector) after every push, so people and agents can search it by meaning.
+author: repo-vector contributors
+branding:
+  icon: search
+  color: blue
+
+# Configuration is by environment only (env: on the step), the same way a deploy step takes its secrets.
+# Required: REPO_VECTOR_STORE, PINECONE_API_KEY or DATABASE_URL, REPO_VECTOR_EMBEDDING_PROVIDER,
+# REPO_VECTOR_EMBEDDING_MODEL, and OPENROUTER_API_KEY or OPENAI_API_KEY for those providers. See README.md.
+
+outputs:
+  mode:
+    description: full, incremental or skipped (code namespace)
+  sha:
+    description: The commit that was indexed
+  namespace:
+    description: Code namespace written to; history is in <namespace>-history
+  files_indexed:
+    description: Files chunked and embedded in this run
+  files_removed:
+    description: Files whose records were deleted (removed, renamed away, or no longer eligible)
+  records_upserted:
+    description: Code and commit records written
+  records_deleted:
+    description: Code and commit records deleted
+  commits_indexed:
+    description: Commit records written to the history namespace
+
+runs:
+  using: node24
+  main: dist/action.js
