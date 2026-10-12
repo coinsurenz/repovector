@@ -1,4 +1,4 @@
-# repo-vector
+# Repovector
 
 A GitHub Action that keeps a vector index of your repository current after every push, in Pinecone or in any Postgres with pgvector. A small CLI, an HTTP API and an MCP server let people and agents search it by meaning: "where are webhook signatures verified", "when did refunds start retrying".
 
