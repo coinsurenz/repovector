@@ -3,6 +3,8 @@ export class HttpError extends Error {
   constructor(
     public readonly status: number,
     message: string,
+    /** Extra response headers, e.g. WWW-Authenticate on a 401. */
+    public readonly headers: Record<string, string> = {},
   ) {
     super(message);
     this.name = 'HttpError';

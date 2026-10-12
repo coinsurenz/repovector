@@ -1,10 +1,12 @@
-import { createHash, timingSafeEqual } from 'node:crypto';
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from 'node:http';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { z } from 'zod';
+import { RESOURCE_METADATA_PATH, createAuthenticator, resourceMetadata, type Authenticator, type Principal } from './auth';
 import { createClient, type RepoVectorClient } from './client';
 import { loadConfig, type Config } from './config';
 import { ConfigError, HttpError, errorMessage } from './errors';
 import { createLogger, type Logger } from './log';
+import { createMcpServer } from './mcp';
 
 const MAX_BODY_BYTES = 64 * 1024;
 
@@ -34,8 +36,13 @@ export interface HandlerOptions {
   /** A client, or a way to get one; the server keeps answering /health while the index does not exist yet. */
   client: RepoVectorClient | (() => Promise<RepoVectorClient>);
   config: Pick<Config, 'store' | 'server'>;
+  /** Checks the Authorization header on every route except /health and the metadata document. */
+  authenticate: Authenticator;
   log: Logger;
 }
+
+/** Returned by a route that wrote the response itself (the MCP transport does). */
+const HANDLED = Symbol('handled');
 
 const RECONNECT_MS = 5000;
 
@@ -75,8 +82,7 @@ export type Handler = ((req: IncomingMessage, res: ServerResponse) => void) & {
   close: () => Promise<void>;
 };
 
-export function createHandler({ client, config, log }: HandlerOptions): Handler {
-  const token = config.server.token;
+export function createHandler({ client, config, authenticate, log }: HandlerOptions): Handler {
   const clients = lazyClient(client);
   const handler = (req: IncomingMessage, res: ServerResponse): void => {
     const started = performance.now();
@@ -84,17 +90,22 @@ export function createHandler({ client, config, log }: HandlerOptions): Handler 
     res.on('finish', () => log.info(`${req.method} ${url.pathname} ${res.statusCode} ${Math.round(performance.now() - started)}ms`));
     if (config.server.corsOrigin) {
       res.setHeader('Access-Control-Allow-Origin', config.server.corsOrigin);
-      res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, Accept, Mcp-Protocol-Version, Mcp-Session-Id');
+      res.setHeader('Access-Control-Expose-Headers', 'WWW-Authenticate, Mcp-Session-Id');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
       res.setHeader('Vary', 'Origin');
     }
-    route(req, url, clients.get, config, token)
-      .then((body) => send(res, 200, body))
+    route(req, res, url, clients.get, config, authenticate, log)
+      .then((body) => {
+        if (body !== HANDLED) send(res, 200, body);
+      })
       .catch((err: unknown) => {
         const status = err instanceof HttpError ? err.status : err instanceof ConfigError ? 400 : 500;
         // Expected states (503 not ready yet, 4xx) are in the access log line; only real faults get an error line.
         if (!(err instanceof HttpError) && status >= 500) log.error(`${req.method} ${url.pathname}: ${errorMessage(err)}`);
-        send(res, status, { error: status >= 500 && !(err instanceof HttpError) ? 'Internal error; see the server log' : errorMessage(err) });
+        if (err instanceof HttpError && (status === 401 || status === 403)) log.warn(`${req.method} ${url.pathname} refused: ${errorMessage(err)}`);
+        const headers = err instanceof HttpError ? err.headers : {};
+        send(res, status, { error: status >= 500 && !(err instanceof HttpError) ? 'Internal error; see the server log' : errorMessage(err) }, headers);
       });
   };
   return Object.assign(handler, {
@@ -108,7 +119,15 @@ export function createHandler({ client, config, log }: HandlerOptions): Handler 
   });
 }
 
-async function route(req: IncomingMessage, url: URL, getClient: () => Promise<RepoVectorClient>, config: HandlerOptions['config'], token: string | null): Promise<unknown> {
+async function route(
+  req: IncomingMessage,
+  res: ServerResponse,
+  url: URL,
+  getClient: () => Promise<RepoVectorClient>,
+  config: HandlerOptions['config'],
+  authenticate: Authenticator,
+  log: Logger,
+): Promise<unknown> {
   const method = req.method ?? 'GET';
   if (method === 'OPTIONS') return {};
   if (url.pathname === '/health' && method === 'GET') {
@@ -116,10 +135,17 @@ async function route(req: IncomingMessage, url: URL, getClient: () => Promise<Re
     const client = await getClient();
     return { ok: true, store: config.store, index: client.identity.index, namespace: client.identity.namespace };
   }
-  const known = ['/status', '/search', '/history/search'];
+  if (url.pathname === RESOURCE_METADATA_PATH || url.pathname.startsWith(`${RESOURCE_METADATA_PATH}/`)) {
+    const metadata = resourceMetadata(config.server.auth);
+    if (!metadata || method !== 'GET') throw new HttpError(404, `No route ${url.pathname}`);
+    return metadata;
+  }
+  const known = ['/status', '/search', '/history/search', '/mcp'];
   if (!known.includes(url.pathname)) throw new HttpError(404, `No route ${url.pathname}`);
-  authorise(req, token);
+  const principal = await authenticate(req.headers.authorization);
   const client = await getClient();
+  if (url.pathname === '/mcp') return mcp(req, res, method, client, principal, log);
+  audit(log, principal, url.pathname);
   if (url.pathname === '/status') {
     if (method !== 'GET') throw new HttpError(405, 'Use GET');
     return client.status();
@@ -130,14 +156,32 @@ async function route(req: IncomingMessage, url: URL, getClient: () => Promise<Re
   return client.searchHistory(parse(HistoryBody, body));
 }
 
-function authorise(req: IncomingMessage, token: string | null): void {
-  if (token === null) return;
-  const header = req.headers.authorization ?? '';
-  const given = header.startsWith('Bearer ') ? header.slice(7) : '';
-  // Compare digests so the comparison is constant-time whatever the lengths.
-  const a = createHash('sha256').update(given).digest();
-  const b = createHash('sha256').update(token).digest();
-  if (given === '' || !timingSafeEqual(a, b)) throw new HttpError(401, 'Missing or wrong bearer token');
+/**
+ * MCP over Streamable HTTP, stateless: every POST gets a fresh server and
+ * transport, so no session state lives here and any replica can answer.
+ */
+async function mcp(req: IncomingMessage, res: ServerResponse, method: string, client: RepoVectorClient, principal: Principal, log: Logger): Promise<typeof HANDLED> {
+  if (method !== 'POST') throw new HttpError(405, 'This MCP endpoint is stateless: use POST', { Allow: 'POST' });
+  const body = await readJson(req);
+  for (const message of Array.isArray(body) ? body : [body]) {
+    const m = message as { method?: string; params?: { name?: string } };
+    if (m?.method === 'tools/call') audit(log, principal, `mcp ${m.params?.name ?? '?'}`);
+  }
+  const server = createMcpServer(client);
+  const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined, enableJsonResponse: true });
+  res.on('close', () => {
+    void transport.close();
+    void server.close();
+  });
+  await server.connect(transport);
+  await transport.handleRequest(req, res, body);
+  return HANDLED;
+}
+
+/** One line per authorised call: who, and which operation. Queries are never logged. */
+function audit(log: Logger, principal: Principal, operation: string): void {
+  if (principal.via === 'none') return;
+  log.info(`audit sub=${JSON.stringify(principal.sub)} via=${principal.via} op=${operation}`);
 }
 
 async function readJson(req: IncomingMessage): Promise<unknown> {
@@ -163,10 +207,10 @@ function parse<T>(schema: z.ZodType<T>, body: unknown): T {
   return result.data;
 }
 
-function send(res: ServerResponse, status: number, body: unknown): void {
+function send(res: ServerResponse, status: number, body: unknown, headers: Record<string, string> = {}): void {
   if (res.headersSent) return;
   const json = JSON.stringify(body);
-  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': Buffer.byteLength(json), 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+  res.writeHead(status, { ...headers, 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': Buffer.byteLength(json), 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
   res.end(json);
 }
 
@@ -176,14 +220,15 @@ const isLoopback = (host: string): boolean => host === '127.0.0.1' || host === '
 export async function serve(env = process.env): Promise<Server> {
   const log = createLogger(env);
   const config = loadConfig(env);
-  if (!config.server.token && !isLoopback(config.server.host)) {
-    throw new ConfigError(`Refusing to listen on ${config.server.host} without REPO_VECTOR_SERVER_TOKEN; set a token, or REPO_VECTOR_SERVER_HOST=127.0.0.1`);
+  if (config.server.auth.mode === 'none' && !isLoopback(config.server.host)) {
+    throw new ConfigError(`Refusing to listen on ${config.server.host} without authentication; set REPO_VECTOR_SERVER_TOKEN or REPO_VECTOR_AUTH=jwt, or REPO_VECTOR_SERVER_HOST=127.0.0.1`);
   }
+  const authenticate = await createAuthenticator(config.server.auth, config.repo);
   // A container has no checkout: identity comes from REPO_VECTOR_REPO / _BRANCH / _NAMESPACE.
-  const handler = createHandler({ client: () => createClient({ env, root: null }), config, log });
+  const handler = createHandler({ client: () => createClient({ env, root: null, readOnly: true }), config, authenticate, log });
   const server = createServer(handler);
   await new Promise<void>((resolve) => server.listen(config.server.port, config.server.host, resolve));
-  log.info(`repo-vector API on http://${config.server.host}:${config.server.port} (${config.store})`);
+  log.info(`repo-vector API on http://${config.server.host}:${config.server.port} (${config.store}; auth ${config.server.auth.mode}; MCP at /mcp)`);
   const { client, error } = await handler.warm();
   if (client) log.info(`Serving index ${client.identity.index}, namespace ${client.identity.namespace}`);
   else log.warn(`Not ready yet: ${error}. /health answers 503 until it is; retrying on request.`);

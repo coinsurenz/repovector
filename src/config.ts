@@ -51,6 +51,14 @@ const schema = z.object({
   REPO_VECTOR_SERVER_PORT: int(1, 65535).default(8080),
   REPO_VECTOR_SERVER_CORS_ORIGIN: z.string().optional(),
   REPO_VECTOR_TOPK_MAX: int(1, 1000).default(100),
+  REPO_VECTOR_AUTH: z.enum(['none', 'token', 'jwt']).optional(),
+  REPO_VECTOR_JWT_ISSUER: z.string().url().optional(),
+  REPO_VECTOR_JWT_AUDIENCE: z.string().url().optional(),
+  REPO_VECTOR_JWT_JWKS_URL: z.string().url().optional(),
+  REPO_VECTOR_JWT_PUBLIC_KEY: z.string().optional(),
+  REPO_VECTOR_JWT_ALG: z.string().optional(),
+  REPO_VECTOR_JWT_SCOPE: z.string().regex(/^\S+$/, 'one scope, no spaces').default('code:read'),
+  REPO_VECTOR_JWT_REPOS_CLAIM: z.string().optional(),
 
   GITHUB_REPOSITORY: z.string().optional(),
   GITHUB_REF_NAME: z.string().optional(),
@@ -99,11 +107,24 @@ export interface Config {
     historyMaxCommits: number;
   };
   server: {
-    token: string | null;
     host: string;
     port: number;
     corsOrigin: string | null;
     topKMax: number;
+    auth: {
+      /** none (loopback only), token (one shared bearer), jwt (per-user tokens from an identity provider). */
+      mode: 'none' | 'token' | 'jwt';
+      token: string | null;
+      issuer: string | null;
+      /** This service's identifier; tokens must be issued for it. Also the `resource` in its metadata. */
+      audience: string | null;
+      jwksUrl: string | null;
+      publicKey: string | null;
+      publicKeyAlg: string | null;
+      scope: string;
+      /** Claim listing the repositories a token may search; null means any repository this server serves. */
+      reposClaim: string | null;
+    };
   };
   /** Values that must never appear in a log; masked first thing in the action. */
   secrets: string[];
@@ -133,6 +154,13 @@ export function loadConfig(env: Env = process.env, cwd: string = process.cwd()):
   if (e.REPO_VECTOR_CHUNK_MAX < e.REPO_VECTOR_CHUNK_TARGET) problems.push('REPO_VECTOR_CHUNK_MAX must be at least REPO_VECTOR_CHUNK_TARGET');
   if (e.REPO_VECTOR_INDEX && e.REPO_VECTOR_STORE === 'pinecone' && !PINECONE_INDEX_RE.test(e.REPO_VECTOR_INDEX)) {
     problems.push('REPO_VECTOR_INDEX: Pinecone index names are lowercase letters, digits and hyphens, 1 to 45 characters');
+  }
+  const authMode = e.REPO_VECTOR_AUTH ?? (e.REPO_VECTOR_SERVER_TOKEN ? 'token' : 'none');
+  if (authMode === 'token' && !e.REPO_VECTOR_SERVER_TOKEN) problems.push('REPO_VECTOR_SERVER_TOKEN is required when REPO_VECTOR_AUTH=token');
+  if (authMode === 'jwt') {
+    if (!e.REPO_VECTOR_JWT_ISSUER) problems.push('REPO_VECTOR_JWT_ISSUER is required when REPO_VECTOR_AUTH=jwt (the identity provider that signs tokens)');
+    if (!e.REPO_VECTOR_JWT_AUDIENCE) problems.push('REPO_VECTOR_JWT_AUDIENCE is required when REPO_VECTOR_AUTH=jwt (this service\'s URL, which tokens must be issued for)');
+    if (!e.REPO_VECTOR_JWT_JWKS_URL === !e.REPO_VECTOR_JWT_PUBLIC_KEY) problems.push('Set exactly one of REPO_VECTOR_JWT_JWKS_URL or REPO_VECTOR_JWT_PUBLIC_KEY when REPO_VECTOR_AUTH=jwt');
   }
   if (problems.length > 0) throw new ConfigError(`Invalid configuration:\n  ${problems.join('\n  ')}`);
 
@@ -171,11 +199,21 @@ export function loadConfig(env: Env = process.env, cwd: string = process.cwd()):
       historyMaxCommits: e.REPO_VECTOR_HISTORY_MAX_COMMITS,
     },
     server: {
-      token: e.REPO_VECTOR_SERVER_TOKEN ?? null,
       host: e.REPO_VECTOR_SERVER_HOST ?? (inDocker ? '0.0.0.0' : '127.0.0.1'),
       port: e.REPO_VECTOR_SERVER_PORT,
       corsOrigin: e.REPO_VECTOR_SERVER_CORS_ORIGIN ?? null,
       topKMax: e.REPO_VECTOR_TOPK_MAX,
+      auth: {
+        mode: authMode,
+        token: e.REPO_VECTOR_SERVER_TOKEN ?? null,
+        issuer: e.REPO_VECTOR_JWT_ISSUER ?? null,
+        audience: e.REPO_VECTOR_JWT_AUDIENCE ?? null,
+        jwksUrl: e.REPO_VECTOR_JWT_JWKS_URL ?? null,
+        publicKey: e.REPO_VECTOR_JWT_PUBLIC_KEY ?? null,
+        publicKeyAlg: e.REPO_VECTOR_JWT_ALG ?? null,
+        scope: e.REPO_VECTOR_JWT_SCOPE,
+        reposClaim: e.REPO_VECTOR_JWT_REPOS_CLAIM ?? null,
+      },
     },
     secrets: [e.PINECONE_API_KEY, e.DATABASE_URL, passwordOf(e.DATABASE_URL), e.OPENROUTER_API_KEY, e.OPENAI_API_KEY, e.REPO_VECTOR_SERVER_TOKEN].filter(
       (v): v is string => typeof v === 'string' && v !== '',

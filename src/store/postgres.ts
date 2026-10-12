@@ -64,8 +64,9 @@ export class PostgresStore implements Backend {
   // ---------- IndexManager ----------
 
   async describe(name: string): Promise<IndexFacts | null> {
-    const [row] = await this.sql<IndexRow[]>`SELECT name, table_name, dimension, model FROM vector_indexes WHERE name = ${name}`;
-    return row ? toFacts(row) : null;
+    // A read-only role never migrates, so before the first index run the table may not exist yet.
+    const rows = await missingAsEmpty(this.sql<IndexRow[]>`SELECT name, table_name, dimension, model FROM vector_indexes WHERE name = ${name}`);
+    return rows[0] ? toFacts(rows[0]) : null;
   }
 
   async create(name: string): Promise<IndexFacts> {
@@ -147,7 +148,7 @@ export class PostgresStore implements Backend {
 
   async readSentinel(namespace: string): Promise<Sentinel | null> {
     const table = this.requireTable();
-    const [row] = await this.sql<Array<{ data: unknown }>>`SELECT data FROM repo_vector_sentinels WHERE table_name = ${table} AND namespace = ${namespace}`;
+    const [row] = await missingAsEmpty(this.sql<Array<{ data: unknown }>>`SELECT data FROM repo_vector_sentinels WHERE table_name = ${table} AND namespace = ${namespace}`);
     return row ? parseSentinel(JSON.stringify(row.data)) : null;
   }
 
@@ -202,4 +203,14 @@ export class PostgresStore implements Backend {
 
 function toFacts(row: IndexRow): IndexFacts {
   return { name: row.name, state: 'Ready', ready: true, embedModel: null, textField: null, dimension: row.dimension, metric: 'cosine', vectorModel: row.model };
+}
+
+/** undefined_table (42P01) reads as no rows: the indexer has not created the schema yet. */
+async function missingAsEmpty<T>(query: PromiseLike<T[]>): Promise<T[]> {
+  try {
+    return await query;
+  } catch (err) {
+    if ((err as { code?: string }).code === '42P01') return [];
+    throw err;
+  }
 }

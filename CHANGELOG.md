@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (unreleased)
+
+- MCP over HTTP at `/mcp` on the existing server (stateless Streamable HTTP), so Claude and other agents connect by URL.
+- `REPO_VECTOR_AUTH=jwt`: per-user access tokens from any OIDC/OAuth identity provider, checked for signature (JWKS or a static public key), issuer, audience, expiry, scope and optionally allowed repositories. Serves `/.well-known/oauth-protected-resource` and sends `WWW-Authenticate` challenges so MCP clients can find the sign-in.
+- The search side never migrates, so it runs on a `SELECT`-only database role.
+- Audit line per authorised call (who and which operation; never the query).
+- `scripts/mock-login.mjs`: a stand-in identity provider for testing the flow.
+- New dependency: `jose` (JWT verification; no dependencies of its own).
+
 ## 0.1.1 (unreleased)
 
 - Fix: on Node 24 (the action's runtime) indexing could be killed for running out of memory with no error printed. V8's optimising WebAssembly compiler briefly took about 2 GB while tree-sitter parsed even a small repository. The action and CLI now re-run themselves once with `--liftoff-only`, which keeps peak memory near 120 MB.

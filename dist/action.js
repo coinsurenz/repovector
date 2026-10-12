@@ -30141,12 +30141,14 @@ import { appendFileSync } from "node:fs";
 
 // src/errors.ts
 var HttpError = class extends Error {
-  constructor(status, message) {
+  constructor(status, message, headers = {}) {
     super(message);
     this.status = status;
+    this.headers = headers;
     this.name = "HttpError";
   }
   status;
+  headers;
 };
 var badRequest = (msg) => new HttpError(400, msg);
 var notFound = (msg) => new HttpError(404, msg);
@@ -34243,6 +34245,14 @@ var schema = external_exports.object({
   REPO_VECTOR_SERVER_PORT: int(1, 65535).default(8080),
   REPO_VECTOR_SERVER_CORS_ORIGIN: external_exports.string().optional(),
   REPO_VECTOR_TOPK_MAX: int(1, 1e3).default(100),
+  REPO_VECTOR_AUTH: external_exports.enum(["none", "token", "jwt"]).optional(),
+  REPO_VECTOR_JWT_ISSUER: external_exports.string().url().optional(),
+  REPO_VECTOR_JWT_AUDIENCE: external_exports.string().url().optional(),
+  REPO_VECTOR_JWT_JWKS_URL: external_exports.string().url().optional(),
+  REPO_VECTOR_JWT_PUBLIC_KEY: external_exports.string().optional(),
+  REPO_VECTOR_JWT_ALG: external_exports.string().optional(),
+  REPO_VECTOR_JWT_SCOPE: external_exports.string().regex(/^\S+$/, "one scope, no spaces").default("code:read"),
+  REPO_VECTOR_JWT_REPOS_CLAIM: external_exports.string().optional(),
   GITHUB_REPOSITORY: external_exports.string().optional(),
   GITHUB_REF_NAME: external_exports.string().optional(),
   GITHUB_ACTIONS: external_exports.string().optional(),
@@ -34268,6 +34278,13 @@ function loadConfig(env = process.env, cwd = process.cwd()) {
   if (e.REPO_VECTOR_CHUNK_MAX < e.REPO_VECTOR_CHUNK_TARGET) problems.push("REPO_VECTOR_CHUNK_MAX must be at least REPO_VECTOR_CHUNK_TARGET");
   if (e.REPO_VECTOR_INDEX && e.REPO_VECTOR_STORE === "pinecone" && !PINECONE_INDEX_RE.test(e.REPO_VECTOR_INDEX)) {
     problems.push("REPO_VECTOR_INDEX: Pinecone index names are lowercase letters, digits and hyphens, 1 to 45 characters");
+  }
+  const authMode = e.REPO_VECTOR_AUTH ?? (e.REPO_VECTOR_SERVER_TOKEN ? "token" : "none");
+  if (authMode === "token" && !e.REPO_VECTOR_SERVER_TOKEN) problems.push("REPO_VECTOR_SERVER_TOKEN is required when REPO_VECTOR_AUTH=token");
+  if (authMode === "jwt") {
+    if (!e.REPO_VECTOR_JWT_ISSUER) problems.push("REPO_VECTOR_JWT_ISSUER is required when REPO_VECTOR_AUTH=jwt (the identity provider that signs tokens)");
+    if (!e.REPO_VECTOR_JWT_AUDIENCE) problems.push("REPO_VECTOR_JWT_AUDIENCE is required when REPO_VECTOR_AUTH=jwt (this service's URL, which tokens must be issued for)");
+    if (!e.REPO_VECTOR_JWT_JWKS_URL === !e.REPO_VECTOR_JWT_PUBLIC_KEY) problems.push("Set exactly one of REPO_VECTOR_JWT_JWKS_URL or REPO_VECTOR_JWT_PUBLIC_KEY when REPO_VECTOR_AUTH=jwt");
   }
   if (problems.length > 0) throw new ConfigError(`Invalid configuration:
   ${problems.join("\n  ")}`);
@@ -34306,11 +34323,21 @@ function loadConfig(env = process.env, cwd = process.cwd()) {
       historyMaxCommits: e.REPO_VECTOR_HISTORY_MAX_COMMITS
     },
     server: {
-      token: e.REPO_VECTOR_SERVER_TOKEN ?? null,
       host: e.REPO_VECTOR_SERVER_HOST ?? (inDocker ? "0.0.0.0" : "127.0.0.1"),
       port: e.REPO_VECTOR_SERVER_PORT,
       corsOrigin: e.REPO_VECTOR_SERVER_CORS_ORIGIN ?? null,
-      topKMax: e.REPO_VECTOR_TOPK_MAX
+      topKMax: e.REPO_VECTOR_TOPK_MAX,
+      auth: {
+        mode: authMode,
+        token: e.REPO_VECTOR_SERVER_TOKEN ?? null,
+        issuer: e.REPO_VECTOR_JWT_ISSUER ?? null,
+        audience: e.REPO_VECTOR_JWT_AUDIENCE ?? null,
+        jwksUrl: e.REPO_VECTOR_JWT_JWKS_URL ?? null,
+        publicKey: e.REPO_VECTOR_JWT_PUBLIC_KEY ?? null,
+        publicKeyAlg: e.REPO_VECTOR_JWT_ALG ?? null,
+        scope: e.REPO_VECTOR_JWT_SCOPE,
+        reposClaim: e.REPO_VECTOR_JWT_REPOS_CLAIM ?? null
+      }
     },
     secrets: [e.PINECONE_API_KEY, e.DATABASE_URL, passwordOf(e.DATABASE_URL), e.OPENROUTER_API_KEY, e.OPENAI_API_KEY, e.REPO_VECTOR_SERVER_TOKEN].filter(
       (v) => typeof v === "string" && v !== ""
@@ -41932,8 +41959,8 @@ var PostgresStore = class _PostgresStore {
   }
   // ---------- IndexManager ----------
   async describe(name2) {
-    const [row] = await this.sql`SELECT name, table_name, dimension, model FROM vector_indexes WHERE name = ${name2}`;
-    return row ? toFacts(row) : null;
+    const rows = await missingAsEmpty(this.sql`SELECT name, table_name, dimension, model FROM vector_indexes WHERE name = ${name2}`);
+    return rows[0] ? toFacts(rows[0]) : null;
   }
   async create(name2) {
     const mode = this.mode;
@@ -42006,7 +42033,7 @@ var PostgresStore = class _PostgresStore {
   }
   async readSentinel(namespace) {
     const table = this.requireTable();
-    const [row] = await this.sql`SELECT data FROM repo_vector_sentinels WHERE table_name = ${table} AND namespace = ${namespace}`;
+    const [row] = await missingAsEmpty(this.sql`SELECT data FROM repo_vector_sentinels WHERE table_name = ${table} AND namespace = ${namespace}`);
     return row ? parseSentinel(JSON.stringify(row.data)) : null;
   }
   async writeSentinel(namespace, sentinel) {
@@ -42053,6 +42080,14 @@ var PostgresStore = class _PostgresStore {
 function toFacts(row) {
   return { name: row.name, state: "Ready", ready: true, embedModel: null, textField: null, dimension: row.dimension, metric: "cosine", vectorModel: row.model };
 }
+async function missingAsEmpty(query) {
+  try {
+    return await query;
+  } catch (err2) {
+    if (err2.code === "42P01") return [];
+    throw err2;
+  }
+}
 
 // src/store/open.ts
 async function resolveIdentity(cfg, root, branchOverride) {
@@ -42097,11 +42132,12 @@ async function buildMode(cfg, provider, model, knownDimension, dimensions) {
   const dimension = knownDimension ?? await client.probeDimension(model, requested);
   return { provider, model, dimension, dimensions: requested, client };
 }
-async function makeBackend(cfg, mode) {
+async function makeBackend(cfg, mode, opts = {}) {
   if (cfg.store === "pinecone") {
     return PineconeStore.fromApiKey(cfg.pineconeApiKey, { cloud: cfg.cloud, region: cfg.region, rerankModel: cfg.rerankModel }, mode);
   }
   const store = PostgresStore.fromUrl(cfg.databaseUrl, mode);
+  if (opts.readOnly) return store;
   try {
     await store.migrate();
   } catch (err2) {

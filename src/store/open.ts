@@ -78,12 +78,17 @@ export async function buildMode(cfg: Config, provider: EmbeddingProviderName, mo
   return { provider, model, dimension, dimensions: requested, client };
 }
 
-/** A backend for the configured store, not yet pointed at an index. Postgres is migrated on open. */
-export async function makeBackend(cfg: Config, mode: EmbeddingMode): Promise<Backend> {
+/**
+ * A backend for the configured store, not yet pointed at an index. Postgres is
+ * migrated on open unless `readOnly`: the search side never runs DDL, so it can
+ * use a role that may only SELECT.
+ */
+export async function makeBackend(cfg: Config, mode: EmbeddingMode, opts: { readOnly?: boolean } = {}): Promise<Backend> {
   if (cfg.store === 'pinecone') {
     return PineconeStore.fromApiKey(cfg.pineconeApiKey!, { cloud: cfg.cloud, region: cfg.region, rerankModel: cfg.rerankModel }, mode);
   }
   const store = PostgresStore.fromUrl(cfg.databaseUrl!, mode);
+  if (opts.readOnly) return store;
   try {
     await store.migrate();
   } catch (err) {
@@ -139,8 +144,8 @@ export async function openForIndexing(cfg: Config, identity: Identity, log: Logg
  * what the code sentinel recorded, so a consumer needs only store credentials
  * plus the provider key; explicit env values must agree with the sentinel.
  */
-export async function openForQuery(cfg: Config, identity: Identity, backendOverride?: Backend): Promise<Opened & { sentinel: Sentinel | null }> {
-  const backend = backendOverride ?? (await makeBackend(cfg, { provider: 'memory' }));
+export async function openForQuery(cfg: Config, identity: Identity, backendOverride?: Backend, opts: { readOnly?: boolean } = {}): Promise<Opened & { sentinel: Sentinel | null }> {
+  const backend = backendOverride ?? (await makeBackend(cfg, { provider: 'memory' }, opts));
   try {
     const index = await backend.describe(identity.index);
     if (!index) throw new ConfigError(`No index named "${identity.index}" in this ${cfg.store === 'pinecone' ? 'Pinecone project' : 'database'}. Has the indexing action run yet?`);
