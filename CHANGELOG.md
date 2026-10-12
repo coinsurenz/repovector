@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (unreleased)
+
+- Fix: on Node 24 (the action's runtime) indexing could be killed for running out of memory with no error printed. V8's optimising WebAssembly compiler briefly took about 2 GB while tree-sitter parsed even a small repository. The action and CLI now re-run themselves once with `--liftoff-only`, which keeps peak memory near 120 MB.
+
 ## 0.1.0 (unreleased)
 
 First version, built from `PLAN.md`.

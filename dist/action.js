@@ -42215,6 +42215,25 @@ function createLogger(env = process.env, write = (l) => process.stderr.write(`${
 }
 var escape2 = (s) => s.replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
 
+// src/relaunch.ts
+import { spawn } from "node:child_process";
+var BASELINE_WASM_FLAG = "--liftoff-only";
+function relaunchWithBaselineWasm() {
+  if (process.execArgv.includes(BASELINE_WASM_FLAG)) return null;
+  return new Promise((resolve) => {
+    const child = spawn(process.execPath, [BASELINE_WASM_FLAG, ...process.execArgv, ...process.argv.slice(1)], { stdio: "inherit" });
+    const forward = (signal) => child.kill(signal);
+    process.on("SIGINT", forward);
+    process.on("SIGTERM", forward);
+    child.on("error", (err2) => {
+      process.stderr.write(`repo-vector: could not restart Node with ${BASELINE_WASM_FLAG}: ${err2.message}
+`);
+      resolve(1);
+    });
+    child.on("exit", (code, signal) => resolve(code ?? (signal ? 1 : 0)));
+  });
+}
+
 // src/report.ts
 function actionOutputs(o) {
   return {
@@ -42269,6 +42288,6 @@ async function main() {
     return 1;
   }
 }
-main().then((code) => {
+(relaunchWithBaselineWasm() ?? main()).then((code) => {
   process.exitCode = code;
 });

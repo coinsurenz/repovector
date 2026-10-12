@@ -61104,6 +61104,27 @@ async function openDryRun(cfg, identity, req) {
 // src/cli.ts
 init_run();
 init_log();
+
+// src/relaunch.ts
+import { spawn } from "node:child_process";
+var BASELINE_WASM_FLAG = "--liftoff-only";
+function relaunchWithBaselineWasm() {
+  if (process.execArgv.includes(BASELINE_WASM_FLAG)) return null;
+  return new Promise((resolve) => {
+    const child = spawn(process.execPath, [BASELINE_WASM_FLAG, ...process.execArgv, ...process.argv.slice(1)], { stdio: "inherit" });
+    const forward = (signal) => child.kill(signal);
+    process.on("SIGINT", forward);
+    process.on("SIGTERM", forward);
+    child.on("error", (err2) => {
+      process.stderr.write(`repo-vector: could not restart Node with ${BASELINE_WASM_FLAG}: ${err2.message}
+`);
+      resolve(1);
+    });
+    child.on("exit", (code, signal) => resolve(code ?? (signal ? 1 : 0)));
+  });
+}
+
+// src/cli.ts
 init_report();
 var HELP = `repo-vector ${TOOL_VERSION}: semantic search over a git repository, kept current by CI
 
@@ -61247,7 +61268,7 @@ function toInt(value) {
   if (!Number.isInteger(n) || n < 1) throw new Error("--top must be a positive whole number");
   return n;
 }
-main(process.argv.slice(2)).then(
+(relaunchWithBaselineWasm() ?? main(process.argv.slice(2))).then(
   (code) => {
     if (code >= 0) process.exitCode = code;
   },

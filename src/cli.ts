@@ -6,6 +6,7 @@ import { errorMessage } from './errors';
 import { indexRepository } from './indexer';
 import { TOOL_VERSION } from './index/run';
 import { createLogger } from './log';
+import { relaunchWithBaselineWasm } from './relaunch';
 import { dryRunLines, formatHits, summaryMarkdown } from './report';
 
 const HELP = `repo-vector ${TOOL_VERSION}: semantic search over a git repository, kept current by CI
@@ -146,7 +147,7 @@ function toInt(value: string | undefined): number | undefined {
   return n;
 }
 
-main(process.argv.slice(2)).then(
+(relaunchWithBaselineWasm() ?? main(process.argv.slice(2))).then(
   (code) => {
     if (code >= 0) process.exitCode = code;
   },

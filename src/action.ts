@@ -2,6 +2,7 @@ import { appendFileSync } from 'node:fs';
 import { errorMessage } from './errors';
 import { indexRepository } from './indexer';
 import { createLogger } from './log';
+import { relaunchWithBaselineWasm } from './relaunch';
 import { actionOutputs, summaryMarkdown } from './report';
 
 /**
@@ -30,6 +31,6 @@ async function main(): Promise<number> {
   }
 }
 
-main().then((code) => {
+(relaunchWithBaselineWasm() ?? main()).then((code) => {
   process.exitCode = code;
 });
