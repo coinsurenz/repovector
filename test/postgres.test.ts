@@ -107,7 +107,9 @@ describe('PostgresStore and the indexer (live, TEST_DATABASE_URL)', { skip: !url
     assert.ok(all.hits.every((h) => h.kind === 'commit'));
     // Fixture commits are dated 2026-01-02 to 2026-01-05, one day apart.
     const late = await client.searchHistory({ query: 'refunds', topK: 10, since: '2026-01-04' });
-    assert.deepEqual(late.hits.map((h) => h.metadata.authored_at).sort(), ['2026-01-04T00:00:00+00:00', '2026-01-05T00:00:00+00:00']);
+    // Compare instants: newer git prints UTC as "Z" in %aI, older git as "+00:00".
+    const instants = late.hits.map((h) => new Date(String(h.metadata.authored_at)).toISOString()).sort();
+    assert.deepEqual(instants, ['2026-01-04T00:00:00.000Z', '2026-01-05T00:00:00.000Z']);
     const early = await client.searchHistory({ query: 'refunds', topK: 10, until: '2026-01-02' });
     assert.deepEqual(early.hits.map((h) => h.metadata.subject), ['feat: shop']);
     assert.equal((await client.searchHistory({ query: 'x', author: 'Nobody' })).hits.length, 0);

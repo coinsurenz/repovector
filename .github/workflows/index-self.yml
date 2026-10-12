@@ -1,6 +1,7 @@
 # This repository indexes itself with its own action, built from source on each push.
 # Needs repository secrets: PINECONE_API_KEY (and a Pinecone index named repo-vector created
 # with llama-text-embed-v2, or flip REPO_VECTOR_CREATE_INDEX to true for the first run).
+# Without the secret (forks, fresh copies) the steps are skipped and the run passes.
 name: index-self
 
 on:
@@ -18,16 +19,24 @@ permissions:
 jobs:
   index:
     runs-on: ubuntu-latest
+    env:
+      HAS_KEY: ${{ secrets.PINECONE_API_KEY != '' }}
     steps:
-      - uses: actions/checkout@v6
+      - if: env.HAS_KEY != 'true'
+        run: echo "::notice::PINECONE_API_KEY is not set; skipping self-index."
+      - if: env.HAS_KEY == 'true'
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v6
+      - if: env.HAS_KEY == 'true'
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
-      - run: npm ci && npm run build
-      - id: index
+      - if: env.HAS_KEY == 'true'
+        run: npm ci && npm run build
+      - if: env.HAS_KEY == 'true'
+        id: index
         uses: ./
         env:
           REPO_VECTOR_STORE: pinecone
@@ -37,4 +46,5 @@ jobs:
           REPO_VECTOR_EMBEDDING_PROVIDER: pinecone
           REPO_VECTOR_EMBEDDING_MODEL: llama-text-embed-v2
           REPO_VECTOR_EXCLUDE: "test/fixtures/**"
-      - run: echo "Indexed ${{ steps.index.outputs.sha }} (${{ steps.index.outputs.mode }}, ${{ steps.index.outputs.files_indexed }} files)"
+      - if: env.HAS_KEY == 'true'
+        run: echo "Indexed ${{ steps.index.outputs.sha }} (${{ steps.index.outputs.mode }}, ${{ steps.index.outputs.files_indexed }} files)"
