@@ -142,7 +142,31 @@ curl -s localhost:8080/search -H "Authorization: Bearer $TOKEN" -H 'Content-Type
 | `POST /search` | bearer | `{ query, topK?, branch?, language?, ext?, fileName?, symbolKind?, pathPrefix?, filter?, rerank? }` |
 | `POST /history/search` | bearer | `{ query, topK?, branch?, since?, until?, author? }` |
 
-The server will not listen beyond 127.0.0.1 without `REPO_VECTOR_SERVER_TOKEN`. For Pinecone, run the image with `REPO_VECTOR_STORE=pinecone` and `PINECONE_API_KEY` instead of the compose database.
+The server will not listen beyond 127.0.0.1 without authentication (`REPO_VECTOR_SERVER_TOKEN` or `REPO_VECTOR_AUTH=jwt`). For Pinecone, run the image with `REPO_VECTOR_STORE=pinecone` and `PINECONE_API_KEY` instead of the compose database.
+
+### Shared search for a team: MCP over HTTP with sign-in
+
+For a company, run one search server instead of giving every laptop store credentials. The server also speaks MCP at `/mcp`, so Claude connects by URL:
+
+```json
+{ "mcpServers": { "repo-vector": { "type": "http", "url": "https://code-search.example.com/mcp" } } }
+```
+
+With `REPO_VECTOR_AUTH=jwt` the server checks per-user access tokens from your existing identity provider (Okta, Entra ID, Google, Keycloak, Auth0, or your own login server). It never runs a login itself:
+
+1. An unauthenticated call gets `401` with `WWW-Authenticate: Bearer resource_metadata=".../.well-known/oauth-protected-resource"`. That document names your identity provider, so an MCP client can send the user there to sign in.
+2. Every request's token is checked: signature against the provider's keys (`REPO_VECTOR_JWT_JWKS_URL`, or one `REPO_VECTOR_JWT_PUBLIC_KEY`), issuer, audience (must be this service, so a token for another API is refused), expiry, the `code:read` scope (`scope` or Entra's `scp`), and optionally a claim listing the repositories the user may search (`REPO_VECTOR_JWT_REPOS_CLAIM`).
+3. Searches run on the server's own database role, which only needs `SELECT`; the server never migrates or writes. Claude holds a short-lived token, never a database credential.
+4. Each call is logged as `audit sub="..." via=jwt op=mcp search_code`. Query text is never logged.
+
+```sql
+CREATE ROLE rv_reader LOGIN PASSWORD '...';
+GRANT SELECT ON vector_indexes, repo_vector_sentinels, vec_<index> TO rv_reader;
+```
+
+Run the server and its database away from production systems: the index holds your source code, and nothing in production needs to reach it. To try the flow without an identity provider, `node scripts/mock-login.mjs` plays the part of one: `init` makes a signing key and prints the server settings, `token --sub you@example.com --aud https://code-search.example.com/mcp --repos owner/name` issues a token, and Claude sends it with `"headers": { "Authorization": "Bearer ${CODE_SEARCH_TOKEN}" }`. Never use it in production.
+
+Not every identity provider lets MCP clients register themselves for the browser sign-in; where yours does not, pre-register a client for Claude, or put an authenticating proxy in front and keep `REPO_VECTOR_AUTH=token` behind it.
 
 
 ## What gets indexed
@@ -188,6 +212,8 @@ Outputs: `mode`, `sha`, `namespace`, `files_indexed`, `files_removed`, `records_
 - Secrets come only from `env:`. The action masks them before printing anything and never logs them.
 - The workflow needs `contents: read` and nothing else.
 - Commit authors are stored by name, never by email.
+- The search server only reads: give it a `SELECT`-only role, and per-user tokens with `REPO_VECTOR_AUTH=jwt` rather than a shared token where more than one person uses it.
+- Search results are untrusted text from your repository. An agent should treat them as data, never as instructions.
 
 ## Costs
 

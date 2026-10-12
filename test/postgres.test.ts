@@ -7,6 +7,7 @@ import type { EmbeddingMode } from '../src/embed/mode';
 import { fileId } from '../src/index/records';
 import { runIndex, type RunOptions } from '../src/index/run';
 import { memoryLogger } from '../src/log';
+import { makeBackend } from '../src/store/open';
 import { PostgresStore } from '../src/store/postgres';
 import { safeKey, tableNameFor, vectorLiteral } from '../src/store/sql';
 import { FixtureRepo, NO_RETRY, indexingConfig, keywordEmbedder, tsFunctions } from './helpers';
@@ -119,5 +120,32 @@ describe('PostgresStore and the indexer (live, TEST_DATABASE_URL)', { skip: !url
     const status = await client.status();
     assert.equal(status.code?.kind, 'code');
     assert.ok(status.stats.namespaces.some((n) => n.name === ns));
+  });
+
+  test('search runs on a SELECT-only role: no migrations, and writes are refused by the database', async () => {
+    const role = `rv_reader_${Date.now().toString(36)}`;
+    const password = `pw_${Math.random().toString(36).slice(2)}`;
+    await sql.unsafe(`CREATE ROLE "${role}" LOGIN PASSWORD '${password}'`);
+    await sql.unsafe(`GRANT SELECT ON vector_indexes, repo_vector_sentinels, "${tableNameFor(name)}" TO "${role}"`);
+    const readerUrl = new URL(url!);
+    readerUrl.username = role;
+    readerUrl.password = password;
+    const cfg = loadConfig({ REPO_VECTOR_STORE: 'postgres', DATABASE_URL: readerUrl.href, REPO_VECTOR_INDEX: name, REPO_VECTOR_NAMESPACE: ns });
+    const reader = await makeBackend(cfg, mode, { readOnly: true });
+    try {
+      const facts = await reader.describe(name);
+      assert.ok(facts, 'the reader can see the index');
+      reader.use(facts);
+      const client = new RepoVectorClient(cfg, { repo: 'acme/shop', branch: 'main', index: name, namespace: ns, historyNamespace: `${ns}-history` }, {
+        backend: reader, index: facts, mode, sentinel: await reader.readSentinel(ns), embedding: { provider: 'openai', model: 'fake-4d', dimension: 4, dimensions: null },
+      });
+      assert.equal((await client.search({ query: 'where is the webhook signature checked', topK: 3 })).hits[0]!.source, 'src/webhooks.ts');
+      await assert.rejects(reader.deleteNamespace(ns), /permission denied/);
+      assert.equal(await reader.describe('no-such-index'), null);
+    } finally {
+      await reader.close();
+      await sql.unsafe(`REVOKE ALL ON vector_indexes, repo_vector_sentinels, "${tableNameFor(name)}" FROM "${role}"`);
+      await sql.unsafe(`DROP ROLE "${role}"`);
+    }
   });
 });

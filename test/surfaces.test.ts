@@ -3,18 +3,29 @@ import { createServer, type Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { after, before, describe, test } from 'node:test';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
+import { SignJWT, exportJWK, generateKeyPair, type CryptoKey } from 'jose';
 import { RepoVectorClient } from '../src/client';
 import { loadConfig } from '../src/config';
 import { runIndex } from '../src/index/run';
 import { memoryLogger } from '../src/log';
 import { createMcpServer } from '../src/mcp';
 import { formatHits } from '../src/report';
+import { createAuthenticator } from '../src/auth';
+import type { Config } from '../src/config';
 import { createHandler, serve } from '../src/server';
 import { MemoryStore } from '../src/store/memory';
 import { FixtureRepo, NO_RETRY, indexingConfig, tsFunctions } from './helpers';
 
 const NS = 'acme-shop--main';
+
+function serverConfig(auth: Partial<Config['server']['auth']>): Config['server'] {
+  return {
+    host: '127.0.0.1', port: 0, corsOrigin: null, topKMax: 100,
+    auth: { mode: 'none', token: null, issuer: null, audience: null, jwksUrl: null, publicKey: null, publicKeyAlg: null, scope: 'code:read', reposClaim: null, ...auth },
+  };
+}
 
 async function indexedClient(repo: FixtureRepo): Promise<RepoVectorClient> {
   const store = new MemoryStore('shop');
@@ -38,7 +49,8 @@ describe('HTTP server', () => {
   before(async () => {
     repo = await FixtureRepo.create();
     const client = await indexedClient(repo);
-    server = createServer(createHandler({ client, config: { store: 'pinecone', server: { token: 's3cret', host: '127.0.0.1', port: 0, corsOrigin: null, topKMax: 100 } }, log }));
+    const server_ = serverConfig({ mode: 'token', token: 's3cret' });
+    server = createServer(createHandler({ client, config: { store: 'pinecone', server: server_ }, authenticate: await createAuthenticator(server_.auth, 'acme/shop'), log }));
     await new Promise<void>((r) => server.listen(0, '127.0.0.1', r));
     base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
   });
@@ -95,7 +107,8 @@ describe('HTTP server', () => {
         if (attempts === 1) throw new Error('No index named "shop". Has the indexing action run yet?');
         return real;
       },
-      config: { store: 'postgres', server: { token: null, host: '127.0.0.1', port: 0, corsOrigin: null, topKMax: 100 } },
+      config: { store: 'postgres', server: serverConfig({}) },
+      authenticate: await createAuthenticator(serverConfig({}).auth, null),
       log: memoryLogger(),
     });
     const lazy = createServer(handler);
@@ -111,7 +124,79 @@ describe('HTTP server', () => {
   });
 
   test('refuses to listen beyond loopback without a token', async () => {
-    await assert.rejects(serve({ REPO_VECTOR_STORE: 'pinecone', PINECONE_API_KEY: 'x', REPO_VECTOR_SERVER_HOST: '0.0.0.0' }), /without REPO_VECTOR_SERVER_TOKEN/);
+    await assert.rejects(serve({ REPO_VECTOR_STORE: 'pinecone', PINECONE_API_KEY: 'x', REPO_VECTOR_SERVER_HOST: '0.0.0.0' }), /without authentication/);
+  });
+});
+
+describe('MCP over HTTP with per-user tokens (REPO_VECTOR_AUTH=jwt)', () => {
+  const ISSUER = 'https://admin.example.test';
+  let repo: FixtureRepo;
+  let server: Server;
+  let base: string;
+  let priv: CryptoKey;
+  const log = memoryLogger();
+
+  const token = (claims: Record<string, unknown>, sub = 'ada@example.test') =>
+    new SignJWT({ scope: 'code:read', repos: ['acme/shop'], ...claims }).setProtectedHeader({ alg: 'EdDSA' }).setIssuer(ISSUER).setAudience(`${base}/mcp`).setSubject(sub).setIssuedAt().setExpirationTime('5m').sign(priv);
+
+  const connect = async (bearer: string) => {
+    const client = new Client({ name: 'test', version: '0' });
+    await client.connect(new StreamableHTTPClientTransport(new URL(`${base}/mcp`), { requestInit: { headers: { Authorization: `Bearer ${bearer}` } } }));
+    return client;
+  };
+
+  before(async () => {
+    repo = await FixtureRepo.create();
+    const client = await indexedClient(repo);
+    const pair = await generateKeyPair('EdDSA', { crv: 'Ed25519', extractable: true });
+    priv = pair.privateKey;
+    // Listen first: the audience is this server's own URL, as it would be in production.
+    let handler: ReturnType<typeof createHandler> | null = null;
+    server = createServer((req, res) => handler!(req, res));
+    await new Promise<void>((r) => server.listen(0, '127.0.0.1', r));
+    base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    const cfg = serverConfig({ mode: 'jwt', issuer: ISSUER, audience: `${base}/mcp`, publicKey: JSON.stringify(await exportJWK(pair.publicKey)), reposClaim: 'repos' });
+    handler = createHandler({ client, config: { store: 'postgres', server: cfg }, authenticate: await createAuthenticator(cfg.auth, 'acme/shop'), log });
+  });
+  after(async () => {
+    server.close();
+    await repo.remove();
+  });
+
+  test('the metadata document names the issuer; an anonymous call gets 401 pointing at it', async () => {
+    const meta = (await (await fetch(`${base}/.well-known/oauth-protected-resource`)).json()) as { resource: string; authorization_servers: string[] };
+    assert.deepEqual(meta.authorization_servers, [ISSUER]);
+    assert.equal(meta.resource, `${base}/mcp`);
+    const anon = await fetch(`${base}/mcp`, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/list' }) });
+    assert.equal(anon.status, 401);
+    assert.match(anon.headers.get('www-authenticate') ?? '', /resource_metadata="http:\/\/127\.0\.0\.1:\d+\/\.well-known\/oauth-protected-resource"/);
+  });
+
+  test('a signed-in user can list and call the tools; the call is audited without the query', async () => {
+    const mcp = await connect(await token({}));
+    const tools = (await mcp.listTools()).tools.map((t) => t.name).sort();
+    assert.deepEqual(tools, ['index_status', 'search_code', 'search_history']);
+    const res = (await mcp.callTool({ name: 'search_code', arguments: { query: 'verify webhook signature', topK: 2 } })) as { content: Array<{ text: string }>; isError?: boolean };
+    assert.ok(!res.isError);
+    assert.match(res.content[0]!.text, /^src\/webhooks\.ts:\d+-\d+ {2}verifyWebhookSignature/);
+    await mcp.close();
+    assert.ok(log.lines.some((l) => l === 'audit sub="ada@example.test" via=jwt op=mcp search_code'));
+    assert.ok(!log.lines.some((l) => l.includes('verify webhook signature')), 'queries are never logged');
+  });
+
+  test('a token for another repository, scope or service is refused before any search', async () => {
+    await assert.rejects(connect(await token({ repos: ['acme/payments'] })), /403|does not grant/);
+    await assert.rejects(connect(await token({ scope: 'payments:write' })), /403|scope/);
+    const forOtherService = await new SignJWT({ scope: 'code:read', repos: ['acme/shop'] }).setProtectedHeader({ alg: 'EdDSA' }).setIssuer(ISSUER).setAudience('https://payments.example.test').setSubject('ada').setExpirationTime('5m').sign(priv);
+    await assert.rejects(connect(forOtherService), /401|different service|Unauthorized/);
+    assert.ok(log.lines.some((l) => /POST \/mcp refused: Access token does not grant repository acme\/shop/.test(l)));
+  });
+
+  test('the REST routes take the same tokens; GET on the stateless MCP endpoint is 405', async () => {
+    const bearer = { authorization: `Bearer ${await token({})}` };
+    assert.equal((await fetch(`${base}/status`, { headers: bearer })).status, 200);
+    assert.equal((await fetch(`${base}/status`)).status, 401);
+    assert.equal((await fetch(`${base}/mcp`, { headers: bearer })).status, 405);
   });
 });
 

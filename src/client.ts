@@ -54,6 +54,8 @@ export interface ClientOptions {
   branch?: string;
   /** Tests inject a store. */
   backend?: Backend;
+  /** Never run schema migrations, so a SELECT-only database role is enough (the HTTP server sets this). */
+  readOnly?: boolean;
 }
 
 /** Search a repository index from code: what the CLI, HTTP server and MCP server all wrap. */
@@ -137,7 +139,7 @@ export async function createClient(opts: ClientOptions = {}): Promise<RepoVector
   const cfg = loadConfig(opts.env ?? process.env);
   const root = opts.root === undefined ? cfg.indexing.root : opts.root;
   const identity = await resolveIdentity(cfg, root, opts.branch);
-  const opened = await openForQuery(cfg, identity, opts.backend);
+  const opened = await openForQuery(cfg, identity, opts.backend, { readOnly: opts.readOnly });
   return new RepoVectorClient(cfg, identity, opened);
 }
 

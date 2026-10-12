@@ -203,8 +203,8 @@ var init_ZodError = __esm({
       "not_finite"
     ]);
     quotelessJson = (obj) => {
-      const json = JSON.stringify(obj, null, 2);
-      return json.replace(/"([^"]+)":/g, "$1:");
+      const json2 = JSON.stringify(obj, null, 2);
+      return json2.replace(/"([^"]+)":/g, "$1:");
     };
     ZodError = class _ZodError extends Error {
       get errors() {
@@ -310,104 +310,104 @@ var init_en = __esm({
     init_ZodError();
     init_util();
     errorMap = (issue2, _ctx) => {
-      let message;
+      let message2;
       switch (issue2.code) {
         case ZodIssueCode.invalid_type:
           if (issue2.received === ZodParsedType.undefined) {
-            message = "Required";
+            message2 = "Required";
           } else {
-            message = `Expected ${issue2.expected}, received ${issue2.received}`;
+            message2 = `Expected ${issue2.expected}, received ${issue2.received}`;
           }
           break;
         case ZodIssueCode.invalid_literal:
-          message = `Invalid literal value, expected ${JSON.stringify(issue2.expected, util.jsonStringifyReplacer)}`;
+          message2 = `Invalid literal value, expected ${JSON.stringify(issue2.expected, util.jsonStringifyReplacer)}`;
           break;
         case ZodIssueCode.unrecognized_keys:
-          message = `Unrecognized key(s) in object: ${util.joinValues(issue2.keys, ", ")}`;
+          message2 = `Unrecognized key(s) in object: ${util.joinValues(issue2.keys, ", ")}`;
           break;
         case ZodIssueCode.invalid_union:
-          message = `Invalid input`;
+          message2 = `Invalid input`;
           break;
         case ZodIssueCode.invalid_union_discriminator:
-          message = `Invalid discriminator value. Expected ${util.joinValues(issue2.options)}`;
+          message2 = `Invalid discriminator value. Expected ${util.joinValues(issue2.options)}`;
           break;
         case ZodIssueCode.invalid_enum_value:
-          message = `Invalid enum value. Expected ${util.joinValues(issue2.options)}, received '${issue2.received}'`;
+          message2 = `Invalid enum value. Expected ${util.joinValues(issue2.options)}, received '${issue2.received}'`;
           break;
         case ZodIssueCode.invalid_arguments:
-          message = `Invalid function arguments`;
+          message2 = `Invalid function arguments`;
           break;
         case ZodIssueCode.invalid_return_type:
-          message = `Invalid function return type`;
+          message2 = `Invalid function return type`;
           break;
         case ZodIssueCode.invalid_date:
-          message = `Invalid date`;
+          message2 = `Invalid date`;
           break;
         case ZodIssueCode.invalid_string:
           if (typeof issue2.validation === "object") {
             if ("includes" in issue2.validation) {
-              message = `Invalid input: must include "${issue2.validation.includes}"`;
+              message2 = `Invalid input: must include "${issue2.validation.includes}"`;
               if (typeof issue2.validation.position === "number") {
-                message = `${message} at one or more positions greater than or equal to ${issue2.validation.position}`;
+                message2 = `${message2} at one or more positions greater than or equal to ${issue2.validation.position}`;
               }
             } else if ("startsWith" in issue2.validation) {
-              message = `Invalid input: must start with "${issue2.validation.startsWith}"`;
+              message2 = `Invalid input: must start with "${issue2.validation.startsWith}"`;
             } else if ("endsWith" in issue2.validation) {
-              message = `Invalid input: must end with "${issue2.validation.endsWith}"`;
+              message2 = `Invalid input: must end with "${issue2.validation.endsWith}"`;
             } else {
               util.assertNever(issue2.validation);
             }
           } else if (issue2.validation !== "regex") {
-            message = `Invalid ${issue2.validation}`;
+            message2 = `Invalid ${issue2.validation}`;
           } else {
-            message = "Invalid";
+            message2 = "Invalid";
           }
           break;
         case ZodIssueCode.too_small:
           if (issue2.type === "array")
-            message = `Array must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `more than`} ${issue2.minimum} element(s)`;
+            message2 = `Array must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `more than`} ${issue2.minimum} element(s)`;
           else if (issue2.type === "string")
-            message = `String must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `over`} ${issue2.minimum} character(s)`;
+            message2 = `String must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `over`} ${issue2.minimum} character(s)`;
           else if (issue2.type === "number")
-            message = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
+            message2 = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
           else if (issue2.type === "bigint")
-            message = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
+            message2 = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
           else if (issue2.type === "date")
-            message = `Date must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${new Date(Number(issue2.minimum))}`;
+            message2 = `Date must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${new Date(Number(issue2.minimum))}`;
           else
-            message = "Invalid input";
+            message2 = "Invalid input";
           break;
         case ZodIssueCode.too_big:
           if (issue2.type === "array")
-            message = `Array must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `less than`} ${issue2.maximum} element(s)`;
+            message2 = `Array must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `less than`} ${issue2.maximum} element(s)`;
           else if (issue2.type === "string")
-            message = `String must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `under`} ${issue2.maximum} character(s)`;
+            message2 = `String must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `under`} ${issue2.maximum} character(s)`;
           else if (issue2.type === "number")
-            message = `Number must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
+            message2 = `Number must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
           else if (issue2.type === "bigint")
-            message = `BigInt must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
+            message2 = `BigInt must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
           else if (issue2.type === "date")
-            message = `Date must be ${issue2.exact ? `exactly` : issue2.inclusive ? `smaller than or equal to` : `smaller than`} ${new Date(Number(issue2.maximum))}`;
+            message2 = `Date must be ${issue2.exact ? `exactly` : issue2.inclusive ? `smaller than or equal to` : `smaller than`} ${new Date(Number(issue2.maximum))}`;
           else
-            message = "Invalid input";
+            message2 = "Invalid input";
           break;
         case ZodIssueCode.custom:
-          message = `Invalid input`;
+          message2 = `Invalid input`;
           break;
         case ZodIssueCode.invalid_intersection_types:
-          message = `Intersection results could not be merged`;
+          message2 = `Intersection results could not be merged`;
           break;
         case ZodIssueCode.not_multiple_of:
-          message = `Number must be a multiple of ${issue2.multipleOf}`;
+          message2 = `Number must be a multiple of ${issue2.multipleOf}`;
           break;
         case ZodIssueCode.not_finite:
-          message = "Number must be finite";
+          message2 = "Number must be finite";
           break;
         default:
-          message = _ctx.defaultError;
+          message2 = _ctx.defaultError;
           util.assertNever(issue2);
       }
-      return { message };
+      return { message: message2 };
     };
     en_default = errorMap;
   }
@@ -556,8 +556,8 @@ var errorUtil;
 var init_errorUtil = __esm({
   "node_modules/zod/v3/helpers/errorUtil.js"() {
     (function(errorUtil2) {
-      errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
-      errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
+      errorUtil2.errToObj = (message2) => typeof message2 === "string" ? { message: message2 } : message2 || {};
+      errorUtil2.toString = (message2) => typeof message2 === "string" ? message2 : message2?.message;
     })(errorUtil || (errorUtil = {}));
   }
 });
@@ -573,16 +573,16 @@ function processCreateParams(params) {
   if (errorMap2)
     return { errorMap: errorMap2, description };
   const customMap = (iss, ctx) => {
-    const { message } = params;
+    const { message: message2 } = params;
     if (iss.code === "invalid_enum_value") {
-      return { message: message ?? ctx.defaultError };
+      return { message: message2 ?? ctx.defaultError };
     }
     if (typeof ctx.data === "undefined") {
-      return { message: message ?? required_error ?? ctx.defaultError };
+      return { message: message2 ?? required_error ?? ctx.defaultError };
     }
     if (iss.code !== "invalid_type")
       return { message: ctx.defaultError };
-    return { message: message ?? invalid_type_error ?? ctx.defaultError };
+    return { message: message2 ?? invalid_type_error ?? ctx.defaultError };
   };
   return { errorMap: customMap, description };
 }
@@ -922,14 +922,14 @@ var init_types = __esm({
         const result = await (isAsync(maybeAsyncResult) ? maybeAsyncResult : Promise.resolve(maybeAsyncResult));
         return handleResult(ctx, result);
       }
-      refine(check2, message) {
+      refine(check2, message2) {
         const getIssueProperties = (val) => {
-          if (typeof message === "string" || typeof message === "undefined") {
-            return { message };
-          } else if (typeof message === "function") {
-            return message(val);
+          if (typeof message2 === "string" || typeof message2 === "undefined") {
+            return { message: message2 };
+          } else if (typeof message2 === "function") {
+            return message2(val);
           } else {
-            return message;
+            return message2;
           }
         };
         return this._refinement((val, ctx) => {
@@ -1402,11 +1402,11 @@ var init_types = __esm({
         }
         return { status: status.value, value: input.data };
       }
-      _regex(regex, validation, message) {
+      _regex(regex, validation, message2) {
         return this.refinement((data) => regex.test(data), {
           validation,
           code: ZodIssueCode.invalid_string,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
       _addCheck(check2) {
@@ -1415,37 +1415,37 @@ var init_types = __esm({
           checks: [...this._def.checks, check2]
         });
       }
-      email(message) {
-        return this._addCheck({ kind: "email", ...errorUtil.errToObj(message) });
+      email(message2) {
+        return this._addCheck({ kind: "email", ...errorUtil.errToObj(message2) });
       }
-      url(message) {
-        return this._addCheck({ kind: "url", ...errorUtil.errToObj(message) });
+      url(message2) {
+        return this._addCheck({ kind: "url", ...errorUtil.errToObj(message2) });
       }
-      emoji(message) {
-        return this._addCheck({ kind: "emoji", ...errorUtil.errToObj(message) });
+      emoji(message2) {
+        return this._addCheck({ kind: "emoji", ...errorUtil.errToObj(message2) });
       }
-      uuid(message) {
-        return this._addCheck({ kind: "uuid", ...errorUtil.errToObj(message) });
+      uuid(message2) {
+        return this._addCheck({ kind: "uuid", ...errorUtil.errToObj(message2) });
       }
-      nanoid(message) {
-        return this._addCheck({ kind: "nanoid", ...errorUtil.errToObj(message) });
+      nanoid(message2) {
+        return this._addCheck({ kind: "nanoid", ...errorUtil.errToObj(message2) });
       }
-      cuid(message) {
-        return this._addCheck({ kind: "cuid", ...errorUtil.errToObj(message) });
+      cuid(message2) {
+        return this._addCheck({ kind: "cuid", ...errorUtil.errToObj(message2) });
       }
-      cuid2(message) {
-        return this._addCheck({ kind: "cuid2", ...errorUtil.errToObj(message) });
+      cuid2(message2) {
+        return this._addCheck({ kind: "cuid2", ...errorUtil.errToObj(message2) });
       }
-      ulid(message) {
-        return this._addCheck({ kind: "ulid", ...errorUtil.errToObj(message) });
+      ulid(message2) {
+        return this._addCheck({ kind: "ulid", ...errorUtil.errToObj(message2) });
       }
-      base64(message) {
-        return this._addCheck({ kind: "base64", ...errorUtil.errToObj(message) });
+      base64(message2) {
+        return this._addCheck({ kind: "base64", ...errorUtil.errToObj(message2) });
       }
-      base64url(message) {
+      base64url(message2) {
         return this._addCheck({
           kind: "base64url",
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
       jwt(options) {
@@ -1475,8 +1475,8 @@ var init_types = __esm({
           ...errorUtil.errToObj(options?.message)
         });
       }
-      date(message) {
-        return this._addCheck({ kind: "date", message });
+      date(message2) {
+        return this._addCheck({ kind: "date", message: message2 });
       }
       time(options) {
         if (typeof options === "string") {
@@ -1492,14 +1492,14 @@ var init_types = __esm({
           ...errorUtil.errToObj(options?.message)
         });
       }
-      duration(message) {
-        return this._addCheck({ kind: "duration", ...errorUtil.errToObj(message) });
+      duration(message2) {
+        return this._addCheck({ kind: "duration", ...errorUtil.errToObj(message2) });
       }
-      regex(regex, message) {
+      regex(regex, message2) {
         return this._addCheck({
           kind: "regex",
           regex,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
       includes(value, options) {
@@ -1510,46 +1510,46 @@ var init_types = __esm({
           ...errorUtil.errToObj(options?.message)
         });
       }
-      startsWith(value, message) {
+      startsWith(value, message2) {
         return this._addCheck({
           kind: "startsWith",
           value,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
-      endsWith(value, message) {
+      endsWith(value, message2) {
         return this._addCheck({
           kind: "endsWith",
           value,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
-      min(minLength, message) {
+      min(minLength, message2) {
         return this._addCheck({
           kind: "min",
           value: minLength,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
-      max(maxLength, message) {
+      max(maxLength, message2) {
         return this._addCheck({
           kind: "max",
           value: maxLength,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
-      length(len, message) {
+      length(len, message2) {
         return this._addCheck({
           kind: "length",
           value: len,
-          ...errorUtil.errToObj(message)
+          ...errorUtil.errToObj(message2)
         });
       }
       /**
        * Equivalent to `.min(1)`
        */
-      nonempty(message) {
-        return this.min(1, errorUtil.errToObj(message));
+      nonempty(message2) {
+        return this.min(1, errorUtil.errToObj(message2));
       }
       trim() {
         return new _ZodString2({
@@ -1734,19 +1734,19 @@ var init_types = __esm({
         }
         return { status: status.value, value: input.data };
       }
-      gte(value, message) {
-        return this.setLimit("min", value, true, errorUtil.toString(message));
+      gte(value, message2) {
+        return this.setLimit("min", value, true, errorUtil.toString(message2));
       }
-      gt(value, message) {
-        return this.setLimit("min", value, false, errorUtil.toString(message));
+      gt(value, message2) {
+        return this.setLimit("min", value, false, errorUtil.toString(message2));
       }
-      lte(value, message) {
-        return this.setLimit("max", value, true, errorUtil.toString(message));
+      lte(value, message2) {
+        return this.setLimit("max", value, true, errorUtil.toString(message2));
       }
-      lt(value, message) {
-        return this.setLimit("max", value, false, errorUtil.toString(message));
+      lt(value, message2) {
+        return this.setLimit("max", value, false, errorUtil.toString(message2));
       }
-      setLimit(kind, value, inclusive, message) {
+      setLimit(kind, value, inclusive, message2) {
         return new _ZodNumber({
           ...this._def,
           checks: [
@@ -1755,7 +1755,7 @@ var init_types = __esm({
               kind,
               value,
               inclusive,
-              message: errorUtil.toString(message)
+              message: errorUtil.toString(message2)
             }
           ]
         });
@@ -1766,68 +1766,68 @@ var init_types = __esm({
           checks: [...this._def.checks, check2]
         });
       }
-      int(message) {
+      int(message2) {
         return this._addCheck({
           kind: "int",
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      positive(message) {
+      positive(message2) {
         return this._addCheck({
           kind: "min",
           value: 0,
           inclusive: false,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      negative(message) {
+      negative(message2) {
         return this._addCheck({
           kind: "max",
           value: 0,
           inclusive: false,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      nonpositive(message) {
+      nonpositive(message2) {
         return this._addCheck({
           kind: "max",
           value: 0,
           inclusive: true,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      nonnegative(message) {
+      nonnegative(message2) {
         return this._addCheck({
           kind: "min",
           value: 0,
           inclusive: true,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      multipleOf(value, message) {
+      multipleOf(value, message2) {
         return this._addCheck({
           kind: "multipleOf",
           value,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      finite(message) {
+      finite(message2) {
         return this._addCheck({
           kind: "finite",
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      safe(message) {
+      safe(message2) {
         return this._addCheck({
           kind: "min",
           inclusive: true,
           value: Number.MIN_SAFE_INTEGER,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         })._addCheck({
           kind: "max",
           inclusive: true,
           value: Number.MAX_SAFE_INTEGER,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
       get minValue() {
@@ -1950,19 +1950,19 @@ var init_types = __esm({
         });
         return INVALID;
       }
-      gte(value, message) {
-        return this.setLimit("min", value, true, errorUtil.toString(message));
+      gte(value, message2) {
+        return this.setLimit("min", value, true, errorUtil.toString(message2));
       }
-      gt(value, message) {
-        return this.setLimit("min", value, false, errorUtil.toString(message));
+      gt(value, message2) {
+        return this.setLimit("min", value, false, errorUtil.toString(message2));
       }
-      lte(value, message) {
-        return this.setLimit("max", value, true, errorUtil.toString(message));
+      lte(value, message2) {
+        return this.setLimit("max", value, true, errorUtil.toString(message2));
       }
-      lt(value, message) {
-        return this.setLimit("max", value, false, errorUtil.toString(message));
+      lt(value, message2) {
+        return this.setLimit("max", value, false, errorUtil.toString(message2));
       }
-      setLimit(kind, value, inclusive, message) {
+      setLimit(kind, value, inclusive, message2) {
         return new _ZodBigInt({
           ...this._def,
           checks: [
@@ -1971,7 +1971,7 @@ var init_types = __esm({
               kind,
               value,
               inclusive,
-              message: errorUtil.toString(message)
+              message: errorUtil.toString(message2)
             }
           ]
         });
@@ -1982,43 +1982,43 @@ var init_types = __esm({
           checks: [...this._def.checks, check2]
         });
       }
-      positive(message) {
+      positive(message2) {
         return this._addCheck({
           kind: "min",
           value: BigInt(0),
           inclusive: false,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      negative(message) {
+      negative(message2) {
         return this._addCheck({
           kind: "max",
           value: BigInt(0),
           inclusive: false,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      nonpositive(message) {
+      nonpositive(message2) {
         return this._addCheck({
           kind: "max",
           value: BigInt(0),
           inclusive: true,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      nonnegative(message) {
+      nonnegative(message2) {
         return this._addCheck({
           kind: "min",
           value: BigInt(0),
           inclusive: true,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      multipleOf(value, message) {
+      multipleOf(value, message2) {
         return this._addCheck({
           kind: "multipleOf",
           value,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
       get minValue() {
@@ -2141,18 +2141,18 @@ var init_types = __esm({
           checks: [...this._def.checks, check2]
         });
       }
-      min(minDate, message) {
+      min(minDate, message2) {
         return this._addCheck({
           kind: "min",
           value: minDate.getTime(),
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
-      max(maxDate, message) {
+      max(maxDate, message2) {
         return this._addCheck({
           kind: "max",
           value: maxDate.getTime(),
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         });
       }
       get minDate() {
@@ -2384,26 +2384,26 @@ var init_types = __esm({
       get element() {
         return this._def.type;
       }
-      min(minLength, message) {
+      min(minLength, message2) {
         return new _ZodArray({
           ...this._def,
-          minLength: { value: minLength, message: errorUtil.toString(message) }
+          minLength: { value: minLength, message: errorUtil.toString(message2) }
         });
       }
-      max(maxLength, message) {
+      max(maxLength, message2) {
         return new _ZodArray({
           ...this._def,
-          maxLength: { value: maxLength, message: errorUtil.toString(message) }
+          maxLength: { value: maxLength, message: errorUtil.toString(message2) }
         });
       }
-      length(len, message) {
+      length(len, message2) {
         return new _ZodArray({
           ...this._def,
-          exactLength: { value: len, message: errorUtil.toString(message) }
+          exactLength: { value: len, message: errorUtil.toString(message2) }
         });
       }
-      nonempty(message) {
-        return this.min(1, message);
+      nonempty(message2) {
+        return this.min(1, message2);
       }
     };
     ZodArray.create = (schema2, params) => {
@@ -2520,17 +2520,17 @@ var init_types = __esm({
       get shape() {
         return this._def.shape();
       }
-      strict(message) {
+      strict(message2) {
         errorUtil.errToObj;
         return new _ZodObject({
           ...this._def,
           unknownKeys: "strict",
-          ...message !== void 0 ? {
+          ...message2 !== void 0 ? {
             errorMap: (issue2, ctx) => {
               const defaultError = this._def.errorMap?.(issue2, ctx).message ?? ctx.defaultError;
               if (issue2.code === "unrecognized_keys")
                 return {
-                  message: errorUtil.errToObj(message).message ?? defaultError
+                  message: errorUtil.errToObj(message2).message ?? defaultError
                 };
               return {
                 message: defaultError
@@ -3248,23 +3248,23 @@ var init_types = __esm({
           return finalizeSet(elements);
         }
       }
-      min(minSize, message) {
+      min(minSize, message2) {
         return new _ZodSet({
           ...this._def,
-          minSize: { value: minSize, message: errorUtil.toString(message) }
+          minSize: { value: minSize, message: errorUtil.toString(message2) }
         });
       }
-      max(maxSize, message) {
+      max(maxSize, message2) {
         return new _ZodSet({
           ...this._def,
-          maxSize: { value: maxSize, message: errorUtil.toString(message) }
+          maxSize: { value: maxSize, message: errorUtil.toString(message2) }
         });
       }
-      size(size2, message) {
-        return this.min(size2, message).max(size2, message);
+      size(size2, message2) {
+        return this.min(size2, message2).max(size2, message2);
       }
-      nonempty(message) {
-        return this.min(1, message);
+      nonempty(message2) {
+        return this.min(1, message2);
       }
     };
     ZodSet.create = (valueType, params) => {
@@ -4154,19 +4154,21 @@ var init_errors2 = __esm({
   "src/errors.ts"() {
     "use strict";
     HttpError = class extends Error {
-      constructor(status, message) {
-        super(message);
+      constructor(status, message2, headers = {}) {
+        super(message2);
         this.status = status;
+        this.headers = headers;
         this.name = "HttpError";
       }
       status;
+      headers;
     };
     badRequest = (msg) => new HttpError(400, msg);
     notFound = (msg) => new HttpError(404, msg);
     unavailable = (msg) => new HttpError(503, msg);
     ConfigError = class extends Error {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "ConfigError";
       }
     };
@@ -4197,6 +4199,13 @@ function loadConfig(env = process.env, cwd = process.cwd()) {
   if (e.REPO_VECTOR_CHUNK_MAX < e.REPO_VECTOR_CHUNK_TARGET) problems.push("REPO_VECTOR_CHUNK_MAX must be at least REPO_VECTOR_CHUNK_TARGET");
   if (e.REPO_VECTOR_INDEX && e.REPO_VECTOR_STORE === "pinecone" && !PINECONE_INDEX_RE.test(e.REPO_VECTOR_INDEX)) {
     problems.push("REPO_VECTOR_INDEX: Pinecone index names are lowercase letters, digits and hyphens, 1 to 45 characters");
+  }
+  const authMode = e.REPO_VECTOR_AUTH ?? (e.REPO_VECTOR_SERVER_TOKEN ? "token" : "none");
+  if (authMode === "token" && !e.REPO_VECTOR_SERVER_TOKEN) problems.push("REPO_VECTOR_SERVER_TOKEN is required when REPO_VECTOR_AUTH=token");
+  if (authMode === "jwt") {
+    if (!e.REPO_VECTOR_JWT_ISSUER) problems.push("REPO_VECTOR_JWT_ISSUER is required when REPO_VECTOR_AUTH=jwt (the identity provider that signs tokens)");
+    if (!e.REPO_VECTOR_JWT_AUDIENCE) problems.push("REPO_VECTOR_JWT_AUDIENCE is required when REPO_VECTOR_AUTH=jwt (this service's URL, which tokens must be issued for)");
+    if (!e.REPO_VECTOR_JWT_JWKS_URL === !e.REPO_VECTOR_JWT_PUBLIC_KEY) problems.push("Set exactly one of REPO_VECTOR_JWT_JWKS_URL or REPO_VECTOR_JWT_PUBLIC_KEY when REPO_VECTOR_AUTH=jwt");
   }
   if (problems.length > 0) throw new ConfigError(`Invalid configuration:
   ${problems.join("\n  ")}`);
@@ -4235,11 +4244,21 @@ function loadConfig(env = process.env, cwd = process.cwd()) {
       historyMaxCommits: e.REPO_VECTOR_HISTORY_MAX_COMMITS
     },
     server: {
-      token: e.REPO_VECTOR_SERVER_TOKEN ?? null,
       host: e.REPO_VECTOR_SERVER_HOST ?? (inDocker ? "0.0.0.0" : "127.0.0.1"),
       port: e.REPO_VECTOR_SERVER_PORT,
       corsOrigin: e.REPO_VECTOR_SERVER_CORS_ORIGIN ?? null,
-      topKMax: e.REPO_VECTOR_TOPK_MAX
+      topKMax: e.REPO_VECTOR_TOPK_MAX,
+      auth: {
+        mode: authMode,
+        token: e.REPO_VECTOR_SERVER_TOKEN ?? null,
+        issuer: e.REPO_VECTOR_JWT_ISSUER ?? null,
+        audience: e.REPO_VECTOR_JWT_AUDIENCE ?? null,
+        jwksUrl: e.REPO_VECTOR_JWT_JWKS_URL ?? null,
+        publicKey: e.REPO_VECTOR_JWT_PUBLIC_KEY ?? null,
+        publicKeyAlg: e.REPO_VECTOR_JWT_ALG ?? null,
+        scope: e.REPO_VECTOR_JWT_SCOPE,
+        reposClaim: e.REPO_VECTOR_JWT_REPOS_CLAIM ?? null
+      }
     },
     secrets: [e.PINECONE_API_KEY, e.DATABASE_URL, passwordOf(e.DATABASE_URL), e.OPENROUTER_API_KEY, e.OPENAI_API_KEY, e.REPO_VECTOR_SERVER_TOKEN].filter(
       (v) => typeof v === "string" && v !== ""
@@ -4307,6 +4326,14 @@ var init_config = __esm({
       REPO_VECTOR_SERVER_PORT: int(1, 65535).default(8080),
       REPO_VECTOR_SERVER_CORS_ORIGIN: external_exports.string().optional(),
       REPO_VECTOR_TOPK_MAX: int(1, 1e3).default(100),
+      REPO_VECTOR_AUTH: external_exports.enum(["none", "token", "jwt"]).optional(),
+      REPO_VECTOR_JWT_ISSUER: external_exports.string().url().optional(),
+      REPO_VECTOR_JWT_AUDIENCE: external_exports.string().url().optional(),
+      REPO_VECTOR_JWT_JWKS_URL: external_exports.string().url().optional(),
+      REPO_VECTOR_JWT_PUBLIC_KEY: external_exports.string().optional(),
+      REPO_VECTOR_JWT_ALG: external_exports.string().optional(),
+      REPO_VECTOR_JWT_SCOPE: external_exports.string().regex(/^\S+$/, "one scope, no spaces").default("code:read"),
+      REPO_VECTOR_JWT_REPOS_CLAIM: external_exports.string().optional(),
       GITHUB_REPOSITORY: external_exports.string().optional(),
       GITHUB_REF_NAME: external_exports.string().optional(),
       GITHUB_ACTIONS: external_exports.string().optional(),
@@ -5081,7 +5108,7 @@ var require_scan = __commonJS({
 var require_parse = __commonJS({
   "node_modules/picomatch/lib/parse.js"(exports, module2) {
     "use strict";
-    var constants = require_constants();
+    var constants2 = require_constants();
     var utils = require_utils();
     var {
       MAX_LENGTH,
@@ -5089,7 +5116,7 @@ var require_parse = __commonJS({
       REGEX_NON_SPECIAL_CHARS,
       REGEX_SPECIAL_CHARS_BACKREF,
       REPLACEMENTS
-    } = constants;
+    } = constants2;
     var expandRange = (args2, options) => {
       if (typeof options.expandRange === "function") {
         return options.expandRange(...args2, options);
@@ -5298,7 +5325,7 @@ var require_parse = __commonJS({
       if (options.maxExtglobRecursion === false) {
         return { risky: false };
       }
-      const max = typeof options.maxExtglobRecursion === "number" ? options.maxExtglobRecursion : constants.DEFAULT_MAX_EXTGLOB_RECURSION;
+      const max = typeof options.maxExtglobRecursion === "number" ? options.maxExtglobRecursion : constants2.DEFAULT_MAX_EXTGLOB_RECURSION;
       const branches = splitTopLevel(body2).map((branch) => branch.trim());
       if (branches.length > 1) {
         if (branches.some((branch) => branch === "") || branches.some((branch) => /^[*?]+$/.test(branch)) || hasRepeatedCharPrefixOverlap(branches)) {
@@ -5344,8 +5371,8 @@ var require_parse = __commonJS({
       const bos = { type: "bos", value: "", output: opts.prepend || "" };
       const tokens = [bos];
       const capture = opts.capture ? "" : "?:";
-      const PLATFORM_CHARS = constants.globChars(opts.windows);
-      const EXTGLOB_CHARS = constants.extglobChars(PLATFORM_CHARS);
+      const PLATFORM_CHARS = constants2.globChars(opts.windows);
+      const EXTGLOB_CHARS = constants2.extglobChars(PLATFORM_CHARS);
       const {
         DOT_LITERAL,
         PLUS_LITERAL,
@@ -6041,7 +6068,7 @@ var require_parse = __commonJS({
         NO_DOTS_SLASH,
         STAR,
         START_ANCHOR
-      } = constants.globChars(opts.windows);
+      } = constants2.globChars(opts.windows);
       const nodot = opts.dot ? NO_DOTS : NO_DOT;
       const slashDot = opts.dot ? NO_DOTS_SLASH : NO_DOT;
       const capture = opts.capture ? "" : "?:";
@@ -6099,8 +6126,8 @@ var require_picomatch = __commonJS({
     var scan = require_scan();
     var parse5 = require_parse();
     var utils = require_utils();
-    var constants = require_constants();
-    var isObject3 = (val) => val && typeof val === "object" && !Array.isArray(val);
+    var constants2 = require_constants();
+    var isObject4 = (val) => val && typeof val === "object" && !Array.isArray(val);
     var picomatch2 = (glob, options, returnState = false) => {
       if (Array.isArray(glob)) {
         const fns = glob.map((input) => picomatch2(input, options, returnState));
@@ -6113,7 +6140,7 @@ var require_picomatch = __commonJS({
         };
         return arrayMatcher;
       }
-      const isState = isObject3(glob) && glob.tokens && glob.input;
+      const isState = isObject4(glob) && glob.tokens && glob.input;
       if (glob === "" || typeof glob !== "string" && !isState) {
         throw new TypeError("Expected pattern to be a non-empty string");
       }
@@ -6227,7 +6254,7 @@ var require_picomatch = __commonJS({
         return /$^/;
       }
     };
-    picomatch2.constants = constants;
+    picomatch2.constants = constants2;
     module2.exports = picomatch2;
   }
 });
@@ -6976,8 +7003,8 @@ var require_runtime = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -7071,15 +7098,15 @@ var require_BackupListPagination = __commonJS({
       isInstance = isInstance && "next" in value;
       return isInstance;
     }
-    function BackupListPaginationFromJSON(json) {
-      return BackupListPaginationFromJSONTyped(json, false);
+    function BackupListPaginationFromJSON(json2) {
+      return BackupListPaginationFromJSONTyped(json2, false);
     }
-    function BackupListPaginationFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupListPaginationFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "next": json["next"]
+        "next": json2["next"]
       };
     }
     function BackupListPaginationToJSON(value) {
@@ -7110,15 +7137,15 @@ var require_LegacyMetadataField = __commonJS({
       isInstance = isInstance && "filterable" in value;
       return isInstance;
     }
-    function LegacyMetadataFieldFromJSON(json) {
-      return LegacyMetadataFieldFromJSONTyped(json, false);
+    function LegacyMetadataFieldFromJSON(json2) {
+      return LegacyMetadataFieldFromJSONTyped(json2, false);
     }
-    function LegacyMetadataFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function LegacyMetadataFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "filterable": json["filterable"]
+        "filterable": json2["filterable"]
       };
     }
     function LegacyMetadataFieldToJSON(value) {
@@ -7154,17 +7181,17 @@ var require_BooleanField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function BooleanFieldFromJSON(json) {
-      return BooleanFieldFromJSONTyped(json, false);
+    function BooleanFieldFromJSON(json2) {
+      return BooleanFieldFromJSONTyped(json2, false);
     }
-    function BooleanFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BooleanFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "filterable": !(0, runtime_1.exists)(json, "filterable") ? void 0 : json["filterable"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "filterable": !(0, runtime_1.exists)(json2, "filterable") ? void 0 : json2["filterable"]
       };
     }
     function BooleanFieldToJSON(value) {
@@ -7206,18 +7233,18 @@ var require_DenseVectorField = __commonJS({
       isInstance = isInstance && "metric" in value;
       return isInstance;
     }
-    function DenseVectorFieldFromJSON(json) {
-      return DenseVectorFieldFromJSONTyped(json, false);
+    function DenseVectorFieldFromJSON(json2) {
+      return DenseVectorFieldFromJSONTyped(json2, false);
     }
-    function DenseVectorFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DenseVectorFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "dimension": json["dimension"],
-        "metric": json["metric"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "dimension": json2["dimension"],
+        "metric": json2["metric"]
       };
     }
     function DenseVectorFieldToJSON(value) {
@@ -7256,17 +7283,17 @@ var require_FloatField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function FloatFieldFromJSON(json) {
-      return FloatFieldFromJSONTyped(json, false);
+    function FloatFieldFromJSON(json2) {
+      return FloatFieldFromJSONTyped(json2, false);
     }
-    function FloatFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FloatFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "filterable": !(0, runtime_1.exists)(json, "filterable") ? void 0 : json["filterable"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "filterable": !(0, runtime_1.exists)(json2, "filterable") ? void 0 : json2["filterable"]
       };
     }
     function FloatFieldToJSON(value) {
@@ -7304,17 +7331,17 @@ var require_IntegerField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function IntegerFieldFromJSON(json) {
-      return IntegerFieldFromJSONTyped(json, false);
+    function IntegerFieldFromJSON(json2) {
+      return IntegerFieldFromJSONTyped(json2, false);
     }
-    function IntegerFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IntegerFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "filterable": !(0, runtime_1.exists)(json, "filterable") ? void 0 : json["filterable"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "filterable": !(0, runtime_1.exists)(json2, "filterable") ? void 0 : json2["filterable"]
       };
     }
     function IntegerFieldToJSON(value) {
@@ -7349,17 +7376,17 @@ var require_ResponseStringFieldFullTextSearchNgram = __commonJS({
       isInstance = isInstance && "prefixOnly" in value;
       return isInstance;
     }
-    function ResponseStringFieldFullTextSearchNgramFromJSON(json) {
-      return ResponseStringFieldFullTextSearchNgramFromJSONTyped(json, false);
+    function ResponseStringFieldFullTextSearchNgramFromJSON(json2) {
+      return ResponseStringFieldFullTextSearchNgramFromJSONTyped(json2, false);
     }
-    function ResponseStringFieldFullTextSearchNgramFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ResponseStringFieldFullTextSearchNgramFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "minGram": json["min_gram"],
-        "maxGram": json["max_gram"],
-        "prefixOnly": json["prefix_only"]
+        "minGram": json2["min_gram"],
+        "maxGram": json2["max_gram"],
+        "prefixOnly": json2["prefix_only"]
       };
     }
     function ResponseStringFieldFullTextSearchNgramToJSON(value) {
@@ -7396,18 +7423,18 @@ var require_ResponseStringFieldFullTextSearch = __commonJS({
       isInstance = isInstance && "stopWords" in value;
       return isInstance;
     }
-    function ResponseStringFieldFullTextSearchFromJSON(json) {
-      return ResponseStringFieldFullTextSearchFromJSONTyped(json, false);
+    function ResponseStringFieldFullTextSearchFromJSON(json2) {
+      return ResponseStringFieldFullTextSearchFromJSONTyped(json2, false);
     }
-    function ResponseStringFieldFullTextSearchFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ResponseStringFieldFullTextSearchFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "language": json["language"],
-        "stemming": json["stemming"],
-        "stopWords": json["stop_words"],
-        "ngram": !(0, runtime_1.exists)(json, "ngram") ? void 0 : (0, ResponseStringFieldFullTextSearchNgram_1.ResponseStringFieldFullTextSearchNgramFromJSON)(json["ngram"])
+        "language": json2["language"],
+        "stemming": json2["stemming"],
+        "stopWords": json2["stop_words"],
+        "ngram": !(0, runtime_1.exists)(json2, "ngram") ? void 0 : (0, ResponseStringFieldFullTextSearchNgram_1.ResponseStringFieldFullTextSearchNgramFromJSON)(json2["ngram"])
       };
     }
     function ResponseStringFieldFullTextSearchToJSON(value) {
@@ -7447,18 +7474,18 @@ var require_ResponseStringField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function ResponseStringFieldFromJSON(json) {
-      return ResponseStringFieldFromJSONTyped(json, false);
+    function ResponseStringFieldFromJSON(json2) {
+      return ResponseStringFieldFromJSONTyped(json2, false);
     }
-    function ResponseStringFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ResponseStringFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "fullTextSearch": !(0, runtime_1.exists)(json, "full_text_search") ? void 0 : (0, ResponseStringFieldFullTextSearch_1.ResponseStringFieldFullTextSearchFromJSON)(json["full_text_search"]),
-        "filterable": !(0, runtime_1.exists)(json, "filterable") ? void 0 : json["filterable"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "fullTextSearch": !(0, runtime_1.exists)(json2, "full_text_search") ? void 0 : (0, ResponseStringFieldFullTextSearch_1.ResponseStringFieldFullTextSearchFromJSON)(json2["full_text_search"]),
+        "filterable": !(0, runtime_1.exists)(json2, "filterable") ? void 0 : json2["filterable"]
       };
     }
     function ResponseStringFieldToJSON(value) {
@@ -7498,21 +7525,21 @@ var require_SemanticTextField = __commonJS({
       isInstance = isInstance && "model" in value;
       return isInstance;
     }
-    function SemanticTextFieldFromJSON(json) {
-      return SemanticTextFieldFromJSONTyped(json, false);
+    function SemanticTextFieldFromJSON(json2) {
+      return SemanticTextFieldFromJSONTyped(json2, false);
     }
-    function SemanticTextFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SemanticTextFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "model": json["model"],
-        "dimension": !(0, runtime_1.exists)(json, "dimension") ? void 0 : json["dimension"],
-        "metric": !(0, runtime_1.exists)(json, "metric") ? void 0 : json["metric"],
-        "writeParameters": !(0, runtime_1.exists)(json, "write_parameters") ? void 0 : json["write_parameters"],
-        "readParameters": !(0, runtime_1.exists)(json, "read_parameters") ? void 0 : json["read_parameters"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "model": json2["model"],
+        "dimension": !(0, runtime_1.exists)(json2, "dimension") ? void 0 : json2["dimension"],
+        "metric": !(0, runtime_1.exists)(json2, "metric") ? void 0 : json2["metric"],
+        "writeParameters": !(0, runtime_1.exists)(json2, "write_parameters") ? void 0 : json2["write_parameters"],
+        "readParameters": !(0, runtime_1.exists)(json2, "read_parameters") ? void 0 : json2["read_parameters"]
       };
     }
     function SemanticTextFieldToJSON(value) {
@@ -7554,16 +7581,16 @@ var require_SparseVectorField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function SparseVectorFieldFromJSON(json) {
-      return SparseVectorFieldFromJSONTyped(json, false);
+    function SparseVectorFieldFromJSON(json2) {
+      return SparseVectorFieldFromJSONTyped(json2, false);
     }
-    function SparseVectorFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SparseVectorFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"]
       };
     }
     function SparseVectorFieldToJSON(value) {
@@ -7600,17 +7627,17 @@ var require_StringListField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function StringListFieldFromJSON(json) {
-      return StringListFieldFromJSONTyped(json, false);
+    function StringListFieldFromJSON(json2) {
+      return StringListFieldFromJSONTyped(json2, false);
     }
-    function StringListFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StringListFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "filterable": !(0, runtime_1.exists)(json, "filterable") ? void 0 : json["filterable"]
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "filterable": !(0, runtime_1.exists)(json2, "filterable") ? void 0 : json2["filterable"]
       };
     }
     function StringListFieldToJSON(value) {
@@ -7645,32 +7672,32 @@ var require_TypedIndexSchemaField = __commonJS({
     var SemanticTextField_1 = require_SemanticTextField();
     var SparseVectorField_1 = require_SparseVectorField();
     var StringListField_1 = require_StringListField();
-    function TypedIndexSchemaFieldFromJSON(json) {
-      return TypedIndexSchemaFieldFromJSONTyped(json, false);
+    function TypedIndexSchemaFieldFromJSON(json2) {
+      return TypedIndexSchemaFieldFromJSONTyped(json2, false);
     }
-    function TypedIndexSchemaFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function TypedIndexSchemaFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["type"]) {
+      switch (json2["type"]) {
         case "boolean":
-          return { ...(0, BooleanField_1.BooleanFieldFromJSONTyped)(json, true), type: "boolean" };
+          return { ...(0, BooleanField_1.BooleanFieldFromJSONTyped)(json2, true), type: "boolean" };
         case "dense_vector":
-          return { ...(0, DenseVectorField_1.DenseVectorFieldFromJSONTyped)(json, true), type: "dense_vector" };
+          return { ...(0, DenseVectorField_1.DenseVectorFieldFromJSONTyped)(json2, true), type: "dense_vector" };
         case "float":
-          return { ...(0, FloatField_1.FloatFieldFromJSONTyped)(json, true), type: "float" };
+          return { ...(0, FloatField_1.FloatFieldFromJSONTyped)(json2, true), type: "float" };
         case "integer":
-          return { ...(0, IntegerField_1.IntegerFieldFromJSONTyped)(json, true), type: "integer" };
+          return { ...(0, IntegerField_1.IntegerFieldFromJSONTyped)(json2, true), type: "integer" };
         case "semantic_text":
-          return { ...(0, SemanticTextField_1.SemanticTextFieldFromJSONTyped)(json, true), type: "semantic_text" };
+          return { ...(0, SemanticTextField_1.SemanticTextFieldFromJSONTyped)(json2, true), type: "semantic_text" };
         case "sparse_vector":
-          return { ...(0, SparseVectorField_1.SparseVectorFieldFromJSONTyped)(json, true), type: "sparse_vector" };
+          return { ...(0, SparseVectorField_1.SparseVectorFieldFromJSONTyped)(json2, true), type: "sparse_vector" };
         case "string":
-          return { ...(0, ResponseStringField_1.ResponseStringFieldFromJSONTyped)(json, true), type: "string" };
+          return { ...(0, ResponseStringField_1.ResponseStringFieldFromJSONTyped)(json2, true), type: "string" };
         case "string_list":
-          return { ...(0, StringListField_1.StringListFieldFromJSONTyped)(json, true), type: "string_list" };
+          return { ...(0, StringListField_1.StringListFieldFromJSONTyped)(json2, true), type: "string_list" };
         default:
-          throw new Error(`No variant of TypedIndexSchemaField exists with 'type=${json["type"]}'`);
+          throw new Error(`No variant of TypedIndexSchemaField exists with 'type=${json2["type"]}'`);
       }
     }
     function TypedIndexSchemaFieldToJSON(value) {
@@ -7714,17 +7741,17 @@ var require_IndexSchemaField = __commonJS({
     exports.IndexSchemaFieldToJSON = IndexSchemaFieldToJSON;
     var LegacyMetadataField_1 = require_LegacyMetadataField();
     var TypedIndexSchemaField_1 = require_TypedIndexSchemaField();
-    function IndexSchemaFieldFromJSON(json) {
-      return IndexSchemaFieldFromJSONTyped(json, false);
+    function IndexSchemaFieldFromJSON(json2) {
+      return IndexSchemaFieldFromJSONTyped(json2, false);
     }
-    function IndexSchemaFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexSchemaFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      if ("type" in json) {
-        return (0, TypedIndexSchemaField_1.TypedIndexSchemaFieldFromJSONTyped)(json, ignoreDiscriminator);
+      if ("type" in json2) {
+        return (0, TypedIndexSchemaField_1.TypedIndexSchemaFieldFromJSONTyped)(json2, ignoreDiscriminator);
       }
-      return (0, LegacyMetadataField_1.LegacyMetadataFieldFromJSONTyped)(json, ignoreDiscriminator);
+      return (0, LegacyMetadataField_1.LegacyMetadataFieldFromJSONTyped)(json2, ignoreDiscriminator);
     }
     function IndexSchemaFieldToJSON(value) {
       if (value === void 0) {
@@ -7757,15 +7784,15 @@ var require_IndexSchema = __commonJS({
       isInstance = isInstance && "fields" in value;
       return isInstance;
     }
-    function IndexSchemaFromJSON(json) {
-      return IndexSchemaFromJSONTyped(json, false);
+    function IndexSchemaFromJSON(json2) {
+      return IndexSchemaFromJSONTyped(json2, false);
     }
-    function IndexSchemaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexSchemaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": (0, runtime_1.mapValues)(json["fields"], IndexSchemaField_1.IndexSchemaFieldFromJSON)
+        "fields": (0, runtime_1.mapValues)(json2["fields"], IndexSchemaField_1.IndexSchemaFieldFromJSON)
       };
     }
     function IndexSchemaToJSON(value) {
@@ -7803,29 +7830,29 @@ var require_BackupModel = __commonJS({
       isInstance = isInstance && "region" in value;
       return isInstance;
     }
-    function BackupModelFromJSON(json) {
-      return BackupModelFromJSONTyped(json, false);
+    function BackupModelFromJSON(json2) {
+      return BackupModelFromJSONTyped(json2, false);
     }
-    function BackupModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "backupId": json["backup_id"],
-        "sourceIndexName": json["source_index_name"],
-        "sourceIndexId": json["source_index_id"],
-        "sourceIndexDeletedAt": !(0, runtime_1.exists)(json, "source_index_deleted_at") ? void 0 : new Date(json["source_index_deleted_at"]),
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "status": json["status"],
-        "cloud": json["cloud"],
-        "region": json["region"],
-        "schema": !(0, runtime_1.exists)(json, "schema") ? void 0 : (0, IndexSchema_1.IndexSchemaFromJSON)(json["schema"]),
-        "recordCount": !(0, runtime_1.exists)(json, "record_count") ? void 0 : json["record_count"],
-        "namespaceCount": !(0, runtime_1.exists)(json, "namespace_count") ? void 0 : json["namespace_count"],
-        "sizeBytes": !(0, runtime_1.exists)(json, "size_bytes") ? void 0 : json["size_bytes"],
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "createdAt": !(0, runtime_1.exists)(json, "created_at") ? void 0 : new Date(json["created_at"])
+        "backupId": json2["backup_id"],
+        "sourceIndexName": json2["source_index_name"],
+        "sourceIndexId": json2["source_index_id"],
+        "sourceIndexDeletedAt": !(0, runtime_1.exists)(json2, "source_index_deleted_at") ? void 0 : new Date(json2["source_index_deleted_at"]),
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "status": json2["status"],
+        "cloud": json2["cloud"],
+        "region": json2["region"],
+        "schema": !(0, runtime_1.exists)(json2, "schema") ? void 0 : (0, IndexSchema_1.IndexSchemaFromJSON)(json2["schema"]),
+        "recordCount": !(0, runtime_1.exists)(json2, "record_count") ? void 0 : json2["record_count"],
+        "namespaceCount": !(0, runtime_1.exists)(json2, "namespace_count") ? void 0 : json2["namespace_count"],
+        "sizeBytes": !(0, runtime_1.exists)(json2, "size_bytes") ? void 0 : json2["size_bytes"],
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "createdAt": !(0, runtime_1.exists)(json2, "created_at") ? void 0 : new Date(json2["created_at"])
       };
     }
     function BackupModelToJSON(value) {
@@ -7872,16 +7899,16 @@ var require_BackupList = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function BackupListFromJSON(json) {
-      return BackupListFromJSONTyped(json, false);
+    function BackupListFromJSON(json2) {
+      return BackupListFromJSONTyped(json2, false);
     }
-    function BackupListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": !(0, runtime_1.exists)(json, "data") ? void 0 : json["data"].map(BackupModel_1.BackupModelFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json["pagination"])
+        "data": !(0, runtime_1.exists)(json2, "data") ? void 0 : json2["data"].map(BackupModel_1.BackupModelFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json2["pagination"])
       };
     }
     function BackupListToJSON(value) {
@@ -7915,15 +7942,15 @@ var require_BackupScheduleHistoryItemSchema = __commonJS({
       isInstance = isInstance && "fields" in value;
       return isInstance;
     }
-    function BackupScheduleHistoryItemSchemaFromJSON(json) {
-      return BackupScheduleHistoryItemSchemaFromJSONTyped(json, false);
+    function BackupScheduleHistoryItemSchemaFromJSON(json2) {
+      return BackupScheduleHistoryItemSchemaFromJSONTyped(json2, false);
     }
-    function BackupScheduleHistoryItemSchemaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleHistoryItemSchemaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": (0, runtime_1.mapValues)(json["fields"], IndexSchemaField_1.IndexSchemaFieldFromJSON)
+        "fields": (0, runtime_1.mapValues)(json2["fields"], IndexSchemaField_1.IndexSchemaFieldFromJSON)
       };
     }
     function BackupScheduleHistoryItemSchemaToJSON(value) {
@@ -7963,29 +7990,29 @@ var require_BackupScheduleHistoryItem = __commonJS({
       isInstance = isInstance && "createdAt" in value;
       return isInstance;
     }
-    function BackupScheduleHistoryItemFromJSON(json) {
-      return BackupScheduleHistoryItemFromJSONTyped(json, false);
+    function BackupScheduleHistoryItemFromJSON(json2) {
+      return BackupScheduleHistoryItemFromJSONTyped(json2, false);
     }
-    function BackupScheduleHistoryItemFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleHistoryItemFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "backupId": json["backup_id"],
-        "sourceIndexId": json["source_index_id"],
-        "sourceIndexName": json["source_index_name"],
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "name": json["name"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "status": json["status"],
-        "cloud": json["cloud"],
-        "region": json["region"],
-        "schema": !(0, runtime_1.exists)(json, "schema") ? void 0 : (0, BackupScheduleHistoryItemSchema_1.BackupScheduleHistoryItemSchemaFromJSON)(json["schema"]),
-        "recordCount": !(0, runtime_1.exists)(json, "record_count") ? void 0 : json["record_count"],
-        "namespaceCount": !(0, runtime_1.exists)(json, "namespace_count") ? void 0 : json["namespace_count"],
-        "sizeBytes": !(0, runtime_1.exists)(json, "size_bytes") ? void 0 : json["size_bytes"],
-        "createdAt": new Date(json["created_at"]),
-        "scheduledExecutionAt": !(0, runtime_1.exists)(json, "scheduled_execution_at") ? void 0 : new Date(json["scheduled_execution_at"])
+        "backupId": json2["backup_id"],
+        "sourceIndexId": json2["source_index_id"],
+        "sourceIndexName": json2["source_index_name"],
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "name": json2["name"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "status": json2["status"],
+        "cloud": json2["cloud"],
+        "region": json2["region"],
+        "schema": !(0, runtime_1.exists)(json2, "schema") ? void 0 : (0, BackupScheduleHistoryItemSchema_1.BackupScheduleHistoryItemSchemaFromJSON)(json2["schema"]),
+        "recordCount": !(0, runtime_1.exists)(json2, "record_count") ? void 0 : json2["record_count"],
+        "namespaceCount": !(0, runtime_1.exists)(json2, "namespace_count") ? void 0 : json2["namespace_count"],
+        "sizeBytes": !(0, runtime_1.exists)(json2, "size_bytes") ? void 0 : json2["size_bytes"],
+        "createdAt": new Date(json2["created_at"]),
+        "scheduledExecutionAt": !(0, runtime_1.exists)(json2, "scheduled_execution_at") ? void 0 : new Date(json2["scheduled_execution_at"])
       };
     }
     function BackupScheduleHistoryItemToJSON(value) {
@@ -8033,16 +8060,16 @@ var require_BackupScheduleHistoryList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function BackupScheduleHistoryListFromJSON(json) {
-      return BackupScheduleHistoryListFromJSONTyped(json, false);
+    function BackupScheduleHistoryListFromJSON(json2) {
+      return BackupScheduleHistoryListFromJSONTyped(json2, false);
     }
-    function BackupScheduleHistoryListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleHistoryListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(BackupScheduleHistoryItem_1.BackupScheduleHistoryItemFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(BackupScheduleHistoryItem_1.BackupScheduleHistoryItemFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json2["pagination"])
       };
     }
     function BackupScheduleHistoryListToJSON(value) {
@@ -8083,24 +8110,24 @@ var require_BackupScheduleResponse = __commonJS({
       isInstance = isInstance && "createdAt" in value;
       return isInstance;
     }
-    function BackupScheduleResponseFromJSON(json) {
-      return BackupScheduleResponseFromJSONTyped(json, false);
+    function BackupScheduleResponseFromJSON(json2) {
+      return BackupScheduleResponseFromJSONTyped(json2, false);
     }
-    function BackupScheduleResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "scheduleId": json["schedule_id"],
-        "name": json["name"],
-        "indexId": json["index_id"],
-        "projectId": json["project_id"],
-        "scheduleType": json["schedule_type"],
-        "frequency": json["frequency"],
-        "retentionExpireAfterDays": json["retention_expire_after_days"],
-        "enabled": json["enabled"],
-        "nextScheduledRun": json["next_scheduled_run"] === null ? null : new Date(json["next_scheduled_run"]),
-        "createdAt": new Date(json["created_at"])
+        "scheduleId": json2["schedule_id"],
+        "name": json2["name"],
+        "indexId": json2["index_id"],
+        "projectId": json2["project_id"],
+        "scheduleType": json2["schedule_type"],
+        "frequency": json2["frequency"],
+        "retentionExpireAfterDays": json2["retention_expire_after_days"],
+        "enabled": json2["enabled"],
+        "nextScheduledRun": json2["next_scheduled_run"] === null ? null : new Date(json2["next_scheduled_run"]),
+        "createdAt": new Date(json2["created_at"])
       };
     }
     function BackupScheduleResponseToJSON(value) {
@@ -8143,16 +8170,16 @@ var require_BackupScheduleList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function BackupScheduleListFromJSON(json) {
-      return BackupScheduleListFromJSONTyped(json, false);
+    function BackupScheduleListFromJSON(json2) {
+      return BackupScheduleListFromJSONTyped(json2, false);
     }
-    function BackupScheduleListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(BackupScheduleResponse_1.BackupScheduleResponseFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(BackupScheduleResponse_1.BackupScheduleResponseFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json2["pagination"])
       };
     }
     function BackupScheduleListToJSON(value) {
@@ -8185,16 +8212,16 @@ var require_BackupScheduleRequestSchedule = __commonJS({
       isInstance = isInstance && "frequency" in value;
       return isInstance;
     }
-    function BackupScheduleRequestScheduleFromJSON(json) {
-      return BackupScheduleRequestScheduleFromJSONTyped(json, false);
+    function BackupScheduleRequestScheduleFromJSON(json2) {
+      return BackupScheduleRequestScheduleFromJSONTyped(json2, false);
     }
-    function BackupScheduleRequestScheduleFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleRequestScheduleFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "frequency": json["frequency"]
+        "type": json2["type"],
+        "frequency": json2["frequency"]
       };
     }
     function BackupScheduleRequestScheduleToJSON(value) {
@@ -8226,15 +8253,15 @@ var require_BackupScheduleRetentionInput = __commonJS({
       isInstance = isInstance && "expireAfterDays" in value;
       return isInstance;
     }
-    function BackupScheduleRetentionInputFromJSON(json) {
-      return BackupScheduleRetentionInputFromJSONTyped(json, false);
+    function BackupScheduleRetentionInputFromJSON(json2) {
+      return BackupScheduleRetentionInputFromJSONTyped(json2, false);
     }
-    function BackupScheduleRetentionInputFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BackupScheduleRetentionInputFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "expireAfterDays": json["expire_after_days"]
+        "expireAfterDays": json2["expire_after_days"]
       };
     }
     function BackupScheduleRetentionInputToJSON(value) {
@@ -8270,16 +8297,16 @@ var require_ByocDeployment = __commonJS({
       isInstance = isInstance && "environment" in value;
       return isInstance;
     }
-    function ByocDeploymentFromJSON(json) {
-      return ByocDeploymentFromJSONTyped(json, false);
+    function ByocDeploymentFromJSON(json2) {
+      return ByocDeploymentFromJSONTyped(json2, false);
     }
-    function ByocDeploymentFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ByocDeploymentFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "deploymentType": json["deployment_type"],
-        "environment": json["environment"]
+        "deploymentType": json2["deployment_type"],
+        "environment": json2["environment"]
       };
     }
     function ByocDeploymentToJSON(value) {
@@ -8314,20 +8341,20 @@ var require_CollectionModel = __commonJS({
       isInstance = isInstance && "environment" in value;
       return isInstance;
     }
-    function CollectionModelFromJSON(json) {
-      return CollectionModelFromJSONTyped(json, false);
+    function CollectionModelFromJSON(json2) {
+      return CollectionModelFromJSONTyped(json2, false);
     }
-    function CollectionModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CollectionModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "size": !(0, runtime_1.exists)(json, "size") ? void 0 : json["size"],
-        "status": json["status"],
-        "dimension": !(0, runtime_1.exists)(json, "dimension") ? void 0 : json["dimension"],
-        "vectorCount": !(0, runtime_1.exists)(json, "vector_count") ? void 0 : json["vector_count"],
-        "environment": json["environment"]
+        "name": json2["name"],
+        "size": !(0, runtime_1.exists)(json2, "size") ? void 0 : json2["size"],
+        "status": json2["status"],
+        "dimension": !(0, runtime_1.exists)(json2, "dimension") ? void 0 : json2["dimension"],
+        "vectorCount": !(0, runtime_1.exists)(json2, "vector_count") ? void 0 : json2["vector_count"],
+        "environment": json2["environment"]
       };
     }
     function CollectionModelToJSON(value) {
@@ -8364,15 +8391,15 @@ var require_CollectionList = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function CollectionListFromJSON(json) {
-      return CollectionListFromJSONTyped(json, false);
+    function CollectionListFromJSON(json2) {
+      return CollectionListFromJSONTyped(json2, false);
     }
-    function CollectionListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CollectionListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "collections": !(0, runtime_1.exists)(json, "collections") ? void 0 : json["collections"].map(CollectionModel_1.CollectionModelFromJSON)
+        "collections": !(0, runtime_1.exists)(json2, "collections") ? void 0 : json2["collections"].map(CollectionModel_1.CollectionModelFromJSON)
       };
     }
     function CollectionListToJSON(value) {
@@ -8403,16 +8430,16 @@ var require_PatchIndexDeploymentRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function PatchIndexDeploymentRequestFromJSON(json) {
-      return PatchIndexDeploymentRequestFromJSONTyped(json, false);
+    function PatchIndexDeploymentRequestFromJSON(json2) {
+      return PatchIndexDeploymentRequestFromJSONTyped(json2, false);
     }
-    function PatchIndexDeploymentRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PatchIndexDeploymentRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "replicas": !(0, runtime_1.exists)(json, "replicas") ? void 0 : json["replicas"],
-        "podType": !(0, runtime_1.exists)(json, "pod_type") ? void 0 : json["pod_type"]
+        "replicas": !(0, runtime_1.exists)(json2, "replicas") ? void 0 : json2["replicas"],
+        "podType": !(0, runtime_1.exists)(json2, "pod_type") ? void 0 : json2["pod_type"]
       };
     }
     function PatchIndexDeploymentRequestToJSON(value) {
@@ -8449,18 +8476,18 @@ var require_PatchSemanticTextField = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function PatchSemanticTextFieldFromJSON(json) {
-      return PatchSemanticTextFieldFromJSONTyped(json, false);
+    function PatchSemanticTextFieldFromJSON(json2) {
+      return PatchSemanticTextFieldFromJSONTyped(json2, false);
     }
-    function PatchSemanticTextFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PatchSemanticTextFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "model": !(0, runtime_1.exists)(json, "model") ? void 0 : json["model"],
-        "writeParameters": !(0, runtime_1.exists)(json, "write_parameters") ? void 0 : json["write_parameters"],
-        "readParameters": !(0, runtime_1.exists)(json, "read_parameters") ? void 0 : json["read_parameters"]
+        "type": json2["type"],
+        "model": !(0, runtime_1.exists)(json2, "model") ? void 0 : json2["model"],
+        "writeParameters": !(0, runtime_1.exists)(json2, "write_parameters") ? void 0 : json2["write_parameters"],
+        "readParameters": !(0, runtime_1.exists)(json2, "read_parameters") ? void 0 : json2["read_parameters"]
       };
     }
     function PatchSemanticTextFieldToJSON(value) {
@@ -8496,15 +8523,15 @@ var require_PatchIndexSchema = __commonJS({
       isInstance = isInstance && "fields" in value;
       return isInstance;
     }
-    function PatchIndexSchemaFromJSON(json) {
-      return PatchIndexSchemaFromJSONTyped(json, false);
+    function PatchIndexSchemaFromJSON(json2) {
+      return PatchIndexSchemaFromJSONTyped(json2, false);
     }
-    function PatchIndexSchemaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PatchIndexSchemaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": (0, runtime_1.mapValues)(json["fields"], PatchSemanticTextField_1.PatchSemanticTextFieldFromJSON)
+        "fields": (0, runtime_1.mapValues)(json2["fields"], PatchSemanticTextField_1.PatchSemanticTextFieldFromJSON)
       };
     }
     function PatchIndexSchemaToJSON(value) {
@@ -8535,16 +8562,16 @@ var require_ScalingConfigManualPatch = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ScalingConfigManualPatchFromJSON(json) {
-      return ScalingConfigManualPatchFromJSONTyped(json, false);
+    function ScalingConfigManualPatchFromJSON(json2) {
+      return ScalingConfigManualPatchFromJSONTyped(json2, false);
     }
-    function ScalingConfigManualPatchFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ScalingConfigManualPatchFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "replicas": !(0, runtime_1.exists)(json, "replicas") ? void 0 : json["replicas"],
-        "shards": !(0, runtime_1.exists)(json, "shards") ? void 0 : json["shards"]
+        "replicas": !(0, runtime_1.exists)(json2, "replicas") ? void 0 : json2["replicas"],
+        "shards": !(0, runtime_1.exists)(json2, "shards") ? void 0 : json2["shards"]
       };
     }
     function ScalingConfigManualPatchToJSON(value) {
@@ -8577,17 +8604,17 @@ var require_ReadCapacityDedicatedPatchConfig = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ReadCapacityDedicatedPatchConfigFromJSON(json) {
-      return ReadCapacityDedicatedPatchConfigFromJSONTyped(json, false);
+    function ReadCapacityDedicatedPatchConfigFromJSON(json2) {
+      return ReadCapacityDedicatedPatchConfigFromJSONTyped(json2, false);
     }
-    function ReadCapacityDedicatedPatchConfigFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityDedicatedPatchConfigFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "nodeType": !(0, runtime_1.exists)(json, "node_type") ? void 0 : json["node_type"],
-        "scaling": !(0, runtime_1.exists)(json, "scaling") ? void 0 : json["scaling"],
-        "manual": !(0, runtime_1.exists)(json, "manual") ? void 0 : (0, ScalingConfigManualPatch_1.ScalingConfigManualPatchFromJSON)(json["manual"])
+        "nodeType": !(0, runtime_1.exists)(json2, "node_type") ? void 0 : json2["node_type"],
+        "scaling": !(0, runtime_1.exists)(json2, "scaling") ? void 0 : json2["scaling"],
+        "manual": !(0, runtime_1.exists)(json2, "manual") ? void 0 : (0, ScalingConfigManualPatch_1.ScalingConfigManualPatchFromJSON)(json2["manual"])
       };
     }
     function ReadCapacityDedicatedPatchConfigToJSON(value) {
@@ -8622,16 +8649,16 @@ var require_ReadCapacityDedicatedPatchSpec = __commonJS({
       isInstance = isInstance && "dedicated" in value;
       return isInstance;
     }
-    function ReadCapacityDedicatedPatchSpecFromJSON(json) {
-      return ReadCapacityDedicatedPatchSpecFromJSONTyped(json, false);
+    function ReadCapacityDedicatedPatchSpecFromJSON(json2) {
+      return ReadCapacityDedicatedPatchSpecFromJSONTyped(json2, false);
     }
-    function ReadCapacityDedicatedPatchSpecFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityDedicatedPatchSpecFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "mode": json["mode"],
-        "dedicated": (0, ReadCapacityDedicatedPatchConfig_1.ReadCapacityDedicatedPatchConfigFromJSON)(json["dedicated"])
+        "mode": json2["mode"],
+        "dedicated": (0, ReadCapacityDedicatedPatchConfig_1.ReadCapacityDedicatedPatchConfigFromJSON)(json2["dedicated"])
       };
     }
     function ReadCapacityDedicatedPatchSpecToJSON(value) {
@@ -8663,15 +8690,15 @@ var require_ReadCapacityOnDemandSpec = __commonJS({
       isInstance = isInstance && "mode" in value;
       return isInstance;
     }
-    function ReadCapacityOnDemandSpecFromJSON(json) {
-      return ReadCapacityOnDemandSpecFromJSONTyped(json, false);
+    function ReadCapacityOnDemandSpecFromJSON(json2) {
+      return ReadCapacityOnDemandSpecFromJSONTyped(json2, false);
     }
-    function ReadCapacityOnDemandSpecFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityOnDemandSpecFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "mode": json["mode"]
+        "mode": json2["mode"]
       };
     }
     function ReadCapacityOnDemandSpecToJSON(value) {
@@ -8698,20 +8725,20 @@ var require_ReadCapacityPatch = __commonJS({
     exports.ReadCapacityPatchToJSON = ReadCapacityPatchToJSON;
     var ReadCapacityDedicatedPatchSpec_1 = require_ReadCapacityDedicatedPatchSpec();
     var ReadCapacityOnDemandSpec_1 = require_ReadCapacityOnDemandSpec();
-    function ReadCapacityPatchFromJSON(json) {
-      return ReadCapacityPatchFromJSONTyped(json, false);
+    function ReadCapacityPatchFromJSON(json2) {
+      return ReadCapacityPatchFromJSONTyped(json2, false);
     }
-    function ReadCapacityPatchFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityPatchFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["mode"]) {
+      switch (json2["mode"]) {
         case "Dedicated":
-          return { ...(0, ReadCapacityDedicatedPatchSpec_1.ReadCapacityDedicatedPatchSpecFromJSONTyped)(json, true), mode: "Dedicated" };
+          return { ...(0, ReadCapacityDedicatedPatchSpec_1.ReadCapacityDedicatedPatchSpecFromJSONTyped)(json2, true), mode: "Dedicated" };
         case "OnDemand":
-          return { ...(0, ReadCapacityOnDemandSpec_1.ReadCapacityOnDemandSpecFromJSONTyped)(json, true), mode: "OnDemand" };
+          return { ...(0, ReadCapacityOnDemandSpec_1.ReadCapacityOnDemandSpecFromJSONTyped)(json2, true), mode: "OnDemand" };
         default:
-          throw new Error(`No variant of ReadCapacityPatch exists with 'mode=${json["mode"]}'`);
+          throw new Error(`No variant of ReadCapacityPatch exists with 'mode=${json2["mode"]}'`);
       }
     }
     function ReadCapacityPatchToJSON(value) {
@@ -8750,19 +8777,19 @@ var require_ConfigureIndexRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ConfigureIndexRequestFromJSON(json) {
-      return ConfigureIndexRequestFromJSONTyped(json, false);
+    function ConfigureIndexRequestFromJSON(json2) {
+      return ConfigureIndexRequestFromJSONTyped(json2, false);
     }
-    function ConfigureIndexRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ConfigureIndexRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "deployment": !(0, runtime_1.exists)(json, "deployment") ? void 0 : (0, PatchIndexDeploymentRequest_1.PatchIndexDeploymentRequestFromJSON)(json["deployment"]),
-        "schema": !(0, runtime_1.exists)(json, "schema") ? void 0 : (0, PatchIndexSchema_1.PatchIndexSchemaFromJSON)(json["schema"]),
-        "readCapacity": !(0, runtime_1.exists)(json, "read_capacity") ? void 0 : (0, ReadCapacityPatch_1.ReadCapacityPatchFromJSON)(json["read_capacity"]),
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "deletionProtection": !(0, runtime_1.exists)(json, "deletion_protection") ? void 0 : json["deletion_protection"]
+        "deployment": !(0, runtime_1.exists)(json2, "deployment") ? void 0 : (0, PatchIndexDeploymentRequest_1.PatchIndexDeploymentRequestFromJSON)(json2["deployment"]),
+        "schema": !(0, runtime_1.exists)(json2, "schema") ? void 0 : (0, PatchIndexSchema_1.PatchIndexSchemaFromJSON)(json2["schema"]),
+        "readCapacity": !(0, runtime_1.exists)(json2, "read_capacity") ? void 0 : (0, ReadCapacityPatch_1.ReadCapacityPatchFromJSON)(json2["read_capacity"]),
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "deletionProtection": !(0, runtime_1.exists)(json2, "deletion_protection") ? void 0 : json2["deletion_protection"]
       };
     }
     function ConfigureIndexRequestToJSON(value) {
@@ -8797,16 +8824,16 @@ var require_CreateBackupRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function CreateBackupRequestFromJSON(json) {
-      return CreateBackupRequestFromJSONTyped(json, false);
+    function CreateBackupRequestFromJSON(json2) {
+      return CreateBackupRequestFromJSONTyped(json2, false);
     }
-    function CreateBackupRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateBackupRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"]
       };
     }
     function CreateBackupRequestToJSON(value) {
@@ -8842,17 +8869,17 @@ var require_CreateBackupScheduleRequest = __commonJS({
       isInstance = isInstance && "retention" in value;
       return isInstance;
     }
-    function CreateBackupScheduleRequestFromJSON(json) {
-      return CreateBackupScheduleRequestFromJSONTyped(json, false);
+    function CreateBackupScheduleRequestFromJSON(json2) {
+      return CreateBackupScheduleRequestFromJSONTyped(json2, false);
     }
-    function CreateBackupScheduleRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateBackupScheduleRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "schedule": (0, BackupScheduleRequestSchedule_1.BackupScheduleRequestScheduleFromJSON)(json["schedule"]),
-        "retention": (0, BackupScheduleRetentionInput_1.BackupScheduleRetentionInputFromJSON)(json["retention"])
+        "name": json2["name"],
+        "schedule": (0, BackupScheduleRequestSchedule_1.BackupScheduleRequestScheduleFromJSON)(json2["schedule"]),
+        "retention": (0, BackupScheduleRetentionInput_1.BackupScheduleRetentionInputFromJSON)(json2["retention"])
       };
     }
     function CreateBackupScheduleRequestToJSON(value) {
@@ -8886,16 +8913,16 @@ var require_CreateCollectionRequest = __commonJS({
       isInstance = isInstance && "source" in value;
       return isInstance;
     }
-    function CreateCollectionRequestFromJSON(json) {
-      return CreateCollectionRequestFromJSONTyped(json, false);
+    function CreateCollectionRequestFromJSON(json2) {
+      return CreateCollectionRequestFromJSONTyped(json2, false);
     }
-    function CreateCollectionRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateCollectionRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "source": json["source"]
+        "name": json2["name"],
+        "source": json2["source"]
       };
     }
     function CreateCollectionRequestToJSON(value) {
@@ -8929,20 +8956,20 @@ var require_CreateIndexForModelRequestEmbed = __commonJS({
       isInstance = isInstance && "fieldMap" in value;
       return isInstance;
     }
-    function CreateIndexForModelRequestEmbedFromJSON(json) {
-      return CreateIndexForModelRequestEmbedFromJSONTyped(json, false);
+    function CreateIndexForModelRequestEmbedFromJSON(json2) {
+      return CreateIndexForModelRequestEmbedFromJSONTyped(json2, false);
     }
-    function CreateIndexForModelRequestEmbedFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexForModelRequestEmbedFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "metric": !(0, runtime_1.exists)(json, "metric") ? void 0 : json["metric"],
-        "fieldMap": json["field_map"],
-        "dimension": !(0, runtime_1.exists)(json, "dimension") ? void 0 : json["dimension"],
-        "readParameters": !(0, runtime_1.exists)(json, "read_parameters") ? void 0 : json["read_parameters"],
-        "writeParameters": !(0, runtime_1.exists)(json, "write_parameters") ? void 0 : json["write_parameters"]
+        "model": json2["model"],
+        "metric": !(0, runtime_1.exists)(json2, "metric") ? void 0 : json2["metric"],
+        "fieldMap": json2["field_map"],
+        "dimension": !(0, runtime_1.exists)(json2, "dimension") ? void 0 : json2["dimension"],
+        "readParameters": !(0, runtime_1.exists)(json2, "read_parameters") ? void 0 : json2["read_parameters"],
+        "writeParameters": !(0, runtime_1.exists)(json2, "write_parameters") ? void 0 : json2["write_parameters"]
       };
     }
     function CreateIndexForModelRequestEmbedToJSON(value) {
@@ -8978,15 +9005,15 @@ var require_MetadataSchemaFieldsValue = __commonJS({
       isInstance = isInstance && "filterable" in value;
       return isInstance;
     }
-    function MetadataSchemaFieldsValueFromJSON(json) {
-      return MetadataSchemaFieldsValueFromJSONTyped(json, false);
+    function MetadataSchemaFieldsValueFromJSON(json2) {
+      return MetadataSchemaFieldsValueFromJSONTyped(json2, false);
     }
-    function MetadataSchemaFieldsValueFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MetadataSchemaFieldsValueFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "filterable": json["filterable"]
+        "filterable": json2["filterable"]
       };
     }
     function MetadataSchemaFieldsValueToJSON(value) {
@@ -9018,15 +9045,15 @@ var require_MetadataSchema = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function MetadataSchemaFromJSON(json) {
-      return MetadataSchemaFromJSONTyped(json, false);
+    function MetadataSchemaFromJSON(json2) {
+      return MetadataSchemaFromJSONTyped(json2, false);
     }
-    function MetadataSchemaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MetadataSchemaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": !(0, runtime_1.exists)(json, "fields") ? void 0 : (0, runtime_1.mapValues)(json["fields"], MetadataSchemaFieldsValue_1.MetadataSchemaFieldsValueFromJSON)
+        "fields": !(0, runtime_1.exists)(json2, "fields") ? void 0 : (0, runtime_1.mapValues)(json2["fields"], MetadataSchemaFieldsValue_1.MetadataSchemaFieldsValueFromJSON)
       };
     }
     function MetadataSchemaToJSON(value) {
@@ -9058,16 +9085,16 @@ var require_ScalingConfigManual = __commonJS({
       isInstance = isInstance && "shards" in value;
       return isInstance;
     }
-    function ScalingConfigManualFromJSON(json) {
-      return ScalingConfigManualFromJSONTyped(json, false);
+    function ScalingConfigManualFromJSON(json2) {
+      return ScalingConfigManualFromJSONTyped(json2, false);
     }
-    function ScalingConfigManualFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ScalingConfigManualFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "replicas": json["replicas"],
-        "shards": json["shards"]
+        "replicas": json2["replicas"],
+        "shards": json2["shards"]
       };
     }
     function ScalingConfigManualToJSON(value) {
@@ -9102,17 +9129,17 @@ var require_ReadCapacityDedicatedConfig = __commonJS({
       isInstance = isInstance && "manual" in value;
       return isInstance;
     }
-    function ReadCapacityDedicatedConfigFromJSON(json) {
-      return ReadCapacityDedicatedConfigFromJSONTyped(json, false);
+    function ReadCapacityDedicatedConfigFromJSON(json2) {
+      return ReadCapacityDedicatedConfigFromJSONTyped(json2, false);
     }
-    function ReadCapacityDedicatedConfigFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityDedicatedConfigFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "nodeType": json["node_type"],
-        "scaling": json["scaling"],
-        "manual": (0, ScalingConfigManual_1.ScalingConfigManualFromJSON)(json["manual"])
+        "nodeType": json2["node_type"],
+        "scaling": json2["scaling"],
+        "manual": (0, ScalingConfigManual_1.ScalingConfigManualFromJSON)(json2["manual"])
       };
     }
     function ReadCapacityDedicatedConfigToJSON(value) {
@@ -9147,16 +9174,16 @@ var require_ReadCapacityDedicatedSpec = __commonJS({
       isInstance = isInstance && "dedicated" in value;
       return isInstance;
     }
-    function ReadCapacityDedicatedSpecFromJSON(json) {
-      return ReadCapacityDedicatedSpecFromJSONTyped(json, false);
+    function ReadCapacityDedicatedSpecFromJSON(json2) {
+      return ReadCapacityDedicatedSpecFromJSONTyped(json2, false);
     }
-    function ReadCapacityDedicatedSpecFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityDedicatedSpecFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "mode": json["mode"],
-        "dedicated": (0, ReadCapacityDedicatedConfig_1.ReadCapacityDedicatedConfigFromJSON)(json["dedicated"])
+        "mode": json2["mode"],
+        "dedicated": (0, ReadCapacityDedicatedConfig_1.ReadCapacityDedicatedConfigFromJSON)(json2["dedicated"])
       };
     }
     function ReadCapacityDedicatedSpecToJSON(value) {
@@ -9184,20 +9211,20 @@ var require_ReadCapacity = __commonJS({
     exports.ReadCapacityToJSON = ReadCapacityToJSON;
     var ReadCapacityDedicatedSpec_1 = require_ReadCapacityDedicatedSpec();
     var ReadCapacityOnDemandSpec_1 = require_ReadCapacityOnDemandSpec();
-    function ReadCapacityFromJSON(json) {
-      return ReadCapacityFromJSONTyped(json, false);
+    function ReadCapacityFromJSON(json2) {
+      return ReadCapacityFromJSONTyped(json2, false);
     }
-    function ReadCapacityFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["mode"]) {
+      switch (json2["mode"]) {
         case "Dedicated":
-          return { ...(0, ReadCapacityDedicatedSpec_1.ReadCapacityDedicatedSpecFromJSONTyped)(json, true), mode: "Dedicated" };
+          return { ...(0, ReadCapacityDedicatedSpec_1.ReadCapacityDedicatedSpecFromJSONTyped)(json2, true), mode: "Dedicated" };
         case "OnDemand":
-          return { ...(0, ReadCapacityOnDemandSpec_1.ReadCapacityOnDemandSpecFromJSONTyped)(json, true), mode: "OnDemand" };
+          return { ...(0, ReadCapacityOnDemandSpec_1.ReadCapacityOnDemandSpecFromJSONTyped)(json2, true), mode: "OnDemand" };
         default:
-          throw new Error(`No variant of ReadCapacity exists with 'mode=${json["mode"]}'`);
+          throw new Error(`No variant of ReadCapacity exists with 'mode=${json2["mode"]}'`);
       }
     }
     function ReadCapacityToJSON(value) {
@@ -9240,22 +9267,22 @@ var require_CreateIndexForModelRequest = __commonJS({
       isInstance = isInstance && "embed" in value;
       return isInstance;
     }
-    function CreateIndexForModelRequestFromJSON(json) {
-      return CreateIndexForModelRequestFromJSONTyped(json, false);
+    function CreateIndexForModelRequestFromJSON(json2) {
+      return CreateIndexForModelRequestFromJSONTyped(json2, false);
     }
-    function CreateIndexForModelRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexForModelRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "cloud": json["cloud"],
-        "region": json["region"],
-        "deletionProtection": !(0, runtime_1.exists)(json, "deletion_protection") ? void 0 : json["deletion_protection"],
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "schema": !(0, runtime_1.exists)(json, "schema") ? void 0 : (0, MetadataSchema_1.MetadataSchemaFromJSON)(json["schema"]),
-        "readCapacity": !(0, runtime_1.exists)(json, "read_capacity") ? void 0 : (0, ReadCapacity_1.ReadCapacityFromJSON)(json["read_capacity"]),
-        "embed": (0, CreateIndexForModelRequestEmbed_1.CreateIndexForModelRequestEmbedFromJSON)(json["embed"])
+        "name": json2["name"],
+        "cloud": json2["cloud"],
+        "region": json2["region"],
+        "deletionProtection": !(0, runtime_1.exists)(json2, "deletion_protection") ? void 0 : json2["deletion_protection"],
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "schema": !(0, runtime_1.exists)(json2, "schema") ? void 0 : (0, MetadataSchema_1.MetadataSchemaFromJSON)(json2["schema"]),
+        "readCapacity": !(0, runtime_1.exists)(json2, "read_capacity") ? void 0 : (0, ReadCapacity_1.ReadCapacityFromJSON)(json2["read_capacity"]),
+        "embed": (0, CreateIndexForModelRequestEmbed_1.CreateIndexForModelRequestEmbedFromJSON)(json2["embed"])
       };
     }
     function CreateIndexForModelRequestToJSON(value) {
@@ -9295,18 +9322,18 @@ var require_CreateIndexFromBackupRequest = __commonJS({
       isInstance = isInstance && "name" in value;
       return isInstance;
     }
-    function CreateIndexFromBackupRequestFromJSON(json) {
-      return CreateIndexFromBackupRequestFromJSONTyped(json, false);
+    function CreateIndexFromBackupRequestFromJSON(json2) {
+      return CreateIndexFromBackupRequestFromJSONTyped(json2, false);
     }
-    function CreateIndexFromBackupRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexFromBackupRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "deletionProtection": !(0, runtime_1.exists)(json, "deletion_protection") ? void 0 : json["deletion_protection"],
-        "readCapacity": !(0, runtime_1.exists)(json, "read_capacity") ? void 0 : (0, ReadCapacity_1.ReadCapacityFromJSON)(json["read_capacity"])
+        "name": json2["name"],
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "deletionProtection": !(0, runtime_1.exists)(json2, "deletion_protection") ? void 0 : json2["deletion_protection"],
+        "readCapacity": !(0, runtime_1.exists)(json2, "read_capacity") ? void 0 : (0, ReadCapacity_1.ReadCapacityFromJSON)(json2["read_capacity"])
       };
     }
     function CreateIndexFromBackupRequestToJSON(value) {
@@ -9341,16 +9368,16 @@ var require_CreateIndexFromBackupResponse = __commonJS({
       isInstance = isInstance && "indexId" in value;
       return isInstance;
     }
-    function CreateIndexFromBackupResponseFromJSON(json) {
-      return CreateIndexFromBackupResponseFromJSONTyped(json, false);
+    function CreateIndexFromBackupResponseFromJSON(json2) {
+      return CreateIndexFromBackupResponseFromJSONTyped(json2, false);
     }
-    function CreateIndexFromBackupResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexFromBackupResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "restoreJobId": json["restore_job_id"],
-        "indexId": json["index_id"]
+        "restoreJobId": json2["restore_job_id"],
+        "indexId": json2["index_id"]
       };
     }
     function CreateIndexFromBackupResponseToJSON(value) {
@@ -9384,17 +9411,17 @@ var require_StringFieldFullTextSearchNgram = __commonJS({
       isInstance = isInstance && "maxGram" in value;
       return isInstance;
     }
-    function StringFieldFullTextSearchNgramFromJSON(json) {
-      return StringFieldFullTextSearchNgramFromJSONTyped(json, false);
+    function StringFieldFullTextSearchNgramFromJSON(json2) {
+      return StringFieldFullTextSearchNgramFromJSONTyped(json2, false);
     }
-    function StringFieldFullTextSearchNgramFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StringFieldFullTextSearchNgramFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "minGram": json["min_gram"],
-        "maxGram": json["max_gram"],
-        "prefixOnly": !(0, runtime_1.exists)(json, "prefix_only") ? void 0 : json["prefix_only"]
+        "minGram": json2["min_gram"],
+        "maxGram": json2["max_gram"],
+        "prefixOnly": !(0, runtime_1.exists)(json2, "prefix_only") ? void 0 : json2["prefix_only"]
       };
     }
     function StringFieldFullTextSearchNgramToJSON(value) {
@@ -9428,18 +9455,18 @@ var require_StringFieldFullTextSearch = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function StringFieldFullTextSearchFromJSON(json) {
-      return StringFieldFullTextSearchFromJSONTyped(json, false);
+    function StringFieldFullTextSearchFromJSON(json2) {
+      return StringFieldFullTextSearchFromJSONTyped(json2, false);
     }
-    function StringFieldFullTextSearchFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StringFieldFullTextSearchFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "language": !(0, runtime_1.exists)(json, "language") ? void 0 : json["language"],
-        "stemming": !(0, runtime_1.exists)(json, "stemming") ? void 0 : json["stemming"],
-        "stopWords": !(0, runtime_1.exists)(json, "stop_words") ? void 0 : json["stop_words"],
-        "ngram": !(0, runtime_1.exists)(json, "ngram") ? void 0 : (0, StringFieldFullTextSearchNgram_1.StringFieldFullTextSearchNgramFromJSON)(json["ngram"])
+        "language": !(0, runtime_1.exists)(json2, "language") ? void 0 : json2["language"],
+        "stemming": !(0, runtime_1.exists)(json2, "stemming") ? void 0 : json2["stemming"],
+        "stopWords": !(0, runtime_1.exists)(json2, "stop_words") ? void 0 : json2["stop_words"],
+        "ngram": !(0, runtime_1.exists)(json2, "ngram") ? void 0 : (0, StringFieldFullTextSearchNgram_1.StringFieldFullTextSearchNgramFromJSON)(json2["ngram"])
       };
     }
     function StringFieldFullTextSearchToJSON(value) {
@@ -9480,17 +9507,17 @@ var require_StringField = __commonJS({
       isInstance = isInstance && "fullTextSearch" in value;
       return isInstance;
     }
-    function StringFieldFromJSON(json) {
-      return StringFieldFromJSONTyped(json, false);
+    function StringFieldFromJSON(json2) {
+      return StringFieldFromJSONTyped(json2, false);
     }
-    function StringFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StringFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "description": !(0, runtime_1.exists)(json, "description") ? void 0 : json["description"],
-        "fullTextSearch": (0, StringFieldFullTextSearch_1.StringFieldFullTextSearchFromJSON)(json["full_text_search"])
+        "type": json2["type"],
+        "description": !(0, runtime_1.exists)(json2, "description") ? void 0 : json2["description"],
+        "fullTextSearch": (0, StringFieldFullTextSearch_1.StringFieldFullTextSearchFromJSON)(json2["full_text_search"])
       };
     }
     function StringFieldToJSON(value) {
@@ -9520,22 +9547,22 @@ var require_CreateIndexSchemaField = __commonJS({
     var DenseVectorField_1 = require_DenseVectorField();
     var SparseVectorField_1 = require_SparseVectorField();
     var StringField_1 = require_StringField();
-    function CreateIndexSchemaFieldFromJSON(json) {
-      return CreateIndexSchemaFieldFromJSONTyped(json, false);
+    function CreateIndexSchemaFieldFromJSON(json2) {
+      return CreateIndexSchemaFieldFromJSONTyped(json2, false);
     }
-    function CreateIndexSchemaFieldFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexSchemaFieldFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["type"]) {
+      switch (json2["type"]) {
         case "dense_vector":
-          return { ...(0, DenseVectorField_1.DenseVectorFieldFromJSONTyped)(json, true), type: "dense_vector" };
+          return { ...(0, DenseVectorField_1.DenseVectorFieldFromJSONTyped)(json2, true), type: "dense_vector" };
         case "sparse_vector":
-          return { ...(0, SparseVectorField_1.SparseVectorFieldFromJSONTyped)(json, true), type: "sparse_vector" };
+          return { ...(0, SparseVectorField_1.SparseVectorFieldFromJSONTyped)(json2, true), type: "sparse_vector" };
         case "string":
-          return { ...(0, StringField_1.StringFieldFromJSONTyped)(json, true), type: "string" };
+          return { ...(0, StringField_1.StringFieldFromJSONTyped)(json2, true), type: "string" };
         default:
-          throw new Error(`No variant of CreateIndexSchemaField exists with 'type=${json["type"]}'`);
+          throw new Error(`No variant of CreateIndexSchemaField exists with 'type=${json2["type"]}'`);
       }
     }
     function CreateIndexSchemaFieldToJSON(value) {
@@ -9575,15 +9602,15 @@ var require_CreateIndexSchema = __commonJS({
       isInstance = isInstance && "fields" in value;
       return isInstance;
     }
-    function CreateIndexSchemaFromJSON(json) {
-      return CreateIndexSchemaFromJSONTyped(json, false);
+    function CreateIndexSchemaFromJSON(json2) {
+      return CreateIndexSchemaFromJSONTyped(json2, false);
     }
-    function CreateIndexSchemaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexSchemaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": (0, runtime_1.mapValues)(json["fields"], CreateIndexSchemaField_1.CreateIndexSchemaFieldFromJSON)
+        "fields": (0, runtime_1.mapValues)(json2["fields"], CreateIndexSchemaField_1.CreateIndexSchemaFieldFromJSON)
       };
     }
     function CreateIndexSchemaToJSON(value) {
@@ -9621,18 +9648,18 @@ var require_ManagedDeployment = __commonJS({
       isInstance = isInstance && "region" in value;
       return isInstance;
     }
-    function ManagedDeploymentFromJSON(json) {
-      return ManagedDeploymentFromJSONTyped(json, false);
+    function ManagedDeploymentFromJSON(json2) {
+      return ManagedDeploymentFromJSONTyped(json2, false);
     }
-    function ManagedDeploymentFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ManagedDeploymentFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "deploymentType": json["deployment_type"],
-        "cloud": json["cloud"],
-        "region": json["region"],
-        "environment": !(0, runtime_1.exists)(json, "environment") ? void 0 : json["environment"]
+        "deploymentType": json2["deployment_type"],
+        "cloud": json2["cloud"],
+        "region": json2["region"],
+        "environment": !(0, runtime_1.exists)(json2, "environment") ? void 0 : json2["environment"]
       };
     }
     function ManagedDeploymentToJSON(value) {
@@ -9661,20 +9688,20 @@ var require_IndexDeploymentRequest = __commonJS({
     exports.IndexDeploymentRequestToJSON = IndexDeploymentRequestToJSON;
     var ByocDeployment_1 = require_ByocDeployment();
     var ManagedDeployment_1 = require_ManagedDeployment();
-    function IndexDeploymentRequestFromJSON(json) {
-      return IndexDeploymentRequestFromJSONTyped(json, false);
+    function IndexDeploymentRequestFromJSON(json2) {
+      return IndexDeploymentRequestFromJSONTyped(json2, false);
     }
-    function IndexDeploymentRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexDeploymentRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["deployment_type"]) {
+      switch (json2["deployment_type"]) {
         case "byoc":
-          return { ...(0, ByocDeployment_1.ByocDeploymentFromJSONTyped)(json, true), deploymentType: "byoc" };
+          return { ...(0, ByocDeployment_1.ByocDeploymentFromJSONTyped)(json2, true), deploymentType: "byoc" };
         case "managed":
-          return { ...(0, ManagedDeployment_1.ManagedDeploymentFromJSONTyped)(json, true), deploymentType: "managed" };
+          return { ...(0, ManagedDeployment_1.ManagedDeploymentFromJSONTyped)(json2, true), deploymentType: "managed" };
         default:
-          throw new Error(`No variant of IndexDeploymentRequest exists with 'deploymentType=${json["deploymentType"]}'`);
+          throw new Error(`No variant of IndexDeploymentRequest exists with 'deploymentType=${json2["deploymentType"]}'`);
       }
     }
     function IndexDeploymentRequestToJSON(value) {
@@ -9714,21 +9741,21 @@ var require_CreateIndexRequest = __commonJS({
       isInstance = isInstance && "schema" in value;
       return isInstance;
     }
-    function CreateIndexRequestFromJSON(json) {
-      return CreateIndexRequestFromJSONTyped(json, false);
+    function CreateIndexRequestFromJSON(json2) {
+      return CreateIndexRequestFromJSONTyped(json2, false);
     }
-    function CreateIndexRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateIndexRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"],
-        "deployment": !(0, runtime_1.exists)(json, "deployment") ? void 0 : (0, IndexDeploymentRequest_1.IndexDeploymentRequestFromJSON)(json["deployment"]),
-        "schema": (0, CreateIndexSchema_1.CreateIndexSchemaFromJSON)(json["schema"]),
-        "cmekId": !(0, runtime_1.exists)(json, "cmek_id") ? void 0 : json["cmek_id"],
-        "readCapacity": !(0, runtime_1.exists)(json, "read_capacity") ? void 0 : (0, ReadCapacity_1.ReadCapacityFromJSON)(json["read_capacity"]),
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "deletionProtection": !(0, runtime_1.exists)(json, "deletion_protection") ? void 0 : json["deletion_protection"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"],
+        "deployment": !(0, runtime_1.exists)(json2, "deployment") ? void 0 : (0, IndexDeploymentRequest_1.IndexDeploymentRequestFromJSON)(json2["deployment"]),
+        "schema": (0, CreateIndexSchema_1.CreateIndexSchemaFromJSON)(json2["schema"]),
+        "cmekId": !(0, runtime_1.exists)(json2, "cmek_id") ? void 0 : json2["cmek_id"],
+        "readCapacity": !(0, runtime_1.exists)(json2, "read_capacity") ? void 0 : (0, ReadCapacity_1.ReadCapacityFromJSON)(json2["read_capacity"]),
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "deletionProtection": !(0, runtime_1.exists)(json2, "deletion_protection") ? void 0 : json2["deletion_protection"]
       };
     }
     function CreateIndexRequestToJSON(value) {
@@ -9767,17 +9794,17 @@ var require_ErrorResponseError = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function ErrorResponseErrorFromJSON(json) {
-      return ErrorResponseErrorFromJSONTyped(json, false);
+    function ErrorResponseErrorFromJSON(json2) {
+      return ErrorResponseErrorFromJSONTyped(json2, false);
     }
-    function ErrorResponseErrorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseErrorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": json["code"],
-        "message": json["message"],
-        "details": !(0, runtime_1.exists)(json, "details") ? void 0 : json["details"]
+        "code": json2["code"],
+        "message": json2["message"],
+        "details": !(0, runtime_1.exists)(json2, "details") ? void 0 : json2["details"]
       };
     }
     function ErrorResponseErrorToJSON(value) {
@@ -9812,16 +9839,16 @@ var require_ErrorResponse = __commonJS({
       isInstance = isInstance && "error" in value;
       return isInstance;
     }
-    function ErrorResponseFromJSON(json) {
-      return ErrorResponseFromJSONTyped(json, false);
+    function ErrorResponseFromJSON(json2) {
+      return ErrorResponseFromJSONTyped(json2, false);
     }
-    function ErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "status": json["status"],
-        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json["error"])
+        "status": json2["status"],
+        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json2["error"])
       };
     }
     function ErrorResponseToJSON(value) {
@@ -9860,19 +9887,19 @@ var require_PodDeployment = __commonJS({
       isInstance = isInstance && "podType" in value;
       return isInstance;
     }
-    function PodDeploymentFromJSON(json) {
-      return PodDeploymentFromJSONTyped(json, false);
+    function PodDeploymentFromJSON(json2) {
+      return PodDeploymentFromJSONTyped(json2, false);
     }
-    function PodDeploymentFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PodDeploymentFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "deploymentType": json["deployment_type"],
-        "environment": json["environment"],
-        "replicas": !(0, runtime_1.exists)(json, "replicas") ? void 0 : json["replicas"],
-        "shards": !(0, runtime_1.exists)(json, "shards") ? void 0 : json["shards"],
-        "podType": json["pod_type"]
+        "deploymentType": json2["deployment_type"],
+        "environment": json2["environment"],
+        "replicas": !(0, runtime_1.exists)(json2, "replicas") ? void 0 : json2["replicas"],
+        "shards": !(0, runtime_1.exists)(json2, "shards") ? void 0 : json2["shards"],
+        "podType": json2["pod_type"]
       };
     }
     function PodDeploymentToJSON(value) {
@@ -9904,22 +9931,22 @@ var require_IndexDeployment = __commonJS({
     var ByocDeployment_1 = require_ByocDeployment();
     var ManagedDeployment_1 = require_ManagedDeployment();
     var PodDeployment_1 = require_PodDeployment();
-    function IndexDeploymentFromJSON(json) {
-      return IndexDeploymentFromJSONTyped(json, false);
+    function IndexDeploymentFromJSON(json2) {
+      return IndexDeploymentFromJSONTyped(json2, false);
     }
-    function IndexDeploymentFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexDeploymentFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["deployment_type"]) {
+      switch (json2["deployment_type"]) {
         case "byoc":
-          return { ...(0, ByocDeployment_1.ByocDeploymentFromJSONTyped)(json, true), deploymentType: "byoc" };
+          return { ...(0, ByocDeployment_1.ByocDeploymentFromJSONTyped)(json2, true), deploymentType: "byoc" };
         case "managed":
-          return { ...(0, ManagedDeployment_1.ManagedDeploymentFromJSONTyped)(json, true), deploymentType: "managed" };
+          return { ...(0, ManagedDeployment_1.ManagedDeploymentFromJSONTyped)(json2, true), deploymentType: "managed" };
         case "pod":
-          return { ...(0, PodDeployment_1.PodDeploymentFromJSONTyped)(json, true), deploymentType: "pod" };
+          return { ...(0, PodDeployment_1.PodDeploymentFromJSONTyped)(json2, true), deploymentType: "pod" };
         default:
-          throw new Error(`No variant of IndexDeployment exists with 'deploymentType=${json["deploymentType"]}'`);
+          throw new Error(`No variant of IndexDeployment exists with 'deploymentType=${json2["deploymentType"]}'`);
       }
     }
     function IndexDeploymentToJSON(value) {
@@ -9958,16 +9985,16 @@ var require_IndexModelStatus = __commonJS({
       isInstance = isInstance && "state" in value;
       return isInstance;
     }
-    function IndexModelStatusFromJSON(json) {
-      return IndexModelStatusFromJSONTyped(json, false);
+    function IndexModelStatusFromJSON(json2) {
+      return IndexModelStatusFromJSONTyped(json2, false);
     }
-    function IndexModelStatusFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexModelStatusFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "ready": json["ready"],
-        "state": json["state"]
+        "ready": json2["ready"],
+        "state": json2["state"]
       };
     }
     function IndexModelStatusToJSON(value) {
@@ -10000,18 +10027,18 @@ var require_ReadCapacityStatus = __commonJS({
       isInstance = isInstance && "state" in value;
       return isInstance;
     }
-    function ReadCapacityStatusFromJSON(json) {
-      return ReadCapacityStatusFromJSONTyped(json, false);
+    function ReadCapacityStatusFromJSON(json2) {
+      return ReadCapacityStatusFromJSONTyped(json2, false);
     }
-    function ReadCapacityStatusFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityStatusFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "state": json["state"],
-        "currentReplicas": !(0, runtime_1.exists)(json, "current_replicas") ? void 0 : json["current_replicas"],
-        "currentShards": !(0, runtime_1.exists)(json, "current_shards") ? void 0 : json["current_shards"],
-        "errorMessage": !(0, runtime_1.exists)(json, "error_message") ? void 0 : json["error_message"]
+        "state": json2["state"],
+        "currentReplicas": !(0, runtime_1.exists)(json2, "current_replicas") ? void 0 : json2["current_replicas"],
+        "currentShards": !(0, runtime_1.exists)(json2, "current_shards") ? void 0 : json2["current_shards"],
+        "errorMessage": !(0, runtime_1.exists)(json2, "error_message") ? void 0 : json2["error_message"]
       };
     }
     function ReadCapacityStatusToJSON(value) {
@@ -10049,17 +10076,17 @@ var require_ReadCapacityDedicatedSpecResponse = __commonJS({
       isInstance = isInstance && "status" in value;
       return isInstance;
     }
-    function ReadCapacityDedicatedSpecResponseFromJSON(json) {
-      return ReadCapacityDedicatedSpecResponseFromJSONTyped(json, false);
+    function ReadCapacityDedicatedSpecResponseFromJSON(json2) {
+      return ReadCapacityDedicatedSpecResponseFromJSONTyped(json2, false);
     }
-    function ReadCapacityDedicatedSpecResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityDedicatedSpecResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "mode": json["mode"],
-        "dedicated": (0, ReadCapacityDedicatedConfig_1.ReadCapacityDedicatedConfigFromJSON)(json["dedicated"]),
-        "status": (0, ReadCapacityStatus_1.ReadCapacityStatusFromJSON)(json["status"])
+        "mode": json2["mode"],
+        "dedicated": (0, ReadCapacityDedicatedConfig_1.ReadCapacityDedicatedConfigFromJSON)(json2["dedicated"]),
+        "status": (0, ReadCapacityStatus_1.ReadCapacityStatusFromJSON)(json2["status"])
       };
     }
     function ReadCapacityDedicatedSpecResponseToJSON(value) {
@@ -10094,16 +10121,16 @@ var require_ReadCapacityOnDemandSpecResponse = __commonJS({
       isInstance = isInstance && "status" in value;
       return isInstance;
     }
-    function ReadCapacityOnDemandSpecResponseFromJSON(json) {
-      return ReadCapacityOnDemandSpecResponseFromJSONTyped(json, false);
+    function ReadCapacityOnDemandSpecResponseFromJSON(json2) {
+      return ReadCapacityOnDemandSpecResponseFromJSONTyped(json2, false);
     }
-    function ReadCapacityOnDemandSpecResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityOnDemandSpecResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "mode": json["mode"],
-        "status": (0, ReadCapacityStatus_1.ReadCapacityStatusFromJSON)(json["status"])
+        "mode": json2["mode"],
+        "status": (0, ReadCapacityStatus_1.ReadCapacityStatusFromJSON)(json2["status"])
       };
     }
     function ReadCapacityOnDemandSpecResponseToJSON(value) {
@@ -10131,20 +10158,20 @@ var require_ReadCapacityResponse = __commonJS({
     exports.ReadCapacityResponseToJSON = ReadCapacityResponseToJSON;
     var ReadCapacityDedicatedSpecResponse_1 = require_ReadCapacityDedicatedSpecResponse();
     var ReadCapacityOnDemandSpecResponse_1 = require_ReadCapacityOnDemandSpecResponse();
-    function ReadCapacityResponseFromJSON(json) {
-      return ReadCapacityResponseFromJSONTyped(json, false);
+    function ReadCapacityResponseFromJSON(json2) {
+      return ReadCapacityResponseFromJSONTyped(json2, false);
     }
-    function ReadCapacityResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReadCapacityResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["mode"]) {
+      switch (json2["mode"]) {
         case "Dedicated":
-          return { ...(0, ReadCapacityDedicatedSpecResponse_1.ReadCapacityDedicatedSpecResponseFromJSONTyped)(json, true), mode: "Dedicated" };
+          return { ...(0, ReadCapacityDedicatedSpecResponse_1.ReadCapacityDedicatedSpecResponseFromJSONTyped)(json2, true), mode: "Dedicated" };
         case "OnDemand":
-          return { ...(0, ReadCapacityOnDemandSpecResponse_1.ReadCapacityOnDemandSpecResponseFromJSONTyped)(json, true), mode: "OnDemand" };
+          return { ...(0, ReadCapacityOnDemandSpecResponse_1.ReadCapacityOnDemandSpecResponseFromJSONTyped)(json2, true), mode: "OnDemand" };
         default:
-          throw new Error(`No variant of ReadCapacityResponse exists with 'mode=${json["mode"]}'`);
+          throw new Error(`No variant of ReadCapacityResponse exists with 'mode=${json2["mode"]}'`);
       }
     }
     function ReadCapacityResponseToJSON(value) {
@@ -10190,26 +10217,26 @@ var require_IndexModel = __commonJS({
       isInstance = isInstance && "deletionProtection" in value;
       return isInstance;
     }
-    function IndexModelFromJSON(json) {
-      return IndexModelFromJSONTyped(json, false);
+    function IndexModelFromJSON(json2) {
+      return IndexModelFromJSONTyped(json2, false);
     }
-    function IndexModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "host": json["host"],
-        "privateHost": !(0, runtime_1.exists)(json, "private_host") ? void 0 : json["private_host"],
-        "status": (0, IndexModelStatus_1.IndexModelStatusFromJSON)(json["status"]),
-        "deployment": (0, IndexDeployment_1.IndexDeploymentFromJSON)(json["deployment"]),
-        "readCapacity": !(0, runtime_1.exists)(json, "read_capacity") ? void 0 : (0, ReadCapacityResponse_1.ReadCapacityResponseFromJSON)(json["read_capacity"]),
-        "sourceCollection": !(0, runtime_1.exists)(json, "source_collection") ? void 0 : json["source_collection"],
-        "sourceBackupId": !(0, runtime_1.exists)(json, "source_backup_id") ? void 0 : json["source_backup_id"],
-        "cmekId": !(0, runtime_1.exists)(json, "cmek_id") ? void 0 : json["cmek_id"],
-        "schema": (0, IndexSchema_1.IndexSchemaFromJSON)(json["schema"]),
-        "tags": !(0, runtime_1.exists)(json, "tags") ? void 0 : json["tags"],
-        "deletionProtection": json["deletion_protection"]
+        "name": json2["name"],
+        "host": json2["host"],
+        "privateHost": !(0, runtime_1.exists)(json2, "private_host") ? void 0 : json2["private_host"],
+        "status": (0, IndexModelStatus_1.IndexModelStatusFromJSON)(json2["status"]),
+        "deployment": (0, IndexDeployment_1.IndexDeploymentFromJSON)(json2["deployment"]),
+        "readCapacity": !(0, runtime_1.exists)(json2, "read_capacity") ? void 0 : (0, ReadCapacityResponse_1.ReadCapacityResponseFromJSON)(json2["read_capacity"]),
+        "sourceCollection": !(0, runtime_1.exists)(json2, "source_collection") ? void 0 : json2["source_collection"],
+        "sourceBackupId": !(0, runtime_1.exists)(json2, "source_backup_id") ? void 0 : json2["source_backup_id"],
+        "cmekId": !(0, runtime_1.exists)(json2, "cmek_id") ? void 0 : json2["cmek_id"],
+        "schema": (0, IndexSchema_1.IndexSchemaFromJSON)(json2["schema"]),
+        "tags": !(0, runtime_1.exists)(json2, "tags") ? void 0 : json2["tags"],
+        "deletionProtection": json2["deletion_protection"]
       };
     }
     function IndexModelToJSON(value) {
@@ -10252,15 +10279,15 @@ var require_IndexList = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function IndexListFromJSON(json) {
-      return IndexListFromJSONTyped(json, false);
+    function IndexListFromJSON(json2) {
+      return IndexListFromJSONTyped(json2, false);
     }
-    function IndexListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "indexes": !(0, runtime_1.exists)(json, "indexes") ? void 0 : json["indexes"].map(IndexModel_1.IndexModelFromJSON)
+        "indexes": !(0, runtime_1.exists)(json2, "indexes") ? void 0 : json2["indexes"].map(IndexModel_1.IndexModelFromJSON)
       };
     }
     function IndexListToJSON(value) {
@@ -10297,22 +10324,22 @@ var require_RestoreJobModel = __commonJS({
       isInstance = isInstance && "createdAt" in value;
       return isInstance;
     }
-    function RestoreJobModelFromJSON(json) {
-      return RestoreJobModelFromJSONTyped(json, false);
+    function RestoreJobModelFromJSON(json2) {
+      return RestoreJobModelFromJSONTyped(json2, false);
     }
-    function RestoreJobModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RestoreJobModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "restoreJobId": json["restore_job_id"],
-        "backupId": json["backup_id"],
-        "targetIndexName": json["target_index_name"],
-        "targetIndexId": json["target_index_id"],
-        "status": json["status"],
-        "createdAt": json["created_at"] === null ? null : new Date(json["created_at"]),
-        "completedAt": !(0, runtime_1.exists)(json, "completed_at") ? void 0 : json["completed_at"] === null ? null : new Date(json["completed_at"]),
-        "percentComplete": !(0, runtime_1.exists)(json, "percent_complete") ? void 0 : json["percent_complete"]
+        "restoreJobId": json2["restore_job_id"],
+        "backupId": json2["backup_id"],
+        "targetIndexName": json2["target_index_name"],
+        "targetIndexId": json2["target_index_id"],
+        "status": json2["status"],
+        "createdAt": json2["created_at"] === null ? null : new Date(json2["created_at"]),
+        "completedAt": !(0, runtime_1.exists)(json2, "completed_at") ? void 0 : json2["completed_at"] === null ? null : new Date(json2["completed_at"]),
+        "percentComplete": !(0, runtime_1.exists)(json2, "percent_complete") ? void 0 : json2["percent_complete"]
       };
     }
     function RestoreJobModelToJSON(value) {
@@ -10353,16 +10380,16 @@ var require_RestoreJobList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function RestoreJobListFromJSON(json) {
-      return RestoreJobListFromJSONTyped(json, false);
+    function RestoreJobListFromJSON(json2) {
+      return RestoreJobListFromJSONTyped(json2, false);
     }
-    function RestoreJobListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RestoreJobListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(RestoreJobModel_1.RestoreJobModelFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(RestoreJobModel_1.RestoreJobModelFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, BackupListPagination_1.BackupListPaginationFromJSON)(json2["pagination"])
       };
     }
     function RestoreJobListToJSON(value) {
@@ -10395,17 +10422,17 @@ var require_UpdateBackupScheduleRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateBackupScheduleRequestFromJSON(json) {
-      return UpdateBackupScheduleRequestFromJSONTyped(json, false);
+    function UpdateBackupScheduleRequestFromJSON(json2) {
+      return UpdateBackupScheduleRequestFromJSONTyped(json2, false);
     }
-    function UpdateBackupScheduleRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateBackupScheduleRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "frequency": !(0, runtime_1.exists)(json, "frequency") ? void 0 : json["frequency"],
-        "retention": !(0, runtime_1.exists)(json, "retention") ? void 0 : (0, BackupScheduleRetentionInput_1.BackupScheduleRetentionInputFromJSON)(json["retention"]),
-        "enabled": !(0, runtime_1.exists)(json, "enabled") ? void 0 : json["enabled"]
+        "frequency": !(0, runtime_1.exists)(json2, "frequency") ? void 0 : json2["frequency"],
+        "retention": !(0, runtime_1.exists)(json2, "retention") ? void 0 : (0, BackupScheduleRetentionInput_1.BackupScheduleRetentionInputFromJSON)(json2["retention"]),
+        "enabled": !(0, runtime_1.exists)(json2, "enabled") ? void 0 : json2["enabled"]
       };
     }
     function UpdateBackupScheduleRequestToJSON(value) {
@@ -11545,8 +11572,8 @@ var require_base = __commonJS({
     var BasePineconeError = class extends Error {
       /** The underlying error, if any. */
       cause;
-      constructor(message, cause) {
-        super(message);
+      constructor(message2, cause) {
+        super(message2);
         Object.setPrototypeOf(this, new.target.prototype);
         if (Error.captureStackTrace) {
           Error.captureStackTrace(this, new.target);
@@ -11568,29 +11595,29 @@ var require_config = __commonJS({
     var base_1 = require_base();
     var CONFIG_HELP = `You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io.`;
     var PineconeConfigurationError = class extends base_1.BasePineconeError {
-      constructor(message) {
-        super(`${message} ${CONFIG_HELP}`);
+      constructor(message2) {
+        super(`${message2} ${CONFIG_HELP}`);
         this.name = "PineconeConfigurationError";
       }
     };
     exports.PineconeConfigurationError = PineconeConfigurationError;
     var PineconeUnexpectedResponseError = class extends base_1.BasePineconeError {
-      constructor(url, status, body2, message) {
-        super(`Unexpected response while calling ${url}. ${message ? message + " " : ""}Status: ${status}. Body: ${body2}`);
+      constructor(url, status, body2, message2) {
+        super(`Unexpected response while calling ${url}. ${message2 ? message2 + " " : ""}Status: ${status}. Body: ${body2}`);
         this.name = "PineconeUnexpectedResponseError";
       }
     };
     exports.PineconeUnexpectedResponseError = PineconeUnexpectedResponseError;
     var PineconeEnvironmentVarsNotSupportedError = class extends base_1.BasePineconeError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "PineconeEnvironmentVarsNotSupportedError";
       }
     };
     exports.PineconeEnvironmentVarsNotSupportedError = PineconeEnvironmentVarsNotSupportedError;
     var PineconeUnableToResolveHostError = class extends base_1.BasePineconeError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "PineconeUnableToResolveHostError";
       }
     };
@@ -11609,8 +11636,8 @@ var require_http = __commonJS({
     var BILLING_HELP = `You can review your plan and billing details in the Pinecone developer console at https://app.pinecone.io/organizations/-/settings/billing`;
     var PineconeBadRequestError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { message } = failedRequest;
-        super(message);
+        const { message: message2 } = failedRequest;
+        super(message2);
         this.name = "PineconeBadRequestError";
       }
     };
@@ -11631,11 +11658,11 @@ var require_http = __commonJS({
     exports.PineconeAuthorizationError = PineconeAuthorizationError;
     var PineconePaymentRequiredError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { url, message } = failedRequest;
+        const { url, message: message2 } = failedRequest;
         if (url) {
-          super(`A call to ${url} returned HTTP status 402 (Payment Required). ${message ? message : ""} ${BILLING_HELP}`.trim());
+          super(`A call to ${url} returned HTTP status 402 (Payment Required). ${message2 ? message2 : ""} ${BILLING_HELP}`.trim());
         } else {
-          super(`The request could not be completed due to a billing problem with your account. ${message ? message : ""} ${BILLING_HELP}`.trim());
+          super(`The request could not be completed due to a billing problem with your account. ${message2 ? message2 : ""} ${BILLING_HELP}`.trim());
         }
         this.name = "PineconePaymentRequiredError";
       }
@@ -11655,9 +11682,9 @@ var require_http = __commonJS({
     exports.PineconeNotFoundError = PineconeNotFoundError;
     var PineconeConflictError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { url, message } = failedRequest;
+        const { url, message: message2 } = failedRequest;
         if (url) {
-          super(`A call to ${url} returned HTTP status 409. ${message ? message : ""}`);
+          super(`A call to ${url} returned HTTP status 409. ${message2 ? message2 : ""}`);
         } else {
           super("The resource you are attempting to create already exists.");
         }
@@ -11667,11 +11694,11 @@ var require_http = __commonJS({
     exports.PineconeConflictError = PineconeConflictError;
     var PineconeFailedPreconditionError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { url, message } = failedRequest;
+        const { url, message: message2 } = failedRequest;
         if (url) {
-          super(`A call to ${url} returned HTTP status 412 (Precondition Failed). ${message ? message : ""}`.trim());
+          super(`A call to ${url} returned HTTP status 412 (Precondition Failed). ${message2 ? message2 : ""}`.trim());
         } else {
-          super(`The request could not be completed because a precondition failed. ${message ? message : ""}`.trim());
+          super(`The request could not be completed because a precondition failed. ${message2 ? message2 : ""}`.trim());
         }
         this.name = "PineconeFailedPreconditionError";
       }
@@ -11679,11 +11706,11 @@ var require_http = __commonJS({
     exports.PineconeFailedPreconditionError = PineconeFailedPreconditionError;
     var PineconeUnprocessableEntityError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { url, message } = failedRequest;
+        const { url, message: message2 } = failedRequest;
         if (url) {
-          super(`A call to ${url} returned HTTP status 422 (Unprocessable Entity). ${message ? message : ""}`.trim());
+          super(`A call to ${url} returned HTTP status 422 (Unprocessable Entity). ${message2 ? message2 : ""}`.trim());
         } else {
-          super(`The request could not be processed because its contents are invalid. ${message ? message : ""}`.trim());
+          super(`The request could not be processed because its contents are invalid. ${message2 ? message2 : ""}`.trim());
         }
         this.name = "PineconeUnprocessableEntityError";
       }
@@ -11724,9 +11751,9 @@ var require_http = __commonJS({
     exports.PineconeUnavailableError = PineconeUnavailableError;
     var PineconeNotImplementedError = class extends base_1.BasePineconeError {
       constructor(requestInfo) {
-        const { url, message } = requestInfo;
+        const { url, message: message2 } = requestInfo;
         if (url) {
-          super(`A call to ${url} returned HTTP status 501. ${message ? message : ""}`);
+          super(`A call to ${url} returned HTTP status 501. ${message2 ? message2 : ""}`);
         } else {
           super();
         }
@@ -11736,11 +11763,11 @@ var require_http = __commonJS({
     exports.PineconeNotImplementedError = PineconeNotImplementedError;
     var PineconeMethodNotAllowedError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { url, message } = failedRequest;
+        const { url, message: message2 } = failedRequest;
         if (url) {
-          super(`A call to ${url} returned HTTP status 405 (Method Not Allowed). ${message ? message : ""}`.trim());
+          super(`A call to ${url} returned HTTP status 405 (Method Not Allowed). ${message2 ? message2 : ""}`.trim());
         } else {
-          super(`The HTTP method used is not allowed for this endpoint. ${message ? message : ""}`.trim());
+          super(`The HTTP method used is not allowed for this endpoint. ${message2 ? message2 : ""}`.trim());
         }
         this.name = "PineconeMethodNotAllowedError";
       }
@@ -11769,11 +11796,11 @@ var require_http = __commonJS({
     exports.PineconeIndexTerminatedError = PineconeIndexTerminatedError;
     var PineconeUnmappedHttpError = class extends base_1.BasePineconeError {
       constructor(failedRequest) {
-        const { url, status, body: body2, message } = failedRequest;
+        const { url, status, body: body2, message: message2 } = failedRequest;
         const intro = url ? `An unexpected error occured while calling the ${url} endpoint. ` : "";
         const statusMsg = status ? `Status: ${status}. ` : "";
         const bodyMsg = body2 ? `Body: ${body2}` : "";
-        super([intro, message, statusMsg, bodyMsg].join(" ").trim());
+        super([intro, message2, statusMsg, bodyMsg].join(" ").trim());
         this.name = "PineconeUnmappedHttpError";
       }
     };
@@ -11851,8 +11878,8 @@ var require_validation = __commonJS({
     exports.PineconeArgumentError = void 0;
     var base_1 = require_base();
     var PineconeArgumentError = class extends base_1.BasePineconeError {
-      constructor(message) {
-        super(`${message}`);
+      constructor(message2) {
+        super(`${message2}`);
         this.name = "PineconeArgumentError";
       }
     };
@@ -11884,8 +11911,8 @@ var require_batch = __commonJS({
       /**
        * @param message - Why the batch was left unsent, and how many documents it held.
        */
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "PineconeBatchUpsertUnsentError";
       }
     };
@@ -11900,17 +11927,17 @@ var require_utils2 = __commonJS({
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.extractMessage = void 0;
     var extractMessage = async (error2) => {
-      let message = await error2.response.text();
+      let message2 = await error2.response.text();
       try {
-        const messageJSON = JSON.parse(message);
+        const messageJSON = JSON.parse(message2);
         if (messageJSON.error?.message) {
-          message = messageJSON.error.message;
+          message2 = messageJSON.error.message;
         } else if (messageJSON.message) {
-          message = messageJSON.message;
+          message2 = messageJSON.message;
         }
       } catch {
       }
-      return message;
+      return message2;
     };
     exports.extractMessage = extractMessage;
   }
@@ -11931,11 +11958,11 @@ var require_handling = __commonJS({
         const responseError = e;
         const rawMessage = await (0, utils_1.extractMessage)(responseError);
         const statusCode = responseError.response.status;
-        const message = customMessage ? await customMessage(statusCode, rawMessage) : rawMessage;
+        const message2 = customMessage ? await customMessage(statusCode, rawMessage) : rawMessage;
         return (0, http_1.mapHttpStatusError)({
           status: responseError.response.status,
           url: responseError.response.url || url,
-          message
+          message: message2
         });
       } else if (e instanceof base_1.BasePineconeError) {
         return e;
@@ -12599,17 +12626,17 @@ var require_chatStream = __commonJS({
        */
       async *[Symbol.asyncIterator]() {
         let buffer2 = "";
-        const decoder = new TextDecoder();
+        const decoder2 = new TextDecoder();
         for await (const chunk of this.stream) {
-          buffer2 += typeof chunk === "string" ? chunk : decoder.decode(chunk, { stream: true });
+          buffer2 += typeof chunk === "string" ? chunk : decoder2.decode(chunk, { stream: true });
           let newlineIndex;
           while ((newlineIndex = buffer2.indexOf("\n")) !== -1) {
             const line = buffer2.slice(0, newlineIndex).trim();
             buffer2 = buffer2.slice(newlineIndex + 1);
             if (line && line.startsWith("data:")) {
-              const json = line.slice(5).trim();
+              const json2 = line.slice(5).trim();
               try {
-                const parsedJson = JSON.parse(json);
+                const parsedJson = JSON.parse(json2);
                 const convertedJson = (0, convertKeys_1.convertKeysToCamelCase)(parsedJson);
                 yield convertedJson;
               } catch {
@@ -12619,7 +12646,7 @@ var require_chatStream = __commonJS({
             }
           }
         }
-        buffer2 += decoder.decode();
+        buffer2 += decoder2.decode();
         if (buffer2.trim()) {
           try {
             const parsedJson = JSON.parse(buffer2);
@@ -12987,12 +13014,12 @@ var require_legacyTranslation = __commonJS({
     var types_1 = require_types();
     var legacyConstants_1 = require_legacyConstants();
     var GUIDE = "MIGRATION.md";
-    function fail(message) {
-      throw new errors_1.PineconeArgumentError(message);
+    function fail(message2) {
+      throw new errors_1.PineconeArgumentError(message2);
     }
-    var isObject3 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+    var isObject4 = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
     function object3(value, name2) {
-      if (!isObject3(value))
+      if (!isObject4(value))
         return fail(`You must pass an object for ${name2}.`);
       return value;
     }
@@ -13004,7 +13031,7 @@ var require_legacyTranslation = __commonJS({
     function clone2(value) {
       if (Array.isArray(value))
         return value.map(clone2);
-      if (isObject3(value))
+      if (isObject4(value))
         return Object.fromEntries(Object.entries(value).filter(([, v]) => v !== void 0).map(([k, v]) => [k, clone2(v)]));
       return value;
     }
@@ -13442,16 +13469,16 @@ var require_indexHostSingleton = __commonJS({
       const _key = (config2, indexName) => `${config2.apiKey}-${indexName}`;
       const singleton = {
         getHostUrl: async (config2, indexName) => {
-          const cacheKey = _key(config2, indexName);
-          if (cacheKey in hostUrls) {
-            return hostUrls[cacheKey];
+          const cacheKey2 = _key(config2, indexName);
+          if (cacheKey2 in hostUrls) {
+            return hostUrls[cacheKey2];
           } else {
             const hostUrl = await _describeIndex(config2, indexName);
             singleton._set(config2, indexName, hostUrl);
-            if (!hostUrls[cacheKey]) {
+            if (!hostUrls[cacheKey2]) {
               throw new errors_1.PineconeUnableToResolveHostError(`Could not get host for index: ${indexName}. Call describeIndex('${indexName}') to check the current status.`);
             }
-            return hostUrls[cacheKey];
+            return hostUrls[cacheKey2];
           }
         },
         _reset: () => {
@@ -13464,12 +13491,12 @@ var require_indexHostSingleton = __commonJS({
           if (!normalizedHostUrl) {
             return;
           }
-          const cacheKey = _key(config2, indexName);
-          hostUrls[cacheKey] = normalizedHostUrl;
+          const cacheKey2 = _key(config2, indexName);
+          hostUrls[cacheKey2] = normalizedHostUrl;
         },
         _delete: (config2, indexName) => {
-          const cacheKey = _key(config2, indexName);
-          delete hostUrls[cacheKey];
+          const cacheKey2 = _key(config2, indexName);
+          delete hostUrls[cacheKey2];
         }
       };
       return singleton;
@@ -14888,8 +14915,8 @@ var require_runtime2 = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -14985,22 +15012,22 @@ var require_Assistant = __commonJS({
       isInstance = isInstance && "status" in value;
       return isInstance;
     }
-    function AssistantFromJSON(json) {
-      return AssistantFromJSONTyped(json, false);
+    function AssistantFromJSON(json2) {
+      return AssistantFromJSONTyped(json2, false);
     }
-    function AssistantFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function AssistantFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "instructions": !(0, runtime_1.exists)(json, "instructions") ? void 0 : json["instructions"],
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : json["metadata"],
-        "status": json["status"],
-        "host": !(0, runtime_1.exists)(json, "host") ? void 0 : json["host"],
-        "region": !(0, runtime_1.exists)(json, "region") ? void 0 : json["region"],
-        "createdAt": !(0, runtime_1.exists)(json, "created_at") ? void 0 : new Date(json["created_at"]),
-        "updatedAt": !(0, runtime_1.exists)(json, "updated_at") ? void 0 : new Date(json["updated_at"])
+        "name": json2["name"],
+        "instructions": !(0, runtime_1.exists)(json2, "instructions") ? void 0 : json2["instructions"],
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : json2["metadata"],
+        "status": json2["status"],
+        "host": !(0, runtime_1.exists)(json2, "host") ? void 0 : json2["host"],
+        "region": !(0, runtime_1.exists)(json2, "region") ? void 0 : json2["region"],
+        "createdAt": !(0, runtime_1.exists)(json2, "created_at") ? void 0 : new Date(json2["created_at"]),
+        "updatedAt": !(0, runtime_1.exists)(json2, "updated_at") ? void 0 : new Date(json2["updated_at"])
       };
     }
     function AssistantToJSON(value) {
@@ -15039,18 +15066,18 @@ var require_CreateAssistantRequest = __commonJS({
       isInstance = isInstance && "name" in value;
       return isInstance;
     }
-    function CreateAssistantRequestFromJSON(json) {
-      return CreateAssistantRequestFromJSONTyped(json, false);
+    function CreateAssistantRequestFromJSON(json2) {
+      return CreateAssistantRequestFromJSONTyped(json2, false);
     }
-    function CreateAssistantRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateAssistantRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "instructions": !(0, runtime_1.exists)(json, "instructions") ? void 0 : json["instructions"],
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : json["metadata"],
-        "region": !(0, runtime_1.exists)(json, "region") ? void 0 : json["region"]
+        "name": json2["name"],
+        "instructions": !(0, runtime_1.exists)(json2, "instructions") ? void 0 : json2["instructions"],
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : json2["metadata"],
+        "region": !(0, runtime_1.exists)(json2, "region") ? void 0 : json2["region"]
       };
     }
     function CreateAssistantRequestToJSON(value) {
@@ -15086,17 +15113,17 @@ var require_ErrorResponseError2 = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function ErrorResponseErrorFromJSON(json) {
-      return ErrorResponseErrorFromJSONTyped(json, false);
+    function ErrorResponseErrorFromJSON(json2) {
+      return ErrorResponseErrorFromJSONTyped(json2, false);
     }
-    function ErrorResponseErrorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseErrorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": json["code"],
-        "message": json["message"],
-        "details": !(0, runtime_1.exists)(json, "details") ? void 0 : json["details"]
+        "code": json2["code"],
+        "message": json2["message"],
+        "details": !(0, runtime_1.exists)(json2, "details") ? void 0 : json2["details"]
       };
     }
     function ErrorResponseErrorToJSON(value) {
@@ -15131,16 +15158,16 @@ var require_ErrorResponse2 = __commonJS({
       isInstance = isInstance && "error" in value;
       return isInstance;
     }
-    function ErrorResponseFromJSON(json) {
-      return ErrorResponseFromJSONTyped(json, false);
+    function ErrorResponseFromJSON(json2) {
+      return ErrorResponseFromJSONTyped(json2, false);
     }
-    function ErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "status": json["status"],
-        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json["error"])
+        "status": json2["status"],
+        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json2["error"])
       };
     }
     function ErrorResponseToJSON(value) {
@@ -15172,15 +15199,15 @@ var require_PaginationResponse = __commonJS({
       isInstance = isInstance && "next" in value;
       return isInstance;
     }
-    function PaginationResponseFromJSON(json) {
-      return PaginationResponseFromJSONTyped(json, false);
+    function PaginationResponseFromJSON(json2) {
+      return PaginationResponseFromJSONTyped(json2, false);
     }
-    function PaginationResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PaginationResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "next": json["next"]
+        "next": json2["next"]
       };
     }
     function PaginationResponseToJSON(value) {
@@ -15213,16 +15240,16 @@ var require_ListAssistantsResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListAssistantsResponseFromJSON(json) {
-      return ListAssistantsResponseFromJSONTyped(json, false);
+    function ListAssistantsResponseFromJSON(json2) {
+      return ListAssistantsResponseFromJSONTyped(json2, false);
     }
-    function ListAssistantsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListAssistantsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "assistants": !(0, runtime_1.exists)(json, "assistants") ? void 0 : json["assistants"].map(Assistant_1.AssistantFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, PaginationResponse_1.PaginationResponseFromJSON)(json["pagination"])
+        "assistants": !(0, runtime_1.exists)(json2, "assistants") ? void 0 : json2["assistants"].map(Assistant_1.AssistantFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, PaginationResponse_1.PaginationResponseFromJSON)(json2["pagination"])
       };
     }
     function ListAssistantsResponseToJSON(value) {
@@ -15254,16 +15281,16 @@ var require_UpdateAssistantRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateAssistantRequestFromJSON(json) {
-      return UpdateAssistantRequestFromJSONTyped(json, false);
+    function UpdateAssistantRequestFromJSON(json2) {
+      return UpdateAssistantRequestFromJSONTyped(json2, false);
     }
-    function UpdateAssistantRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateAssistantRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "instructions": !(0, runtime_1.exists)(json, "instructions") ? void 0 : json["instructions"],
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : json["metadata"]
+        "instructions": !(0, runtime_1.exists)(json2, "instructions") ? void 0 : json2["instructions"],
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : json2["metadata"]
       };
     }
     function UpdateAssistantRequestToJSON(value) {
@@ -15295,17 +15322,17 @@ var require_UpdateAssistantResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateAssistantResponseFromJSON(json) {
-      return UpdateAssistantResponseFromJSONTyped(json, false);
+    function UpdateAssistantResponseFromJSON(json2) {
+      return UpdateAssistantResponseFromJSONTyped(json2, false);
     }
-    function UpdateAssistantResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateAssistantResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "assistantName": !(0, runtime_1.exists)(json, "assistant_name") ? void 0 : json["assistant_name"],
-        "instructions": !(0, runtime_1.exists)(json, "instructions") ? void 0 : json["instructions"],
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : json["metadata"]
+        "assistantName": !(0, runtime_1.exists)(json2, "assistant_name") ? void 0 : json2["assistant_name"],
+        "instructions": !(0, runtime_1.exists)(json2, "instructions") ? void 0 : json2["instructions"],
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : json2["metadata"]
       };
     }
     function UpdateAssistantResponseToJSON(value) {
@@ -16029,8 +16056,8 @@ var require_runtime3 = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -16126,17 +16153,17 @@ var require_AlignmentRequest = __commonJS({
       isInstance = isInstance && "groundTruthAnswer" in value;
       return isInstance;
     }
-    function AlignmentRequestFromJSON(json) {
-      return AlignmentRequestFromJSONTyped(json, false);
+    function AlignmentRequestFromJSON(json2) {
+      return AlignmentRequestFromJSONTyped(json2, false);
     }
-    function AlignmentRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function AlignmentRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "question": json["question"],
-        "answer": json["answer"],
-        "groundTruthAnswer": json["ground_truth_answer"]
+        "question": json2["question"],
+        "answer": json2["answer"],
+        "groundTruthAnswer": json2["ground_truth_answer"]
       };
     }
     function AlignmentRequestToJSON(value) {
@@ -16171,17 +16198,17 @@ var require_Metrics = __commonJS({
       isInstance = isInstance && "alignment" in value;
       return isInstance;
     }
-    function MetricsFromJSON(json) {
-      return MetricsFromJSONTyped(json, false);
+    function MetricsFromJSON(json2) {
+      return MetricsFromJSONTyped(json2, false);
     }
-    function MetricsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MetricsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "correctness": json["correctness"],
-        "completeness": json["completeness"],
-        "alignment": json["alignment"]
+        "correctness": json2["correctness"],
+        "completeness": json2["completeness"],
+        "alignment": json2["alignment"]
       };
     }
     function MetricsToJSON(value) {
@@ -16214,15 +16241,15 @@ var require_Fact = __commonJS({
       isInstance = isInstance && "content" in value;
       return isInstance;
     }
-    function FactFromJSON(json) {
-      return FactFromJSONTyped(json, false);
+    function FactFromJSON(json2) {
+      return FactFromJSONTyped(json2, false);
     }
-    function FactFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FactFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "content": json["content"]
+        "content": json2["content"]
       };
     }
     function FactToJSON(value) {
@@ -16255,16 +16282,16 @@ var require_EvaluatedFact = __commonJS({
       isInstance = isInstance && "entailment" in value;
       return isInstance;
     }
-    function EvaluatedFactFromJSON(json) {
-      return EvaluatedFactFromJSONTyped(json, false);
+    function EvaluatedFactFromJSON(json2) {
+      return EvaluatedFactFromJSONTyped(json2, false);
     }
-    function EvaluatedFactFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function EvaluatedFactFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fact": (0, Fact_1.FactFromJSON)(json["fact"]),
-        "entailment": json["entailment"]
+        "fact": (0, Fact_1.FactFromJSON)(json2["fact"]),
+        "entailment": json2["entailment"]
       };
     }
     function EvaluatedFactToJSON(value) {
@@ -16297,15 +16324,15 @@ var require_Reasoning = __commonJS({
       isInstance = isInstance && "evaluatedFacts" in value;
       return isInstance;
     }
-    function ReasoningFromJSON(json) {
-      return ReasoningFromJSONTyped(json, false);
+    function ReasoningFromJSON(json2) {
+      return ReasoningFromJSONTyped(json2, false);
     }
-    function ReasoningFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReasoningFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "evaluatedFacts": json["evaluated_facts"].map(EvaluatedFact_1.EvaluatedFactFromJSON)
+        "evaluatedFacts": json2["evaluated_facts"].map(EvaluatedFact_1.EvaluatedFactFromJSON)
       };
     }
     function ReasoningToJSON(value) {
@@ -16338,17 +16365,17 @@ var require_TokenCounts = __commonJS({
       isInstance = isInstance && "totalTokens" in value;
       return isInstance;
     }
-    function TokenCountsFromJSON(json) {
-      return TokenCountsFromJSONTyped(json, false);
+    function TokenCountsFromJSON(json2) {
+      return TokenCountsFromJSONTyped(json2, false);
     }
-    function TokenCountsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function TokenCountsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "promptTokens": json["prompt_tokens"],
-        "completionTokens": json["completion_tokens"],
-        "totalTokens": json["total_tokens"]
+        "promptTokens": json2["prompt_tokens"],
+        "completionTokens": json2["completion_tokens"],
+        "totalTokens": json2["total_tokens"]
       };
     }
     function TokenCountsToJSON(value) {
@@ -16386,17 +16413,17 @@ var require_AlignmentResponse = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function AlignmentResponseFromJSON(json) {
-      return AlignmentResponseFromJSONTyped(json, false);
+    function AlignmentResponseFromJSON(json2) {
+      return AlignmentResponseFromJSONTyped(json2, false);
     }
-    function AlignmentResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function AlignmentResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "metrics": (0, Metrics_1.MetricsFromJSON)(json["metrics"]),
-        "reasoning": (0, Reasoning_1.ReasoningFromJSON)(json["reasoning"]),
-        "usage": (0, TokenCounts_1.TokenCountsFromJSON)(json["usage"])
+        "metrics": (0, Metrics_1.MetricsFromJSON)(json2["metrics"]),
+        "reasoning": (0, Reasoning_1.ReasoningFromJSON)(json2["reasoning"]),
+        "usage": (0, TokenCounts_1.TokenCountsFromJSON)(json2["usage"])
       };
     }
     function AlignmentResponseToJSON(value) {
@@ -16429,15 +16456,15 @@ var require_BasicErrorResponse = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function BasicErrorResponseFromJSON(json) {
-      return BasicErrorResponseFromJSONTyped(json, false);
+    function BasicErrorResponseFromJSON(json2) {
+      return BasicErrorResponseFromJSONTyped(json2, false);
     }
-    function BasicErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function BasicErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "message": json["message"]
+        "message": json2["message"]
       };
     }
     function BasicErrorResponseToJSON(value) {
@@ -16809,14 +16836,14 @@ var require_assistantHostSingleton = __commonJS({
       const _key = (config2, assistantName) => `${config2.apiKey}-${assistantName}`;
       const singleton = {
         getHostUrl: async (config2, assistantName) => {
-          const cacheKey = _key(config2, assistantName);
-          if (cacheKey in hostUrls) {
-            return hostUrls[cacheKey];
+          const cacheKey2 = _key(config2, assistantName);
+          if (cacheKey2 in hostUrls) {
+            return hostUrls[cacheKey2];
           } else {
             const hostUrl = await _describeAssistant(config2, assistantName);
-            hostUrls[cacheKey] = (0, utils_1.normalizeUrl)(ensureAssistantPath(hostUrl));
+            hostUrls[cacheKey2] = (0, utils_1.normalizeUrl)(ensureAssistantPath(hostUrl));
           }
-          return hostUrls[cacheKey];
+          return hostUrls[cacheKey2];
         },
         _reset: () => {
           for (const key of Object.keys(hostUrls)) {
@@ -16828,12 +16855,12 @@ var require_assistantHostSingleton = __commonJS({
           if (!hostUrl || !normalizedHostUrl) {
             return;
           }
-          const cacheKey = _key(config2, assistantName);
-          hostUrls[cacheKey] = normalizedHostUrl;
+          const cacheKey2 = _key(config2, assistantName);
+          hostUrls[cacheKey2] = normalizedHostUrl;
         },
         _delete: (config2, assistantName) => {
-          const cacheKey = _key(config2, assistantName);
-          delete hostUrls[cacheKey];
+          const cacheKey2 = _key(config2, assistantName);
+          delete hostUrls[cacheKey2];
         }
       };
       return singleton;
@@ -17251,8 +17278,8 @@ var require_runtime4 = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -17346,15 +17373,15 @@ var require_CreateNamespaceRequestSchemaFieldsValue = __commonJS({
       isInstance = isInstance && "filterable" in value;
       return isInstance;
     }
-    function CreateNamespaceRequestSchemaFieldsValueFromJSON(json) {
-      return CreateNamespaceRequestSchemaFieldsValueFromJSONTyped(json, false);
+    function CreateNamespaceRequestSchemaFieldsValueFromJSON(json2) {
+      return CreateNamespaceRequestSchemaFieldsValueFromJSONTyped(json2, false);
     }
-    function CreateNamespaceRequestSchemaFieldsValueFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateNamespaceRequestSchemaFieldsValueFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "filterable": json["filterable"]
+        "filterable": json2["filterable"]
       };
     }
     function CreateNamespaceRequestSchemaFieldsValueToJSON(value) {
@@ -17386,15 +17413,15 @@ var require_CreateNamespaceRequestSchema = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function CreateNamespaceRequestSchemaFromJSON(json) {
-      return CreateNamespaceRequestSchemaFromJSONTyped(json, false);
+    function CreateNamespaceRequestSchemaFromJSON(json2) {
+      return CreateNamespaceRequestSchemaFromJSONTyped(json2, false);
     }
-    function CreateNamespaceRequestSchemaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateNamespaceRequestSchemaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": !(0, runtime_1.exists)(json, "fields") ? void 0 : (0, runtime_1.mapValues)(json["fields"], CreateNamespaceRequestSchemaFieldsValue_1.CreateNamespaceRequestSchemaFieldsValueFromJSON)
+        "fields": !(0, runtime_1.exists)(json2, "fields") ? void 0 : (0, runtime_1.mapValues)(json2["fields"], CreateNamespaceRequestSchemaFieldsValue_1.CreateNamespaceRequestSchemaFieldsValueFromJSON)
       };
     }
     function CreateNamespaceRequestSchemaToJSON(value) {
@@ -17427,16 +17454,16 @@ var require_CreateNamespaceRequest = __commonJS({
       isInstance = isInstance && "name" in value;
       return isInstance;
     }
-    function CreateNamespaceRequestFromJSON(json) {
-      return CreateNamespaceRequestFromJSONTyped(json, false);
+    function CreateNamespaceRequestFromJSON(json2) {
+      return CreateNamespaceRequestFromJSONTyped(json2, false);
     }
-    function CreateNamespaceRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateNamespaceRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "schema": !(0, runtime_1.exists)(json, "schema") ? void 0 : (0, CreateNamespaceRequestSchema_1.CreateNamespaceRequestSchemaFromJSON)(json["schema"])
+        "name": json2["name"],
+        "schema": !(0, runtime_1.exists)(json2, "schema") ? void 0 : (0, CreateNamespaceRequestSchema_1.CreateNamespaceRequestSchemaFromJSON)(json2["schema"])
       };
     }
     function CreateNamespaceRequestToJSON(value) {
@@ -17468,17 +17495,17 @@ var require_DeleteDocumentsRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function DeleteDocumentsRequestFromJSON(json) {
-      return DeleteDocumentsRequestFromJSONTyped(json, false);
+    function DeleteDocumentsRequestFromJSON(json2) {
+      return DeleteDocumentsRequestFromJSONTyped(json2, false);
     }
-    function DeleteDocumentsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DeleteDocumentsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "ids": !(0, runtime_1.exists)(json, "ids") ? void 0 : json["ids"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "deleteAll": !(0, runtime_1.exists)(json, "delete_all") ? void 0 : json["delete_all"]
+        "ids": !(0, runtime_1.exists)(json2, "ids") ? void 0 : json2["ids"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "deleteAll": !(0, runtime_1.exists)(json2, "delete_all") ? void 0 : json2["delete_all"]
       };
     }
     function DeleteDocumentsRequestToJSON(value) {
@@ -17511,15 +17538,15 @@ var require_DeleteDocumentsResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function DeleteDocumentsResponseFromJSON(json) {
-      return DeleteDocumentsResponseFromJSONTyped(json, false);
+    function DeleteDocumentsResponseFromJSON(json2) {
+      return DeleteDocumentsResponseFromJSONTyped(json2, false);
     }
-    function DeleteDocumentsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DeleteDocumentsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "matchedRecords": !(0, runtime_1.exists)(json, "matched_records") ? void 0 : json["matched_records"]
+        "matchedRecords": !(0, runtime_1.exists)(json2, "matched_records") ? void 0 : json2["matched_records"]
       };
     }
     function DeleteDocumentsResponseToJSON(value) {
@@ -17550,18 +17577,18 @@ var require_DeleteRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function DeleteRequestFromJSON(json) {
-      return DeleteRequestFromJSONTyped(json, false);
+    function DeleteRequestFromJSON(json2) {
+      return DeleteRequestFromJSONTyped(json2, false);
     }
-    function DeleteRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DeleteRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "ids": !(0, runtime_1.exists)(json, "ids") ? void 0 : json["ids"],
-        "deleteAll": !(0, runtime_1.exists)(json, "deleteAll") ? void 0 : json["deleteAll"],
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"]
+        "ids": !(0, runtime_1.exists)(json2, "ids") ? void 0 : json2["ids"],
+        "deleteAll": !(0, runtime_1.exists)(json2, "deleteAll") ? void 0 : json2["deleteAll"],
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"]
       };
     }
     function DeleteRequestToJSON(value) {
@@ -17595,15 +17622,15 @@ var require_DescribeIndexStatsRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function DescribeIndexStatsRequestFromJSON(json) {
-      return DescribeIndexStatsRequestFromJSONTyped(json, false);
+    function DescribeIndexStatsRequestFromJSON(json2) {
+      return DescribeIndexStatsRequestFromJSONTyped(json2, false);
     }
-    function DescribeIndexStatsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DescribeIndexStatsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"]
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"]
       };
     }
     function DescribeIndexStatsRequestToJSON(value) {
@@ -17634,15 +17661,15 @@ var require_DocumentFetchUsage = __commonJS({
       isInstance = isInstance && "readUnits" in value;
       return isInstance;
     }
-    function DocumentFetchUsageFromJSON(json) {
-      return DocumentFetchUsageFromJSONTyped(json, false);
+    function DocumentFetchUsageFromJSON(json2) {
+      return DocumentFetchUsageFromJSONTyped(json2, false);
     }
-    function DocumentFetchUsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocumentFetchUsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "readUnits": json["read_units"]
+        "readUnits": json2["read_units"]
       };
     }
     function DocumentFetchUsageToJSON(value) {
@@ -17667,11 +17694,11 @@ var require_DocumentFieldValue = __commonJS({
     exports.DocumentFieldValueFromJSON = DocumentFieldValueFromJSON;
     exports.DocumentFieldValueFromJSONTyped = DocumentFieldValueFromJSONTyped;
     exports.DocumentFieldValueToJSON = DocumentFieldValueToJSON;
-    function DocumentFieldValueFromJSON(json) {
-      return DocumentFieldValueFromJSONTyped(json, false);
+    function DocumentFieldValueFromJSON(json2) {
+      return DocumentFieldValueFromJSONTyped(json2, false);
     }
-    function DocumentFieldValueFromJSONTyped(json, ignoreDiscriminator) {
-      return json;
+    function DocumentFieldValueFromJSONTyped(json2, ignoreDiscriminator) {
+      return json2;
     }
     function DocumentFieldValueToJSON(value) {
       return value;
@@ -17693,15 +17720,15 @@ var require_DocumentListUsage = __commonJS({
       isInstance = isInstance && "readUnits" in value;
       return isInstance;
     }
-    function DocumentListUsageFromJSON(json) {
-      return DocumentListUsageFromJSONTyped(json, false);
+    function DocumentListUsageFromJSON(json2) {
+      return DocumentListUsageFromJSONTyped(json2, false);
     }
-    function DocumentListUsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocumentListUsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "readUnits": json["read_units"]
+        "readUnits": json2["read_units"]
       };
     }
     function DocumentListUsageToJSON(value) {
@@ -17732,16 +17759,16 @@ var require_DocumentRecord = __commonJS({
       isInstance = isInstance && "_id" in value;
       return isInstance;
     }
-    function DocumentRecordFromJSON(json) {
-      return DocumentRecordFromJSONTyped(json, false);
+    function DocumentRecordFromJSON(json2) {
+      return DocumentRecordFromJSONTyped(json2, false);
     }
-    function DocumentRecordFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocumentRecordFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        ...json,
-        "_id": json["_id"]
+        ...json2,
+        "_id": json2["_id"]
       };
     }
     function DocumentRecordToJSON(value) {
@@ -17774,16 +17801,16 @@ var require_SparseValues = __commonJS({
       isInstance = isInstance && "values" in value;
       return isInstance;
     }
-    function SparseValuesFromJSON(json) {
-      return SparseValuesFromJSONTyped(json, false);
+    function SparseValuesFromJSON(json2) {
+      return SparseValuesFromJSONTyped(json2, false);
     }
-    function SparseValuesFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SparseValuesFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "indices": json["indices"],
-        "values": json["values"]
+        "indices": json2["indices"],
+        "values": json2["values"]
       };
     }
     function SparseValuesToJSON(value) {
@@ -17817,20 +17844,20 @@ var require_DocumentScoringMethod = __commonJS({
       isInstance = isInstance && "type" in value;
       return isInstance;
     }
-    function DocumentScoringMethodFromJSON(json) {
-      return DocumentScoringMethodFromJSONTyped(json, false);
+    function DocumentScoringMethodFromJSON(json2) {
+      return DocumentScoringMethodFromJSONTyped(json2, false);
     }
-    function DocumentScoringMethodFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocumentScoringMethodFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "fields": !(0, runtime_1.exists)(json, "fields") ? void 0 : json["fields"],
-        "field": !(0, runtime_1.exists)(json, "field") ? void 0 : json["field"],
-        "query": !(0, runtime_1.exists)(json, "query") ? void 0 : json["query"],
-        "values": !(0, runtime_1.exists)(json, "values") ? void 0 : json["values"],
-        "sparseValues": !(0, runtime_1.exists)(json, "sparse_values") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json["sparse_values"])
+        "type": json2["type"],
+        "fields": !(0, runtime_1.exists)(json2, "fields") ? void 0 : json2["fields"],
+        "field": !(0, runtime_1.exists)(json2, "field") ? void 0 : json2["field"],
+        "query": !(0, runtime_1.exists)(json2, "query") ? void 0 : json2["query"],
+        "values": !(0, runtime_1.exists)(json2, "values") ? void 0 : json2["values"],
+        "sparseValues": !(0, runtime_1.exists)(json2, "sparse_values") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json2["sparse_values"])
       };
     }
     function DocumentScoringMethodToJSON(value) {
@@ -17867,17 +17894,17 @@ var require_DocumentSearchMatch = __commonJS({
       isInstance = isInstance && "_score" in value;
       return isInstance;
     }
-    function DocumentSearchMatchFromJSON(json) {
-      return DocumentSearchMatchFromJSONTyped(json, false);
+    function DocumentSearchMatchFromJSON(json2) {
+      return DocumentSearchMatchFromJSONTyped(json2, false);
     }
-    function DocumentSearchMatchFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocumentSearchMatchFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        ...json,
-        "_id": json["_id"],
-        "_score": json["_score"]
+        ...json2,
+        "_id": json2["_id"],
+        "_score": json2["_score"]
       };
     }
     function DocumentSearchMatchToJSON(value) {
@@ -17910,15 +17937,15 @@ var require_DocumentSearchUsage = __commonJS({
       isInstance = isInstance && "readUnits" in value;
       return isInstance;
     }
-    function DocumentSearchUsageFromJSON(json) {
-      return DocumentSearchUsageFromJSONTyped(json, false);
+    function DocumentSearchUsageFromJSON(json2) {
+      return DocumentSearchUsageFromJSONTyped(json2, false);
     }
-    function DocumentSearchUsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocumentSearchUsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "readUnits": json["read_units"]
+        "readUnits": json2["read_units"]
       };
     }
     function DocumentSearchUsageToJSON(value) {
@@ -17950,16 +17977,16 @@ var require_ErrorResponseError3 = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function ErrorResponseErrorFromJSON(json) {
-      return ErrorResponseErrorFromJSONTyped(json, false);
+    function ErrorResponseErrorFromJSON(json2) {
+      return ErrorResponseErrorFromJSONTyped(json2, false);
     }
-    function ErrorResponseErrorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseErrorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": json["code"],
-        "message": json["message"]
+        "code": json2["code"],
+        "message": json2["message"]
       };
     }
     function ErrorResponseErrorToJSON(value) {
@@ -17993,16 +18020,16 @@ var require_ErrorResponse3 = __commonJS({
       isInstance = isInstance && "error" in value;
       return isInstance;
     }
-    function ErrorResponseFromJSON(json) {
-      return ErrorResponseFromJSONTyped(json, false);
+    function ErrorResponseFromJSON(json2) {
+      return ErrorResponseFromJSONTyped(json2, false);
     }
-    function ErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "status": json["status"],
-        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json["error"])
+        "status": json2["status"],
+        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json2["error"])
       };
     }
     function ErrorResponseToJSON(value) {
@@ -18035,18 +18062,18 @@ var require_FetchByMetadataRequest = __commonJS({
       isInstance = isInstance && "filter" in value;
       return isInstance;
     }
-    function FetchByMetadataRequestFromJSON(json) {
-      return FetchByMetadataRequestFromJSONTyped(json, false);
+    function FetchByMetadataRequestFromJSON(json2) {
+      return FetchByMetadataRequestFromJSONTyped(json2, false);
     }
-    function FetchByMetadataRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FetchByMetadataRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "filter": json["filter"],
-        "limit": !(0, runtime_1.exists)(json, "limit") ? void 0 : json["limit"],
-        "paginationToken": !(0, runtime_1.exists)(json, "paginationToken") ? void 0 : json["paginationToken"]
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "filter": json2["filter"],
+        "limit": !(0, runtime_1.exists)(json2, "limit") ? void 0 : json2["limit"],
+        "paginationToken": !(0, runtime_1.exists)(json2, "paginationToken") ? void 0 : json2["paginationToken"]
       };
     }
     function FetchByMetadataRequestToJSON(value) {
@@ -18080,15 +18107,15 @@ var require_Pagination = __commonJS({
       isInstance = isInstance && "next" in value;
       return isInstance;
     }
-    function PaginationFromJSON(json) {
-      return PaginationFromJSONTyped(json, false);
+    function PaginationFromJSON(json2) {
+      return PaginationFromJSONTyped(json2, false);
     }
-    function PaginationFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PaginationFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "next": json["next"]
+        "next": json2["next"]
       };
     }
     function PaginationToJSON(value) {
@@ -18119,15 +18146,15 @@ var require_Usage = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UsageFromJSON(json) {
-      return UsageFromJSONTyped(json, false);
+    function UsageFromJSON(json2) {
+      return UsageFromJSONTyped(json2, false);
     }
-    function UsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "readUnits": !(0, runtime_1.exists)(json, "readUnits") ? void 0 : json["readUnits"]
+        "readUnits": !(0, runtime_1.exists)(json2, "readUnits") ? void 0 : json2["readUnits"]
       };
     }
     function UsageToJSON(value) {
@@ -18152,11 +18179,11 @@ var require_MetadataValue = __commonJS({
     exports.MetadataValueFromJSON = MetadataValueFromJSON;
     exports.MetadataValueFromJSONTyped = MetadataValueFromJSONTyped;
     exports.MetadataValueToJSON = MetadataValueToJSON;
-    function MetadataValueFromJSON(json) {
-      return MetadataValueFromJSONTyped(json, false);
+    function MetadataValueFromJSON(json2) {
+      return MetadataValueFromJSONTyped(json2, false);
     }
-    function MetadataValueFromJSONTyped(json, ignoreDiscriminator) {
-      return json;
+    function MetadataValueFromJSONTyped(json2, ignoreDiscriminator) {
+      return json2;
     }
     function MetadataValueToJSON(value) {
       return value;
@@ -18181,18 +18208,18 @@ var require_Vector = __commonJS({
       isInstance = isInstance && "id" in value;
       return isInstance;
     }
-    function VectorFromJSON(json) {
-      return VectorFromJSONTyped(json, false);
+    function VectorFromJSON(json2) {
+      return VectorFromJSONTyped(json2, false);
     }
-    function VectorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function VectorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "values": !(0, runtime_1.exists)(json, "values") ? void 0 : json["values"],
-        "sparseValues": !(0, runtime_1.exists)(json, "sparseValues") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json["sparseValues"]),
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : (0, runtime_1.mapValues)(json["metadata"], MetadataValue_1.MetadataValueFromJSON)
+        "id": json2["id"],
+        "values": !(0, runtime_1.exists)(json2, "values") ? void 0 : json2["values"],
+        "sparseValues": !(0, runtime_1.exists)(json2, "sparseValues") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json2["sparseValues"]),
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : (0, runtime_1.mapValues)(json2["metadata"], MetadataValue_1.MetadataValueFromJSON)
       };
     }
     function VectorToJSON(value) {
@@ -18229,18 +18256,18 @@ var require_FetchByMetadataResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function FetchByMetadataResponseFromJSON(json) {
-      return FetchByMetadataResponseFromJSONTyped(json, false);
+    function FetchByMetadataResponseFromJSON(json2) {
+      return FetchByMetadataResponseFromJSONTyped(json2, false);
     }
-    function FetchByMetadataResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FetchByMetadataResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "vectors": !(0, runtime_1.exists)(json, "vectors") ? void 0 : (0, runtime_1.mapValues)(json["vectors"], Vector_1.VectorFromJSON),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json["usage"]),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json["pagination"])
+        "vectors": !(0, runtime_1.exists)(json2, "vectors") ? void 0 : (0, runtime_1.mapValues)(json2["vectors"], Vector_1.VectorFromJSON),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json2["usage"]),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json2["pagination"])
       };
     }
     function FetchByMetadataResponseToJSON(value) {
@@ -18274,19 +18301,19 @@ var require_FetchDocumentsRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function FetchDocumentsRequestFromJSON(json) {
-      return FetchDocumentsRequestFromJSONTyped(json, false);
+    function FetchDocumentsRequestFromJSON(json2) {
+      return FetchDocumentsRequestFromJSONTyped(json2, false);
     }
-    function FetchDocumentsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FetchDocumentsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "ids": !(0, runtime_1.exists)(json, "ids") ? void 0 : json["ids"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "includeFields": !(0, runtime_1.exists)(json, "include_fields") ? void 0 : json["include_fields"],
-        "paginationToken": !(0, runtime_1.exists)(json, "pagination_token") ? void 0 : json["pagination_token"],
-        "limit": !(0, runtime_1.exists)(json, "limit") ? void 0 : json["limit"]
+        "ids": !(0, runtime_1.exists)(json2, "ids") ? void 0 : json2["ids"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "includeFields": !(0, runtime_1.exists)(json2, "include_fields") ? void 0 : json2["include_fields"],
+        "paginationToken": !(0, runtime_1.exists)(json2, "pagination_token") ? void 0 : json2["pagination_token"],
+        "limit": !(0, runtime_1.exists)(json2, "limit") ? void 0 : json2["limit"]
       };
     }
     function FetchDocumentsRequestToJSON(value) {
@@ -18321,16 +18348,16 @@ var require_FetchedDocumentRecord = __commonJS({
       isInstance = isInstance && "_id" in value;
       return isInstance;
     }
-    function FetchedDocumentRecordFromJSON(json) {
-      return FetchedDocumentRecordFromJSONTyped(json, false);
+    function FetchedDocumentRecordFromJSON(json2) {
+      return FetchedDocumentRecordFromJSONTyped(json2, false);
     }
-    function FetchedDocumentRecordFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FetchedDocumentRecordFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        ...json,
-        "_id": json["_id"]
+        ...json2,
+        "_id": json2["_id"]
       };
     }
     function FetchedDocumentRecordToJSON(value) {
@@ -18368,18 +18395,18 @@ var require_FetchDocumentsResponse = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function FetchDocumentsResponseFromJSON(json) {
-      return FetchDocumentsResponseFromJSONTyped(json, false);
+    function FetchDocumentsResponseFromJSON(json2) {
+      return FetchDocumentsResponseFromJSONTyped(json2, false);
     }
-    function FetchDocumentsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FetchDocumentsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "documents": (0, runtime_1.mapValues)(json["documents"], FetchedDocumentRecord_1.FetchedDocumentRecordFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json["pagination"]),
-        "namespace": json["namespace"],
-        "usage": (0, DocumentFetchUsage_1.DocumentFetchUsageFromJSON)(json["usage"])
+        "documents": (0, runtime_1.mapValues)(json2["documents"], FetchedDocumentRecord_1.FetchedDocumentRecordFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json2["pagination"]),
+        "namespace": json2["namespace"],
+        "usage": (0, DocumentFetchUsage_1.DocumentFetchUsageFromJSON)(json2["usage"])
       };
     }
     function FetchDocumentsResponseToJSON(value) {
@@ -18415,17 +18442,17 @@ var require_FetchResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function FetchResponseFromJSON(json) {
-      return FetchResponseFromJSONTyped(json, false);
+    function FetchResponseFromJSON(json2) {
+      return FetchResponseFromJSONTyped(json2, false);
     }
-    function FetchResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function FetchResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "vectors": !(0, runtime_1.exists)(json, "vectors") ? void 0 : (0, runtime_1.mapValues)(json["vectors"], Vector_1.VectorFromJSON),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json["usage"])
+        "vectors": !(0, runtime_1.exists)(json2, "vectors") ? void 0 : (0, runtime_1.mapValues)(json2["vectors"], Vector_1.VectorFromJSON),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json2["usage"])
       };
     }
     function FetchResponseToJSON(value) {
@@ -18460,17 +18487,17 @@ var require_Hit = __commonJS({
       isInstance = isInstance && "fields" in value;
       return isInstance;
     }
-    function HitFromJSON(json) {
-      return HitFromJSONTyped(json, false);
+    function HitFromJSON(json2) {
+      return HitFromJSONTyped(json2, false);
     }
-    function HitFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function HitFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "_id": json["_id"],
-        "_score": json["_score"],
-        "fields": json["fields"]
+        "_id": json2["_id"],
+        "_score": json2["_score"],
+        "fields": json2["fields"]
       };
     }
     function HitToJSON(value) {
@@ -18503,15 +18530,15 @@ var require_ImportErrorMode = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ImportErrorModeFromJSON(json) {
-      return ImportErrorModeFromJSONTyped(json, false);
+    function ImportErrorModeFromJSON(json2) {
+      return ImportErrorModeFromJSONTyped(json2, false);
     }
-    function ImportErrorModeFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ImportErrorModeFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "onError": !(0, runtime_1.exists)(json, "onError") ? void 0 : json["onError"]
+        "onError": !(0, runtime_1.exists)(json2, "onError") ? void 0 : json2["onError"]
       };
     }
     function ImportErrorModeToJSON(value) {
@@ -18542,16 +18569,16 @@ var require_ImportValidationResult = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ImportValidationResultFromJSON(json) {
-      return ImportValidationResultFromJSONTyped(json, false);
+    function ImportValidationResultFromJSON(json2) {
+      return ImportValidationResultFromJSONTyped(json2, false);
     }
-    function ImportValidationResultFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ImportValidationResultFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "importSuccesses": !(0, runtime_1.exists)(json, "importSuccesses") ? void 0 : json["importSuccesses"],
-        "importErrors": !(0, runtime_1.exists)(json, "importErrors") ? void 0 : json["importErrors"]
+        "importSuccesses": !(0, runtime_1.exists)(json2, "importSuccesses") ? void 0 : json2["importSuccesses"],
+        "importErrors": !(0, runtime_1.exists)(json2, "importErrors") ? void 0 : json2["importErrors"]
       };
     }
     function ImportValidationResultToJSON(value) {
@@ -18590,23 +18617,23 @@ var require_ImportModel = __commonJS({
       isInstance = isInstance && "recordsImported" in value;
       return isInstance;
     }
-    function ImportModelFromJSON(json) {
-      return ImportModelFromJSONTyped(json, false);
+    function ImportModelFromJSON(json2) {
+      return ImportModelFromJSONTyped(json2, false);
     }
-    function ImportModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ImportModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "uri": json["uri"],
-        "status": json["status"],
-        "createdAt": new Date(json["createdAt"]),
-        "finishedAt": !(0, runtime_1.exists)(json, "finishedAt") ? void 0 : new Date(json["finishedAt"]),
-        "percentComplete": json["percentComplete"],
-        "recordsImported": json["recordsImported"],
-        "error": !(0, runtime_1.exists)(json, "error") ? void 0 : json["error"],
-        "validationResult": !(0, runtime_1.exists)(json, "validationResult") ? void 0 : (0, ImportValidationResult_1.ImportValidationResultFromJSON)(json["validationResult"])
+        "id": json2["id"],
+        "uri": json2["uri"],
+        "status": json2["status"],
+        "createdAt": new Date(json2["createdAt"]),
+        "finishedAt": !(0, runtime_1.exists)(json2, "finishedAt") ? void 0 : new Date(json2["finishedAt"]),
+        "percentComplete": json2["percentComplete"],
+        "recordsImported": json2["recordsImported"],
+        "error": !(0, runtime_1.exists)(json2, "error") ? void 0 : json2["error"],
+        "validationResult": !(0, runtime_1.exists)(json2, "validationResult") ? void 0 : (0, ImportValidationResult_1.ImportValidationResultFromJSON)(json2["validationResult"])
       };
     }
     function ImportModelToJSON(value) {
@@ -18645,15 +18672,15 @@ var require_NamespaceSummary = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function NamespaceSummaryFromJSON(json) {
-      return NamespaceSummaryFromJSONTyped(json, false);
+    function NamespaceSummaryFromJSON(json2) {
+      return NamespaceSummaryFromJSONTyped(json2, false);
     }
-    function NamespaceSummaryFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function NamespaceSummaryFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "vectorCount": !(0, runtime_1.exists)(json, "vectorCount") ? void 0 : json["vectorCount"]
+        "vectorCount": !(0, runtime_1.exists)(json2, "vectorCount") ? void 0 : json2["vectorCount"]
       };
     }
     function NamespaceSummaryToJSON(value) {
@@ -18685,22 +18712,22 @@ var require_IndexDescription = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function IndexDescriptionFromJSON(json) {
-      return IndexDescriptionFromJSONTyped(json, false);
+    function IndexDescriptionFromJSON(json2) {
+      return IndexDescriptionFromJSONTyped(json2, false);
     }
-    function IndexDescriptionFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function IndexDescriptionFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "namespaces": !(0, runtime_1.exists)(json, "namespaces") ? void 0 : (0, runtime_1.mapValues)(json["namespaces"], NamespaceSummary_1.NamespaceSummaryFromJSON),
-        "dimension": !(0, runtime_1.exists)(json, "dimension") ? void 0 : json["dimension"],
-        "indexFullness": !(0, runtime_1.exists)(json, "indexFullness") ? void 0 : json["indexFullness"],
-        "totalVectorCount": !(0, runtime_1.exists)(json, "totalVectorCount") ? void 0 : json["totalVectorCount"],
-        "metric": !(0, runtime_1.exists)(json, "metric") ? void 0 : json["metric"],
-        "vectorType": !(0, runtime_1.exists)(json, "vectorType") ? void 0 : json["vectorType"],
-        "memoryFullness": !(0, runtime_1.exists)(json, "memoryFullness") ? void 0 : json["memoryFullness"],
-        "storageFullness": !(0, runtime_1.exists)(json, "storageFullness") ? void 0 : json["storageFullness"]
+        "namespaces": !(0, runtime_1.exists)(json2, "namespaces") ? void 0 : (0, runtime_1.mapValues)(json2["namespaces"], NamespaceSummary_1.NamespaceSummaryFromJSON),
+        "dimension": !(0, runtime_1.exists)(json2, "dimension") ? void 0 : json2["dimension"],
+        "indexFullness": !(0, runtime_1.exists)(json2, "indexFullness") ? void 0 : json2["indexFullness"],
+        "totalVectorCount": !(0, runtime_1.exists)(json2, "totalVectorCount") ? void 0 : json2["totalVectorCount"],
+        "metric": !(0, runtime_1.exists)(json2, "metric") ? void 0 : json2["metric"],
+        "vectorType": !(0, runtime_1.exists)(json2, "vectorType") ? void 0 : json2["vectorType"],
+        "memoryFullness": !(0, runtime_1.exists)(json2, "memoryFullness") ? void 0 : json2["memoryFullness"],
+        "storageFullness": !(0, runtime_1.exists)(json2, "storageFullness") ? void 0 : json2["storageFullness"]
       };
     }
     function IndexDescriptionToJSON(value) {
@@ -18738,17 +18765,17 @@ var require_ListDocumentsRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListDocumentsRequestFromJSON(json) {
-      return ListDocumentsRequestFromJSONTyped(json, false);
+    function ListDocumentsRequestFromJSON(json2) {
+      return ListDocumentsRequestFromJSONTyped(json2, false);
     }
-    function ListDocumentsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListDocumentsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "prefix": !(0, runtime_1.exists)(json, "prefix") ? void 0 : json["prefix"],
-        "limit": !(0, runtime_1.exists)(json, "limit") ? void 0 : json["limit"],
-        "paginationToken": !(0, runtime_1.exists)(json, "pagination_token") ? void 0 : json["pagination_token"]
+        "prefix": !(0, runtime_1.exists)(json2, "prefix") ? void 0 : json2["prefix"],
+        "limit": !(0, runtime_1.exists)(json2, "limit") ? void 0 : json2["limit"],
+        "paginationToken": !(0, runtime_1.exists)(json2, "pagination_token") ? void 0 : json2["pagination_token"]
       };
     }
     function ListDocumentsRequestToJSON(value) {
@@ -18781,15 +18808,15 @@ var require_ListedDocumentRecord = __commonJS({
       isInstance = isInstance && "_id" in value;
       return isInstance;
     }
-    function ListedDocumentRecordFromJSON(json) {
-      return ListedDocumentRecordFromJSONTyped(json, false);
+    function ListedDocumentRecordFromJSON(json2) {
+      return ListedDocumentRecordFromJSONTyped(json2, false);
     }
-    function ListedDocumentRecordFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListedDocumentRecordFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "_id": json["_id"]
+        "_id": json2["_id"]
       };
     }
     function ListedDocumentRecordToJSON(value) {
@@ -18826,18 +18853,18 @@ var require_ListDocumentsResponse = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function ListDocumentsResponseFromJSON(json) {
-      return ListDocumentsResponseFromJSONTyped(json, false);
+    function ListDocumentsResponseFromJSON(json2) {
+      return ListDocumentsResponseFromJSONTyped(json2, false);
     }
-    function ListDocumentsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListDocumentsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "documents": json["documents"].map(ListedDocumentRecord_1.ListedDocumentRecordFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json["pagination"]),
-        "namespace": json["namespace"],
-        "usage": (0, DocumentListUsage_1.DocumentListUsageFromJSON)(json["usage"])
+        "documents": json2["documents"].map(ListedDocumentRecord_1.ListedDocumentRecordFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json2["pagination"]),
+        "namespace": json2["namespace"],
+        "usage": (0, DocumentListUsage_1.DocumentListUsageFromJSON)(json2["usage"])
       };
     }
     function ListDocumentsResponseToJSON(value) {
@@ -18873,16 +18900,16 @@ var require_ListImportsResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListImportsResponseFromJSON(json) {
-      return ListImportsResponseFromJSONTyped(json, false);
+    function ListImportsResponseFromJSON(json2) {
+      return ListImportsResponseFromJSONTyped(json2, false);
     }
-    function ListImportsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListImportsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": !(0, runtime_1.exists)(json, "data") ? void 0 : json["data"].map(ImportModel_1.ImportModelFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json["pagination"])
+        "data": !(0, runtime_1.exists)(json2, "data") ? void 0 : json2["data"].map(ImportModel_1.ImportModelFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json2["pagination"])
       };
     }
     function ListImportsResponseToJSON(value) {
@@ -18914,15 +18941,15 @@ var require_ListItem = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListItemFromJSON(json) {
-      return ListItemFromJSONTyped(json, false);
+    function ListItemFromJSON(json2) {
+      return ListItemFromJSONTyped(json2, false);
     }
-    function ListItemFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListItemFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"]
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"]
       };
     }
     function ListItemToJSON(value) {
@@ -18953,15 +18980,15 @@ var require_NamespaceDescriptionIndexedFields = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function NamespaceDescriptionIndexedFieldsFromJSON(json) {
-      return NamespaceDescriptionIndexedFieldsFromJSONTyped(json, false);
+    function NamespaceDescriptionIndexedFieldsFromJSON(json2) {
+      return NamespaceDescriptionIndexedFieldsFromJSONTyped(json2, false);
     }
-    function NamespaceDescriptionIndexedFieldsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function NamespaceDescriptionIndexedFieldsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "fields": !(0, runtime_1.exists)(json, "fields") ? void 0 : json["fields"]
+        "fields": !(0, runtime_1.exists)(json2, "fields") ? void 0 : json2["fields"]
       };
     }
     function NamespaceDescriptionIndexedFieldsToJSON(value) {
@@ -18994,19 +19021,19 @@ var require_NamespaceDescription = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function NamespaceDescriptionFromJSON(json) {
-      return NamespaceDescriptionFromJSONTyped(json, false);
+    function NamespaceDescriptionFromJSON(json2) {
+      return NamespaceDescriptionFromJSONTyped(json2, false);
     }
-    function NamespaceDescriptionFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function NamespaceDescriptionFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"],
-        "recordCount": !(0, runtime_1.exists)(json, "record_count") ? void 0 : json["record_count"],
-        "schema": !(0, runtime_1.exists)(json, "schema") ? void 0 : (0, CreateNamespaceRequestSchema_1.CreateNamespaceRequestSchemaFromJSON)(json["schema"]),
-        "indexedFields": !(0, runtime_1.exists)(json, "indexed_fields") ? void 0 : (0, NamespaceDescriptionIndexedFields_1.NamespaceDescriptionIndexedFieldsFromJSON)(json["indexed_fields"]),
-        "sizeBytes": !(0, runtime_1.exists)(json, "size_bytes") ? void 0 : json["size_bytes"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"],
+        "recordCount": !(0, runtime_1.exists)(json2, "record_count") ? void 0 : json2["record_count"],
+        "schema": !(0, runtime_1.exists)(json2, "schema") ? void 0 : (0, CreateNamespaceRequestSchema_1.CreateNamespaceRequestSchemaFromJSON)(json2["schema"]),
+        "indexedFields": !(0, runtime_1.exists)(json2, "indexed_fields") ? void 0 : (0, NamespaceDescriptionIndexedFields_1.NamespaceDescriptionIndexedFieldsFromJSON)(json2["indexed_fields"]),
+        "sizeBytes": !(0, runtime_1.exists)(json2, "size_bytes") ? void 0 : json2["size_bytes"]
       };
     }
     function NamespaceDescriptionToJSON(value) {
@@ -19043,17 +19070,17 @@ var require_ListNamespacesResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListNamespacesResponseFromJSON(json) {
-      return ListNamespacesResponseFromJSONTyped(json, false);
+    function ListNamespacesResponseFromJSON(json2) {
+      return ListNamespacesResponseFromJSONTyped(json2, false);
     }
-    function ListNamespacesResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListNamespacesResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "namespaces": !(0, runtime_1.exists)(json, "namespaces") ? void 0 : json["namespaces"].map(NamespaceDescription_1.NamespaceDescriptionFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json["pagination"]),
-        "totalCount": !(0, runtime_1.exists)(json, "total_count") ? void 0 : json["total_count"]
+        "namespaces": !(0, runtime_1.exists)(json2, "namespaces") ? void 0 : json2["namespaces"].map(NamespaceDescription_1.NamespaceDescriptionFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json2["pagination"]),
+        "totalCount": !(0, runtime_1.exists)(json2, "total_count") ? void 0 : json2["total_count"]
       };
     }
     function ListNamespacesResponseToJSON(value) {
@@ -19089,18 +19116,18 @@ var require_ListResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListResponseFromJSON(json) {
-      return ListResponseFromJSONTyped(json, false);
+    function ListResponseFromJSON(json2) {
+      return ListResponseFromJSONTyped(json2, false);
     }
-    function ListResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "vectors": !(0, runtime_1.exists)(json, "vectors") ? void 0 : json["vectors"].map(ListItem_1.ListItemFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json["pagination"]),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json["usage"])
+        "vectors": !(0, runtime_1.exists)(json2, "vectors") ? void 0 : json2["vectors"].map(ListItem_1.ListItemFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, Pagination_1.PaginationFromJSON)(json2["pagination"]),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json2["usage"])
       };
     }
     function ListResponseToJSON(value) {
@@ -19134,16 +19161,16 @@ var require_ProtobufAny = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ProtobufAnyFromJSON(json) {
-      return ProtobufAnyFromJSONTyped(json, false);
+    function ProtobufAnyFromJSON(json2) {
+      return ProtobufAnyFromJSONTyped(json2, false);
     }
-    function ProtobufAnyFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ProtobufAnyFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "typeUrl": !(0, runtime_1.exists)(json, "typeUrl") ? void 0 : json["typeUrl"],
-        "value": !(0, runtime_1.exists)(json, "value") ? void 0 : json["value"]
+        "typeUrl": !(0, runtime_1.exists)(json2, "typeUrl") ? void 0 : json2["typeUrl"],
+        "value": !(0, runtime_1.exists)(json2, "value") ? void 0 : json2["value"]
       };
     }
     function ProtobufAnyToJSON(value) {
@@ -19177,24 +19204,24 @@ var require_QueryRequest = __commonJS({
       isInstance = isInstance && "topK" in value;
       return isInstance;
     }
-    function QueryRequestFromJSON(json) {
-      return QueryRequestFromJSONTyped(json, false);
+    function QueryRequestFromJSON(json2) {
+      return QueryRequestFromJSONTyped(json2, false);
     }
-    function QueryRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function QueryRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "topK": json["topK"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "includeValues": !(0, runtime_1.exists)(json, "includeValues") ? void 0 : json["includeValues"],
-        "includeMetadata": !(0, runtime_1.exists)(json, "includeMetadata") ? void 0 : json["includeMetadata"],
-        "vector": !(0, runtime_1.exists)(json, "vector") ? void 0 : json["vector"],
-        "sparseVector": !(0, runtime_1.exists)(json, "sparseVector") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json["sparseVector"]),
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "scanFactor": !(0, runtime_1.exists)(json, "scanFactor") ? void 0 : json["scanFactor"],
-        "maxCandidates": !(0, runtime_1.exists)(json, "maxCandidates") ? void 0 : json["maxCandidates"]
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "topK": json2["topK"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "includeValues": !(0, runtime_1.exists)(json2, "includeValues") ? void 0 : json2["includeValues"],
+        "includeMetadata": !(0, runtime_1.exists)(json2, "includeMetadata") ? void 0 : json2["includeMetadata"],
+        "vector": !(0, runtime_1.exists)(json2, "vector") ? void 0 : json2["vector"],
+        "sparseVector": !(0, runtime_1.exists)(json2, "sparseVector") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json2["sparseVector"]),
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "scanFactor": !(0, runtime_1.exists)(json2, "scanFactor") ? void 0 : json2["scanFactor"],
+        "maxCandidates": !(0, runtime_1.exists)(json2, "maxCandidates") ? void 0 : json2["maxCandidates"]
       };
     }
     function QueryRequestToJSON(value) {
@@ -19236,19 +19263,19 @@ var require_ScoredVector = __commonJS({
       isInstance = isInstance && "id" in value;
       return isInstance;
     }
-    function ScoredVectorFromJSON(json) {
-      return ScoredVectorFromJSONTyped(json, false);
+    function ScoredVectorFromJSON(json2) {
+      return ScoredVectorFromJSONTyped(json2, false);
     }
-    function ScoredVectorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ScoredVectorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "score": !(0, runtime_1.exists)(json, "score") ? void 0 : json["score"],
-        "values": !(0, runtime_1.exists)(json, "values") ? void 0 : json["values"],
-        "sparseValues": !(0, runtime_1.exists)(json, "sparseValues") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json["sparseValues"]),
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : json["metadata"]
+        "id": json2["id"],
+        "score": !(0, runtime_1.exists)(json2, "score") ? void 0 : json2["score"],
+        "values": !(0, runtime_1.exists)(json2, "values") ? void 0 : json2["values"],
+        "sparseValues": !(0, runtime_1.exists)(json2, "sparseValues") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json2["sparseValues"]),
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : json2["metadata"]
       };
     }
     function ScoredVectorToJSON(value) {
@@ -19284,16 +19311,16 @@ var require_SingleQueryResults = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function SingleQueryResultsFromJSON(json) {
-      return SingleQueryResultsFromJSONTyped(json, false);
+    function SingleQueryResultsFromJSON(json2) {
+      return SingleQueryResultsFromJSONTyped(json2, false);
     }
-    function SingleQueryResultsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SingleQueryResultsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "matches": !(0, runtime_1.exists)(json, "matches") ? void 0 : json["matches"].map(ScoredVector_1.ScoredVectorFromJSON),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"]
+        "matches": !(0, runtime_1.exists)(json2, "matches") ? void 0 : json2["matches"].map(ScoredVector_1.ScoredVectorFromJSON),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"]
       };
     }
     function SingleQueryResultsToJSON(value) {
@@ -19328,18 +19355,18 @@ var require_QueryResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function QueryResponseFromJSON(json) {
-      return QueryResponseFromJSONTyped(json, false);
+    function QueryResponseFromJSON(json2) {
+      return QueryResponseFromJSONTyped(json2, false);
     }
-    function QueryResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function QueryResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "results": !(0, runtime_1.exists)(json, "results") ? void 0 : json["results"].map(SingleQueryResults_1.SingleQueryResultsFromJSON),
-        "matches": !(0, runtime_1.exists)(json, "matches") ? void 0 : json["matches"].map(ScoredVector_1.ScoredVectorFromJSON),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json["usage"])
+        "results": !(0, runtime_1.exists)(json2, "results") ? void 0 : json2["results"].map(SingleQueryResults_1.SingleQueryResultsFromJSON),
+        "matches": !(0, runtime_1.exists)(json2, "matches") ? void 0 : json2["matches"].map(ScoredVector_1.ScoredVectorFromJSON),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, Usage_1.UsageFromJSON)(json2["usage"])
       };
     }
     function QueryResponseToJSON(value) {
@@ -19374,17 +19401,17 @@ var require_RpcStatus = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function RpcStatusFromJSON(json) {
-      return RpcStatusFromJSONTyped(json, false);
+    function RpcStatusFromJSON(json2) {
+      return RpcStatusFromJSONTyped(json2, false);
     }
-    function RpcStatusFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RpcStatusFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": !(0, runtime_1.exists)(json, "code") ? void 0 : json["code"],
-        "message": !(0, runtime_1.exists)(json, "message") ? void 0 : json["message"],
-        "details": !(0, runtime_1.exists)(json, "details") ? void 0 : json["details"].map(ProtobufAny_1.ProtobufAnyFromJSON)
+        "code": !(0, runtime_1.exists)(json2, "code") ? void 0 : json2["code"],
+        "message": !(0, runtime_1.exists)(json2, "message") ? void 0 : json2["message"],
+        "details": !(0, runtime_1.exists)(json2, "details") ? void 0 : json2["details"].map(ProtobufAny_1.ProtobufAnyFromJSON)
       };
     }
     function RpcStatusToJSON(value) {
@@ -19420,18 +19447,18 @@ var require_SearchDocumentsRequest = __commonJS({
       isInstance = isInstance && "topK" in value;
       return isInstance;
     }
-    function SearchDocumentsRequestFromJSON(json) {
-      return SearchDocumentsRequestFromJSONTyped(json, false);
+    function SearchDocumentsRequestFromJSON(json2) {
+      return SearchDocumentsRequestFromJSONTyped(json2, false);
     }
-    function SearchDocumentsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchDocumentsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "scoreBy": json["score_by"].map(DocumentScoringMethod_1.DocumentScoringMethodFromJSON),
-        "topK": json["top_k"],
-        "includeFields": !(0, runtime_1.exists)(json, "include_fields") ? void 0 : json["include_fields"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"]
+        "scoreBy": json2["score_by"].map(DocumentScoringMethod_1.DocumentScoringMethodFromJSON),
+        "topK": json2["top_k"],
+        "includeFields": !(0, runtime_1.exists)(json2, "include_fields") ? void 0 : json2["include_fields"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"]
       };
     }
     function SearchDocumentsRequestToJSON(value) {
@@ -19469,17 +19496,17 @@ var require_SearchDocumentsResponse = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function SearchDocumentsResponseFromJSON(json) {
-      return SearchDocumentsResponseFromJSONTyped(json, false);
+    function SearchDocumentsResponseFromJSON(json2) {
+      return SearchDocumentsResponseFromJSONTyped(json2, false);
     }
-    function SearchDocumentsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchDocumentsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "matches": json["matches"].map(DocumentSearchMatch_1.DocumentSearchMatchFromJSON),
-        "namespace": json["namespace"],
-        "usage": (0, DocumentSearchUsage_1.DocumentSearchUsageFromJSON)(json["usage"])
+        "matches": json2["matches"].map(DocumentSearchMatch_1.DocumentSearchMatchFromJSON),
+        "namespace": json2["namespace"],
+        "usage": (0, DocumentSearchUsage_1.DocumentSearchUsageFromJSON)(json2["usage"])
       };
     }
     function SearchDocumentsResponseToJSON(value) {
@@ -19513,16 +19540,16 @@ var require_SearchMatchTerms = __commonJS({
       isInstance = isInstance && "terms" in value;
       return isInstance;
     }
-    function SearchMatchTermsFromJSON(json) {
-      return SearchMatchTermsFromJSONTyped(json, false);
+    function SearchMatchTermsFromJSON(json2) {
+      return SearchMatchTermsFromJSONTyped(json2, false);
     }
-    function SearchMatchTermsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchMatchTermsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "strategy": json["strategy"],
-        "terms": json["terms"]
+        "strategy": json2["strategy"],
+        "terms": json2["terms"]
       };
     }
     function SearchMatchTermsToJSON(value) {
@@ -19554,17 +19581,17 @@ var require_SearchRecordsVector = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function SearchRecordsVectorFromJSON(json) {
-      return SearchRecordsVectorFromJSONTyped(json, false);
+    function SearchRecordsVectorFromJSON(json2) {
+      return SearchRecordsVectorFromJSONTyped(json2, false);
     }
-    function SearchRecordsVectorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchRecordsVectorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "values": !(0, runtime_1.exists)(json, "values") ? void 0 : json["values"],
-        "sparseValues": !(0, runtime_1.exists)(json, "sparse_values") ? void 0 : json["sparse_values"],
-        "sparseIndices": !(0, runtime_1.exists)(json, "sparse_indices") ? void 0 : json["sparse_indices"]
+        "values": !(0, runtime_1.exists)(json2, "values") ? void 0 : json2["values"],
+        "sparseValues": !(0, runtime_1.exists)(json2, "sparse_values") ? void 0 : json2["sparse_values"],
+        "sparseIndices": !(0, runtime_1.exists)(json2, "sparse_indices") ? void 0 : json2["sparse_indices"]
       };
     }
     function SearchRecordsVectorToJSON(value) {
@@ -19600,20 +19627,20 @@ var require_SearchRecordsRequestQuery = __commonJS({
       isInstance = isInstance && "topK" in value;
       return isInstance;
     }
-    function SearchRecordsRequestQueryFromJSON(json) {
-      return SearchRecordsRequestQueryFromJSONTyped(json, false);
+    function SearchRecordsRequestQueryFromJSON(json2) {
+      return SearchRecordsRequestQueryFromJSONTyped(json2, false);
     }
-    function SearchRecordsRequestQueryFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchRecordsRequestQueryFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "topK": json["top_k"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "inputs": !(0, runtime_1.exists)(json, "inputs") ? void 0 : json["inputs"],
-        "vector": !(0, runtime_1.exists)(json, "vector") ? void 0 : (0, SearchRecordsVector_1.SearchRecordsVectorFromJSON)(json["vector"]),
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "matchTerms": !(0, runtime_1.exists)(json, "match_terms") ? void 0 : (0, SearchMatchTerms_1.SearchMatchTermsFromJSON)(json["match_terms"])
+        "topK": json2["top_k"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "inputs": !(0, runtime_1.exists)(json2, "inputs") ? void 0 : json2["inputs"],
+        "vector": !(0, runtime_1.exists)(json2, "vector") ? void 0 : (0, SearchRecordsVector_1.SearchRecordsVectorFromJSON)(json2["vector"]),
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "matchTerms": !(0, runtime_1.exists)(json2, "match_terms") ? void 0 : (0, SearchMatchTerms_1.SearchMatchTermsFromJSON)(json2["match_terms"])
       };
     }
     function SearchRecordsRequestQueryToJSON(value) {
@@ -19651,19 +19678,19 @@ var require_SearchRecordsRequestRerank = __commonJS({
       isInstance = isInstance && "rankFields" in value;
       return isInstance;
     }
-    function SearchRecordsRequestRerankFromJSON(json) {
-      return SearchRecordsRequestRerankFromJSONTyped(json, false);
+    function SearchRecordsRequestRerankFromJSON(json2) {
+      return SearchRecordsRequestRerankFromJSONTyped(json2, false);
     }
-    function SearchRecordsRequestRerankFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchRecordsRequestRerankFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "rankFields": json["rank_fields"],
-        "topN": !(0, runtime_1.exists)(json, "top_n") ? void 0 : json["top_n"],
-        "parameters": !(0, runtime_1.exists)(json, "parameters") ? void 0 : json["parameters"],
-        "query": !(0, runtime_1.exists)(json, "query") ? void 0 : json["query"]
+        "model": json2["model"],
+        "rankFields": json2["rank_fields"],
+        "topN": !(0, runtime_1.exists)(json2, "top_n") ? void 0 : json2["top_n"],
+        "parameters": !(0, runtime_1.exists)(json2, "parameters") ? void 0 : json2["parameters"],
+        "query": !(0, runtime_1.exists)(json2, "query") ? void 0 : json2["query"]
       };
     }
     function SearchRecordsRequestRerankToJSON(value) {
@@ -19701,17 +19728,17 @@ var require_SearchRecordsRequest = __commonJS({
       isInstance = isInstance && "query" in value;
       return isInstance;
     }
-    function SearchRecordsRequestFromJSON(json) {
-      return SearchRecordsRequestFromJSONTyped(json, false);
+    function SearchRecordsRequestFromJSON(json2) {
+      return SearchRecordsRequestFromJSONTyped(json2, false);
     }
-    function SearchRecordsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchRecordsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "query": (0, SearchRecordsRequestQuery_1.SearchRecordsRequestQueryFromJSON)(json["query"]),
-        "fields": !(0, runtime_1.exists)(json, "fields") ? void 0 : json["fields"],
-        "rerank": !(0, runtime_1.exists)(json, "rerank") ? void 0 : (0, SearchRecordsRequestRerank_1.SearchRecordsRequestRerankFromJSON)(json["rerank"])
+        "query": (0, SearchRecordsRequestQuery_1.SearchRecordsRequestQueryFromJSON)(json2["query"]),
+        "fields": !(0, runtime_1.exists)(json2, "fields") ? void 0 : json2["fields"],
+        "rerank": !(0, runtime_1.exists)(json2, "rerank") ? void 0 : (0, SearchRecordsRequestRerank_1.SearchRecordsRequestRerankFromJSON)(json2["rerank"])
       };
     }
     function SearchRecordsRequestToJSON(value) {
@@ -19745,15 +19772,15 @@ var require_SearchRecordsResponseResult = __commonJS({
       isInstance = isInstance && "hits" in value;
       return isInstance;
     }
-    function SearchRecordsResponseResultFromJSON(json) {
-      return SearchRecordsResponseResultFromJSONTyped(json, false);
+    function SearchRecordsResponseResultFromJSON(json2) {
+      return SearchRecordsResponseResultFromJSONTyped(json2, false);
     }
-    function SearchRecordsResponseResultFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchRecordsResponseResultFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "hits": json["hits"].map(Hit_1.HitFromJSON)
+        "hits": json2["hits"].map(Hit_1.HitFromJSON)
       };
     }
     function SearchRecordsResponseResultToJSON(value) {
@@ -19785,17 +19812,17 @@ var require_SearchUsage = __commonJS({
       isInstance = isInstance && "readUnits" in value;
       return isInstance;
     }
-    function SearchUsageFromJSON(json) {
-      return SearchUsageFromJSONTyped(json, false);
+    function SearchUsageFromJSON(json2) {
+      return SearchUsageFromJSONTyped(json2, false);
     }
-    function SearchUsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchUsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "readUnits": json["read_units"],
-        "embedTotalTokens": !(0, runtime_1.exists)(json, "embed_total_tokens") ? void 0 : json["embed_total_tokens"],
-        "rerankUnits": !(0, runtime_1.exists)(json, "rerank_units") ? void 0 : json["rerank_units"]
+        "readUnits": json2["read_units"],
+        "embedTotalTokens": !(0, runtime_1.exists)(json2, "embed_total_tokens") ? void 0 : json2["embed_total_tokens"],
+        "rerankUnits": !(0, runtime_1.exists)(json2, "rerank_units") ? void 0 : json2["rerank_units"]
       };
     }
     function SearchUsageToJSON(value) {
@@ -19831,16 +19858,16 @@ var require_SearchRecordsResponse = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function SearchRecordsResponseFromJSON(json) {
-      return SearchRecordsResponseFromJSONTyped(json, false);
+    function SearchRecordsResponseFromJSON(json2) {
+      return SearchRecordsResponseFromJSONTyped(json2, false);
     }
-    function SearchRecordsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchRecordsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "result": (0, SearchRecordsResponseResult_1.SearchRecordsResponseResultFromJSON)(json["result"]),
-        "usage": (0, SearchUsage_1.SearchUsageFromJSON)(json["usage"])
+        "result": (0, SearchRecordsResponseResult_1.SearchRecordsResponseResultFromJSON)(json2["result"]),
+        "usage": (0, SearchUsage_1.SearchUsageFromJSON)(json2["usage"])
       };
     }
     function SearchRecordsResponseToJSON(value) {
@@ -19874,17 +19901,17 @@ var require_StartImportRequest = __commonJS({
       isInstance = isInstance && "uri" in value;
       return isInstance;
     }
-    function StartImportRequestFromJSON(json) {
-      return StartImportRequestFromJSONTyped(json, false);
+    function StartImportRequestFromJSON(json2) {
+      return StartImportRequestFromJSONTyped(json2, false);
     }
-    function StartImportRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StartImportRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "integrationId": !(0, runtime_1.exists)(json, "integrationId") ? void 0 : json["integrationId"],
-        "uri": json["uri"],
-        "errorMode": !(0, runtime_1.exists)(json, "errorMode") ? void 0 : (0, ImportErrorMode_1.ImportErrorModeFromJSON)(json["errorMode"])
+        "integrationId": !(0, runtime_1.exists)(json2, "integrationId") ? void 0 : json2["integrationId"],
+        "uri": json2["uri"],
+        "errorMode": !(0, runtime_1.exists)(json2, "errorMode") ? void 0 : (0, ImportErrorMode_1.ImportErrorModeFromJSON)(json2["errorMode"])
       };
     }
     function StartImportRequestToJSON(value) {
@@ -19917,15 +19944,15 @@ var require_StartImportResponse = __commonJS({
       isInstance = isInstance && "id" in value;
       return isInstance;
     }
-    function StartImportResponseFromJSON(json) {
-      return StartImportResponseFromJSONTyped(json, false);
+    function StartImportResponseFromJSON(json2) {
+      return StartImportResponseFromJSONTyped(json2, false);
     }
-    function StartImportResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StartImportResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"]
+        "id": json2["id"]
       };
     }
     function StartImportResponseToJSON(value) {
@@ -19957,17 +19984,17 @@ var require_UpdateDocumentRecord = __commonJS({
       isInstance = isInstance && "_id" in value;
       return isInstance;
     }
-    function UpdateDocumentRecordFromJSON(json) {
-      return UpdateDocumentRecordFromJSONTyped(json, false);
+    function UpdateDocumentRecordFromJSON(json2) {
+      return UpdateDocumentRecordFromJSONTyped(json2, false);
     }
-    function UpdateDocumentRecordFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateDocumentRecordFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        ...json,
-        "_id": json["_id"],
-        "_remove_fields": !(0, runtime_1.exists)(json, "_remove_fields") ? void 0 : json["_remove_fields"]
+        ...json2,
+        "_id": json2["_id"],
+        "_remove_fields": !(0, runtime_1.exists)(json2, "_remove_fields") ? void 0 : json2["_remove_fields"]
       };
     }
     function UpdateDocumentRecordToJSON(value) {
@@ -20002,18 +20029,18 @@ var require_UpdateDocumentsRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateDocumentsRequestFromJSON(json) {
-      return UpdateDocumentsRequestFromJSONTyped(json, false);
+    function UpdateDocumentsRequestFromJSON(json2) {
+      return UpdateDocumentsRequestFromJSONTyped(json2, false);
     }
-    function UpdateDocumentsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateDocumentsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "documents": !(0, runtime_1.exists)(json, "documents") ? void 0 : json["documents"].map(UpdateDocumentRecord_1.UpdateDocumentRecordFromJSON),
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "setFields": !(0, runtime_1.exists)(json, "set_fields") ? void 0 : (0, runtime_1.mapValues)(json["set_fields"], DocumentFieldValue_1.DocumentFieldValueFromJSON),
-        "removeFields": !(0, runtime_1.exists)(json, "remove_fields") ? void 0 : json["remove_fields"]
+        "documents": !(0, runtime_1.exists)(json2, "documents") ? void 0 : json2["documents"].map(UpdateDocumentRecord_1.UpdateDocumentRecordFromJSON),
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "setFields": !(0, runtime_1.exists)(json2, "set_fields") ? void 0 : (0, runtime_1.mapValues)(json2["set_fields"], DocumentFieldValue_1.DocumentFieldValueFromJSON),
+        "removeFields": !(0, runtime_1.exists)(json2, "remove_fields") ? void 0 : json2["remove_fields"]
       };
     }
     function UpdateDocumentsRequestToJSON(value) {
@@ -20047,15 +20074,15 @@ var require_UpdateDocumentsResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateDocumentsResponseFromJSON(json) {
-      return UpdateDocumentsResponseFromJSONTyped(json, false);
+    function UpdateDocumentsResponseFromJSON(json2) {
+      return UpdateDocumentsResponseFromJSONTyped(json2, false);
     }
-    function UpdateDocumentsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateDocumentsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "matchedRecords": !(0, runtime_1.exists)(json, "matched_records") ? void 0 : json["matched_records"]
+        "matchedRecords": !(0, runtime_1.exists)(json2, "matched_records") ? void 0 : json2["matched_records"]
       };
     }
     function UpdateDocumentsResponseToJSON(value) {
@@ -20088,21 +20115,21 @@ var require_UpdateRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateRequestFromJSON(json) {
-      return UpdateRequestFromJSONTyped(json, false);
+    function UpdateRequestFromJSON(json2) {
+      return UpdateRequestFromJSONTyped(json2, false);
     }
-    function UpdateRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "values": !(0, runtime_1.exists)(json, "values") ? void 0 : json["values"],
-        "sparseValues": !(0, runtime_1.exists)(json, "sparseValues") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json["sparseValues"]),
-        "setMetadata": !(0, runtime_1.exists)(json, "setMetadata") ? void 0 : (0, runtime_1.mapValues)(json["setMetadata"], MetadataValue_1.MetadataValueFromJSON),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "dryRun": !(0, runtime_1.exists)(json, "dryRun") ? void 0 : json["dryRun"]
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "values": !(0, runtime_1.exists)(json2, "values") ? void 0 : json2["values"],
+        "sparseValues": !(0, runtime_1.exists)(json2, "sparseValues") ? void 0 : (0, SparseValues_1.SparseValuesFromJSON)(json2["sparseValues"]),
+        "setMetadata": !(0, runtime_1.exists)(json2, "setMetadata") ? void 0 : (0, runtime_1.mapValues)(json2["setMetadata"], MetadataValue_1.MetadataValueFromJSON),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "dryRun": !(0, runtime_1.exists)(json2, "dryRun") ? void 0 : json2["dryRun"]
       };
     }
     function UpdateRequestToJSON(value) {
@@ -20139,15 +20166,15 @@ var require_UpdateResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateResponseFromJSON(json) {
-      return UpdateResponseFromJSONTyped(json, false);
+    function UpdateResponseFromJSON(json2) {
+      return UpdateResponseFromJSONTyped(json2, false);
     }
-    function UpdateResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "matchedRecords": !(0, runtime_1.exists)(json, "matchedRecords") ? void 0 : json["matchedRecords"]
+        "matchedRecords": !(0, runtime_1.exists)(json2, "matchedRecords") ? void 0 : json2["matchedRecords"]
       };
     }
     function UpdateResponseToJSON(value) {
@@ -20179,15 +20206,15 @@ var require_UpsertDocumentsRequest = __commonJS({
       isInstance = isInstance && "documents" in value;
       return isInstance;
     }
-    function UpsertDocumentsRequestFromJSON(json) {
-      return UpsertDocumentsRequestFromJSONTyped(json, false);
+    function UpsertDocumentsRequestFromJSON(json2) {
+      return UpsertDocumentsRequestFromJSONTyped(json2, false);
     }
-    function UpsertDocumentsRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpsertDocumentsRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "documents": json["documents"].map(DocumentRecord_1.DocumentRecordFromJSON)
+        "documents": json2["documents"].map(DocumentRecord_1.DocumentRecordFromJSON)
       };
     }
     function UpsertDocumentsRequestToJSON(value) {
@@ -20218,15 +20245,15 @@ var require_UpsertDocumentsResponse = __commonJS({
       isInstance = isInstance && "upsertedCount" in value;
       return isInstance;
     }
-    function UpsertDocumentsResponseFromJSON(json) {
-      return UpsertDocumentsResponseFromJSONTyped(json, false);
+    function UpsertDocumentsResponseFromJSON(json2) {
+      return UpsertDocumentsResponseFromJSONTyped(json2, false);
     }
-    function UpsertDocumentsResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpsertDocumentsResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "upsertedCount": json["upserted_count"]
+        "upsertedCount": json2["upserted_count"]
       };
     }
     function UpsertDocumentsResponseToJSON(value) {
@@ -20257,15 +20284,15 @@ var require_UpsertRecord = __commonJS({
       isInstance = isInstance && "_id" in value;
       return isInstance;
     }
-    function UpsertRecordFromJSON(json) {
-      return UpsertRecordFromJSONTyped(json, false);
+    function UpsertRecordFromJSON(json2) {
+      return UpsertRecordFromJSONTyped(json2, false);
     }
-    function UpsertRecordFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpsertRecordFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "_id": json["_id"]
+        "_id": json2["_id"]
       };
     }
     function UpsertRecordToJSON(value) {
@@ -20298,16 +20325,16 @@ var require_UpsertRequest = __commonJS({
       isInstance = isInstance && "vectors" in value;
       return isInstance;
     }
-    function UpsertRequestFromJSON(json) {
-      return UpsertRequestFromJSONTyped(json, false);
+    function UpsertRequestFromJSON(json2) {
+      return UpsertRequestFromJSONTyped(json2, false);
     }
-    function UpsertRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpsertRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "vectors": json["vectors"].map(Vector_1.VectorFromJSON),
-        "namespace": !(0, runtime_1.exists)(json, "namespace") ? void 0 : json["namespace"]
+        "vectors": json2["vectors"].map(Vector_1.VectorFromJSON),
+        "namespace": !(0, runtime_1.exists)(json2, "namespace") ? void 0 : json2["namespace"]
       };
     }
     function UpsertRequestToJSON(value) {
@@ -20339,15 +20366,15 @@ var require_UpsertResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpsertResponseFromJSON(json) {
-      return UpsertResponseFromJSONTyped(json, false);
+    function UpsertResponseFromJSON(json2) {
+      return UpsertResponseFromJSONTyped(json2, false);
     }
-    function UpsertResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpsertResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "upsertedCount": !(0, runtime_1.exists)(json, "upsertedCount") ? void 0 : json["upsertedCount"]
+        "upsertedCount": !(0, runtime_1.exists)(json2, "upsertedCount") ? void 0 : json2["upsertedCount"]
       };
     }
     function UpsertResponseToJSON(value) {
@@ -24126,8 +24153,8 @@ var require_runtime5 = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -24222,16 +24249,16 @@ var require_DenseEmbedding = __commonJS({
       isInstance = isInstance && "vectorType" in value;
       return isInstance;
     }
-    function DenseEmbeddingFromJSON(json) {
-      return DenseEmbeddingFromJSONTyped(json, false);
+    function DenseEmbeddingFromJSON(json2) {
+      return DenseEmbeddingFromJSONTyped(json2, false);
     }
-    function DenseEmbeddingFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DenseEmbeddingFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "values": json["values"],
-        "vectorType": json["vector_type"]
+        "values": json2["values"],
+        "vectorType": json2["vector_type"]
       };
     }
     function DenseEmbeddingToJSON(value) {
@@ -24263,15 +24290,15 @@ var require_EmbedRequestInputsInner = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function EmbedRequestInputsInnerFromJSON(json) {
-      return EmbedRequestInputsInnerFromJSONTyped(json, false);
+    function EmbedRequestInputsInnerFromJSON(json2) {
+      return EmbedRequestInputsInnerFromJSONTyped(json2, false);
     }
-    function EmbedRequestInputsInnerFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function EmbedRequestInputsInnerFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "text": !(0, runtime_1.exists)(json, "text") ? void 0 : json["text"]
+        "text": !(0, runtime_1.exists)(json2, "text") ? void 0 : json2["text"]
       };
     }
     function EmbedRequestInputsInnerToJSON(value) {
@@ -24305,17 +24332,17 @@ var require_EmbedRequest = __commonJS({
       isInstance = isInstance && "inputs" in value;
       return isInstance;
     }
-    function EmbedRequestFromJSON(json) {
-      return EmbedRequestFromJSONTyped(json, false);
+    function EmbedRequestFromJSON(json2) {
+      return EmbedRequestFromJSONTyped(json2, false);
     }
-    function EmbedRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function EmbedRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "parameters": !(0, runtime_1.exists)(json, "parameters") ? void 0 : json["parameters"],
-        "inputs": json["inputs"].map(EmbedRequestInputsInner_1.EmbedRequestInputsInnerFromJSON)
+        "model": json2["model"],
+        "parameters": !(0, runtime_1.exists)(json2, "parameters") ? void 0 : json2["parameters"],
+        "inputs": json2["inputs"].map(EmbedRequestInputsInner_1.EmbedRequestInputsInnerFromJSON)
       };
     }
     function EmbedRequestToJSON(value) {
@@ -24351,18 +24378,18 @@ var require_SparseEmbedding = __commonJS({
       isInstance = isInstance && "vectorType" in value;
       return isInstance;
     }
-    function SparseEmbeddingFromJSON(json) {
-      return SparseEmbeddingFromJSONTyped(json, false);
+    function SparseEmbeddingFromJSON(json2) {
+      return SparseEmbeddingFromJSONTyped(json2, false);
     }
-    function SparseEmbeddingFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SparseEmbeddingFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "sparseValues": json["sparse_values"],
-        "sparseIndices": json["sparse_indices"],
-        "sparseTokens": !(0, runtime_1.exists)(json, "sparse_tokens") ? void 0 : json["sparse_tokens"],
-        "vectorType": json["vector_type"]
+        "sparseValues": json2["sparse_values"],
+        "sparseIndices": json2["sparse_indices"],
+        "sparseTokens": !(0, runtime_1.exists)(json2, "sparse_tokens") ? void 0 : json2["sparse_tokens"],
+        "vectorType": json2["vector_type"]
       };
     }
     function SparseEmbeddingToJSON(value) {
@@ -24392,20 +24419,20 @@ var require_Embedding = __commonJS({
     exports.EmbeddingToJSON = EmbeddingToJSON;
     var DenseEmbedding_1 = require_DenseEmbedding();
     var SparseEmbedding_1 = require_SparseEmbedding();
-    function EmbeddingFromJSON(json) {
-      return EmbeddingFromJSONTyped(json, false);
+    function EmbeddingFromJSON(json2) {
+      return EmbeddingFromJSONTyped(json2, false);
     }
-    function EmbeddingFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function EmbeddingFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["vector_type"]) {
+      switch (json2["vector_type"]) {
         case "dense":
-          return { ...(0, DenseEmbedding_1.DenseEmbeddingFromJSONTyped)(json, true), vectorType: "dense" };
+          return { ...(0, DenseEmbedding_1.DenseEmbeddingFromJSONTyped)(json2, true), vectorType: "dense" };
         case "sparse":
-          return { ...(0, SparseEmbedding_1.SparseEmbeddingFromJSONTyped)(json, true), vectorType: "sparse" };
+          return { ...(0, SparseEmbedding_1.SparseEmbeddingFromJSONTyped)(json2, true), vectorType: "sparse" };
         default:
-          throw new Error(`No variant of Embedding exists with 'vectorType=${json["vectorType"]}'`);
+          throw new Error(`No variant of Embedding exists with 'vectorType=${json2["vectorType"]}'`);
       }
     }
     function EmbeddingToJSON(value) {
@@ -24441,15 +24468,15 @@ var require_EmbeddingsListUsage = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function EmbeddingsListUsageFromJSON(json) {
-      return EmbeddingsListUsageFromJSONTyped(json, false);
+    function EmbeddingsListUsageFromJSON(json2) {
+      return EmbeddingsListUsageFromJSONTyped(json2, false);
     }
-    function EmbeddingsListUsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function EmbeddingsListUsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "totalTokens": !(0, runtime_1.exists)(json, "total_tokens") ? void 0 : json["total_tokens"]
+        "totalTokens": !(0, runtime_1.exists)(json2, "total_tokens") ? void 0 : json2["total_tokens"]
       };
     }
     function EmbeddingsListUsageToJSON(value) {
@@ -24485,18 +24512,18 @@ var require_EmbeddingsList = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function EmbeddingsListFromJSON(json) {
-      return EmbeddingsListFromJSONTyped(json, false);
+    function EmbeddingsListFromJSON(json2) {
+      return EmbeddingsListFromJSONTyped(json2, false);
     }
-    function EmbeddingsListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function EmbeddingsListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "vectorType": json["vector_type"],
-        "data": json["data"].map(Embedding_1.EmbeddingFromJSON),
-        "usage": (0, EmbeddingsListUsage_1.EmbeddingsListUsageFromJSON)(json["usage"])
+        "model": json2["model"],
+        "vectorType": json2["vector_type"],
+        "data": json2["data"].map(Embedding_1.EmbeddingFromJSON),
+        "usage": (0, EmbeddingsListUsage_1.EmbeddingsListUsageFromJSON)(json2["usage"])
       };
     }
     function EmbeddingsListToJSON(value) {
@@ -24532,17 +24559,17 @@ var require_ErrorResponseError4 = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function ErrorResponseErrorFromJSON(json) {
-      return ErrorResponseErrorFromJSONTyped(json, false);
+    function ErrorResponseErrorFromJSON(json2) {
+      return ErrorResponseErrorFromJSONTyped(json2, false);
     }
-    function ErrorResponseErrorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseErrorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": json["code"],
-        "message": json["message"],
-        "details": !(0, runtime_1.exists)(json, "details") ? void 0 : json["details"]
+        "code": json2["code"],
+        "message": json2["message"],
+        "details": !(0, runtime_1.exists)(json2, "details") ? void 0 : json2["details"]
       };
     }
     function ErrorResponseErrorToJSON(value) {
@@ -24577,16 +24604,16 @@ var require_ErrorResponse4 = __commonJS({
       isInstance = isInstance && "error" in value;
       return isInstance;
     }
-    function ErrorResponseFromJSON(json) {
-      return ErrorResponseFromJSONTyped(json, false);
+    function ErrorResponseFromJSON(json2) {
+      return ErrorResponseFromJSONTyped(json2, false);
     }
-    function ErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "status": json["status"],
-        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json["error"])
+        "status": json2["status"],
+        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json2["error"])
       };
     }
     function ErrorResponseToJSON(value) {
@@ -24617,11 +24644,11 @@ var require_ModelInfoSupportedParameterAllowedValuesInner = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ModelInfoSupportedParameterAllowedValuesInnerFromJSON(json) {
-      return ModelInfoSupportedParameterAllowedValuesInnerFromJSONTyped(json, false);
+    function ModelInfoSupportedParameterAllowedValuesInnerFromJSON(json2) {
+      return ModelInfoSupportedParameterAllowedValuesInnerFromJSONTyped(json2, false);
     }
-    function ModelInfoSupportedParameterAllowedValuesInnerFromJSONTyped(json, ignoreDiscriminator) {
-      return json;
+    function ModelInfoSupportedParameterAllowedValuesInnerFromJSONTyped(json2, ignoreDiscriminator) {
+      return json2;
     }
     function ModelInfoSupportedParameterAllowedValuesInnerToJSON(value) {
       return value;
@@ -24642,11 +24669,11 @@ var require_ModelInfoSupportedParameterDefault = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ModelInfoSupportedParameterDefaultFromJSON(json) {
-      return ModelInfoSupportedParameterDefaultFromJSONTyped(json, false);
+    function ModelInfoSupportedParameterDefaultFromJSON(json2) {
+      return ModelInfoSupportedParameterDefaultFromJSONTyped(json2, false);
     }
-    function ModelInfoSupportedParameterDefaultFromJSONTyped(json, ignoreDiscriminator) {
-      return json;
+    function ModelInfoSupportedParameterDefaultFromJSONTyped(json2, ignoreDiscriminator) {
+      return json2;
     }
     function ModelInfoSupportedParameterDefaultToJSON(value) {
       return value;
@@ -24674,22 +24701,22 @@ var require_ModelInfoSupportedParameter = __commonJS({
       isInstance = isInstance && "required" in value;
       return isInstance;
     }
-    function ModelInfoSupportedParameterFromJSON(json) {
-      return ModelInfoSupportedParameterFromJSONTyped(json, false);
+    function ModelInfoSupportedParameterFromJSON(json2) {
+      return ModelInfoSupportedParameterFromJSONTyped(json2, false);
     }
-    function ModelInfoSupportedParameterFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ModelInfoSupportedParameterFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "parameter": json["parameter"],
-        "type": json["type"],
-        "valueType": json["value_type"],
-        "required": json["required"],
-        "allowedValues": !(0, runtime_1.exists)(json, "allowed_values") ? void 0 : json["allowed_values"].map(ModelInfoSupportedParameterAllowedValuesInner_1.ModelInfoSupportedParameterAllowedValuesInnerFromJSON),
-        "min": !(0, runtime_1.exists)(json, "min") ? void 0 : json["min"],
-        "max": !(0, runtime_1.exists)(json, "max") ? void 0 : json["max"],
-        "_default": !(0, runtime_1.exists)(json, "default") ? void 0 : (0, ModelInfoSupportedParameterDefault_1.ModelInfoSupportedParameterDefaultFromJSON)(json["default"])
+        "parameter": json2["parameter"],
+        "type": json2["type"],
+        "valueType": json2["value_type"],
+        "required": json2["required"],
+        "allowedValues": !(0, runtime_1.exists)(json2, "allowed_values") ? void 0 : json2["allowed_values"].map(ModelInfoSupportedParameterAllowedValuesInner_1.ModelInfoSupportedParameterAllowedValuesInnerFromJSON),
+        "min": !(0, runtime_1.exists)(json2, "min") ? void 0 : json2["min"],
+        "max": !(0, runtime_1.exists)(json2, "max") ? void 0 : json2["max"],
+        "_default": !(0, runtime_1.exists)(json2, "default") ? void 0 : (0, ModelInfoSupportedParameterDefault_1.ModelInfoSupportedParameterDefaultFromJSON)(json2["default"])
       };
     }
     function ModelInfoSupportedParameterToJSON(value) {
@@ -24732,26 +24759,26 @@ var require_ModelInfo = __commonJS({
       isInstance = isInstance && "supportedParameters" in value;
       return isInstance;
     }
-    function ModelInfoFromJSON(json) {
-      return ModelInfoFromJSONTyped(json, false);
+    function ModelInfoFromJSON(json2) {
+      return ModelInfoFromJSONTyped(json2, false);
     }
-    function ModelInfoFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ModelInfoFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "shortDescription": json["short_description"],
-        "type": json["type"],
-        "vectorType": !(0, runtime_1.exists)(json, "vector_type") ? void 0 : json["vector_type"],
-        "defaultDimension": !(0, runtime_1.exists)(json, "default_dimension") ? void 0 : json["default_dimension"],
-        "modality": !(0, runtime_1.exists)(json, "modality") ? void 0 : json["modality"],
-        "maxSequenceLength": !(0, runtime_1.exists)(json, "max_sequence_length") ? void 0 : json["max_sequence_length"],
-        "maxBatchSize": !(0, runtime_1.exists)(json, "max_batch_size") ? void 0 : json["max_batch_size"],
-        "providerName": !(0, runtime_1.exists)(json, "provider_name") ? void 0 : json["provider_name"],
-        "supportedDimensions": !(0, runtime_1.exists)(json, "supported_dimensions") ? void 0 : json["supported_dimensions"],
-        "supportedMetrics": !(0, runtime_1.exists)(json, "supported_metrics") ? void 0 : json["supported_metrics"],
-        "supportedParameters": json["supported_parameters"].map(ModelInfoSupportedParameter_1.ModelInfoSupportedParameterFromJSON)
+        "model": json2["model"],
+        "shortDescription": json2["short_description"],
+        "type": json2["type"],
+        "vectorType": !(0, runtime_1.exists)(json2, "vector_type") ? void 0 : json2["vector_type"],
+        "defaultDimension": !(0, runtime_1.exists)(json2, "default_dimension") ? void 0 : json2["default_dimension"],
+        "modality": !(0, runtime_1.exists)(json2, "modality") ? void 0 : json2["modality"],
+        "maxSequenceLength": !(0, runtime_1.exists)(json2, "max_sequence_length") ? void 0 : json2["max_sequence_length"],
+        "maxBatchSize": !(0, runtime_1.exists)(json2, "max_batch_size") ? void 0 : json2["max_batch_size"],
+        "providerName": !(0, runtime_1.exists)(json2, "provider_name") ? void 0 : json2["provider_name"],
+        "supportedDimensions": !(0, runtime_1.exists)(json2, "supported_dimensions") ? void 0 : json2["supported_dimensions"],
+        "supportedMetrics": !(0, runtime_1.exists)(json2, "supported_metrics") ? void 0 : json2["supported_metrics"],
+        "supportedParameters": json2["supported_parameters"].map(ModelInfoSupportedParameter_1.ModelInfoSupportedParameterFromJSON)
       };
     }
     function ModelInfoToJSON(value) {
@@ -24794,15 +24821,15 @@ var require_ModelInfoList = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ModelInfoListFromJSON(json) {
-      return ModelInfoListFromJSONTyped(json, false);
+    function ModelInfoListFromJSON(json2) {
+      return ModelInfoListFromJSONTyped(json2, false);
     }
-    function ModelInfoListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ModelInfoListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "models": !(0, runtime_1.exists)(json, "models") ? void 0 : json["models"].map(ModelInfo_1.ModelInfoFromJSON)
+        "models": !(0, runtime_1.exists)(json2, "models") ? void 0 : json2["models"].map(ModelInfo_1.ModelInfoFromJSON)
       };
     }
     function ModelInfoListToJSON(value) {
@@ -24835,17 +24862,17 @@ var require_RankedDocument = __commonJS({
       isInstance = isInstance && "score" in value;
       return isInstance;
     }
-    function RankedDocumentFromJSON(json) {
-      return RankedDocumentFromJSONTyped(json, false);
+    function RankedDocumentFromJSON(json2) {
+      return RankedDocumentFromJSONTyped(json2, false);
     }
-    function RankedDocumentFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RankedDocumentFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "index": json["index"],
-        "score": json["score"],
-        "document": !(0, runtime_1.exists)(json, "document") ? void 0 : json["document"]
+        "index": json2["index"],
+        "score": json2["score"],
+        "document": !(0, runtime_1.exists)(json2, "document") ? void 0 : json2["document"]
       };
     }
     function RankedDocumentToJSON(value) {
@@ -24881,21 +24908,21 @@ var require_RerankRequest = __commonJS({
       isInstance = isInstance && "documents" in value;
       return isInstance;
     }
-    function RerankRequestFromJSON(json) {
-      return RerankRequestFromJSONTyped(json, false);
+    function RerankRequestFromJSON(json2) {
+      return RerankRequestFromJSONTyped(json2, false);
     }
-    function RerankRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RerankRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "query": json["query"],
-        "topN": !(0, runtime_1.exists)(json, "top_n") ? void 0 : json["top_n"],
-        "returnDocuments": !(0, runtime_1.exists)(json, "return_documents") ? void 0 : json["return_documents"],
-        "rankFields": !(0, runtime_1.exists)(json, "rank_fields") ? void 0 : json["rank_fields"],
-        "documents": json["documents"],
-        "parameters": !(0, runtime_1.exists)(json, "parameters") ? void 0 : json["parameters"]
+        "model": json2["model"],
+        "query": json2["query"],
+        "topN": !(0, runtime_1.exists)(json2, "top_n") ? void 0 : json2["top_n"],
+        "returnDocuments": !(0, runtime_1.exists)(json2, "return_documents") ? void 0 : json2["return_documents"],
+        "rankFields": !(0, runtime_1.exists)(json2, "rank_fields") ? void 0 : json2["rank_fields"],
+        "documents": json2["documents"],
+        "parameters": !(0, runtime_1.exists)(json2, "parameters") ? void 0 : json2["parameters"]
       };
     }
     function RerankRequestToJSON(value) {
@@ -24932,15 +24959,15 @@ var require_RerankResultUsage = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function RerankResultUsageFromJSON(json) {
-      return RerankResultUsageFromJSONTyped(json, false);
+    function RerankResultUsageFromJSON(json2) {
+      return RerankResultUsageFromJSONTyped(json2, false);
     }
-    function RerankResultUsageFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RerankResultUsageFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "rerankUnits": !(0, runtime_1.exists)(json, "rerank_units") ? void 0 : json["rerank_units"]
+        "rerankUnits": !(0, runtime_1.exists)(json2, "rerank_units") ? void 0 : json2["rerank_units"]
       };
     }
     function RerankResultUsageToJSON(value) {
@@ -24975,17 +25002,17 @@ var require_RerankResult = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function RerankResultFromJSON(json) {
-      return RerankResultFromJSONTyped(json, false);
+    function RerankResultFromJSON(json2) {
+      return RerankResultFromJSONTyped(json2, false);
     }
-    function RerankResultFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RerankResultFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "model": json["model"],
-        "data": json["data"].map(RankedDocument_1.RankedDocumentFromJSON),
-        "usage": (0, RerankResultUsage_1.RerankResultUsageFromJSON)(json["usage"])
+        "model": json2["model"],
+        "data": json2["data"].map(RankedDocument_1.RankedDocumentFromJSON),
+        "usage": (0, RerankResultUsage_1.RerankResultUsageFromJSON)(json2["usage"])
       };
     }
     function RerankResultToJSON(value) {
@@ -25844,8 +25871,8 @@ var require_runtime6 = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -25941,23 +25968,23 @@ var require_AssistantFileModel = __commonJS({
       isInstance = isInstance && "id" in value;
       return isInstance;
     }
-    function AssistantFileModelFromJSON(json) {
-      return AssistantFileModelFromJSONTyped(json, false);
+    function AssistantFileModelFromJSON(json2) {
+      return AssistantFileModelFromJSONTyped(json2, false);
     }
-    function AssistantFileModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function AssistantFileModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "id": json["id"],
-        "size": !(0, runtime_1.exists)(json, "size") ? void 0 : json["size"],
-        "metadata": !(0, runtime_1.exists)(json, "metadata") ? void 0 : json["metadata"],
-        "createdOn": !(0, runtime_1.exists)(json, "created_on") ? void 0 : new Date(json["created_on"]),
-        "updatedOn": !(0, runtime_1.exists)(json, "updated_on") ? void 0 : new Date(json["updated_on"]),
-        "status": !(0, runtime_1.exists)(json, "status") ? void 0 : json["status"],
-        "signedUrl": !(0, runtime_1.exists)(json, "signed_url") ? void 0 : json["signed_url"],
-        "multimodal": !(0, runtime_1.exists)(json, "multimodal") ? void 0 : json["multimodal"]
+        "name": json2["name"],
+        "id": json2["id"],
+        "size": !(0, runtime_1.exists)(json2, "size") ? void 0 : json2["size"],
+        "metadata": !(0, runtime_1.exists)(json2, "metadata") ? void 0 : json2["metadata"],
+        "createdOn": !(0, runtime_1.exists)(json2, "created_on") ? void 0 : new Date(json2["created_on"]),
+        "updatedOn": !(0, runtime_1.exists)(json2, "updated_on") ? void 0 : new Date(json2["updated_on"]),
+        "status": !(0, runtime_1.exists)(json2, "status") ? void 0 : json2["status"],
+        "signedUrl": !(0, runtime_1.exists)(json2, "signed_url") ? void 0 : json2["signed_url"],
+        "multimodal": !(0, runtime_1.exists)(json2, "multimodal") ? void 0 : json2["multimodal"]
       };
     }
     function AssistantFileModelToJSON(value) {
@@ -25996,16 +26023,16 @@ var require_MessageModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function MessageModelFromJSON(json) {
-      return MessageModelFromJSONTyped(json, false);
+    function MessageModelFromJSON(json2) {
+      return MessageModelFromJSONTyped(json2, false);
     }
-    function MessageModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MessageModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "role": !(0, runtime_1.exists)(json, "role") ? void 0 : json["role"],
-        "content": !(0, runtime_1.exists)(json, "content") ? void 0 : json["content"]
+        "role": !(0, runtime_1.exists)(json2, "role") ? void 0 : json2["role"],
+        "content": !(0, runtime_1.exists)(json2, "content") ? void 0 : json2["content"]
       };
     }
     function MessageModelToJSON(value) {
@@ -26038,17 +26065,17 @@ var require_ChoiceModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ChoiceModelFromJSON(json) {
-      return ChoiceModelFromJSONTyped(json, false);
+    function ChoiceModelFromJSON(json2) {
+      return ChoiceModelFromJSONTyped(json2, false);
     }
-    function ChoiceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ChoiceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "finishReason": !(0, runtime_1.exists)(json, "finish_reason") ? void 0 : json["finish_reason"],
-        "index": !(0, runtime_1.exists)(json, "index") ? void 0 : json["index"],
-        "message": !(0, runtime_1.exists)(json, "message") ? void 0 : (0, MessageModel_1.MessageModelFromJSON)(json["message"])
+        "finishReason": !(0, runtime_1.exists)(json2, "finish_reason") ? void 0 : json2["finish_reason"],
+        "index": !(0, runtime_1.exists)(json2, "index") ? void 0 : json2["index"],
+        "message": !(0, runtime_1.exists)(json2, "message") ? void 0 : (0, MessageModel_1.MessageModelFromJSON)(json2["message"])
       };
     }
     function ChoiceModelToJSON(value) {
@@ -26081,17 +26108,17 @@ var require_UsageModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UsageModelFromJSON(json) {
-      return UsageModelFromJSONTyped(json, false);
+    function UsageModelFromJSON(json2) {
+      return UsageModelFromJSONTyped(json2, false);
     }
-    function UsageModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UsageModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "promptTokens": !(0, runtime_1.exists)(json, "prompt_tokens") ? void 0 : json["prompt_tokens"],
-        "completionTokens": !(0, runtime_1.exists)(json, "completion_tokens") ? void 0 : json["completion_tokens"],
-        "totalTokens": !(0, runtime_1.exists)(json, "total_tokens") ? void 0 : json["total_tokens"]
+        "promptTokens": !(0, runtime_1.exists)(json2, "prompt_tokens") ? void 0 : json2["prompt_tokens"],
+        "completionTokens": !(0, runtime_1.exists)(json2, "completion_tokens") ? void 0 : json2["completion_tokens"],
+        "totalTokens": !(0, runtime_1.exists)(json2, "total_tokens") ? void 0 : json2["total_tokens"]
       };
     }
     function UsageModelToJSON(value) {
@@ -26126,18 +26153,18 @@ var require_ChatCompletionModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ChatCompletionModelFromJSON(json) {
-      return ChatCompletionModelFromJSONTyped(json, false);
+    function ChatCompletionModelFromJSON(json2) {
+      return ChatCompletionModelFromJSONTyped(json2, false);
     }
-    function ChatCompletionModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ChatCompletionModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "choices": !(0, runtime_1.exists)(json, "choices") ? void 0 : json["choices"].map(ChoiceModel_1.ChoiceModelFromJSON),
-        "model": !(0, runtime_1.exists)(json, "model") ? void 0 : json["model"],
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, UsageModel_1.UsageModelFromJSON)(json["usage"])
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "choices": !(0, runtime_1.exists)(json2, "choices") ? void 0 : json2["choices"].map(ChoiceModel_1.ChoiceModelFromJSON),
+        "model": !(0, runtime_1.exists)(json2, "model") ? void 0 : json2["model"],
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, UsageModel_1.UsageModelFromJSON)(json2["usage"])
       };
     }
     function ChatCompletionModelToJSON(value) {
@@ -26172,16 +26199,16 @@ var require_HighlightModel = __commonJS({
       isInstance = isInstance && "content" in value;
       return isInstance;
     }
-    function HighlightModelFromJSON(json) {
-      return HighlightModelFromJSONTyped(json, false);
+    function HighlightModelFromJSON(json2) {
+      return HighlightModelFromJSONTyped(json2, false);
     }
-    function HighlightModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function HighlightModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "content": json["content"]
+        "type": json2["type"],
+        "content": json2["content"]
       };
     }
     function HighlightModelToJSON(value) {
@@ -26215,17 +26242,17 @@ var require_ReferenceModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ReferenceModelFromJSON(json) {
-      return ReferenceModelFromJSONTyped(json, false);
+    function ReferenceModelFromJSON(json2) {
+      return ReferenceModelFromJSONTyped(json2, false);
     }
-    function ReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "file": !(0, runtime_1.exists)(json, "file") ? void 0 : (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json["file"]),
-        "pages": !(0, runtime_1.exists)(json, "pages") ? void 0 : json["pages"],
-        "highlight": !(0, runtime_1.exists)(json, "highlight") ? void 0 : (0, HighlightModel_1.HighlightModelFromJSON)(json["highlight"])
+        "file": !(0, runtime_1.exists)(json2, "file") ? void 0 : (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json2["file"]),
+        "pages": !(0, runtime_1.exists)(json2, "pages") ? void 0 : json2["pages"],
+        "highlight": !(0, runtime_1.exists)(json2, "highlight") ? void 0 : (0, HighlightModel_1.HighlightModelFromJSON)(json2["highlight"])
       };
     }
     function ReferenceModelToJSON(value) {
@@ -26259,16 +26286,16 @@ var require_CitationModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function CitationModelFromJSON(json) {
-      return CitationModelFromJSONTyped(json, false);
+    function CitationModelFromJSON(json2) {
+      return CitationModelFromJSONTyped(json2, false);
     }
-    function CitationModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CitationModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "position": !(0, runtime_1.exists)(json, "position") ? void 0 : json["position"],
-        "references": !(0, runtime_1.exists)(json, "references") ? void 0 : json["references"].map(ReferenceModel_1.ReferenceModelFromJSON)
+        "position": !(0, runtime_1.exists)(json2, "position") ? void 0 : json2["position"],
+        "references": !(0, runtime_1.exists)(json2, "references") ? void 0 : json2["references"].map(ReferenceModel_1.ReferenceModelFromJSON)
       };
     }
     function CitationModelToJSON(value) {
@@ -26300,16 +26327,16 @@ var require_ContentFilterResults = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ContentFilterResultsFromJSON(json) {
-      return ContentFilterResultsFromJSONTyped(json, false);
+    function ContentFilterResultsFromJSON(json2) {
+      return ContentFilterResultsFromJSONTyped(json2, false);
     }
-    function ContentFilterResultsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ContentFilterResultsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "spec": !(0, runtime_1.exists)(json, "spec") ? void 0 : json["spec"],
-        "results": !(0, runtime_1.exists)(json, "results") ? void 0 : json["results"]
+        "spec": !(0, runtime_1.exists)(json2, "spec") ? void 0 : json2["spec"],
+        "results": !(0, runtime_1.exists)(json2, "results") ? void 0 : json2["results"]
       };
     }
     function ContentFilterResultsToJSON(value) {
@@ -26345,22 +26372,22 @@ var require_ChatModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ChatModelFromJSON(json) {
-      return ChatModelFromJSONTyped(json, false);
+    function ChatModelFromJSON(json2) {
+      return ChatModelFromJSONTyped(json2, false);
     }
-    function ChatModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ChatModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "finishReason": !(0, runtime_1.exists)(json, "finish_reason") ? void 0 : json["finish_reason"],
-        "message": !(0, runtime_1.exists)(json, "message") ? void 0 : (0, MessageModel_1.MessageModelFromJSON)(json["message"]),
-        "model": !(0, runtime_1.exists)(json, "model") ? void 0 : json["model"],
-        "citations": !(0, runtime_1.exists)(json, "citations") ? void 0 : json["citations"].map(CitationModel_1.CitationModelFromJSON),
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, UsageModel_1.UsageModelFromJSON)(json["usage"]),
-        "contextSnippetCount": !(0, runtime_1.exists)(json, "context_snippet_count") ? void 0 : json["context_snippet_count"],
-        "contentFilterResults": !(0, runtime_1.exists)(json, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json["content_filter_results"])
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "finishReason": !(0, runtime_1.exists)(json2, "finish_reason") ? void 0 : json2["finish_reason"],
+        "message": !(0, runtime_1.exists)(json2, "message") ? void 0 : (0, MessageModel_1.MessageModelFromJSON)(json2["message"]),
+        "model": !(0, runtime_1.exists)(json2, "model") ? void 0 : json2["model"],
+        "citations": !(0, runtime_1.exists)(json2, "citations") ? void 0 : json2["citations"].map(CitationModel_1.CitationModelFromJSON),
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, UsageModel_1.UsageModelFromJSON)(json2["usage"]),
+        "contextSnippetCount": !(0, runtime_1.exists)(json2, "context_snippet_count") ? void 0 : json2["context_snippet_count"],
+        "contentFilterResults": !(0, runtime_1.exists)(json2, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json2["content_filter_results"])
       };
     }
     function ChatModelToJSON(value) {
@@ -26398,18 +26425,18 @@ var require_ContextOptionsModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ContextOptionsModelFromJSON(json) {
-      return ContextOptionsModelFromJSONTyped(json, false);
+    function ContextOptionsModelFromJSON(json2) {
+      return ContextOptionsModelFromJSONTyped(json2, false);
     }
-    function ContextOptionsModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ContextOptionsModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "topK": !(0, runtime_1.exists)(json, "top_k") ? void 0 : json["top_k"],
-        "snippetSize": !(0, runtime_1.exists)(json, "snippet_size") ? void 0 : json["snippet_size"],
-        "multimodal": !(0, runtime_1.exists)(json, "multimodal") ? void 0 : json["multimodal"],
-        "includeBinaryContent": !(0, runtime_1.exists)(json, "include_binary_content") ? void 0 : json["include_binary_content"]
+        "topK": !(0, runtime_1.exists)(json2, "top_k") ? void 0 : json2["top_k"],
+        "snippetSize": !(0, runtime_1.exists)(json2, "snippet_size") ? void 0 : json2["snippet_size"],
+        "multimodal": !(0, runtime_1.exists)(json2, "multimodal") ? void 0 : json2["multimodal"],
+        "includeBinaryContent": !(0, runtime_1.exists)(json2, "include_binary_content") ? void 0 : json2["include_binary_content"]
       };
     }
     function ContextOptionsModelToJSON(value) {
@@ -26446,22 +26473,22 @@ var require_ChatRequest = __commonJS({
       isInstance = isInstance && "messages" in value;
       return isInstance;
     }
-    function ChatRequestFromJSON(json) {
-      return ChatRequestFromJSONTyped(json, false);
+    function ChatRequestFromJSON(json2) {
+      return ChatRequestFromJSONTyped(json2, false);
     }
-    function ChatRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ChatRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "messages": json["messages"].map(MessageModel_1.MessageModelFromJSON),
-        "stream": !(0, runtime_1.exists)(json, "stream") ? void 0 : json["stream"],
-        "model": !(0, runtime_1.exists)(json, "model") ? void 0 : json["model"],
-        "temperature": !(0, runtime_1.exists)(json, "temperature") ? void 0 : json["temperature"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "jsonResponse": !(0, runtime_1.exists)(json, "json_response") ? void 0 : json["json_response"],
-        "includeHighlights": !(0, runtime_1.exists)(json, "include_highlights") ? void 0 : json["include_highlights"],
-        "contextOptions": !(0, runtime_1.exists)(json, "context_options") ? void 0 : (0, ContextOptionsModel_1.ContextOptionsModelFromJSON)(json["context_options"])
+        "messages": json2["messages"].map(MessageModel_1.MessageModelFromJSON),
+        "stream": !(0, runtime_1.exists)(json2, "stream") ? void 0 : json2["stream"],
+        "model": !(0, runtime_1.exists)(json2, "model") ? void 0 : json2["model"],
+        "temperature": !(0, runtime_1.exists)(json2, "temperature") ? void 0 : json2["temperature"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "jsonResponse": !(0, runtime_1.exists)(json2, "json_response") ? void 0 : json2["json_response"],
+        "includeHighlights": !(0, runtime_1.exists)(json2, "include_highlights") ? void 0 : json2["include_highlights"],
+        "contextOptions": !(0, runtime_1.exists)(json2, "context_options") ? void 0 : (0, ContextOptionsModel_1.ContextOptionsModelFromJSON)(json2["context_options"])
       };
     }
     function ChatRequestToJSON(value) {
@@ -26499,16 +26526,16 @@ var require_ChoiceChunkModelDelta = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ChoiceChunkModelDeltaFromJSON(json) {
-      return ChoiceChunkModelDeltaFromJSONTyped(json, false);
+    function ChoiceChunkModelDeltaFromJSON(json2) {
+      return ChoiceChunkModelDeltaFromJSONTyped(json2, false);
     }
-    function ChoiceChunkModelDeltaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ChoiceChunkModelDeltaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "role": !(0, runtime_1.exists)(json, "role") ? void 0 : json["role"],
-        "content": !(0, runtime_1.exists)(json, "content") ? void 0 : json["content"]
+        "role": !(0, runtime_1.exists)(json2, "role") ? void 0 : json2["role"],
+        "content": !(0, runtime_1.exists)(json2, "content") ? void 0 : json2["content"]
       };
     }
     function ChoiceChunkModelDeltaToJSON(value) {
@@ -26541,17 +26568,17 @@ var require_ChoiceChunkModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ChoiceChunkModelFromJSON(json) {
-      return ChoiceChunkModelFromJSONTyped(json, false);
+    function ChoiceChunkModelFromJSON(json2) {
+      return ChoiceChunkModelFromJSONTyped(json2, false);
     }
-    function ChoiceChunkModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ChoiceChunkModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "finishReason": !(0, runtime_1.exists)(json, "finish_reason") ? void 0 : json["finish_reason"],
-        "index": !(0, runtime_1.exists)(json, "index") ? void 0 : json["index"],
-        "delta": !(0, runtime_1.exists)(json, "delta") ? void 0 : (0, ChoiceChunkModelDelta_1.ChoiceChunkModelDeltaFromJSON)(json["delta"])
+        "finishReason": !(0, runtime_1.exists)(json2, "finish_reason") ? void 0 : json2["finish_reason"],
+        "index": !(0, runtime_1.exists)(json2, "index") ? void 0 : json2["index"],
+        "delta": !(0, runtime_1.exists)(json2, "delta") ? void 0 : (0, ChoiceChunkModelDelta_1.ChoiceChunkModelDeltaFromJSON)(json2["delta"])
       };
     }
     function ChoiceChunkModelToJSON(value) {
@@ -26588,18 +26615,18 @@ var require_CitationChunkModel = __commonJS({
       isInstance = isInstance && "citation" in value;
       return isInstance;
     }
-    function CitationChunkModelFromJSON(json) {
-      return CitationChunkModelFromJSONTyped(json, false);
+    function CitationChunkModelFromJSON(json2) {
+      return CitationChunkModelFromJSONTyped(json2, false);
     }
-    function CitationChunkModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CitationChunkModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "id": json["id"],
-        "model": json["model"],
-        "citation": (0, CitationModel_1.CitationModelFromJSON)(json["citation"])
+        "type": json2["type"],
+        "id": json2["id"],
+        "model": json2["model"],
+        "citation": (0, CitationModel_1.CitationModelFromJSON)(json2["citation"])
       };
     }
     function CitationChunkModelToJSON(value) {
@@ -26633,15 +26660,15 @@ var require_ContentChunkModelDelta = __commonJS({
       isInstance = isInstance && "content" in value;
       return isInstance;
     }
-    function ContentChunkModelDeltaFromJSON(json) {
-      return ContentChunkModelDeltaFromJSONTyped(json, false);
+    function ContentChunkModelDeltaFromJSON(json2) {
+      return ContentChunkModelDeltaFromJSONTyped(json2, false);
     }
-    function ContentChunkModelDeltaFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ContentChunkModelDeltaFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "content": json["content"]
+        "content": json2["content"]
       };
     }
     function ContentChunkModelDeltaToJSON(value) {
@@ -26678,19 +26705,19 @@ var require_ContentChunkModel = __commonJS({
       isInstance = isInstance && "delta" in value;
       return isInstance;
     }
-    function ContentChunkModelFromJSON(json) {
-      return ContentChunkModelFromJSONTyped(json, false);
+    function ContentChunkModelFromJSON(json2) {
+      return ContentChunkModelFromJSONTyped(json2, false);
     }
-    function ContentChunkModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ContentChunkModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "id": json["id"],
-        "model": json["model"],
-        "delta": (0, ContentChunkModelDelta_1.ContentChunkModelDeltaFromJSON)(json["delta"]),
-        "contentFilterResults": !(0, runtime_1.exists)(json, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json["content_filter_results"])
+        "type": json2["type"],
+        "id": json2["id"],
+        "model": json2["model"],
+        "delta": (0, ContentChunkModelDelta_1.ContentChunkModelDeltaFromJSON)(json2["delta"]),
+        "contentFilterResults": !(0, runtime_1.exists)(json2, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json2["content_filter_results"])
       };
     }
     function ContentChunkModelToJSON(value) {
@@ -26727,17 +26754,17 @@ var require_ImageModel = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function ImageModelFromJSON(json) {
-      return ImageModelFromJSONTyped(json, false);
+    function ImageModelFromJSON(json2) {
+      return ImageModelFromJSONTyped(json2, false);
     }
-    function ImageModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ImageModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "mimeType": json["mime_type"],
-        "data": json["data"]
+        "type": json2["type"],
+        "mimeType": json2["mime_type"],
+        "data": json2["data"]
       };
     }
     function ImageModelToJSON(value) {
@@ -26773,17 +26800,17 @@ var require_MultiModalContentImageBlockModel = __commonJS({
       isInstance = isInstance && "caption" in value;
       return isInstance;
     }
-    function MultiModalContentImageBlockModelFromJSON(json) {
-      return MultiModalContentImageBlockModelFromJSONTyped(json, false);
+    function MultiModalContentImageBlockModelFromJSON(json2) {
+      return MultiModalContentImageBlockModelFromJSONTyped(json2, false);
     }
-    function MultiModalContentImageBlockModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MultiModalContentImageBlockModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "caption": json["caption"],
-        "image": !(0, runtime_1.exists)(json, "image") ? void 0 : (0, ImageModel_1.ImageModelFromJSON)(json["image"])
+        "type": json2["type"],
+        "caption": json2["caption"],
+        "image": !(0, runtime_1.exists)(json2, "image") ? void 0 : (0, ImageModel_1.ImageModelFromJSON)(json2["image"])
       };
     }
     function MultiModalContentImageBlockModelToJSON(value) {
@@ -26817,16 +26844,16 @@ var require_MultiModalContentTextBlockModel = __commonJS({
       isInstance = isInstance && "text" in value;
       return isInstance;
     }
-    function MultiModalContentTextBlockModelFromJSON(json) {
-      return MultiModalContentTextBlockModelFromJSONTyped(json, false);
+    function MultiModalContentTextBlockModelFromJSON(json2) {
+      return MultiModalContentTextBlockModelFromJSONTyped(json2, false);
     }
-    function MultiModalContentTextBlockModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MultiModalContentTextBlockModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "text": json["text"]
+        "type": json2["type"],
+        "text": json2["text"]
       };
     }
     function MultiModalContentTextBlockModelToJSON(value) {
@@ -26854,20 +26881,20 @@ var require_MultiModalContentBlocksModel = __commonJS({
     exports.MultiModalContentBlocksModelToJSON = MultiModalContentBlocksModelToJSON;
     var MultiModalContentImageBlockModel_1 = require_MultiModalContentImageBlockModel();
     var MultiModalContentTextBlockModel_1 = require_MultiModalContentTextBlockModel();
-    function MultiModalContentBlocksModelFromJSON(json) {
-      return MultiModalContentBlocksModelFromJSONTyped(json, false);
+    function MultiModalContentBlocksModelFromJSON(json2) {
+      return MultiModalContentBlocksModelFromJSONTyped(json2, false);
     }
-    function MultiModalContentBlocksModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MultiModalContentBlocksModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["type"]) {
+      switch (json2["type"]) {
         case "image":
-          return { ...(0, MultiModalContentImageBlockModel_1.MultiModalContentImageBlockModelFromJSONTyped)(json, true), type: "image" };
+          return { ...(0, MultiModalContentImageBlockModel_1.MultiModalContentImageBlockModelFromJSONTyped)(json2, true), type: "image" };
         case "text":
-          return { ...(0, MultiModalContentTextBlockModel_1.MultiModalContentTextBlockModelFromJSONTyped)(json, true), type: "text" };
+          return { ...(0, MultiModalContentTextBlockModel_1.MultiModalContentTextBlockModelFromJSONTyped)(json2, true), type: "text" };
         default:
-          throw new Error(`No variant of MultiModalContentBlocksModel exists with 'type=${json["type"]}'`);
+          throw new Error(`No variant of MultiModalContentBlocksModel exists with 'type=${json2["type"]}'`);
       }
     }
     function MultiModalContentBlocksModelToJSON(value) {
@@ -26906,17 +26933,17 @@ var require_DocxReferenceModel = __commonJS({
       isInstance = isInstance && "pages" in value;
       return isInstance;
     }
-    function DocxReferenceModelFromJSON(json) {
-      return DocxReferenceModelFromJSONTyped(json, false);
+    function DocxReferenceModelFromJSON(json2) {
+      return DocxReferenceModelFromJSONTyped(json2, false);
     }
-    function DocxReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function DocxReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json["file"]),
-        "pages": json["pages"]
+        "type": json2["type"],
+        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json2["file"]),
+        "pages": json2["pages"]
       };
     }
     function DocxReferenceModelToJSON(value) {
@@ -26951,16 +26978,16 @@ var require_JsonReferenceModel = __commonJS({
       isInstance = isInstance && "file" in value;
       return isInstance;
     }
-    function JsonReferenceModelFromJSON(json) {
-      return JsonReferenceModelFromJSONTyped(json, false);
+    function JsonReferenceModelFromJSON(json2) {
+      return JsonReferenceModelFromJSONTyped(json2, false);
     }
-    function JsonReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function JsonReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json["file"])
+        "type": json2["type"],
+        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json2["file"])
       };
     }
     function JsonReferenceModelToJSON(value) {
@@ -26994,16 +27021,16 @@ var require_MarkdownReferenceModel = __commonJS({
       isInstance = isInstance && "file" in value;
       return isInstance;
     }
-    function MarkdownReferenceModelFromJSON(json) {
-      return MarkdownReferenceModelFromJSONTyped(json, false);
+    function MarkdownReferenceModelFromJSON(json2) {
+      return MarkdownReferenceModelFromJSONTyped(json2, false);
     }
-    function MarkdownReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MarkdownReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json["file"])
+        "type": json2["type"],
+        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json2["file"])
       };
     }
     function MarkdownReferenceModelToJSON(value) {
@@ -27038,17 +27065,17 @@ var require_PdfReferenceModel = __commonJS({
       isInstance = isInstance && "pages" in value;
       return isInstance;
     }
-    function PdfReferenceModelFromJSON(json) {
-      return PdfReferenceModelFromJSONTyped(json, false);
+    function PdfReferenceModelFromJSON(json2) {
+      return PdfReferenceModelFromJSONTyped(json2, false);
     }
-    function PdfReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PdfReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json["file"]),
-        "pages": json["pages"]
+        "type": json2["type"],
+        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json2["file"]),
+        "pages": json2["pages"]
       };
     }
     function PdfReferenceModelToJSON(value) {
@@ -27083,16 +27110,16 @@ var require_TextReferenceModel = __commonJS({
       isInstance = isInstance && "file" in value;
       return isInstance;
     }
-    function TextReferenceModelFromJSON(json) {
-      return TextReferenceModelFromJSONTyped(json, false);
+    function TextReferenceModelFromJSON(json2) {
+      return TextReferenceModelFromJSONTyped(json2, false);
     }
-    function TextReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function TextReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json["file"])
+        "type": json2["type"],
+        "file": (0, AssistantFileModel_1.AssistantFileModelFromJSON)(json2["file"])
       };
     }
     function TextReferenceModelToJSON(value) {
@@ -27123,26 +27150,26 @@ var require_TypedReferenceModel = __commonJS({
     var MarkdownReferenceModel_1 = require_MarkdownReferenceModel();
     var PdfReferenceModel_1 = require_PdfReferenceModel();
     var TextReferenceModel_1 = require_TextReferenceModel();
-    function TypedReferenceModelFromJSON(json) {
-      return TypedReferenceModelFromJSONTyped(json, false);
+    function TypedReferenceModelFromJSON(json2) {
+      return TypedReferenceModelFromJSONTyped(json2, false);
     }
-    function TypedReferenceModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function TypedReferenceModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["type"]) {
+      switch (json2["type"]) {
         case "doc_x":
-          return { ...(0, DocxReferenceModel_1.DocxReferenceModelFromJSONTyped)(json, true), type: "doc_x" };
+          return { ...(0, DocxReferenceModel_1.DocxReferenceModelFromJSONTyped)(json2, true), type: "doc_x" };
         case "json":
-          return { ...(0, JsonReferenceModel_1.JsonReferenceModelFromJSONTyped)(json, true), type: "json" };
+          return { ...(0, JsonReferenceModel_1.JsonReferenceModelFromJSONTyped)(json2, true), type: "json" };
         case "markdown":
-          return { ...(0, MarkdownReferenceModel_1.MarkdownReferenceModelFromJSONTyped)(json, true), type: "markdown" };
+          return { ...(0, MarkdownReferenceModel_1.MarkdownReferenceModelFromJSONTyped)(json2, true), type: "markdown" };
         case "pdf":
-          return { ...(0, PdfReferenceModel_1.PdfReferenceModelFromJSONTyped)(json, true), type: "pdf" };
+          return { ...(0, PdfReferenceModel_1.PdfReferenceModelFromJSONTyped)(json2, true), type: "pdf" };
         case "text":
-          return { ...(0, TextReferenceModel_1.TextReferenceModelFromJSONTyped)(json, true), type: "text" };
+          return { ...(0, TextReferenceModel_1.TextReferenceModelFromJSONTyped)(json2, true), type: "text" };
         default:
-          throw new Error(`No variant of TypedReferenceModel exists with 'type=${json["type"]}'`);
+          throw new Error(`No variant of TypedReferenceModel exists with 'type=${json2["type"]}'`);
       }
     }
     function TypedReferenceModelToJSON(value) {
@@ -27189,18 +27216,18 @@ var require_MultiModalSnippetModel = __commonJS({
       isInstance = isInstance && "reference" in value;
       return isInstance;
     }
-    function MultiModalSnippetModelFromJSON(json) {
-      return MultiModalSnippetModelFromJSONTyped(json, false);
+    function MultiModalSnippetModelFromJSON(json2) {
+      return MultiModalSnippetModelFromJSONTyped(json2, false);
     }
-    function MultiModalSnippetModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MultiModalSnippetModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "content": json["content"].map(MultiModalContentBlocksModel_1.MultiModalContentBlocksModelFromJSON),
-        "score": json["score"],
-        "reference": (0, TypedReferenceModel_1.TypedReferenceModelFromJSON)(json["reference"])
+        "type": json2["type"],
+        "content": json2["content"].map(MultiModalContentBlocksModel_1.MultiModalContentBlocksModelFromJSON),
+        "score": json2["score"],
+        "reference": (0, TypedReferenceModel_1.TypedReferenceModelFromJSON)(json2["reference"])
       };
     }
     function MultiModalSnippetModelToJSON(value) {
@@ -27238,18 +27265,18 @@ var require_TextSnippetModel = __commonJS({
       isInstance = isInstance && "reference" in value;
       return isInstance;
     }
-    function TextSnippetModelFromJSON(json) {
-      return TextSnippetModelFromJSONTyped(json, false);
+    function TextSnippetModelFromJSON(json2) {
+      return TextSnippetModelFromJSONTyped(json2, false);
     }
-    function TextSnippetModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function TextSnippetModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "content": json["content"],
-        "score": json["score"],
-        "reference": (0, TypedReferenceModel_1.TypedReferenceModelFromJSON)(json["reference"])
+        "type": json2["type"],
+        "content": json2["content"],
+        "score": json2["score"],
+        "reference": (0, TypedReferenceModel_1.TypedReferenceModelFromJSON)(json2["reference"])
       };
     }
     function TextSnippetModelToJSON(value) {
@@ -27279,20 +27306,20 @@ var require_SnippetModel = __commonJS({
     exports.SnippetModelToJSON = SnippetModelToJSON;
     var MultiModalSnippetModel_1 = require_MultiModalSnippetModel();
     var TextSnippetModel_1 = require_TextSnippetModel();
-    function SnippetModelFromJSON(json) {
-      return SnippetModelFromJSONTyped(json, false);
+    function SnippetModelFromJSON(json2) {
+      return SnippetModelFromJSONTyped(json2, false);
     }
-    function SnippetModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SnippetModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["type"]) {
+      switch (json2["type"]) {
         case "multimodal":
-          return { ...(0, MultiModalSnippetModel_1.MultiModalSnippetModelFromJSONTyped)(json, true), type: "multimodal" };
+          return { ...(0, MultiModalSnippetModel_1.MultiModalSnippetModelFromJSONTyped)(json2, true), type: "multimodal" };
         case "text":
-          return { ...(0, TextSnippetModel_1.TextSnippetModelFromJSONTyped)(json, true), type: "text" };
+          return { ...(0, TextSnippetModel_1.TextSnippetModelFromJSONTyped)(json2, true), type: "text" };
         default:
-          throw new Error(`No variant of SnippetModel exists with 'type=${json["type"]}'`);
+          throw new Error(`No variant of SnippetModel exists with 'type=${json2["type"]}'`);
       }
     }
     function SnippetModelToJSON(value) {
@@ -27332,17 +27359,17 @@ var require_ContextModel = __commonJS({
       isInstance = isInstance && "usage" in value;
       return isInstance;
     }
-    function ContextModelFromJSON(json) {
-      return ContextModelFromJSONTyped(json, false);
+    function ContextModelFromJSON(json2) {
+      return ContextModelFromJSONTyped(json2, false);
     }
-    function ContextModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ContextModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "snippets": json["snippets"].map(SnippetModel_1.SnippetModelFromJSON),
-        "usage": (0, UsageModel_1.UsageModelFromJSON)(json["usage"])
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "snippets": json2["snippets"].map(SnippetModel_1.SnippetModelFromJSON),
+        "usage": (0, UsageModel_1.UsageModelFromJSON)(json2["usage"])
       };
     }
     function ContextModelToJSON(value) {
@@ -27376,21 +27403,21 @@ var require_ContextRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ContextRequestFromJSON(json) {
-      return ContextRequestFromJSONTyped(json, false);
+    function ContextRequestFromJSON(json2) {
+      return ContextRequestFromJSONTyped(json2, false);
     }
-    function ContextRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ContextRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "query": !(0, runtime_1.exists)(json, "query") ? void 0 : json["query"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"],
-        "messages": !(0, runtime_1.exists)(json, "messages") ? void 0 : json["messages"].map(MessageModel_1.MessageModelFromJSON),
-        "topK": !(0, runtime_1.exists)(json, "top_k") ? void 0 : json["top_k"],
-        "snippetSize": !(0, runtime_1.exists)(json, "snippet_size") ? void 0 : json["snippet_size"],
-        "multimodal": !(0, runtime_1.exists)(json, "multimodal") ? void 0 : json["multimodal"],
-        "includeBinaryContent": !(0, runtime_1.exists)(json, "include_binary_content") ? void 0 : json["include_binary_content"]
+        "query": !(0, runtime_1.exists)(json2, "query") ? void 0 : json2["query"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"],
+        "messages": !(0, runtime_1.exists)(json2, "messages") ? void 0 : json2["messages"].map(MessageModel_1.MessageModelFromJSON),
+        "topK": !(0, runtime_1.exists)(json2, "top_k") ? void 0 : json2["top_k"],
+        "snippetSize": !(0, runtime_1.exists)(json2, "snippet_size") ? void 0 : json2["snippet_size"],
+        "multimodal": !(0, runtime_1.exists)(json2, "multimodal") ? void 0 : json2["multimodal"],
+        "includeBinaryContent": !(0, runtime_1.exists)(json2, "include_binary_content") ? void 0 : json2["include_binary_content"]
       };
     }
     function ContextRequestToJSON(value) {
@@ -27429,17 +27456,17 @@ var require_ErrorResponseError5 = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function ErrorResponseErrorFromJSON(json) {
-      return ErrorResponseErrorFromJSONTyped(json, false);
+    function ErrorResponseErrorFromJSON(json2) {
+      return ErrorResponseErrorFromJSONTyped(json2, false);
     }
-    function ErrorResponseErrorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseErrorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": json["code"],
-        "message": json["message"],
-        "details": !(0, runtime_1.exists)(json, "details") ? void 0 : json["details"]
+        "code": json2["code"],
+        "message": json2["message"],
+        "details": !(0, runtime_1.exists)(json2, "details") ? void 0 : json2["details"]
       };
     }
     function ErrorResponseErrorToJSON(value) {
@@ -27474,16 +27501,16 @@ var require_ErrorResponse5 = __commonJS({
       isInstance = isInstance && "error" in value;
       return isInstance;
     }
-    function ErrorResponseFromJSON(json) {
-      return ErrorResponseFromJSONTyped(json, false);
+    function ErrorResponseFromJSON(json2) {
+      return ErrorResponseFromJSONTyped(json2, false);
     }
-    function ErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "status": json["status"],
-        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json["error"])
+        "status": json2["status"],
+        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json2["error"])
       };
     }
     function ErrorResponseToJSON(value) {
@@ -27515,15 +27542,15 @@ var require_PaginationResponse2 = __commonJS({
       isInstance = isInstance && "next" in value;
       return isInstance;
     }
-    function PaginationResponseFromJSON(json) {
-      return PaginationResponseFromJSONTyped(json, false);
+    function PaginationResponseFromJSON(json2) {
+      return PaginationResponseFromJSONTyped(json2, false);
     }
-    function PaginationResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function PaginationResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "next": json["next"]
+        "next": json2["next"]
       };
     }
     function PaginationResponseToJSON(value) {
@@ -27556,16 +27583,16 @@ var require_ListFilesResponse = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function ListFilesResponseFromJSON(json) {
-      return ListFilesResponseFromJSONTyped(json, false);
+    function ListFilesResponseFromJSON(json2) {
+      return ListFilesResponseFromJSONTyped(json2, false);
     }
-    function ListFilesResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListFilesResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "files": !(0, runtime_1.exists)(json, "files") ? void 0 : json["files"].map(AssistantFileModel_1.AssistantFileModelFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, PaginationResponse_1.PaginationResponseFromJSON)(json["pagination"])
+        "files": !(0, runtime_1.exists)(json2, "files") ? void 0 : json2["files"].map(AssistantFileModel_1.AssistantFileModelFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, PaginationResponse_1.PaginationResponseFromJSON)(json2["pagination"])
       };
     }
     function ListFilesResponseToJSON(value) {
@@ -27603,20 +27630,20 @@ var require_MessageEndModel = __commonJS({
       isInstance = isInstance && "finishReason" in value;
       return isInstance;
     }
-    function MessageEndModelFromJSON(json) {
-      return MessageEndModelFromJSONTyped(json, false);
+    function MessageEndModelFromJSON(json2) {
+      return MessageEndModelFromJSONTyped(json2, false);
     }
-    function MessageEndModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MessageEndModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "id": json["id"],
-        "model": json["model"],
-        "finishReason": json["finish_reason"],
-        "usage": !(0, runtime_1.exists)(json, "usage") ? void 0 : (0, UsageModel_1.UsageModelFromJSON)(json["usage"]),
-        "contentFilterResults": !(0, runtime_1.exists)(json, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json["content_filter_results"])
+        "type": json2["type"],
+        "id": json2["id"],
+        "model": json2["model"],
+        "finishReason": json2["finish_reason"],
+        "usage": !(0, runtime_1.exists)(json2, "usage") ? void 0 : (0, UsageModel_1.UsageModelFromJSON)(json2["usage"]),
+        "contentFilterResults": !(0, runtime_1.exists)(json2, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json2["content_filter_results"])
       };
     }
     function MessageEndModelToJSON(value) {
@@ -27657,20 +27684,20 @@ var require_MessageStartModel = __commonJS({
       isInstance = isInstance && "role" in value;
       return isInstance;
     }
-    function MessageStartModelFromJSON(json) {
-      return MessageStartModelFromJSONTyped(json, false);
+    function MessageStartModelFromJSON(json2) {
+      return MessageStartModelFromJSONTyped(json2, false);
     }
-    function MessageStartModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function MessageStartModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "type": json["type"],
-        "id": json["id"],
-        "model": json["model"],
-        "role": json["role"],
-        "contextSnippetCount": !(0, runtime_1.exists)(json, "context_snippet_count") ? void 0 : json["context_snippet_count"],
-        "contentFilterResults": !(0, runtime_1.exists)(json, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json["content_filter_results"])
+        "type": json2["type"],
+        "id": json2["id"],
+        "model": json2["model"],
+        "role": json2["role"],
+        "contextSnippetCount": !(0, runtime_1.exists)(json2, "context_snippet_count") ? void 0 : json2["context_snippet_count"],
+        "contentFilterResults": !(0, runtime_1.exists)(json2, "content_filter_results") ? void 0 : (0, ContentFilterResults_1.ContentFilterResultsFromJSON)(json2["content_filter_results"])
       };
     }
     function MessageStartModelToJSON(value) {
@@ -27710,23 +27737,23 @@ var require_OperationModel = __commonJS({
       isInstance = isInstance && "createdOn" in value;
       return isInstance;
     }
-    function OperationModelFromJSON(json) {
-      return OperationModelFromJSONTyped(json, false);
+    function OperationModelFromJSON(json2) {
+      return OperationModelFromJSONTyped(json2, false);
     }
-    function OperationModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function OperationModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "operationType": json["operation_type"],
-        "fileId": !(0, runtime_1.exists)(json, "file_id") ? void 0 : json["file_id"],
-        "status": json["status"],
-        "createdOn": new Date(json["created_on"]),
-        "completedOn": !(0, runtime_1.exists)(json, "completed_on") ? void 0 : json["completed_on"] === null ? null : new Date(json["completed_on"]),
-        "percentComplete": !(0, runtime_1.exists)(json, "percent_complete") ? void 0 : json["percent_complete"],
-        "errorMessage": !(0, runtime_1.exists)(json, "error_message") ? void 0 : json["error_message"],
-        "ingestionUnits": !(0, runtime_1.exists)(json, "ingestion_units") ? void 0 : json["ingestion_units"]
+        "id": json2["id"],
+        "operationType": json2["operation_type"],
+        "fileId": !(0, runtime_1.exists)(json2, "file_id") ? void 0 : json2["file_id"],
+        "status": json2["status"],
+        "createdOn": new Date(json2["created_on"]),
+        "completedOn": !(0, runtime_1.exists)(json2, "completed_on") ? void 0 : json2["completed_on"] === null ? null : new Date(json2["completed_on"]),
+        "percentComplete": !(0, runtime_1.exists)(json2, "percent_complete") ? void 0 : json2["percent_complete"],
+        "errorMessage": !(0, runtime_1.exists)(json2, "error_message") ? void 0 : json2["error_message"],
+        "ingestionUnits": !(0, runtime_1.exists)(json2, "ingestion_units") ? void 0 : json2["ingestion_units"]
       };
     }
     function OperationModelToJSON(value) {
@@ -27767,16 +27794,16 @@ var require_OperationList = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function OperationListFromJSON(json) {
-      return OperationListFromJSONTyped(json, false);
+    function OperationListFromJSON(json2) {
+      return OperationListFromJSONTyped(json2, false);
     }
-    function OperationListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function OperationListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "operations": !(0, runtime_1.exists)(json, "operations") ? void 0 : json["operations"].map(OperationModel_1.OperationModelFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, PaginationResponse_1.PaginationResponseFromJSON)(json["pagination"])
+        "operations": !(0, runtime_1.exists)(json2, "operations") ? void 0 : json2["operations"].map(OperationModel_1.OperationModelFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, PaginationResponse_1.PaginationResponseFromJSON)(json2["pagination"])
       };
     }
     function OperationListToJSON(value) {
@@ -27810,19 +27837,19 @@ var require_SearchCompletions = __commonJS({
       isInstance = isInstance && "messages" in value;
       return isInstance;
     }
-    function SearchCompletionsFromJSON(json) {
-      return SearchCompletionsFromJSONTyped(json, false);
+    function SearchCompletionsFromJSON(json2) {
+      return SearchCompletionsFromJSONTyped(json2, false);
     }
-    function SearchCompletionsFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function SearchCompletionsFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "messages": json["messages"].map(MessageModel_1.MessageModelFromJSON),
-        "stream": !(0, runtime_1.exists)(json, "stream") ? void 0 : json["stream"],
-        "model": !(0, runtime_1.exists)(json, "model") ? void 0 : json["model"],
-        "temperature": !(0, runtime_1.exists)(json, "temperature") ? void 0 : json["temperature"],
-        "filter": !(0, runtime_1.exists)(json, "filter") ? void 0 : json["filter"]
+        "messages": json2["messages"].map(MessageModel_1.MessageModelFromJSON),
+        "stream": !(0, runtime_1.exists)(json2, "stream") ? void 0 : json2["stream"],
+        "model": !(0, runtime_1.exists)(json2, "model") ? void 0 : json2["model"],
+        "temperature": !(0, runtime_1.exists)(json2, "temperature") ? void 0 : json2["temperature"],
+        "filter": !(0, runtime_1.exists)(json2, "filter") ? void 0 : json2["filter"]
       };
     }
     function SearchCompletionsToJSON(value) {
@@ -27855,24 +27882,24 @@ var require_StreamChatChunkModel = __commonJS({
     var ContentChunkModel_1 = require_ContentChunkModel();
     var MessageEndModel_1 = require_MessageEndModel();
     var MessageStartModel_1 = require_MessageStartModel();
-    function StreamChatChunkModelFromJSON(json) {
-      return StreamChatChunkModelFromJSONTyped(json, false);
+    function StreamChatChunkModelFromJSON(json2) {
+      return StreamChatChunkModelFromJSONTyped(json2, false);
     }
-    function StreamChatChunkModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StreamChatChunkModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
-      switch (json["type"]) {
+      switch (json2["type"]) {
         case "citation":
-          return { ...(0, CitationChunkModel_1.CitationChunkModelFromJSONTyped)(json, true), type: "citation" };
+          return { ...(0, CitationChunkModel_1.CitationChunkModelFromJSONTyped)(json2, true), type: "citation" };
         case "content_chunk":
-          return { ...(0, ContentChunkModel_1.ContentChunkModelFromJSONTyped)(json, true), type: "content_chunk" };
+          return { ...(0, ContentChunkModel_1.ContentChunkModelFromJSONTyped)(json2, true), type: "content_chunk" };
         case "message_end":
-          return { ...(0, MessageEndModel_1.MessageEndModelFromJSONTyped)(json, true), type: "message_end" };
+          return { ...(0, MessageEndModel_1.MessageEndModelFromJSONTyped)(json2, true), type: "message_end" };
         case "message_start":
-          return { ...(0, MessageStartModel_1.MessageStartModelFromJSONTyped)(json, true), type: "message_start" };
+          return { ...(0, MessageStartModel_1.MessageStartModelFromJSONTyped)(json2, true), type: "message_start" };
         default:
-          throw new Error(`No variant of StreamChatChunkModel exists with 'type=${json["type"]}'`);
+          throw new Error(`No variant of StreamChatChunkModel exists with 'type=${json2["type"]}'`);
       }
     }
     function StreamChatChunkModelToJSON(value) {
@@ -27913,17 +27940,17 @@ var require_StreamChatCompletionChunkModel = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function StreamChatCompletionChunkModelFromJSON(json) {
-      return StreamChatCompletionChunkModelFromJSONTyped(json, false);
+    function StreamChatCompletionChunkModelFromJSON(json2) {
+      return StreamChatCompletionChunkModelFromJSONTyped(json2, false);
     }
-    function StreamChatCompletionChunkModelFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function StreamChatCompletionChunkModelFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": !(0, runtime_1.exists)(json, "id") ? void 0 : json["id"],
-        "choices": !(0, runtime_1.exists)(json, "choices") ? void 0 : json["choices"].map(ChoiceChunkModel_1.ChoiceChunkModelFromJSON),
-        "model": !(0, runtime_1.exists)(json, "model") ? void 0 : json["model"]
+        "id": !(0, runtime_1.exists)(json2, "id") ? void 0 : json2["id"],
+        "choices": !(0, runtime_1.exists)(json2, "choices") ? void 0 : json2["choices"].map(ChoiceChunkModel_1.ChoiceChunkModelFromJSON),
+        "model": !(0, runtime_1.exists)(json2, "model") ? void 0 : json2["model"]
       };
     }
     function StreamChatCompletionChunkModelToJSON(value) {
@@ -28616,8 +28643,8 @@ var require_chat = __commonJS({
     var messagesValidation = (options) => {
       let messages2 = [];
       if (options.messages && typeof options.messages[0] == "string") {
-        messages2 = options.messages.map((message) => {
-          return { role: "user", content: message };
+        messages2 = options.messages.map((message2) => {
+          return { role: "user", content: message2 };
         });
       }
       if (Array.isArray(options.messages) && typeof options.messages[0] === "object") {
@@ -28626,7 +28653,7 @@ var require_chat = __commonJS({
             throw new errors_1.PineconeArgumentError('No role specified in message object. Must be one of "user" or "assistant"');
           }
         }
-        const keys = Array.from(new Set(options.messages.flatMap((message) => Object.keys(message))));
+        const keys = Array.from(new Set(options.messages.flatMap((message2) => Object.keys(message2))));
         if (keys.length !== 2) {
           throw new errors_1.PineconeArgumentError('Message object must have exactly two keys: "role" and "content"');
         }
@@ -28724,8 +28751,8 @@ var require_chatStream2 = __commonJS({
           })
         });
         if (response.ok && response.body) {
-          const { Readable } = await import("node:stream");
-          const nodeReadable = Readable.fromWeb(response.body);
+          const { Readable: Readable2 } = await import("node:stream");
+          const nodeReadable = Readable2.fromWeb(response.body);
           return new utils_1.ChatStream(nodeReadable);
         } else {
           const err2 = await (0, errors_1.handleApiError)(new assistant_data_1.ResponseError(response, "Response returned an error"), void 0, chatUrl);
@@ -28775,8 +28802,8 @@ var require_chatCompletionStream = __commonJS({
           })
         });
         if (response.ok && response.body) {
-          const { Readable } = await import("node:stream");
-          const nodeReadable = Readable.fromWeb(response.body);
+          const { Readable: Readable2 } = await import("node:stream");
+          const nodeReadable = Readable2.fromWeb(response.body);
           return new utils_1.ChatStream(nodeReadable);
         } else {
           const err2 = await (0, errors_1.handleApiError)(new assistant_data_1.ResponseError(response, "Response returned an error"), void 0, chatUrl);
@@ -28917,8 +28944,8 @@ var require_fileUpload = __commonJS({
         return executeUpload(fetch3, method, url, requestHeaders, formData);
       }
       const fetch2 = (0, utils_1.getNonRetryingFetch)(config2);
-      const { body: body2, contentType } = await buildMultipartBody(file, fileName, mimeType, metadata2);
-      return executeStreamUpload(fetch2, method, url, requestHeaders, body2, contentType);
+      const { body: body2, contentType: contentType3 } = await buildMultipartBody(file, fileName, mimeType, metadata2);
+      return executeStreamUpload(fetch2, method, url, requestHeaders, body2, contentType3);
     }
     async function executeUpload(fetch2, method, url, requestHeaders, body2) {
       const headers = Object.fromEntries(Object.entries(requestHeaders).filter(([key]) => key.toLowerCase() !== "content-type"));
@@ -28929,10 +28956,10 @@ var require_fileUpload = __commonJS({
       });
       return parseResponse(response, url);
     }
-    async function executeStreamUpload(fetch2, method, url, requestHeaders, body2, contentType) {
+    async function executeStreamUpload(fetch2, method, url, requestHeaders, body2, contentType3) {
       const response = await fetch2(url, {
         method,
-        headers: { ...requestHeaders, "Content-Type": contentType },
+        headers: { ...requestHeaders, "Content-Type": contentType3 },
         body: body2,
         // undici (Node.js built-in fetch) requires duplex: 'half' for streaming
         // request bodies. The RequestInit type doesn't include this field yet.
@@ -28949,19 +28976,19 @@ var require_fileUpload = __commonJS({
       }
     }
     async function buildMultipartBody(stream, fileName, mimeType, metadata2) {
-      const { Readable } = await import("stream");
+      const { Readable: Readable2 } = await import("stream");
       const boundary = `----PineconeBoundary${Math.random().toString(36).slice(2)}`;
-      const encoder = new TextEncoder();
+      const encoder2 = new TextEncoder();
       const preambleParts = [];
       if (metadata2) {
-        preambleParts.push(encoder.encode(`--${boundary}\r
+        preambleParts.push(encoder2.encode(`--${boundary}\r
 Content-Disposition: form-data; name="metadata"\r
 Content-Type: application/json\r
 \r
 ` + JSON.stringify(metadata2) + `\r
 `));
       }
-      preambleParts.push(encoder.encode(`--${boundary}\r
+      preambleParts.push(encoder2.encode(`--${boundary}\r
 Content-Disposition: form-data; name="file"; filename="${escapeFilename(fileName)}"\r
 Content-Type: ${mimeType}\r
 \r
@@ -28973,10 +29000,10 @@ Content-Type: ${mimeType}\r
         header.set(part, offset);
         offset += part.length;
       }
-      const footer = encoder.encode(`\r
+      const footer = encoder2.encode(`\r
 --${boundary}--\r
 `);
-      const webStream = Readable.toWeb(stream instanceof Readable ? stream : Readable.from(stream));
+      const webStream = Readable2.toWeb(stream instanceof Readable2 ? stream : Readable2.from(stream));
       const reader = webStream.getReader();
       let phase = "header";
       const body2 = new ReadableStream({
@@ -28992,7 +29019,7 @@ Content-Type: ${mimeType}\r
             controller.close();
             phase = "done";
           } else {
-            controller.enqueue(typeof value === "string" ? encoder.encode(value) : value);
+            controller.enqueue(typeof value === "string" ? encoder2.encode(value) : value);
           }
         },
         cancel(reason) {
@@ -29274,8 +29301,8 @@ var require_context = __commonJS({
         return void 0;
       }
       if (Array.isArray(messages2) && typeof messages2[0] === "string") {
-        return messages2.map((message) => {
-          return { role: "user", content: message };
+        return messages2.map((message2) => {
+          return { role: "user", content: message2 };
         });
       }
       if (Array.isArray(messages2) && typeof messages2[0] === "object") {
@@ -30556,8 +30583,8 @@ var require_runtime7 = __commonJS({
       tsv: "	",
       pipes: "|"
     };
-    function exists(json, key) {
-      const value = json[key];
+    function exists(json2, key) {
+      const value = json2[key];
       return value !== null && value !== void 0;
     }
     function querystring(params, prefix = "") {
@@ -30654,18 +30681,18 @@ var require_APIKey = __commonJS({
       isInstance = isInstance && "roles" in value;
       return isInstance;
     }
-    function APIKeyFromJSON(json) {
-      return APIKeyFromJSONTyped(json, false);
+    function APIKeyFromJSON(json2) {
+      return APIKeyFromJSONTyped(json2, false);
     }
-    function APIKeyFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function APIKeyFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "name": json["name"],
-        "projectId": json["project_id"],
-        "roles": json["roles"]
+        "id": json2["id"],
+        "name": json2["name"],
+        "projectId": json2["project_id"],
+        "roles": json2["roles"]
       };
     }
     function APIKeyToJSON(value) {
@@ -30701,16 +30728,16 @@ var require_APIKeyWithSecret = __commonJS({
       isInstance = isInstance && "value" in value;
       return isInstance;
     }
-    function APIKeyWithSecretFromJSON(json) {
-      return APIKeyWithSecretFromJSONTyped(json, false);
+    function APIKeyWithSecretFromJSON(json2) {
+      return APIKeyWithSecretFromJSONTyped(json2, false);
     }
-    function APIKeyWithSecretFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function APIKeyWithSecretFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "key": (0, APIKey_1.APIKeyFromJSON)(json["key"]),
-        "value": json["value"]
+        "key": (0, APIKey_1.APIKeyFromJSON)(json2["key"]),
+        "value": json2["value"]
       };
     }
     function APIKeyWithSecretToJSON(value) {
@@ -30743,16 +30770,16 @@ var require_CreateAPIKeyRequest = __commonJS({
       isInstance = isInstance && "name" in value;
       return isInstance;
     }
-    function CreateAPIKeyRequestFromJSON(json) {
-      return CreateAPIKeyRequestFromJSONTyped(json, false);
+    function CreateAPIKeyRequestFromJSON(json2) {
+      return CreateAPIKeyRequestFromJSONTyped(json2, false);
     }
-    function CreateAPIKeyRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateAPIKeyRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "roles": !(0, runtime_1.exists)(json, "roles") ? void 0 : json["roles"]
+        "name": json2["name"],
+        "roles": !(0, runtime_1.exists)(json2, "roles") ? void 0 : json2["roles"]
       };
     }
     function CreateAPIKeyRequestToJSON(value) {
@@ -30786,17 +30813,17 @@ var require_RoleBindingInput = __commonJS({
       isInstance = isInstance && "role" in value;
       return isInstance;
     }
-    function RoleBindingInputFromJSON(json) {
-      return RoleBindingInputFromJSONTyped(json, false);
+    function RoleBindingInputFromJSON(json2) {
+      return RoleBindingInputFromJSONTyped(json2, false);
     }
-    function RoleBindingInputFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RoleBindingInputFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "resourceType": json["resource_type"],
-        "resourceId": !(0, runtime_1.exists)(json, "resource_id") ? void 0 : json["resource_id"],
-        "role": json["role"]
+        "resourceType": json2["resource_type"],
+        "resourceId": !(0, runtime_1.exists)(json2, "resource_id") ? void 0 : json2["resource_id"],
+        "role": json2["role"]
       };
     }
     function RoleBindingInputToJSON(value) {
@@ -30831,16 +30858,16 @@ var require_CreateInviteRequest = __commonJS({
       isInstance = isInstance && "roleBindings" in value;
       return isInstance;
     }
-    function CreateInviteRequestFromJSON(json) {
-      return CreateInviteRequestFromJSONTyped(json, false);
+    function CreateInviteRequestFromJSON(json2) {
+      return CreateInviteRequestFromJSONTyped(json2, false);
     }
-    function CreateInviteRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateInviteRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "email": json["email"],
-        "roleBindings": json["role_bindings"].map(RoleBindingInput_1.RoleBindingInputFromJSON)
+        "email": json2["email"],
+        "roleBindings": json2["role_bindings"].map(RoleBindingInput_1.RoleBindingInputFromJSON)
       };
     }
     function CreateInviteRequestToJSON(value) {
@@ -30873,17 +30900,17 @@ var require_CreateProjectRequest = __commonJS({
       isInstance = isInstance && "name" in value;
       return isInstance;
     }
-    function CreateProjectRequestFromJSON(json) {
-      return CreateProjectRequestFromJSONTyped(json, false);
+    function CreateProjectRequestFromJSON(json2) {
+      return CreateProjectRequestFromJSONTyped(json2, false);
     }
-    function CreateProjectRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateProjectRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "maxPods": !(0, runtime_1.exists)(json, "max_pods") ? void 0 : json["max_pods"],
-        "forceEncryptionWithCmek": !(0, runtime_1.exists)(json, "force_encryption_with_cmek") ? void 0 : json["force_encryption_with_cmek"]
+        "name": json2["name"],
+        "maxPods": !(0, runtime_1.exists)(json2, "max_pods") ? void 0 : json2["max_pods"],
+        "forceEncryptionWithCmek": !(0, runtime_1.exists)(json2, "force_encryption_with_cmek") ? void 0 : json2["force_encryption_with_cmek"]
       };
     }
     function CreateProjectRequestToJSON(value) {
@@ -30920,19 +30947,19 @@ var require_CreateRoleBindingRequest = __commonJS({
       isInstance = isInstance && "role" in value;
       return isInstance;
     }
-    function CreateRoleBindingRequestFromJSON(json) {
-      return CreateRoleBindingRequestFromJSONTyped(json, false);
+    function CreateRoleBindingRequestFromJSON(json2) {
+      return CreateRoleBindingRequestFromJSONTyped(json2, false);
     }
-    function CreateRoleBindingRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateRoleBindingRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "principalType": json["principal_type"],
-        "principalId": json["principal_id"],
-        "resourceType": json["resource_type"],
-        "resourceId": !(0, runtime_1.exists)(json, "resource_id") ? void 0 : json["resource_id"],
-        "role": json["role"]
+        "principalType": json2["principal_type"],
+        "principalId": json2["principal_id"],
+        "resourceType": json2["resource_type"],
+        "resourceId": !(0, runtime_1.exists)(json2, "resource_id") ? void 0 : json2["resource_id"],
+        "role": json2["role"]
       };
     }
     function CreateRoleBindingRequestToJSON(value) {
@@ -30969,16 +30996,16 @@ var require_CreateServiceAccountRequest = __commonJS({
       isInstance = isInstance && "name" in value;
       return isInstance;
     }
-    function CreateServiceAccountRequestFromJSON(json) {
-      return CreateServiceAccountRequestFromJSONTyped(json, false);
+    function CreateServiceAccountRequestFromJSON(json2) {
+      return CreateServiceAccountRequestFromJSONTyped(json2, false);
     }
-    function CreateServiceAccountRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function CreateServiceAccountRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": json["name"],
-        "roleBindings": !(0, runtime_1.exists)(json, "role_bindings") ? void 0 : json["role_bindings"].map(RoleBindingInput_1.RoleBindingInputFromJSON)
+        "name": json2["name"],
+        "roleBindings": !(0, runtime_1.exists)(json2, "role_bindings") ? void 0 : json2["role_bindings"].map(RoleBindingInput_1.RoleBindingInputFromJSON)
       };
     }
     function CreateServiceAccountRequestToJSON(value) {
@@ -31012,17 +31039,17 @@ var require_ErrorResponseError6 = __commonJS({
       isInstance = isInstance && "message" in value;
       return isInstance;
     }
-    function ErrorResponseErrorFromJSON(json) {
-      return ErrorResponseErrorFromJSONTyped(json, false);
+    function ErrorResponseErrorFromJSON(json2) {
+      return ErrorResponseErrorFromJSONTyped(json2, false);
     }
-    function ErrorResponseErrorFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseErrorFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "code": json["code"],
-        "message": json["message"],
-        "details": !(0, runtime_1.exists)(json, "details") ? void 0 : json["details"]
+        "code": json2["code"],
+        "message": json2["message"],
+        "details": !(0, runtime_1.exists)(json2, "details") ? void 0 : json2["details"]
       };
     }
     function ErrorResponseErrorToJSON(value) {
@@ -31057,16 +31084,16 @@ var require_ErrorResponse6 = __commonJS({
       isInstance = isInstance && "error" in value;
       return isInstance;
     }
-    function ErrorResponseFromJSON(json) {
-      return ErrorResponseFromJSONTyped(json, false);
+    function ErrorResponseFromJSON(json2) {
+      return ErrorResponseFromJSONTyped(json2, false);
     }
-    function ErrorResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ErrorResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "status": json["status"],
-        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json["error"])
+        "status": json2["status"],
+        "error": (0, ErrorResponseError_1.ErrorResponseErrorFromJSON)(json2["error"])
       };
     }
     function ErrorResponseToJSON(value) {
@@ -31102,20 +31129,20 @@ var require_Invite = __commonJS({
       isInstance = isInstance && "createdAt" in value;
       return isInstance;
     }
-    function InviteFromJSON(json) {
-      return InviteFromJSONTyped(json, false);
+    function InviteFromJSON(json2) {
+      return InviteFromJSONTyped(json2, false);
     }
-    function InviteFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function InviteFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "email": json["email"],
-        "status": json["status"],
-        "expiresAt": !(0, runtime_1.exists)(json, "expires_at") ? void 0 : json["expires_at"] === null ? null : new Date(json["expires_at"]),
-        "processedAt": !(0, runtime_1.exists)(json, "processed_at") ? void 0 : json["processed_at"] === null ? null : new Date(json["processed_at"]),
-        "createdAt": new Date(json["created_at"])
+        "id": json2["id"],
+        "email": json2["email"],
+        "status": json2["status"],
+        "expiresAt": !(0, runtime_1.exists)(json2, "expires_at") ? void 0 : json2["expires_at"] === null ? null : new Date(json2["expires_at"]),
+        "processedAt": !(0, runtime_1.exists)(json2, "processed_at") ? void 0 : json2["processed_at"] === null ? null : new Date(json2["processed_at"]),
+        "createdAt": new Date(json2["created_at"])
       };
     }
     function InviteToJSON(value) {
@@ -31151,15 +31178,15 @@ var require_InviteListPagination = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function InviteListPaginationFromJSON(json) {
-      return InviteListPaginationFromJSONTyped(json, false);
+    function InviteListPaginationFromJSON(json2) {
+      return InviteListPaginationFromJSONTyped(json2, false);
     }
-    function InviteListPaginationFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function InviteListPaginationFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "next": !(0, runtime_1.exists)(json, "next") ? void 0 : json["next"]
+        "next": !(0, runtime_1.exists)(json2, "next") ? void 0 : json2["next"]
       };
     }
     function InviteListPaginationToJSON(value) {
@@ -31193,16 +31220,16 @@ var require_InviteList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function InviteListFromJSON(json) {
-      return InviteListFromJSONTyped(json, false);
+    function InviteListFromJSON(json2) {
+      return InviteListFromJSONTyped(json2, false);
     }
-    function InviteListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function InviteListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(Invite_1.InviteFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(Invite_1.InviteFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json2["pagination"])
       };
     }
     function InviteListToJSON(value) {
@@ -31235,15 +31262,15 @@ var require_ListApiKeysResponse = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function ListApiKeysResponseFromJSON(json) {
-      return ListApiKeysResponseFromJSONTyped(json, false);
+    function ListApiKeysResponseFromJSON(json2) {
+      return ListApiKeysResponseFromJSONTyped(json2, false);
     }
-    function ListApiKeysResponseFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ListApiKeysResponseFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(APIKey_1.APIKeyFromJSON)
+        "data": json2["data"].map(APIKey_1.APIKeyFromJSON)
       };
     }
     function ListApiKeysResponseToJSON(value) {
@@ -31279,20 +31306,20 @@ var require_Organization = __commonJS({
       isInstance = isInstance && "supportTier" in value;
       return isInstance;
     }
-    function OrganizationFromJSON(json) {
-      return OrganizationFromJSONTyped(json, false);
+    function OrganizationFromJSON(json2) {
+      return OrganizationFromJSONTyped(json2, false);
     }
-    function OrganizationFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function OrganizationFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "name": json["name"],
-        "plan": json["plan"],
-        "paymentStatus": json["payment_status"],
-        "createdAt": new Date(json["created_at"]),
-        "supportTier": json["support_tier"]
+        "id": json2["id"],
+        "name": json2["name"],
+        "plan": json2["plan"],
+        "paymentStatus": json2["payment_status"],
+        "createdAt": new Date(json2["created_at"]),
+        "supportTier": json2["support_tier"]
       };
     }
     function OrganizationToJSON(value) {
@@ -31329,15 +31356,15 @@ var require_OrganizationList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function OrganizationListFromJSON(json) {
-      return OrganizationListFromJSONTyped(json, false);
+    function OrganizationListFromJSON(json2) {
+      return OrganizationListFromJSONTyped(json2, false);
     }
-    function OrganizationListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function OrganizationListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(Organization_1.OrganizationFromJSON)
+        "data": json2["data"].map(Organization_1.OrganizationFromJSON)
       };
     }
     function OrganizationListToJSON(value) {
@@ -31373,20 +31400,20 @@ var require_Project = __commonJS({
       isInstance = isInstance && "organizationId" in value;
       return isInstance;
     }
-    function ProjectFromJSON(json) {
-      return ProjectFromJSONTyped(json, false);
+    function ProjectFromJSON(json2) {
+      return ProjectFromJSONTyped(json2, false);
     }
-    function ProjectFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ProjectFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "name": json["name"],
-        "maxPods": json["max_pods"],
-        "forceEncryptionWithCmek": json["force_encryption_with_cmek"],
-        "organizationId": json["organization_id"],
-        "createdAt": !(0, runtime_1.exists)(json, "created_at") ? void 0 : new Date(json["created_at"])
+        "id": json2["id"],
+        "name": json2["name"],
+        "maxPods": json2["max_pods"],
+        "forceEncryptionWithCmek": json2["force_encryption_with_cmek"],
+        "organizationId": json2["organization_id"],
+        "createdAt": !(0, runtime_1.exists)(json2, "created_at") ? void 0 : new Date(json2["created_at"])
       };
     }
     function ProjectToJSON(value) {
@@ -31423,15 +31450,15 @@ var require_ProjectList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function ProjectListFromJSON(json) {
-      return ProjectListFromJSONTyped(json, false);
+    function ProjectListFromJSON(json2) {
+      return ProjectListFromJSONTyped(json2, false);
     }
-    function ProjectListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ProjectListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(Project_1.ProjectFromJSON)
+        "data": json2["data"].map(Project_1.ProjectFromJSON)
       };
     }
     function ProjectListToJSON(value) {
@@ -31468,21 +31495,21 @@ var require_RoleBinding = __commonJS({
       isInstance = isInstance && "createdAt" in value;
       return isInstance;
     }
-    function RoleBindingFromJSON(json) {
-      return RoleBindingFromJSONTyped(json, false);
+    function RoleBindingFromJSON(json2) {
+      return RoleBindingFromJSONTyped(json2, false);
     }
-    function RoleBindingFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RoleBindingFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "principalType": json["principal_type"],
-        "principalId": json["principal_id"],
-        "resourceType": json["resource_type"],
-        "resourceId": json["resource_id"],
-        "role": json["role"],
-        "createdAt": new Date(json["created_at"])
+        "id": json2["id"],
+        "principalType": json2["principal_type"],
+        "principalId": json2["principal_id"],
+        "resourceType": json2["resource_type"],
+        "resourceId": json2["resource_id"],
+        "role": json2["role"],
+        "createdAt": new Date(json2["created_at"])
       };
     }
     function RoleBindingToJSON(value) {
@@ -31522,16 +31549,16 @@ var require_RoleBindingList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function RoleBindingListFromJSON(json) {
-      return RoleBindingListFromJSONTyped(json, false);
+    function RoleBindingListFromJSON(json2) {
+      return RoleBindingListFromJSONTyped(json2, false);
     }
-    function RoleBindingListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function RoleBindingListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(RoleBinding_1.RoleBindingFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(RoleBinding_1.RoleBindingFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json2["pagination"])
       };
     }
     function RoleBindingListToJSON(value) {
@@ -31567,19 +31594,19 @@ var require_ServiceAccount = __commonJS({
       isInstance = isInstance && "updatedAt" in value;
       return isInstance;
     }
-    function ServiceAccountFromJSON(json) {
-      return ServiceAccountFromJSONTyped(json, false);
+    function ServiceAccountFromJSON(json2) {
+      return ServiceAccountFromJSONTyped(json2, false);
     }
-    function ServiceAccountFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ServiceAccountFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "name": json["name"],
-        "clientId": json["client_id"],
-        "createdAt": new Date(json["created_at"]),
-        "updatedAt": new Date(json["updated_at"])
+        "id": json2["id"],
+        "name": json2["name"],
+        "clientId": json2["client_id"],
+        "createdAt": new Date(json2["created_at"]),
+        "updatedAt": new Date(json2["updated_at"])
       };
     }
     function ServiceAccountToJSON(value) {
@@ -31617,16 +31644,16 @@ var require_ServiceAccountList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function ServiceAccountListFromJSON(json) {
-      return ServiceAccountListFromJSONTyped(json, false);
+    function ServiceAccountListFromJSON(json2) {
+      return ServiceAccountListFromJSONTyped(json2, false);
     }
-    function ServiceAccountListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ServiceAccountListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(ServiceAccount_1.ServiceAccountFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(ServiceAccount_1.ServiceAccountFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json2["pagination"])
       };
     }
     function ServiceAccountListToJSON(value) {
@@ -31660,16 +31687,16 @@ var require_ServiceAccountWithSecret = __commonJS({
       isInstance = isInstance && "clientSecret" in value;
       return isInstance;
     }
-    function ServiceAccountWithSecretFromJSON(json) {
-      return ServiceAccountWithSecretFromJSONTyped(json, false);
+    function ServiceAccountWithSecretFromJSON(json2) {
+      return ServiceAccountWithSecretFromJSONTyped(json2, false);
     }
-    function ServiceAccountWithSecretFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function ServiceAccountWithSecretFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "serviceAccount": (0, ServiceAccount_1.ServiceAccountFromJSON)(json["service_account"]),
-        "clientSecret": json["client_secret"]
+        "serviceAccount": (0, ServiceAccount_1.ServiceAccountFromJSON)(json2["service_account"]),
+        "clientSecret": json2["client_secret"]
       };
     }
     function ServiceAccountWithSecretToJSON(value) {
@@ -31701,16 +31728,16 @@ var require_UpdateAPIKeyRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateAPIKeyRequestFromJSON(json) {
-      return UpdateAPIKeyRequestFromJSONTyped(json, false);
+    function UpdateAPIKeyRequestFromJSON(json2) {
+      return UpdateAPIKeyRequestFromJSONTyped(json2, false);
     }
-    function UpdateAPIKeyRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateAPIKeyRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"],
-        "roles": !(0, runtime_1.exists)(json, "roles") ? void 0 : json["roles"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"],
+        "roles": !(0, runtime_1.exists)(json2, "roles") ? void 0 : json2["roles"]
       };
     }
     function UpdateAPIKeyRequestToJSON(value) {
@@ -31742,15 +31769,15 @@ var require_UpdateOrganizationRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateOrganizationRequestFromJSON(json) {
-      return UpdateOrganizationRequestFromJSONTyped(json, false);
+    function UpdateOrganizationRequestFromJSON(json2) {
+      return UpdateOrganizationRequestFromJSONTyped(json2, false);
     }
-    function UpdateOrganizationRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateOrganizationRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"]
       };
     }
     function UpdateOrganizationRequestToJSON(value) {
@@ -31781,17 +31808,17 @@ var require_UpdateProjectRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateProjectRequestFromJSON(json) {
-      return UpdateProjectRequestFromJSONTyped(json, false);
+    function UpdateProjectRequestFromJSON(json2) {
+      return UpdateProjectRequestFromJSONTyped(json2, false);
     }
-    function UpdateProjectRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateProjectRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"],
-        "maxPods": !(0, runtime_1.exists)(json, "max_pods") ? void 0 : json["max_pods"],
-        "forceEncryptionWithCmek": !(0, runtime_1.exists)(json, "force_encryption_with_cmek") ? void 0 : json["force_encryption_with_cmek"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"],
+        "maxPods": !(0, runtime_1.exists)(json2, "max_pods") ? void 0 : json2["max_pods"],
+        "forceEncryptionWithCmek": !(0, runtime_1.exists)(json2, "force_encryption_with_cmek") ? void 0 : json2["force_encryption_with_cmek"]
       };
     }
     function UpdateProjectRequestToJSON(value) {
@@ -31824,15 +31851,15 @@ var require_UpdateServiceAccountRequest = __commonJS({
       let isInstance = true;
       return isInstance;
     }
-    function UpdateServiceAccountRequestFromJSON(json) {
-      return UpdateServiceAccountRequestFromJSONTyped(json, false);
+    function UpdateServiceAccountRequestFromJSON(json2) {
+      return UpdateServiceAccountRequestFromJSONTyped(json2, false);
     }
-    function UpdateServiceAccountRequestFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UpdateServiceAccountRequestFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"]
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"]
       };
     }
     function UpdateServiceAccountRequestToJSON(value) {
@@ -31865,17 +31892,17 @@ var require_User = __commonJS({
       isInstance = isInstance && "email" in value;
       return isInstance;
     }
-    function UserFromJSON(json) {
-      return UserFromJSONTyped(json, false);
+    function UserFromJSON(json2) {
+      return UserFromJSONTyped(json2, false);
     }
-    function UserFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UserFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "id": json["id"],
-        "email": json["email"],
-        "name": !(0, runtime_1.exists)(json, "name") ? void 0 : json["name"]
+        "id": json2["id"],
+        "email": json2["email"],
+        "name": !(0, runtime_1.exists)(json2, "name") ? void 0 : json2["name"]
       };
     }
     function UserToJSON(value) {
@@ -31911,16 +31938,16 @@ var require_UserList = __commonJS({
       isInstance = isInstance && "data" in value;
       return isInstance;
     }
-    function UserListFromJSON(json) {
-      return UserListFromJSONTyped(json, false);
+    function UserListFromJSON(json2) {
+      return UserListFromJSONTyped(json2, false);
     }
-    function UserListFromJSONTyped(json, ignoreDiscriminator) {
-      if (json === void 0 || json === null) {
-        return json;
+    function UserListFromJSONTyped(json2, ignoreDiscriminator) {
+      if (json2 === void 0 || json2 === null) {
+        return json2;
       }
       return {
-        "data": json["data"].map(User_1.UserFromJSON),
-        "pagination": !(0, runtime_1.exists)(json, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json["pagination"])
+        "data": json2["data"].map(User_1.UserFromJSON),
+        "pagination": !(0, runtime_1.exists)(json2, "pagination") ? void 0 : (0, InviteListPagination_1.InviteListPaginationFromJSON)(json2["pagination"])
       };
     }
     function UserListToJSON(value) {
@@ -35446,8 +35473,8 @@ function postgres(x) {
   Error.captureStackTrace(error2, postgres);
   return error2;
 }
-function generic(code, message) {
-  const error2 = Object.assign(new Error(code + ": " + message), { code });
+function generic(code, message2) {
+  const error2 = Object.assign(new Error(code + ": " + message2), { code });
   Error.captureStackTrace(error2, generic);
   return error2;
 }
@@ -35909,7 +35936,7 @@ var init_bytes = __esm({
 // node_modules/postgres/src/connection.js
 import net from "net";
 import tls from "tls";
-import crypto from "crypto";
+import crypto2 from "crypto";
 import Stream from "stream";
 import { performance as performance2 } from "perf_hooks";
 function Connection(options, queues = {}, { onopen = noop, onend = noop, onclose = noop } = {}) {
@@ -36378,13 +36405,13 @@ function Connection(options, queues = {}, { onopen = noop, onend = noop, onclose
     for (let i2 = 0; i2 < length2; ++i2) {
       start2 = index;
       while (x[index++] !== 0) ;
-      const table = x.readUInt32BE(index);
+      const table2 = x.readUInt32BE(index);
       const number3 = x.readUInt16BE(index + 4);
       const type = x.readUInt32BE(index + 6);
       query.statement.columns[i2] = {
         name: transform2.column.from ? transform2.column.from(x.toString("utf8", start2, index - 1)) : x.toString("utf8", start2, index - 1),
         parser: parsers3[type],
-        table,
+        table: table2,
         number: number3,
         type
       };
@@ -36415,14 +36442,14 @@ function Connection(options, queues = {}, { onopen = noop, onend = noop, onclose
     );
   }
   async function SASL() {
-    nonce = (await crypto.randomBytes(18)).toString("base64");
+    nonce = (await crypto2.randomBytes(18)).toString("base64");
     bytes_default().p().str("SCRAM-SHA-256" + bytes_default.N);
     const i2 = bytes_default.i;
     write(bytes_default.inc(4).str("n,,n=*,r=" + nonce).i32(bytes_default.i - i2 - 4, i2).end());
   }
   async function SASLContinue(x) {
     const res = x.toString("utf8", 9).split(",").reduce((acc, x2) => (acc[x2[0]] = x2.slice(2), acc), {});
-    const saltedPassword = await crypto.pbkdf2Sync(
+    const saltedPassword = await crypto2.pbkdf2Sync(
       await Pass(),
       Buffer.from(res.s, "base64"),
       parseInt(res.i),
@@ -36664,13 +36691,13 @@ function parseError(x) {
   return error2;
 }
 function md5(x) {
-  return crypto.createHash("md5").update(x).digest("hex");
+  return crypto2.createHash("md5").update(x).digest("hex");
 }
 function hmac(key, x) {
-  return crypto.createHmac("sha256", key).update(x).digest();
+  return crypto2.createHmac("sha256", key).update(x).digest();
 }
 function sha256(x) {
-  return crypto.createHash("sha256").update(x).digest();
+  return crypto2.createHash("sha256").update(x).digest();
 }
 function xor(a, b2) {
   const length = Math.max(a.length, b2.length);
@@ -37087,7 +37114,7 @@ function Postgres(a, b2) {
       unsafe,
       notify,
       array: array2,
-      json,
+      json: json2,
       file
     });
     return sql2;
@@ -37244,7 +37271,7 @@ function Postgres(a, b2) {
     queue === open ? c.idleTimer.start() : c.idleTimer.cancel();
     return c;
   }
-  function json(x) {
+  function json2(x) {
     return new Parameter(x, 3802);
   }
   function array2(x, type) {
@@ -37490,6 +37517,14 @@ var init_sql = __esm({
 function toFacts(row) {
   return { name: row.name, state: "Ready", ready: true, embedModel: null, textField: null, dimension: row.dimension, metric: "cosine", vectorModel: row.model };
 }
+async function missingAsEmpty(query) {
+  try {
+    return await query;
+  } catch (err2) {
+    if (err2.code === "42P01") return [];
+    throw err2;
+  }
+}
 var PostgresStore;
 var init_postgres = __esm({
   "src/store/postgres.ts"() {
@@ -37540,22 +37575,22 @@ var init_postgres = __esm({
       }
       // ---------- IndexManager ----------
       async describe(name2) {
-        const [row] = await this.sql`SELECT name, table_name, dimension, model FROM vector_indexes WHERE name = ${name2}`;
-        return row ? toFacts(row) : null;
+        const rows = await missingAsEmpty(this.sql`SELECT name, table_name, dimension, model FROM vector_indexes WHERE name = ${name2}`);
+        return rows[0] ? toFacts(rows[0]) : null;
       }
       async create(name2) {
         const mode = this.mode;
         if (!isExternal(mode)) throw badRequest(`Postgres cannot store vectors for ${describeMode(mode)}; use openrouter or openai`);
-        const table = tableNameFor(name2);
+        const table2 = tableNameFor(name2);
         await this.sql.begin(async (tx) => {
-          await tx`INSERT INTO vector_indexes (name, table_name, dimension, model) VALUES (${name2}, ${table}, ${mode.dimension}, ${mode.model})`;
-          await tx.unsafe(`CREATE TABLE "${table}" (
+          await tx`INSERT INTO vector_indexes (name, table_name, dimension, model) VALUES (${name2}, ${table2}, ${mode.dimension}, ${mode.model})`;
+          await tx.unsafe(`CREATE TABLE "${table2}" (
         id text NOT NULL, namespace text NOT NULL, embedding halfvec(${mode.dimension}) NOT NULL,
         chunk_text text NOT NULL, metadata jsonb NOT NULL, PRIMARY KEY (namespace, id))`);
-          await tx.unsafe(`CREATE INDEX "${table}_embedding_idx" ON "${table}" USING hnsw (embedding halfvec_cosine_ops)`);
-          await tx.unsafe(`CREATE INDEX "${table}_namespace_idx" ON "${table}" (namespace)`);
+          await tx.unsafe(`CREATE INDEX "${table2}_embedding_idx" ON "${table2}" USING hnsw (embedding halfvec_cosine_ops)`);
+          await tx.unsafe(`CREATE INDEX "${table2}_namespace_idx" ON "${table2}" (namespace)`);
         });
-        return toFacts({ name: name2, table_name: table, dimension: mode.dimension, model: mode.model });
+        return toFacts({ name: name2, table_name: table2, dimension: mode.dimension, model: mode.model });
       }
       async waitUntilReady(name2) {
         const facts = await this.describe(name2);
@@ -37568,40 +37603,40 @@ var init_postgres = __esm({
       // ---------- VectorStore ----------
       async upsertRecords(namespace, records) {
         if (records.length === 0) return;
-        const { table, mode } = this.target();
+        const { table: table2, mode } = this.target();
         const texts = records.map((r) => String(r[RECORD_FIELDS.text] ?? ""));
         const { vectors } = await mode.client.embed(mode.model, texts, mode.dimensions);
         const rows = records.map((r, i2) => {
           const { [RECORD_FIELDS.text]: _text, ...metadata2 } = metadataOf(r);
           return { id: r._id, namespace, embedding: vectorLiteral(vectors[i2] ?? []), chunk_text: texts[i2] ?? "", metadata: this.sql.json(metadata2) };
         });
-        await this.sql`INSERT INTO ${this.sql(table)} ${this.sql(rows, "id", "namespace", "embedding", "chunk_text", "metadata")}
+        await this.sql`INSERT INTO ${this.sql(table2)} ${this.sql(rows, "id", "namespace", "embedding", "chunk_text", "metadata")}
       ON CONFLICT (namespace, id) DO UPDATE SET embedding = EXCLUDED.embedding, chunk_text = EXCLUDED.chunk_text, metadata = EXCLUDED.metadata`;
       }
       async deleteByPrefix(namespace, prefix, keepBelow) {
-        const table = this.requireTable();
+        const table2 = this.requireTable();
         const from = prefix.length + 1;
-        const deleted = await this.sql`DELETE FROM ${this.sql(table)}
+        const deleted = await this.sql`DELETE FROM ${this.sql(table2)}
       WHERE namespace = ${namespace} AND starts_with(id, ${prefix})
         AND (CASE WHEN substr(id, ${from}) ~ '^[0-9]+$' THEN substr(id, ${from})::bigint ELSE -1 END) >= ${keepBelow}
       RETURNING id`;
         return deleted.length;
       }
       async deleteExcept(namespace, keep) {
-        const table = this.requireTable();
-        const deleted = await this.sql`DELETE FROM ${this.sql(table)} WHERE namespace = ${namespace} AND NOT (id = ANY(${[...keep]}::text[])) RETURNING id`;
+        const table2 = this.requireTable();
+        const deleted = await this.sql`DELETE FROM ${this.sql(table2)} WHERE namespace = ${namespace} AND NOT (id = ANY(${[...keep]}::text[])) RETURNING id`;
         return deleted.length;
       }
       async search(params) {
         if (params.rerank) throw badRequest("Reranking is only available on the Pinecone store");
         const started = performance.now();
-        const { table, mode } = this.target();
+        const { table: table2, mode } = this.target();
         const conditions = parseFilter(params.filter);
         const { vectors, tokens } = await mode.client.embed(mode.model, [params.query], mode.dimensions);
         const vector = vectorLiteral(vectors[0] ?? []);
         const rows = await this.sql`
       SELECT id, chunk_text, metadata, 1 - (embedding <=> ${vector}::halfvec) AS score
-      FROM ${this.sql(table)}
+      FROM ${this.sql(table2)}
       WHERE namespace = ${params.namespace} ${this.where(conditions)}
       ORDER BY embedding <=> ${vector}::halfvec
       LIMIT ${params.topK}`;
@@ -37613,26 +37648,26 @@ var init_postgres = __esm({
         };
       }
       async readSentinel(namespace) {
-        const table = this.requireTable();
-        const [row] = await this.sql`SELECT data FROM repo_vector_sentinels WHERE table_name = ${table} AND namespace = ${namespace}`;
+        const table2 = this.requireTable();
+        const [row] = await missingAsEmpty(this.sql`SELECT data FROM repo_vector_sentinels WHERE table_name = ${table2} AND namespace = ${namespace}`);
         return row ? parseSentinel(JSON.stringify(row.data)) : null;
       }
       async writeSentinel(namespace, sentinel) {
-        const table = this.requireTable();
-        await this.sql`INSERT INTO repo_vector_sentinels (table_name, namespace, data) VALUES (${table}, ${namespace}, ${this.sql.json(sentinel)})
+        const table2 = this.requireTable();
+        await this.sql`INSERT INTO repo_vector_sentinels (table_name, namespace, data) VALUES (${table2}, ${namespace}, ${this.sql.json(sentinel)})
       ON CONFLICT (table_name, namespace) DO UPDATE SET data = EXCLUDED.data, updated_at = now()`;
       }
       async stats() {
-        const table = this.requireTable();
-        const counts = await this.sql`SELECT namespace, count(*)::int AS n FROM ${this.sql(table)} GROUP BY namespace ORDER BY namespace`;
-        const [row] = await this.sql`SELECT name, table_name, dimension, model FROM vector_indexes WHERE table_name = ${table}`;
+        const table2 = this.requireTable();
+        const counts = await this.sql`SELECT namespace, count(*)::int AS n FROM ${this.sql(table2)} GROUP BY namespace ORDER BY namespace`;
+        const [row] = await this.sql`SELECT name, table_name, dimension, model FROM vector_indexes WHERE table_name = ${table2}`;
         const namespaces = counts.map((c) => ({ name: c.namespace, recordCount: c.n }));
-        return { indexName: row?.name ?? table, dimension: row?.dimension, totalRecordCount: namespaces.reduce((n, ns) => n + ns.recordCount, 0), namespaces };
+        return { indexName: row?.name ?? table2, dimension: row?.dimension, totalRecordCount: namespaces.reduce((n, ns) => n + ns.recordCount, 0), namespaces };
       }
       async deleteNamespace(namespace) {
-        const table = this.requireTable();
-        await this.sql`DELETE FROM ${this.sql(table)} WHERE namespace = ${namespace}`;
-        await this.sql`DELETE FROM repo_vector_sentinels WHERE table_name = ${table} AND namespace = ${namespace}`;
+        const table2 = this.requireTable();
+        await this.sql`DELETE FROM ${this.sql(table2)} WHERE namespace = ${namespace}`;
+        await this.sql`DELETE FROM repo_vector_sentinels WHERE table_name = ${table2} AND namespace = ${namespace}`;
       }
       async close() {
         await this.sql.end({ timeout: 5 });
@@ -37653,9 +37688,9 @@ var init_postgres = __esm({
         return this.table;
       }
       target() {
-        const table = this.requireTable();
+        const table2 = this.requireTable();
         if (!isExternal(this.mode)) throw unavailable(`Postgres needs an external embedding provider, not ${describeMode(this.mode)}`);
-        return { table, mode: this.mode };
+        return { table: table2, mode: this.mode };
       }
     };
   }
@@ -37705,11 +37740,12 @@ async function buildMode(cfg, provider, model, knownDimension, dimensions) {
   const dimension = knownDimension ?? await client.probeDimension(model, requested);
   return { provider, model, dimension, dimensions: requested, client };
 }
-async function makeBackend(cfg, mode) {
+async function makeBackend(cfg, mode, opts = {}) {
   if (cfg.store === "pinecone") {
     return PineconeStore.fromApiKey(cfg.pineconeApiKey, { cloud: cfg.cloud, region: cfg.region, rerankModel: cfg.rerankModel }, mode);
   }
   const store = PostgresStore.fromUrl(cfg.databaseUrl, mode);
+  if (opts.readOnly) return store;
   try {
     await store.migrate();
   } catch (err2) {
@@ -37747,8 +37783,8 @@ async function openForIndexing(cfg, identity, log, backendOverride) {
     throw err2;
   }
 }
-async function openForQuery(cfg, identity, backendOverride) {
-  const backend = backendOverride ?? await makeBackend(cfg, { provider: "memory" });
+async function openForQuery(cfg, identity, backendOverride, opts = {}) {
+  const backend = backendOverride ?? await makeBackend(cfg, { provider: "memory" }, opts);
   try {
     const index = await backend.describe(identity.index);
     if (!index) throw new ConfigError(`No index named "${identity.index}" in this ${cfg.store === "pinecone" ? "Pinecone project" : "database"}. Has the indexing action run yet?`);
@@ -37797,7 +37833,7 @@ async function createClient(opts = {}) {
   const cfg = loadConfig(opts.env ?? process.env);
   const root = opts.root === void 0 ? cfg.indexing.root : opts.root;
   const identity = await resolveIdentity(cfg, root, opts.branch);
-  const opened = await openForQuery(cfg, identity, opts.backend);
+  const opened = await openForQuery(cfg, identity, opts.backend, { readOnly: opts.readOnly });
   return new RepoVectorClient(cfg, identity, opened);
 }
 function toEpoch(value, name2, endOfDay = false) {
@@ -40390,8 +40426,8 @@ ${JSON.stringify(symbolNames, null, 2)}`);
             return UTF8ArrayToString(binary2, offset - len, len);
           }
           __name(getString, "getString");
-          function failIf(condition, message) {
-            if (condition) throw new Error(message);
+          function failIf(condition, message2) {
+            if (condition) throw new Error(message2);
           }
           __name(failIf, "failIf");
           var name2 = "dylink.0";
@@ -40542,7 +40578,7 @@ ${JSON.stringify(symbolNames, null, 2)}`);
             target.push(n % 128 | 128, n >> 7);
           }
         }, "uleb128Encode");
-        var sigToWasmTypes = /* @__PURE__ */ __name((sig) => {
+        var sigToWasmTypes = /* @__PURE__ */ __name((sig2) => {
           var typeNames = {
             "i": "i32",
             "j": "i64",
@@ -40553,16 +40589,16 @@ ${JSON.stringify(symbolNames, null, 2)}`);
           };
           var type = {
             parameters: [],
-            results: sig[0] == "v" ? [] : [typeNames[sig[0]]]
+            results: sig2[0] == "v" ? [] : [typeNames[sig2[0]]]
           };
-          for (var i2 = 1; i2 < sig.length; ++i2) {
-            type.parameters.push(typeNames[sig[i2]]);
+          for (var i2 = 1; i2 < sig2.length; ++i2) {
+            type.parameters.push(typeNames[sig2[i2]]);
           }
           return type;
         }, "sigToWasmTypes");
-        var generateFuncType = /* @__PURE__ */ __name((sig, target) => {
-          var sigRet = sig.slice(0, 1);
-          var sigParam = sig.slice(1);
+        var generateFuncType = /* @__PURE__ */ __name((sig2, target) => {
+          var sigRet = sig2.slice(0, 1);
+          var sigParam = sig2.slice(1);
           var typeCodes = {
             "i": 127,
             // i32
@@ -40587,12 +40623,12 @@ ${JSON.stringify(symbolNames, null, 2)}`);
             target.push(1, typeCodes[sigRet]);
           }
         }, "generateFuncType");
-        var convertJsFunctionToWasm = /* @__PURE__ */ __name((func2, sig) => {
+        var convertJsFunctionToWasm = /* @__PURE__ */ __name((func2, sig2) => {
           if (typeof WebAssembly.Function == "function") {
-            return new WebAssembly.Function(sigToWasmTypes(sig), func2);
+            return new WebAssembly.Function(sigToWasmTypes(sig2), func2);
           }
           var typeSectionBody = [1];
-          generateFuncType(sig, typeSectionBody);
+          generateFuncType(sig2, typeSectionBody);
           var bytes = [
             0,
             97,
@@ -40689,7 +40725,7 @@ ${JSON.stringify(symbolNames, null, 2)}`);
           wasmTable.set(idx, func2);
           wasmTableMirror[idx] = wasmTable.get(idx);
         }, "setWasmTableEntry");
-        var addFunction = /* @__PURE__ */ __name((func2, sig) => {
+        var addFunction = /* @__PURE__ */ __name((func2, sig2) => {
           var rtn = getFunctionAddress(func2);
           if (rtn) {
             return rtn;
@@ -40701,7 +40737,7 @@ ${JSON.stringify(symbolNames, null, 2)}`);
             if (!(err2 instanceof TypeError)) {
               throw err2;
             }
-            var wrapped = convertJsFunctionToWasm(func2, sig);
+            var wrapped = convertJsFunctionToWasm(func2, sig2);
             setWasmTableEntry(ret, wrapped);
           }
           functionsInTableMap.set(func2, ret);
@@ -40750,21 +40786,21 @@ ${JSON.stringify(symbolNames, null, 2)}`);
           }
           return true;
         }, "isSymbolDefined");
-        var dynCall = /* @__PURE__ */ __name((sig, ptr, args2 = []) => {
+        var dynCall = /* @__PURE__ */ __name((sig2, ptr, args2 = []) => {
           var rtn = getWasmTableEntry(ptr)(...args2);
           return rtn;
         }, "dynCall");
         var stackSave = /* @__PURE__ */ __name(() => _emscripten_stack_get_current(), "stackSave");
         var stackRestore = /* @__PURE__ */ __name((val) => __emscripten_stack_restore(val), "stackRestore");
-        var createInvokeFunction = /* @__PURE__ */ __name((sig) => (ptr, ...args2) => {
+        var createInvokeFunction = /* @__PURE__ */ __name((sig2) => (ptr, ...args2) => {
           var sp = stackSave();
           try {
-            return dynCall(sig, ptr, args2);
+            return dynCall(sig2, ptr, args2);
           } catch (e) {
             stackRestore(sp);
             if (e !== e + 0) throw e;
             _setThrew(1, 0);
-            if (sig[0] == "j") return 0n;
+            if (sig2[0] == "j") return 0n;
           }
         }, "createInvokeFunction");
         var resolveGlobalSymbol = /* @__PURE__ */ __name((symName, direct = false) => {
@@ -41212,8 +41248,8 @@ ${JSON.stringify(symbolNames, null, 2)}`);
         _fd_write.sig = "iippp";
         function _tree_sitter_log_callback(isLexMessage, messageAddress) {
           if (Module.currentLogCallback) {
-            const message = UTF8ToString(messageAddress);
-            Module.currentLogCallback(message, isLexMessage !== 0);
+            const message2 = UTF8ToString(messageAddress);
+            Module.currentLogCallback(message2, isLexMessage !== 0);
           }
         }
         __name(_tree_sitter_log_callback, "_tree_sitter_log_callback");
@@ -42662,183 +42698,1412 @@ var init_report = __esm({
   }
 });
 
-// src/server.ts
-var server_exports = {};
-__export(server_exports, {
-  createHandler: () => createHandler,
-  serve: () => serve
-});
-import { createHash as createHash3, timingSafeEqual } from "node:crypto";
-import { createServer } from "node:http";
-function lazyClient(source) {
-  if (typeof source !== "function") return { get: async () => source, peek: () => ({ client: source, error: null }) };
-  let client = null;
-  let error2 = null;
-  let lastAttempt = 0;
-  let pending = null;
-  const get = async () => {
-    if (client) return client;
-    if (error2 && Date.now() - lastAttempt < RECONNECT_MS) throw new HttpError(503, error2);
-    pending ??= source().then((c) => {
-      client = c;
-      error2 = null;
-      return c;
-    }).catch((err2) => {
-      error2 = errorMessage(err2);
-      throw new HttpError(503, error2);
-    }).finally(() => {
-      lastAttempt = Date.now();
-      pending = null;
-    });
-    return pending;
-  };
-  return { get, peek: () => ({ client, error: error2 }) };
-}
-function createHandler({ client, config: config2, log }) {
-  const token = config2.server.token;
-  const clients = lazyClient(client);
-  const handler = (req, res) => {
-    const started = performance.now();
-    const url = new URL(req.url ?? "/", "http://localhost");
-    res.on("finish", () => log.info(`${req.method} ${url.pathname} ${res.statusCode} ${Math.round(performance.now() - started)}ms`));
-    if (config2.server.corsOrigin) {
-      res.setHeader("Access-Control-Allow-Origin", config2.server.corsOrigin);
-      res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-      res.setHeader("Vary", "Origin");
-    }
-    route(req, url, clients.get, config2, token).then((body2) => send(res, 200, body2)).catch((err2) => {
-      const status = err2 instanceof HttpError ? err2.status : err2 instanceof ConfigError ? 400 : 500;
-      if (!(err2 instanceof HttpError) && status >= 500) log.error(`${req.method} ${url.pathname}: ${errorMessage(err2)}`);
-      send(res, status, { error: status >= 500 && !(err2 instanceof HttpError) ? "Internal error; see the server log" : errorMessage(err2) });
-    });
-  };
-  return Object.assign(handler, {
-    warm: async () => {
-      await clients.get().catch(() => null);
-      return clients.peek();
-    },
-    close: async () => {
-      await clients.peek().client?.close();
-    }
-  });
-}
-async function route(req, url, getClient, config2, token) {
-  const method = req.method ?? "GET";
-  if (method === "OPTIONS") return {};
-  if (url.pathname === "/health" && method === "GET") {
-    const client2 = await getClient();
-    return { ok: true, store: config2.store, index: client2.identity.index, namespace: client2.identity.namespace };
-  }
-  const known = ["/status", "/search", "/history/search"];
-  if (!known.includes(url.pathname)) throw new HttpError(404, `No route ${url.pathname}`);
-  authorise(req, token);
-  const client = await getClient();
-  if (url.pathname === "/status") {
-    if (method !== "GET") throw new HttpError(405, "Use GET");
-    return client.status();
-  }
-  if (method !== "POST") throw new HttpError(405, "Use POST");
-  const body2 = await readJson(req);
-  if (url.pathname === "/search") return client.search(parse2(SearchBody, body2));
-  return client.searchHistory(parse2(HistoryBody, body2));
-}
-function authorise(req, token) {
-  if (token === null) return;
-  const header = req.headers.authorization ?? "";
-  const given = header.startsWith("Bearer ") ? header.slice(7) : "";
-  const a = createHash3("sha256").update(given).digest();
-  const b2 = createHash3("sha256").update(token).digest();
-  if (given === "" || !timingSafeEqual(a, b2)) throw new HttpError(401, "Missing or wrong bearer token");
-}
-async function readJson(req) {
-  const type = req.headers["content-type"] ?? "";
-  if (!type.includes("application/json")) throw new HttpError(415, "Send Content-Type: application/json");
-  const chunks = [];
-  let size2 = 0;
-  for await (const chunk of req) {
-    size2 += chunk.length;
-    if (size2 > MAX_BODY_BYTES) throw new HttpError(413, `Body larger than ${MAX_BODY_BYTES} bytes`);
-    chunks.push(chunk);
-  }
-  try {
-    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
-  } catch {
-    throw new HttpError(400, "Body is not valid JSON");
-  }
-}
-function parse2(schema2, body2) {
-  const result = schema2.safeParse(body2);
-  if (!result.success) throw new HttpError(400, result.error.issues.map((i2) => `${i2.path.join(".") || "body"}: ${i2.message}`).join("; "));
-  return result.data;
-}
-function send(res, status, body2) {
-  if (res.headersSent) return;
-  const json = JSON.stringify(body2);
-  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Content-Length": Buffer.byteLength(json), "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
-  res.end(json);
-}
-async function serve(env = process.env) {
-  const log = createLogger(env);
-  const config2 = loadConfig(env);
-  if (!config2.server.token && !isLoopback(config2.server.host)) {
-    throw new ConfigError(`Refusing to listen on ${config2.server.host} without REPO_VECTOR_SERVER_TOKEN; set a token, or REPO_VECTOR_SERVER_HOST=127.0.0.1`);
-  }
-  const handler = createHandler({ client: () => createClient({ env, root: null }), config: config2, log });
-  const server = createServer(handler);
-  await new Promise((resolve) => server.listen(config2.server.port, config2.server.host, resolve));
-  log.info(`repo-vector API on http://${config2.server.host}:${config2.server.port} (${config2.store})`);
-  const { client, error: error2 } = await handler.warm();
-  if (client) log.info(`Serving index ${client.identity.index}, namespace ${client.identity.namespace}`);
-  else log.warn(`Not ready yet: ${error2}. /health answers 503 until it is; retrying on request.`);
-  const stop2 = () => {
-    server.close();
-    void handler.close();
-  };
-  process.once("SIGTERM", stop2);
-  process.once("SIGINT", stop2);
-  return server;
-}
-var MAX_BODY_BYTES, filterValue, SearchBody, HistoryBody, RECONNECT_MS, isLoopback;
-var init_server = __esm({
-  "src/server.ts"() {
-    "use strict";
-    init_zod();
-    init_client2();
-    init_config();
-    init_errors2();
-    init_log();
-    MAX_BODY_BYTES = 64 * 1024;
-    filterValue = external_exports.union([external_exports.string(), external_exports.number(), external_exports.boolean(), external_exports.record(external_exports.unknown()), external_exports.array(external_exports.unknown())]);
-    SearchBody = external_exports.object({
-      query: external_exports.string().trim().min(1).max(2e3),
-      topK: external_exports.number().int().min(1).optional(),
-      branch: external_exports.string().max(200).optional(),
-      language: external_exports.string().max(50).optional(),
-      ext: external_exports.string().max(20).optional(),
-      fileName: external_exports.string().max(300).optional(),
-      symbolKind: external_exports.string().max(100).optional(),
-      pathPrefix: external_exports.string().max(500).optional(),
-      filter: external_exports.record(filterValue).optional(),
-      rerank: external_exports.boolean().optional()
-    }).strict();
-    HistoryBody = external_exports.object({
-      query: external_exports.string().trim().min(1).max(2e3),
-      topK: external_exports.number().int().min(1).optional(),
-      branch: external_exports.string().max(200).optional(),
-      since: external_exports.string().max(40).optional(),
-      until: external_exports.string().max(40).optional(),
-      author: external_exports.string().max(200).optional()
-    }).strict();
-    RECONNECT_MS = 5e3;
-    isLoopback = (host) => host === "127.0.0.1" || host === "::1" || host === "localhost";
+// node_modules/@hono/node-server/dist/constants-BLSFu_RU.mjs
+var X_ALREADY_SENT;
+var init_constants_BLSFu_RU = __esm({
+  "node_modules/@hono/node-server/dist/constants-BLSFu_RU.mjs"() {
+    X_ALREADY_SENT = "x-hono-already-sent";
   }
 });
 
-// node_modules/zod/v3/index.js
-var init_v3 = __esm({
-  "node_modules/zod/v3/index.js"() {
-    init_external();
+// node_modules/hono/dist/helper/websocket/index.js
+var defineWebSocketHelper;
+var init_websocket = __esm({
+  "node_modules/hono/dist/helper/websocket/index.js"() {
+    defineWebSocketHelper = (handler) => {
+      return ((...args2) => {
+        if (typeof args2[0] === "function") {
+          const [createEvents, options] = args2;
+          return async function upgradeWebSocket2(c, next) {
+            const result = await handler(c, await createEvents(c), options);
+            if (result) return result;
+            await next();
+          };
+        } else {
+          const [c, events, options] = args2;
+          return (async () => {
+            const upgraded = await handler(c, events, options);
+            if (!upgraded) throw new Error("Failed to upgrade WebSocket");
+            return upgraded;
+          })();
+        }
+      });
+    };
+  }
+});
+
+// node_modules/@hono/node-server/dist/index.mjs
+import { STATUS_CODES, ServerResponse, createServer } from "node:http";
+import { Http2ServerRequest, constants } from "node:http2";
+import { Readable } from "node:stream";
+async function readWithoutBlocking(readPromise) {
+  return Promise.race([readPromise, Promise.resolve().then(() => Promise.resolve(void 0))]);
+}
+function writeFromReadableStreamDefaultReader(reader, writable, currentReadPromise) {
+  const cancel = (error2) => {
+    reader.cancel(error2).catch(() => {
+    });
+  };
+  writable.on("close", cancel);
+  writable.on("error", cancel);
+  (currentReadPromise ?? reader.read()).then(flow, handleStreamError);
+  return reader.closed.finally(() => {
+    writable.off("close", cancel);
+    writable.off("error", cancel);
+  });
+  function handleStreamError(error2) {
+    if (error2) writable.destroy(error2);
+  }
+  function onDrain() {
+    reader.read().then(flow, handleStreamError);
+  }
+  function flow({ done, value }) {
+    try {
+      if (done) writable.end();
+      else if (!writable.write(value)) writable.once("drain", onDrain);
+      else return reader.read().then(flow, handleStreamError);
+    } catch (e) {
+      handleStreamError(e);
+    }
+  }
+}
+function writeFromReadableStream(stream, writable) {
+  if (stream.locked) throw new TypeError("ReadableStream is locked.");
+  else if (writable.destroyed) return;
+  return writeFromReadableStreamDefaultReader(stream.getReader(), writable);
+}
+var RequestError, nonJoinedHeaders, validHeaderName, isHttpWhitespace, normalizeHeaderValue, forbiddenHeaderValue, GlobalHeaders, materializeHeaders, RequestHeaders, newHeadersFromIncoming, reValidRequestUrl, reDotSegment, reValidHost, buildUrl, toRequestError, GlobalRequest, Request$1, wrapBodyStream, byteExactEncodings, isByteExactEncoding, bodyBufferedBeforeDisconnectKey, bodyBufferedLengthBeforeDisconnectKey, toBufferChunk, isRecoverableDisconnectedIncoming, recordBodyBufferedBeforeDisconnect, readBodyBufferedBeforeDisconnect, enqueueBufferedBody, newRequestFromIncoming, getRequestCache, requestCache, incomingKey, urlKey, methodKey, headersKey, abortControllerKey, getAbortController, abortRequest, bodyBufferKey, bodyReadPromiseKey, bodyConsumedDirectlyKey, bodyLockReaderKey, abortReasonKey, newBodyUnusableError, rejectBodyUnusable, textDecoder, consumeBodyDirectOnce, toArrayBuffer, contentType, methodTokenRegExp, normalizeIncomingMethod, validateDirectReadMethod, readBodyWithFastPath, readRawBodyIfAvailable, normalizeAbortError, readBodyDirect, requestPrototype, newRequest, defaultContentType, responseCache, getResponseCache, cacheKey, GlobalResponse, Response$1, validRedirectUrl, parseRedirectUrl, validRedirectStatuses, buildOutgoingHttpHeaders, outgoingEnded, incomingDraining, DRAIN_TIMEOUT_MS, MAX_DRAIN_BYTES, drainIncoming, makeCloseHandler, isImmediateCacheableResponse, handleRequestError, handleFetchError, handleResponseError, flushHeaders, trySetContentLength, writeDefaultHeaders, responseViaCache, isPromise, responseViaResponseObject, getRequestListener, CloseEvent, ErrorEvent, generateConnectionSymbol, CONNECTION_SYMBOL_KEY, WAIT_FOR_WEBSOCKET_SYMBOL, upgradeWebSocket;
+var init_dist = __esm({
+  "node_modules/@hono/node-server/dist/index.mjs"() {
+    init_constants_BLSFu_RU();
+    init_websocket();
+    RequestError = class extends Error {
+      constructor(message2, options) {
+        super(message2, options);
+        this.name = "RequestError";
+      }
+    };
+    nonJoinedHeaders = /* @__PURE__ */ new Set([
+      "age",
+      "authorization",
+      "content-length",
+      "content-type",
+      "etag",
+      "expires",
+      "from",
+      "host",
+      "if-modified-since",
+      "if-unmodified-since",
+      "last-modified",
+      "location",
+      "max-forwards",
+      "proxy-authorization",
+      "referer",
+      "retry-after",
+      "server",
+      "user-agent"
+    ]);
+    validHeaderName = /^[!#$%&'*+\-.^_`|~\dA-Za-z]+$/;
+    isHttpWhitespace = (code) => code === 9 || code === 10 || code === 13 || code === 32;
+    normalizeHeaderValue = (value) => {
+      if (!isHttpWhitespace(value.charCodeAt(0)) && !isHttpWhitespace(value.charCodeAt(value.length - 1))) return value;
+      let start2 = 0;
+      let end = value.length;
+      while (start2 < end && isHttpWhitespace(value.charCodeAt(start2))) start2++;
+      while (end > start2 && isHttpWhitespace(value.charCodeAt(end - 1))) end--;
+      return value.slice(start2, end);
+    };
+    forbiddenHeaderValue = /[\0\r\n]/;
+    GlobalHeaders = globalThis.Headers;
+    materializeHeaders = (rawHeaders, HeadersCtor = GlobalHeaders) => {
+      const headers = new HeadersCtor();
+      for (let i2 = 0; i2 < rawHeaders.length; i2 += 2) {
+        const name2 = rawHeaders[i2];
+        if (!name2.startsWith(":")) headers.append(name2, rawHeaders[i2 + 1]);
+      }
+      return headers;
+    };
+    RequestHeaders = class {
+      #incoming;
+      #rawHeaders;
+      #headers;
+      #invalidValue;
+      constructor(incoming) {
+        this.#incoming = incoming;
+        if (incoming instanceof Http2ServerRequest) this.#rawHeaders = incoming.rawHeaders.slice();
+      }
+      get #lazyRawHeaders() {
+        return this.#rawHeaders ??= this.#incoming.rawHeaders.slice();
+      }
+      get #native() {
+        if (!this.#headers) {
+          this.#headers = materializeHeaders(this.#lazyRawHeaders);
+          this.#rawHeaders = void 0;
+        }
+        return this.#headers;
+      }
+      #normalizedName(name2) {
+        if (typeof name2 !== "string") return;
+        if (!validHeaderName.test(name2)) throw new TypeError(`Invalid header name: ${name2}`);
+        return name2.toLowerCase();
+      }
+      #lookupHttp1(lowerName) {
+        const headers = this.#incoming instanceof Http2ServerRequest ? void 0 : this.#incoming.headers;
+        if (!headers || nonJoinedHeaders.has(lowerName) || lowerName === "set-cookie" || lowerName === "__proto__") return;
+        if (!Object.hasOwn(headers, lowerName)) return null;
+        const rawValue = headers[lowerName];
+        if (typeof rawValue === "string") {
+          const value = normalizeHeaderValue(rawValue);
+          return forbiddenHeaderValue.test(value) ? void 0 : value;
+        }
+      }
+      #lookup(rawHeaders, lowerName) {
+        const separator = lowerName === "cookie" ? "; " : ", ";
+        let value = null;
+        for (let i2 = 0; i2 < rawHeaders.length; i2 += 2) {
+          const rawName = rawHeaders[i2];
+          if (rawName.length === lowerName.length && rawName.toLowerCase() === lowerName) {
+            const rawValue = normalizeHeaderValue(rawHeaders[i2 + 1]);
+            if (forbiddenHeaderValue.test(rawValue)) {
+              this.#invalidValue = true;
+              return;
+            }
+            value = value === null ? rawValue : value + separator + rawValue;
+          }
+        }
+        return value;
+      }
+      append(name2, value) {
+        this.#native.append(name2, value);
+      }
+      delete(name2) {
+        this.#native.delete(name2);
+      }
+      get(name2) {
+        const lowerName = this.#normalizedName(name2);
+        if (lowerName && !this.#headers && !this.#invalidValue) {
+          const http1Value = this.#lookupHttp1(lowerName);
+          if (http1Value !== void 0) return http1Value;
+          const value = this.#lookup(this.#lazyRawHeaders, lowerName);
+          if (value !== void 0) return value;
+        }
+        return this.#native.get(name2);
+      }
+      has(name2) {
+        const lowerName = this.#normalizedName(name2);
+        if (lowerName && !this.#headers && !this.#invalidValue) {
+          const http1Value = this.#lookupHttp1(lowerName);
+          if (http1Value !== void 0) return http1Value !== null;
+          const value = this.#lookup(this.#lazyRawHeaders, lowerName);
+          if (value !== void 0) return value !== null;
+        }
+        return this.#native.has(name2);
+      }
+      set(name2, value) {
+        this.#native.set(name2, value);
+      }
+      getSetCookie() {
+        return this.#native.getSetCookie();
+      }
+      keys() {
+        return this.#native.keys();
+      }
+      values() {
+        return this.#native.values();
+      }
+      entries() {
+        return this.#native.entries();
+      }
+      forEach(callback, thisArg) {
+        this.#native.forEach((value, key) => {
+          callback.call(thisArg, value, key, this);
+        });
+      }
+      [Symbol.iterator]() {
+        return this.entries();
+      }
+    };
+    Object.defineProperty(RequestHeaders.prototype, /* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom"), { value: function(depth, options, inspectFn) {
+      return `Headers (lightweight) ${inspectFn(Object.fromEntries(this), {
+        ...options,
+        depth: depth == null ? null : depth - 1
+      })}`;
+    } });
+    Object.setPrototypeOf(RequestHeaders.prototype, GlobalHeaders.prototype);
+    newHeadersFromIncoming = (incoming) => globalThis.Headers === GlobalHeaders ? new RequestHeaders(incoming) : materializeHeaders(incoming.rawHeaders, globalThis.Headers);
+    reValidRequestUrl = /^\/[!#$&-;=?-\[\]_a-z~]*$/;
+    reDotSegment = /\/\.\.?(?:[/?#]|$)/;
+    reValidHost = /^[a-z0-9._-]+(?::(?:[1-5]\d{3,4}|[6-9]\d{3}))?$/;
+    buildUrl = (scheme, host, incomingUrl) => {
+      const url = `${scheme}://${host}${incomingUrl}`;
+      if (!reValidHost.test(host)) {
+        const urlObj = new URL(url);
+        if (urlObj.hostname.length !== host.length && urlObj.hostname !== (host.includes(":") ? host.replace(/:\d+$/, "") : host).toLowerCase()) throw new RequestError("Invalid host header");
+        return urlObj.href;
+      } else if (incomingUrl.length === 0) return url + "/";
+      else {
+        if (incomingUrl.charCodeAt(0) !== 47) throw new RequestError("Invalid URL");
+        if (!reValidRequestUrl.test(incomingUrl) || reDotSegment.test(incomingUrl)) return new URL(url).href;
+        return url;
+      }
+    };
+    toRequestError = (e) => {
+      if (e instanceof RequestError) return e;
+      return new RequestError(e.message, { cause: e });
+    };
+    GlobalRequest = global.Request;
+    Request$1 = class extends GlobalRequest {
+      constructor(input, options) {
+        if (typeof input === "object" && getRequestCache in input) {
+          const hasReplacementBody = options !== void 0 && "body" in options && options.body != null;
+          if (input[bodyConsumedDirectlyKey] && !hasReplacementBody) throw new TypeError("Cannot construct a Request with a Request object that has already been used.");
+          input = input[getRequestCache]();
+        }
+        if (typeof options?.body?.getReader !== "undefined") options.duplex ??= "half";
+        super(input, options);
+      }
+    };
+    wrapBodyStream = /* @__PURE__ */ Symbol("wrapBodyStream");
+    byteExactEncodings = /* @__PURE__ */ new Set([
+      "latin1",
+      "binary",
+      "hex",
+      "base64",
+      "base64url"
+    ]);
+    isByteExactEncoding = (encoding) => encoding === null || byteExactEncodings.has(encoding);
+    bodyBufferedBeforeDisconnectKey = /* @__PURE__ */ Symbol("bodyBufferedBeforeDisconnect");
+    bodyBufferedLengthBeforeDisconnectKey = /* @__PURE__ */ Symbol("bodyBufferedLengthBeforeDisconnect");
+    toBufferChunk = (chunk, encoding) => Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, encoding ?? "utf8");
+    isRecoverableDisconnectedIncoming = (incoming) => !(incoming instanceof Http2ServerRequest) && !!incoming.complete && !!incoming.readableAborted && typeof incoming.read === "function" && isByteExactEncoding(incoming.readableEncoding);
+    recordBodyBufferedBeforeDisconnect = (incoming) => {
+      if (incoming.readableDidRead || !isRecoverableDisconnectedIncoming(incoming)) return;
+      const incomingWithRecovery = incoming;
+      incomingWithRecovery[bodyBufferedLengthBeforeDisconnectKey] ??= incoming.readableLength;
+    };
+    readBodyBufferedBeforeDisconnect = (incoming, chunks) => {
+      if (incoming.readableDidRead && !chunks || !isRecoverableDisconnectedIncoming(incoming)) return;
+      const incomingWithRecovery = incoming;
+      if (incomingWithRecovery[bodyBufferedBeforeDisconnectKey] !== void 0) return incomingWithRecovery[bodyBufferedBeforeDisconnectKey];
+      let result;
+      const errored = incoming.errored;
+      if (errored && errored.code !== "ECONNRESET") result = errored;
+      else if (incomingWithRecovery[bodyBufferedLengthBeforeDisconnectKey] !== void 0 && incoming.readableLength !== incomingWithRecovery[bodyBufferedLengthBeforeDisconnectKey]) result = newBodyUnusableError();
+      else {
+        const bodyChunks = chunks ?? [];
+        const chunk = incoming.read();
+        if (chunk !== null) bodyChunks.push(toBufferChunk(chunk, incoming.readableEncoding));
+        const buffer2 = bodyChunks.length === 1 ? bodyChunks[0] : Buffer.concat(bodyChunks);
+        result = buffer2;
+        const contentLength = incoming.headers["content-length"];
+        if (typeof contentLength === "string" && /^\d+$/.test(contentLength)) {
+          const expectedLength = Number(contentLength);
+          if (Number.isSafeInteger(expectedLength) && buffer2.length !== expectedLength) result = newBodyUnusableError();
+        }
+      }
+      incomingWithRecovery[bodyBufferedBeforeDisconnectKey] = result;
+      return result;
+    };
+    enqueueBufferedBody = (controller, buffered) => {
+      if (buffered instanceof Error) {
+        controller.error(buffered);
+        return;
+      }
+      if (buffered.length > 0) controller.enqueue(buffered);
+      controller.close();
+    };
+    newRequestFromIncoming = (method, url, headers, incoming, abortController) => {
+      const init2 = {
+        method,
+        headers,
+        signal: abortController.signal
+      };
+      if (method === "TRACE") {
+        init2.method = "GET";
+        const req = new Request$1(url, init2);
+        Object.defineProperty(req, "method", { get() {
+          return "TRACE";
+        } });
+        return req;
+      }
+      if (!(method === "GET" || method === "HEAD")) if ("rawBody" in incoming && incoming.rawBody instanceof Buffer) init2.body = new ReadableStream({ start(controller) {
+        controller.enqueue(incoming.rawBody);
+        controller.close();
+      } });
+      else if (incoming[wrapBodyStream]) {
+        let reader;
+        init2.body = new ReadableStream({ async pull(controller) {
+          try {
+            if (!reader) {
+              const buffered = readBodyBufferedBeforeDisconnect(incoming);
+              if (buffered !== void 0) {
+                enqueueBufferedBody(controller, buffered);
+                return;
+              }
+            }
+            reader ||= Readable.toWeb(incoming).getReader();
+            const { done, value } = await reader.read();
+            if (done) controller.close();
+            else controller.enqueue(value);
+          } catch (error2) {
+            controller.error(error2);
+          }
+        } });
+      } else {
+        const buffered = readBodyBufferedBeforeDisconnect(incoming);
+        if (buffered !== void 0) init2.body = new ReadableStream({ start(controller) {
+          enqueueBufferedBody(controller, buffered);
+        } });
+        else init2.body = Readable.toWeb(incoming);
+      }
+      return new Request$1(url, init2);
+    };
+    getRequestCache = /* @__PURE__ */ Symbol("getRequestCache");
+    requestCache = /* @__PURE__ */ Symbol("requestCache");
+    incomingKey = /* @__PURE__ */ Symbol("incomingKey");
+    urlKey = /* @__PURE__ */ Symbol("urlKey");
+    methodKey = /* @__PURE__ */ Symbol("methodKey");
+    headersKey = /* @__PURE__ */ Symbol("headersKey");
+    abortControllerKey = /* @__PURE__ */ Symbol("abortControllerKey");
+    getAbortController = /* @__PURE__ */ Symbol("getAbortController");
+    abortRequest = /* @__PURE__ */ Symbol("abortRequest");
+    bodyBufferKey = /* @__PURE__ */ Symbol("bodyBuffer");
+    bodyReadPromiseKey = /* @__PURE__ */ Symbol("bodyReadPromise");
+    bodyConsumedDirectlyKey = /* @__PURE__ */ Symbol("bodyConsumedDirectly");
+    bodyLockReaderKey = /* @__PURE__ */ Symbol("bodyLockReader");
+    abortReasonKey = /* @__PURE__ */ Symbol("abortReason");
+    newBodyUnusableError = () => {
+      return /* @__PURE__ */ new TypeError("Body is unusable");
+    };
+    rejectBodyUnusable = () => {
+      return Promise.reject(newBodyUnusableError());
+    };
+    textDecoder = new TextDecoder();
+    consumeBodyDirectOnce = (request) => {
+      if (request[bodyConsumedDirectlyKey]) return rejectBodyUnusable();
+      request[bodyConsumedDirectlyKey] = true;
+    };
+    toArrayBuffer = (buf) => {
+      return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    };
+    contentType = (request) => {
+      return (request[headersKey] ||= newHeadersFromIncoming(request[incomingKey])).get("content-type") || "";
+    };
+    methodTokenRegExp = /^[!#$%&'*+\-.^_`|~0-9A-Za-z]+$/;
+    normalizeIncomingMethod = (method) => {
+      if (typeof method !== "string" || method.length === 0) return "GET";
+      switch (method) {
+        case "DELETE":
+        case "GET":
+        case "HEAD":
+        case "OPTIONS":
+        case "PATCH":
+        case "POST":
+        case "PUT":
+        case "QUERY":
+          return method;
+      }
+      const upper = method.toUpperCase();
+      switch (upper) {
+        case "DELETE":
+        case "GET":
+        case "HEAD":
+        case "OPTIONS":
+        case "POST":
+        case "PUT":
+          return upper;
+        default:
+          return method;
+      }
+    };
+    validateDirectReadMethod = (method) => {
+      if (!methodTokenRegExp.test(method)) return /* @__PURE__ */ new TypeError(`'${method}' is not a valid HTTP method.`);
+      const normalized = method.toUpperCase();
+      if (normalized === "CONNECT" || normalized === "TRACK" || normalized === "TRACE" && method !== "TRACE") return /* @__PURE__ */ new TypeError(`'${method}' HTTP method is unsupported.`);
+    };
+    readBodyWithFastPath = (request, method, fromBuffer) => {
+      if (request[bodyConsumedDirectlyKey]) return rejectBodyUnusable();
+      const methodName = request.method;
+      if (methodName === "GET" || methodName === "HEAD") return request[getRequestCache]()[method]();
+      const methodValidationError = validateDirectReadMethod(methodName);
+      if (methodValidationError) return Promise.reject(methodValidationError);
+      if (request[requestCache]) {
+        if (methodName !== "TRACE") return request[requestCache][method]();
+      }
+      const alreadyUsedError = consumeBodyDirectOnce(request);
+      if (alreadyUsedError) return alreadyUsedError;
+      const raw = readRawBodyIfAvailable(request);
+      if (raw) {
+        const result = Promise.resolve(fromBuffer(raw, request));
+        request[bodyBufferKey] = void 0;
+        return result;
+      }
+      return readBodyDirect(request).then((buf) => {
+        const result = fromBuffer(buf, request);
+        request[bodyBufferKey] = void 0;
+        return result;
+      });
+    };
+    readRawBodyIfAvailable = (request) => {
+      const incoming = request[incomingKey];
+      if ("rawBody" in incoming && incoming.rawBody instanceof Buffer) return incoming.rawBody;
+    };
+    normalizeAbortError = (request, incoming) => {
+      if (incoming.errored) return incoming.errored;
+      const reason = request[abortReasonKey];
+      if (reason !== void 0) return reason instanceof Error ? reason : new Error(String(reason));
+      return /* @__PURE__ */ new Error("Client connection prematurely closed.");
+    };
+    readBodyDirect = (request) => {
+      if (request[bodyBufferKey]) return Promise.resolve(request[bodyBufferKey]);
+      if (request[bodyReadPromiseKey]) return request[bodyReadPromiseKey];
+      const incoming = request[incomingKey];
+      if (incoming.readableDidRead) return rejectBodyUnusable();
+      const buffered = readBodyBufferedBeforeDisconnect(incoming);
+      if (buffered !== void 0) {
+        if (buffered instanceof Error) return Promise.reject(buffered);
+        request[bodyBufferKey] = buffered;
+        return Promise.resolve(buffered);
+      }
+      const promise = new Promise((resolve, reject) => {
+        const chunks = [];
+        let settled = false;
+        const finish = (callback) => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          callback();
+        };
+        const recoverCompleteBodyAfterDisconnect = (error2) => {
+          const streamError = incoming.errored ?? error2;
+          if (!isRecoverableDisconnectedIncoming(incoming) || streamError && streamError.code !== "ECONNRESET") return false;
+          finish(() => {
+            const recovered = readBodyBufferedBeforeDisconnect(incoming, chunks);
+            if (recovered instanceof Error) reject(recovered);
+            else if (recovered === void 0) reject(error2 ?? normalizeAbortError(request, incoming));
+            else {
+              request[bodyBufferKey] = recovered;
+              resolve(recovered);
+            }
+          });
+          return true;
+        };
+        const onData = (chunk) => {
+          chunks.push(toBufferChunk(chunk, incoming.readableEncoding));
+        };
+        const onEnd = () => {
+          finish(() => {
+            const buffer2 = chunks.length === 1 ? chunks[0] : Buffer.concat(chunks);
+            request[bodyBufferKey] = buffer2;
+            resolve(buffer2);
+          });
+        };
+        const onError = (error2) => {
+          if (recoverCompleteBodyAfterDisconnect(error2)) return;
+          finish(() => {
+            reject(error2);
+          });
+        };
+        const onClose = () => {
+          if (incoming.readableEnded) {
+            onEnd();
+            return;
+          }
+          if (recoverCompleteBodyAfterDisconnect()) return;
+          finish(() => {
+            reject(normalizeAbortError(request, incoming));
+          });
+        };
+        const cleanup = () => {
+          incoming.off("data", onData);
+          incoming.off("end", onEnd);
+          incoming.off("error", onError);
+          incoming.off("close", onClose);
+          request[bodyReadPromiseKey] = void 0;
+        };
+        incoming.on("data", onData);
+        incoming.on("end", onEnd);
+        incoming.on("error", onError);
+        incoming.on("close", onClose);
+        queueMicrotask(() => {
+          if (settled) return;
+          if (incoming.readableEnded) onEnd();
+          else if (incoming.errored) onError(incoming.errored);
+          else if (incoming.destroyed) onClose();
+        });
+      });
+      request[bodyReadPromiseKey] = promise;
+      return promise;
+    };
+    requestPrototype = {
+      get method() {
+        return this[methodKey];
+      },
+      get url() {
+        return this[urlKey];
+      },
+      get headers() {
+        return this[headersKey] ||= newHeadersFromIncoming(this[incomingKey]);
+      },
+      [abortRequest](reason) {
+        if (this[abortReasonKey] === void 0) this[abortReasonKey] = reason;
+        const abortController = this[abortControllerKey];
+        if (abortController && !abortController.signal.aborted) abortController.abort(reason);
+      },
+      [getAbortController]() {
+        this[abortControllerKey] ||= new AbortController();
+        if (this[abortReasonKey] !== void 0 && !this[abortControllerKey].signal.aborted) this[abortControllerKey].abort(this[abortReasonKey]);
+        return this[abortControllerKey];
+      },
+      [getRequestCache]() {
+        const abortController = this[getAbortController]();
+        if (this[requestCache]) return this[requestCache];
+        const method = this.method;
+        if (this[bodyConsumedDirectlyKey] && !(method === "GET" || method === "HEAD")) {
+          this[bodyBufferKey] = void 0;
+          const init2 = {
+            method: method === "TRACE" ? "GET" : method,
+            headers: this.headers,
+            signal: abortController.signal
+          };
+          if (method !== "TRACE") {
+            init2.body = new ReadableStream({ start(c) {
+              c.close();
+            } });
+            init2.duplex = "half";
+          }
+          const req = new Request$1(this[urlKey], init2);
+          if (method === "TRACE") Object.defineProperty(req, "method", { get() {
+            return "TRACE";
+          } });
+          return this[requestCache] = req;
+        }
+        return this[requestCache] = newRequestFromIncoming(this.method, this[urlKey], this.headers, this[incomingKey], abortController);
+      },
+      get body() {
+        if (!this[bodyConsumedDirectlyKey]) return this[getRequestCache]().body;
+        const request = this[getRequestCache]();
+        if (!this[bodyLockReaderKey] && request.body) this[bodyLockReaderKey] = request.body.getReader();
+        return request.body;
+      },
+      get bodyUsed() {
+        if (this[bodyConsumedDirectlyKey]) return true;
+        if (this[requestCache]) return this[requestCache].bodyUsed;
+        return false;
+      }
+    };
+    Object.defineProperty(requestPrototype, "signal", { get() {
+      return this[getAbortController]().signal;
+    } });
+    [
+      "cache",
+      "credentials",
+      "destination",
+      "integrity",
+      "mode",
+      "redirect",
+      "referrer",
+      "referrerPolicy",
+      "keepalive"
+    ].forEach((k) => {
+      Object.defineProperty(requestPrototype, k, { get() {
+        return this[getRequestCache]()[k];
+      } });
+    });
+    ["clone", "formData"].forEach((k) => {
+      Object.defineProperty(requestPrototype, k, { value: function() {
+        if (this[bodyConsumedDirectlyKey]) {
+          if (k === "clone") throw newBodyUnusableError();
+          return rejectBodyUnusable();
+        }
+        return this[getRequestCache]()[k]();
+      } });
+    });
+    Object.defineProperty(requestPrototype, "text", { value: function() {
+      return readBodyWithFastPath(this, "text", (buf) => textDecoder.decode(buf));
+    } });
+    Object.defineProperty(requestPrototype, "arrayBuffer", { value: function() {
+      return readBodyWithFastPath(this, "arrayBuffer", (buf) => toArrayBuffer(buf));
+    } });
+    Object.defineProperty(requestPrototype, "blob", { value: function() {
+      return readBodyWithFastPath(this, "blob", (buf, request) => {
+        const type = contentType(request);
+        const init2 = type ? { headers: { "content-type": type } } : void 0;
+        return new Response(buf, init2).blob();
+      });
+    } });
+    Object.defineProperty(requestPrototype, "json", { value: function() {
+      if (this[bodyConsumedDirectlyKey]) return rejectBodyUnusable();
+      return this.text().then(JSON.parse);
+    } });
+    Object.defineProperty(requestPrototype, /* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom"), { value: function(depth, options, inspectFn) {
+      return `Request (lightweight) ${inspectFn({
+        method: this.method,
+        url: this.url,
+        headers: this.headers,
+        nativeRequest: this[requestCache]
+      }, {
+        ...options,
+        depth: depth == null ? null : depth - 1
+      })}`;
+    } });
+    Object.setPrototypeOf(requestPrototype, Request$1.prototype);
+    newRequest = (incoming, defaultHostname) => {
+      const req = Object.create(requestPrototype);
+      req[incomingKey] = incoming;
+      req[methodKey] = normalizeIncomingMethod(incoming.method);
+      const incomingUrl = incoming.url || "";
+      if (incomingUrl[0] !== "/" && (incomingUrl.startsWith("http://") || incomingUrl.startsWith("https://"))) {
+        if (incoming instanceof Http2ServerRequest) throw new RequestError("Absolute URL for :path is not allowed in HTTP/2");
+        try {
+          req[urlKey] = new URL(incomingUrl).href;
+        } catch (e) {
+          throw new RequestError("Invalid absolute URL", { cause: e });
+        }
+        return req;
+      }
+      const host = (incoming instanceof Http2ServerRequest ? incoming.authority : incoming.headers.host) || defaultHostname;
+      if (!host) throw new RequestError("Missing host header");
+      let scheme;
+      if (incoming instanceof Http2ServerRequest) {
+        scheme = incoming.scheme;
+        if (!(scheme === "http" || scheme === "https")) throw new RequestError("Unsupported scheme");
+      } else scheme = incoming.socket && incoming.socket.encrypted ? "https" : "http";
+      try {
+        req[urlKey] = buildUrl(scheme, host, incomingUrl);
+      } catch (e) {
+        if (e instanceof RequestError) throw e;
+        else throw new RequestError("Invalid URL", { cause: e });
+      }
+      return req;
+    };
+    defaultContentType = "text/plain; charset=UTF-8";
+    responseCache = /* @__PURE__ */ Symbol("responseCache");
+    getResponseCache = /* @__PURE__ */ Symbol("getResponseCache");
+    cacheKey = /* @__PURE__ */ Symbol("cache");
+    GlobalResponse = global.Response;
+    Response$1 = class Response$12 {
+      #body;
+      #init;
+      [getResponseCache]() {
+        const cache2 = this[cacheKey];
+        const liveHeaders = cache2 && cache2[2] instanceof Headers ? cache2[2] : void 0;
+        delete this[cacheKey];
+        return this[responseCache] ||= new GlobalResponse(this.#body, liveHeaders ? {
+          status: this.#init?.status,
+          statusText: this.#init?.statusText,
+          headers: liveHeaders
+        } : this.#init);
+      }
+      constructor(body2, init2) {
+        let headers;
+        this.#body = body2;
+        if (init2 instanceof GlobalResponse) {
+          const cachedGlobalResponse = init2[responseCache];
+          if (cachedGlobalResponse) {
+            this.#init = cachedGlobalResponse;
+            this[getResponseCache]();
+            return;
+          }
+          this.#init = init2 instanceof Response$12 ? init2.#init : init2;
+          headers = new Headers(init2.headers);
+        } else this.#init = init2;
+        if (body2 == null || typeof body2 === "string" || typeof body2?.getReader !== "undefined" || body2 instanceof Blob || body2 instanceof Uint8Array) this[cacheKey] = [
+          init2?.status || 200,
+          body2 ?? null,
+          headers || init2?.headers
+        ];
+      }
+      get headers() {
+        const cache2 = this[cacheKey];
+        if (cache2) {
+          if (!(cache2[2] instanceof Headers)) cache2[2] = new Headers(cache2[2] || (cache2[1] === null ? void 0 : { "content-type": defaultContentType }));
+          return cache2[2];
+        }
+        return this[getResponseCache]().headers;
+      }
+      get status() {
+        return this[cacheKey]?.[0] ?? this[getResponseCache]().status;
+      }
+      get ok() {
+        const status = this.status;
+        return status >= 200 && status < 300;
+      }
+    };
+    [
+      "body",
+      "bodyUsed",
+      "redirected",
+      "statusText",
+      "trailers",
+      "type",
+      "url"
+    ].forEach((k) => {
+      Object.defineProperty(Response$1.prototype, k, { get() {
+        return this[getResponseCache]()[k];
+      } });
+    });
+    [
+      "arrayBuffer",
+      "blob",
+      "clone",
+      "formData",
+      "json",
+      "text"
+    ].forEach((k) => {
+      Object.defineProperty(Response$1.prototype, k, { value: function() {
+        return this[getResponseCache]()[k]();
+      } });
+    });
+    Object.defineProperty(Response$1.prototype, /* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom"), { value: function(depth, options, inspectFn) {
+      return `Response (lightweight) ${inspectFn({
+        status: this.status,
+        headers: this.headers,
+        ok: this.ok,
+        nativeResponse: this[responseCache]
+      }, {
+        ...options,
+        depth: depth == null ? null : depth - 1
+      })}`;
+    } });
+    Object.setPrototypeOf(Response$1, GlobalResponse);
+    Object.setPrototypeOf(Response$1.prototype, GlobalResponse.prototype);
+    validRedirectUrl = /^https?:\/\/[!#-;=?-[\]_a-z~A-Z]+$/;
+    parseRedirectUrl = (url) => {
+      if (url instanceof URL) return url.href;
+      if (validRedirectUrl.test(url)) return url;
+      return new URL(url).href;
+    };
+    validRedirectStatuses = /* @__PURE__ */ new Set([
+      301,
+      302,
+      303,
+      307,
+      308
+    ]);
+    Object.defineProperty(Response$1, "redirect", {
+      value: function redirect(url, status = 302) {
+        if (!validRedirectStatuses.has(status)) throw new RangeError("Invalid status code");
+        return new Response$1(null, {
+          status,
+          headers: { location: parseRedirectUrl(url) }
+        });
+      },
+      writable: true,
+      configurable: true
+    });
+    Object.defineProperty(Response$1, "json", {
+      value: function json(data, init2) {
+        const body2 = JSON.stringify(data);
+        if (body2 === void 0) throw new TypeError("The data is not JSON serializable");
+        const initHeaders = init2?.headers;
+        let headers;
+        if (initHeaders) {
+          headers = new Headers(initHeaders);
+          if (!headers.has("content-type")) headers.set("content-type", "application/json");
+        } else headers = { "content-type": "application/json" };
+        return new Response$1(body2, {
+          status: init2?.status ?? 200,
+          statusText: init2?.statusText,
+          headers
+        });
+      },
+      writable: true,
+      configurable: true
+    });
+    buildOutgoingHttpHeaders = (headers, defaultContentType2) => {
+      const res = {};
+      if (!(headers instanceof Headers)) headers = new Headers(headers ?? void 0);
+      if (headers.has("set-cookie")) {
+        const cookies = [];
+        for (const [k, v] of headers) if (k === "set-cookie") cookies.push(v);
+        else res[k] = v;
+        if (cookies.length > 0) res["set-cookie"] = cookies;
+      } else for (const [k, v] of headers) res[k] = v;
+      if (defaultContentType2) res["content-type"] ??= defaultContentType2;
+      return res;
+    };
+    outgoingEnded = /* @__PURE__ */ Symbol("outgoingEnded");
+    incomingDraining = /* @__PURE__ */ Symbol("incomingDraining");
+    DRAIN_TIMEOUT_MS = 500;
+    MAX_DRAIN_BYTES = 64 * 1024 * 1024;
+    drainIncoming = (incoming) => {
+      const incomingWithDrainState = incoming;
+      if (incoming.destroyed || incomingWithDrainState[incomingDraining]) return;
+      incomingWithDrainState[incomingDraining] = true;
+      if (incoming instanceof Http2ServerRequest) {
+        try {
+          incoming.stream?.close?.(constants.NGHTTP2_NO_ERROR);
+        } catch {
+        }
+        return;
+      }
+      let bytesRead = 0;
+      const cleanup = () => {
+        clearTimeout(timer2);
+        incoming.off("data", onData);
+        incoming.off("end", cleanup);
+        incoming.off("error", cleanup);
+      };
+      const forceClose = () => {
+        cleanup();
+        const socket = incoming.socket;
+        if (socket && !socket.destroyed) {
+          if (typeof socket.destroySoon === "function") socket.destroySoon();
+          else if (typeof socket.destroy === "function") socket.destroy();
+        }
+      };
+      const timer2 = setTimeout(forceClose, DRAIN_TIMEOUT_MS);
+      timer2.unref?.();
+      const onData = (chunk) => {
+        bytesRead += chunk.length;
+        if (bytesRead > MAX_DRAIN_BYTES) forceClose();
+      };
+      incoming.on("data", onData);
+      incoming.on("end", cleanup);
+      incoming.on("error", cleanup);
+      incoming.resume();
+    };
+    makeCloseHandler = (req, incoming, outgoing, needsBodyCleanup) => () => {
+      if (incoming.errored) {
+        recordBodyBufferedBeforeDisconnect(incoming);
+        req[abortRequest](incoming.errored.toString());
+      } else if (!outgoing.writableFinished) {
+        recordBodyBufferedBeforeDisconnect(incoming);
+        req[abortRequest]("Client connection prematurely closed.");
+      }
+      if (needsBodyCleanup && !incoming.readableEnded) setTimeout(() => {
+        if (!incoming.readableEnded) setTimeout(() => {
+          drainIncoming(incoming);
+        });
+      });
+    };
+    isImmediateCacheableResponse = (res) => {
+      if (!(cacheKey in res)) return false;
+      const body2 = res[cacheKey][1];
+      return body2 === null || typeof body2 === "string" || body2 instanceof Uint8Array;
+    };
+    handleRequestError = () => new Response(null, { status: 400 });
+    handleFetchError = (e) => new Response(null, { status: e instanceof Error && (e.name === "TimeoutError" || e.constructor.name === "TimeoutError") ? 504 : 500 });
+    handleResponseError = (e, outgoing) => {
+      const err2 = e instanceof Error ? e : new Error("unknown error", { cause: e });
+      if (err2.code === "ERR_STREAM_PREMATURE_CLOSE") console.info("The user aborted a request.");
+      else {
+        console.error(e);
+        if (!outgoing.headersSent) {
+          if (outgoing instanceof ServerResponse) outgoing._contentLength = null;
+          outgoing.writeHead(500, { "Content-Type": "text/plain" });
+        }
+        outgoing.end(`Error: ${err2.message}`);
+        outgoing.destroy(err2);
+      }
+    };
+    flushHeaders = (outgoing) => {
+      if ("flushHeaders" in outgoing && outgoing.writable) outgoing.flushHeaders();
+    };
+    trySetContentLength = (outgoing, status, length) => {
+      const http1 = outgoing;
+      if (http1._contentLength === null && http1._hasBody && http1.useChunkedEncodingByDefault && !http1._removedContLen && status >= 200 && status !== 204 && status !== 304 && !outgoing.hasHeader("content-length") && !outgoing.hasHeader("transfer-encoding") && !outgoing.hasHeader("trailer")) {
+        http1._contentLength = length;
+        return true;
+      }
+      return false;
+    };
+    writeDefaultHeaders = (outgoing, status, length) => {
+      if (trySetContentLength(outgoing, status, length)) outgoing.writeHead(status, { "Content-Type": defaultContentType });
+      else outgoing.writeHead(status, {
+        "Content-Type": defaultContentType,
+        "Content-Length": length
+      });
+    };
+    responseViaCache = async (res, outgoing) => {
+      let [status, body2, header] = res[cacheKey];
+      if (!header) {
+        if (body2 === null) {
+          outgoing.writeHead(status);
+          outgoing.end();
+        } else if (typeof body2 === "string") {
+          writeDefaultHeaders(outgoing, status, Buffer.byteLength(body2));
+          outgoing.end(body2);
+        } else if (body2 instanceof Uint8Array) {
+          writeDefaultHeaders(outgoing, status, body2.byteLength);
+          outgoing.end(body2);
+        } else if (body2 instanceof Blob) {
+          writeDefaultHeaders(outgoing, status, body2.size);
+          outgoing.end(new Uint8Array(await body2.arrayBuffer()));
+        } else {
+          outgoing.writeHead(status, { "Content-Type": defaultContentType });
+          flushHeaders(outgoing);
+          await writeFromReadableStream(body2, outgoing)?.catch((e) => handleResponseError(e, outgoing));
+        }
+        outgoing[outgoingEnded]?.();
+        return;
+      }
+      let hasContentLength = false;
+      let plainHeaders = false;
+      let canAutoLength = true;
+      if (header instanceof Headers) {
+        hasContentLength = header.has("content-length");
+        header = buildOutgoingHttpHeaders(header, body2 === null ? void 0 : defaultContentType);
+      } else if (Array.isArray(header)) {
+        const headerObj = new Headers(header);
+        hasContentLength = headerObj.has("content-length");
+        header = buildOutgoingHttpHeaders(headerObj, body2 === null ? void 0 : defaultContentType);
+      } else {
+        plainHeaders = true;
+        for (const key in header) {
+          if (key.length === 14 && key.toLowerCase() === "content-length") {
+            hasContentLength = true;
+            break;
+          }
+          if (key.length === 17 && key.toLowerCase() === "transfer-encoding" || key.length === 7 && key.toLowerCase() === "trailer") canAutoLength = false;
+        }
+      }
+      if (!hasContentLength) {
+        let length;
+        if (typeof body2 === "string") length = Buffer.byteLength(body2);
+        else if (body2 instanceof Uint8Array) length = body2.byteLength;
+        else if (body2 instanceof Blob) length = body2.size;
+        if (length !== void 0 && (!plainHeaders || !canAutoLength || !trySetContentLength(outgoing, status, length))) {
+          if (plainHeaders) header = { ...header };
+          header["Content-Length"] = length;
+        }
+      }
+      outgoing.writeHead(status, header);
+      if (body2 == null) outgoing.end();
+      else if (typeof body2 === "string" || body2 instanceof Uint8Array) outgoing.end(body2);
+      else if (body2 instanceof Blob) outgoing.end(new Uint8Array(await body2.arrayBuffer()));
+      else {
+        flushHeaders(outgoing);
+        await writeFromReadableStream(body2, outgoing)?.catch((e) => handleResponseError(e, outgoing));
+      }
+      outgoing[outgoingEnded]?.();
+    };
+    isPromise = (res) => typeof res.then === "function";
+    responseViaResponseObject = async (res, outgoing, options = {}) => {
+      if (isPromise(res)) if (options.errorHandler) try {
+        res = await res;
+      } catch (err2) {
+        const errRes = await options.errorHandler(err2);
+        if (!errRes) return;
+        res = errRes;
+      }
+      else res = await res.catch(handleFetchError);
+      if (cacheKey in res) return responseViaCache(res, outgoing);
+      const resHeaderRecord = buildOutgoingHttpHeaders(res.headers, res.body === null ? void 0 : defaultContentType);
+      if (res.body) {
+        const reader = res.body.getReader();
+        const values2 = [];
+        let done = false;
+        let currentReadPromise = void 0;
+        if (resHeaderRecord["transfer-encoding"] !== "chunked") {
+          let maxReadCount = 2;
+          for (let i2 = 0; i2 < maxReadCount; i2++) {
+            currentReadPromise ||= reader.read();
+            const chunk = await readWithoutBlocking(currentReadPromise).catch((e) => {
+              console.error(e);
+              done = true;
+            });
+            if (!chunk) {
+              if (i2 === 1) {
+                await new Promise((resolve) => setTimeout(resolve));
+                maxReadCount = 3;
+                continue;
+              }
+              break;
+            }
+            currentReadPromise = void 0;
+            if (chunk.value) values2.push(chunk.value);
+            if (chunk.done) {
+              done = true;
+              break;
+            }
+          }
+          if (done && !("content-length" in resHeaderRecord)) resHeaderRecord["content-length"] = values2.reduce((acc, value) => acc + value.length, 0);
+        }
+        outgoing.writeHead(res.status, resHeaderRecord);
+        values2.forEach((value) => {
+          outgoing.write(value);
+        });
+        if (done) outgoing.end();
+        else {
+          if (values2.length === 0) flushHeaders(outgoing);
+          await writeFromReadableStreamDefaultReader(reader, outgoing, currentReadPromise);
+        }
+      } else if (resHeaderRecord[X_ALREADY_SENT]) {
+      } else {
+        outgoing.writeHead(res.status, resHeaderRecord);
+        outgoing.end();
+      }
+      outgoing[outgoingEnded]?.();
+    };
+    getRequestListener = (fetchCallback, options = {}) => {
+      const autoCleanupIncoming = options.autoCleanupIncoming ?? true;
+      if (options.overrideGlobalObjects !== false && global.Request !== Request$1) {
+        Object.defineProperty(global, "Request", { value: Request$1 });
+        Object.defineProperty(global, "Response", { value: Response$1 });
+      }
+      return async (incoming, outgoing) => {
+        let res, req;
+        let needsBodyCleanup = false;
+        let closeHandlerAttached = false;
+        const ensureCloseHandler = () => {
+          if (!req || closeHandlerAttached) return;
+          closeHandlerAttached = true;
+          outgoing.on("close", makeCloseHandler(req, incoming, outgoing, needsBodyCleanup));
+        };
+        try {
+          req = newRequest(incoming, options.hostname);
+          needsBodyCleanup = autoCleanupIncoming && !(incoming.method === "GET" || incoming.method === "HEAD");
+          if (needsBodyCleanup) {
+            incoming[wrapBodyStream] = true;
+            if (incoming instanceof Http2ServerRequest) outgoing[outgoingEnded] = () => {
+              if (!incoming.readableEnded) setTimeout(() => {
+                if (!incoming.readableEnded) setTimeout(() => {
+                  incoming.destroy();
+                  outgoing.destroy();
+                });
+              });
+            };
+          }
+          res = fetchCallback(req, {
+            incoming,
+            outgoing
+          });
+          if (!isPromise(res) && isImmediateCacheableResponse(res)) {
+            if (needsBodyCleanup && !incoming.readableEnded) outgoing.once("finish", () => {
+              if (!incoming.readableEnded) drainIncoming(incoming);
+            });
+            return responseViaCache(res, outgoing);
+          }
+          ensureCloseHandler();
+        } catch (e) {
+          if (!res) if (options.errorHandler) {
+            ensureCloseHandler();
+            res = await options.errorHandler(req ? e : toRequestError(e));
+            if (!res) return;
+          } else if (!req) res = handleRequestError();
+          else res = handleFetchError(e);
+          else return handleResponseError(e, outgoing);
+        }
+        try {
+          return await responseViaResponseObject(res, outgoing, options);
+        } catch (e) {
+          return handleResponseError(e, outgoing);
+        }
+      };
+    };
+    CloseEvent = globalThis.CloseEvent ?? class extends Event {
+      #eventInitDict;
+      constructor(type, eventInitDict = {}) {
+        super(type, eventInitDict);
+        this.#eventInitDict = eventInitDict;
+      }
+      get wasClean() {
+        return this.#eventInitDict.wasClean ?? false;
+      }
+      get code() {
+        return this.#eventInitDict.code ?? 0;
+      }
+      get reason() {
+        return this.#eventInitDict.reason ?? "";
+      }
+    };
+    ErrorEvent = globalThis.ErrorEvent ?? class extends Event {
+      #eventInitDict;
+      constructor(type, eventInitDict = {}) {
+        super(type, eventInitDict);
+        this.#eventInitDict = eventInitDict;
+      }
+      get message() {
+        return this.#eventInitDict.message ?? "";
+      }
+      get filename() {
+        return this.#eventInitDict.filename ?? "";
+      }
+      get lineno() {
+        return this.#eventInitDict.lineno ?? 0;
+      }
+      get colno() {
+        return this.#eventInitDict.colno ?? 0;
+      }
+      get error() {
+        return this.#eventInitDict.error ?? null;
+      }
+    };
+    generateConnectionSymbol = () => /* @__PURE__ */ Symbol("connection");
+    CONNECTION_SYMBOL_KEY = /* @__PURE__ */ Symbol("CONNECTION_SYMBOL_KEY");
+    WAIT_FOR_WEBSOCKET_SYMBOL = /* @__PURE__ */ Symbol("WAIT_FOR_WEBSOCKET_SYMBOL");
+    upgradeWebSocket = defineWebSocketHelper(async (c, events, options) => {
+      if (c.req.header("upgrade")?.toLowerCase() !== "websocket") return;
+      const env = c.env;
+      const waitForWebSocket = env[WAIT_FOR_WEBSOCKET_SYMBOL];
+      if (!waitForWebSocket || !env.incoming) return new Response(null, { status: 500 });
+      const connectionSymbol = generateConnectionSymbol();
+      env[CONNECTION_SYMBOL_KEY] = connectionSymbol;
+      (async () => {
+        let ws;
+        try {
+          ws = await waitForWebSocket(env.incoming, connectionSymbol);
+        } catch {
+          return;
+        }
+        const messagesReceivedInStarting = [];
+        const bufferMessage = (data, isBinary) => {
+          messagesReceivedInStarting.push([data, isBinary]);
+        };
+        ws.on("message", bufferMessage);
+        const ctx = {
+          binaryType: "arraybuffer",
+          close(code, reason) {
+            ws.close(code, reason);
+          },
+          protocol: ws.protocol,
+          raw: ws,
+          get readyState() {
+            return ws.readyState;
+          },
+          send(source, opts) {
+            ws.send(source, { compress: opts?.compress });
+          },
+          url: new URL(c.req.url)
+        };
+        try {
+          events?.onOpen?.(new Event("open"), ctx);
+        } catch (e) {
+          (options?.onError ?? console.error)(e);
+        }
+        const handleMessage = (data, isBinary) => {
+          const datas = Array.isArray(data) ? data : [data];
+          for (const data2 of datas) try {
+            events?.onMessage?.(new MessageEvent("message", { data: isBinary ? data2 instanceof ArrayBuffer ? data2 : data2.buffer.slice(data2.byteOffset, data2.byteOffset + data2.byteLength) : typeof data2 === "string" ? data2 : Buffer.from(data2).toString("utf-8") }), ctx);
+          } catch (e) {
+            (options?.onError ?? console.error)(e);
+          }
+        };
+        ws.off("message", bufferMessage);
+        for (const message2 of messagesReceivedInStarting) handleMessage(...message2);
+        ws.on("message", (data, isBinary) => {
+          handleMessage(data, isBinary);
+        });
+        ws.on("close", (code, reason) => {
+          try {
+            events?.onClose?.(new CloseEvent("close", {
+              code,
+              reason: reason.toString()
+            }), ctx);
+          } catch (e) {
+            (options?.onError ?? console.error)(e);
+          }
+        });
+        ws.on("error", (error2) => {
+          try {
+            events?.onError?.(new ErrorEvent("error", { error: error2 }), ctx);
+          } catch (e) {
+            (options?.onError ?? console.error)(e);
+          }
+        });
+      })();
+      return new Response();
+    });
+  }
+});
+
+// node_modules/content-type/index.js
+var require_content_type = __commonJS({
+  "node_modules/content-type/index.js"(exports) {
+    "use strict";
+    var PARAM_REGEXP = /; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) */g;
+    var TEXT_REGEXP = /^[\u000b\u0020-\u007e\u0080-\u00ff]+$/;
+    var TOKEN_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/;
+    var QESC_REGEXP = /\\([\u000b\u0020-\u00ff])/g;
+    var QUOTE_REGEXP = /([\\"])/g;
+    var TYPE_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+\/[!#$%&'*+.^_`|~0-9A-Za-z-]+$/;
+    exports.format = format;
+    exports.parse = parse5;
+    function format(obj) {
+      if (!obj || typeof obj !== "object") {
+        throw new TypeError("argument obj is required");
+      }
+      var parameters = obj.parameters;
+      var type = obj.type;
+      if (!type || !TYPE_REGEXP.test(type)) {
+        throw new TypeError("invalid type");
+      }
+      var string3 = type;
+      if (parameters && typeof parameters === "object") {
+        var param;
+        var params = Object.keys(parameters).sort();
+        for (var i2 = 0; i2 < params.length; i2++) {
+          param = params[i2];
+          if (!TOKEN_REGEXP.test(param)) {
+            throw new TypeError("invalid parameter name");
+          }
+          string3 += "; " + param + "=" + qstring(parameters[param]);
+        }
+      }
+      return string3;
+    }
+    function parse5(string3) {
+      if (!string3) {
+        throw new TypeError("argument string is required");
+      }
+      var header = typeof string3 === "object" ? getcontenttype(string3) : string3;
+      if (typeof header !== "string") {
+        throw new TypeError("argument string is required to be a string");
+      }
+      var index = header.indexOf(";");
+      var type = index !== -1 ? header.slice(0, index).trim() : header.trim();
+      if (!TYPE_REGEXP.test(type)) {
+        throw new TypeError("invalid media type");
+      }
+      var obj = new ContentType(type.toLowerCase());
+      if (index !== -1) {
+        var key;
+        var match;
+        var value;
+        PARAM_REGEXP.lastIndex = index;
+        while (match = PARAM_REGEXP.exec(header)) {
+          if (match.index !== index) {
+            throw new TypeError("invalid parameter format");
+          }
+          index += match[0].length;
+          key = match[1].toLowerCase();
+          value = match[2];
+          if (value.charCodeAt(0) === 34) {
+            value = value.slice(1, -1);
+            if (value.indexOf("\\") !== -1) {
+              value = value.replace(QESC_REGEXP, "$1");
+            }
+          }
+          obj.parameters[key] = value;
+        }
+        if (index !== header.length) {
+          throw new TypeError("invalid parameter format");
+        }
+      }
+      return obj;
+    }
+    function getcontenttype(obj) {
+      var header;
+      if (typeof obj.getHeader === "function") {
+        header = obj.getHeader("content-type");
+      } else if (typeof obj.headers === "object") {
+        header = obj.headers && obj.headers["content-type"];
+      }
+      if (typeof header !== "string") {
+        throw new TypeError("content-type header is missing from object");
+      }
+      return header;
+    }
+    function qstring(val) {
+      var str = String(val);
+      if (TOKEN_REGEXP.test(str)) {
+        return str;
+      }
+      if (str.length > 0 && !TEXT_REGEXP.test(str)) {
+        throw new TypeError("invalid parameter value");
+      }
+      return '"' + str.replace(QUOTE_REGEXP, "\\$1") + '"';
+    }
+    function ContentType(type) {
+      this.parameters = /* @__PURE__ */ Object.create(null);
+      this.type = type;
+    }
+  }
+});
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/mediaType.js
+function mediaTypeEssence(header) {
+  if (!header) {
+    return void 0;
+  }
+  try {
+    return import_content_type.default.parse(header).type;
+  } catch {
+    const essence = (header.split(";", 1)[0] ?? "").trim().toLowerCase();
+    if (essence === "" || header.slice(essence.length).includes(",")) {
+      return void 0;
+    }
+    return essence;
+  }
+}
+function isJsonContentType(header) {
+  if (header === "application/json") {
+    return true;
+  }
+  return mediaTypeEssence(header) === "application/json";
+}
+var import_content_type;
+var init_mediaType = __esm({
+  "node_modules/@modelcontextprotocol/sdk/dist/esm/shared/mediaType.js"() {
+    import_content_type = __toESM(require_content_type(), 1);
+  }
+});
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/requestBody.js
+function requestBodyTooLargeMessage(maxBytes) {
+  return `Payload Too Large: Request body must not exceed ${maxBytes} bytes`;
+}
+function resolveMaxRequestBodySize(value) {
+  if (value === void 0) {
+    return DEFAULT_MAX_REQUEST_BODY_SIZE;
+  }
+  if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
+    throw new RangeError(`maxRequestBodySize must be a positive number of bytes, got ${String(value)}`);
+  }
+  return value;
+}
+async function readRequestBody(request, maxBytes = DEFAULT_MAX_REQUEST_BODY_SIZE) {
+  if (Number(request.headers.get("content-length")) > maxBytes) {
+    return { tooLarge: true };
+  }
+  if (request.body === null) {
+    return { tooLarge: false, text: "" };
+  }
+  const reader = request.body.getReader();
+  const decoder2 = new TextDecoder();
+  let received = 0;
+  let text = "";
+  try {
+    for (; ; ) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      received += value.byteLength;
+      if (received > maxBytes) {
+        return { tooLarge: true };
+      }
+      text += decoder2.decode(value, { stream: true });
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  return { tooLarge: false, text: text + decoder2.decode() };
+}
+var DEFAULT_MAX_REQUEST_BODY_SIZE, MAX_BATCH_SIZE;
+var init_requestBody = __esm({
+  "node_modules/@modelcontextprotocol/sdk/dist/esm/server/requestBody.js"() {
+    DEFAULT_MAX_REQUEST_BODY_SIZE = 4 * 1024 * 1024;
+    MAX_BATCH_SIZE = 100;
+  }
+});
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/sseKeepAlive.js
+function armSseKeepAlive(intervalMs, onTick) {
+  if (!Number.isFinite(intervalMs) || intervalMs < 1) {
+    return void 0;
+  }
+  const timer2 = setInterval(onTick, Math.min(intervalMs, MAX_TIMER_DELAY_MS));
+  timer2.unref?.();
+  return timer2;
+}
+var DEFAULT_SSE_KEEP_ALIVE_MS, MAX_TIMER_DELAY_MS;
+var init_sseKeepAlive = __esm({
+  "node_modules/@modelcontextprotocol/sdk/dist/esm/server/sseKeepAlive.js"() {
+    DEFAULT_SSE_KEEP_ALIVE_MS = 15e3;
+    MAX_TIMER_DELAY_MS = 2 ** 31 - 1;
   }
 });
 
@@ -43302,14 +44567,14 @@ function prefixIssues(path10, issues) {
     return iss;
   });
 }
-function unwrapMessage(message) {
-  return typeof message === "string" ? message : message?.message;
+function unwrapMessage(message2) {
+  return typeof message2 === "string" ? message2 : message2?.message;
 }
 function finalizeIssue(iss, ctx, config2) {
   const full = { ...iss, path: iss.path ?? [] };
   if (!iss.message) {
-    const message = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
-    full.message = message;
+    const message2 = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
+    full.message = message2;
   }
   delete full.inst;
   delete full.continue;
@@ -43515,7 +44780,7 @@ var init_errors4 = __esm({
 });
 
 // node_modules/zod/v4/core/parse.js
-var _parse, parse3, _parseAsync, parseAsync, _safeParse, safeParse, _safeParseAsync, safeParseAsync;
+var _parse, parse2, _parseAsync, parseAsync, _safeParse, safeParse, _safeParseAsync, safeParseAsync;
 var init_parse = __esm({
   "node_modules/zod/v4/core/parse.js"() {
     init_core();
@@ -43534,7 +44799,7 @@ var init_parse = __esm({
       }
       return result.value;
     };
-    parse3 = /* @__PURE__ */ _parse($ZodRealError);
+    parse2 = /* @__PURE__ */ _parse($ZodRealError);
     _parseAsync = (_Err) => async (schema2, value, _ctx, params) => {
       const ctx = _ctx ? Object.assign(_ctx, { async: true }) : { async: true };
       let result = schema2._zod.run({ value, issues: [] }, ctx);
@@ -44829,7 +46094,7 @@ var init_schemas = __esm({
         return (payload, ctx) => fn(shape, payload, ctx);
       };
       let fastpass;
-      const isObject3 = isObject2;
+      const isObject4 = isObject2;
       const jit = !globalConfig.jitless;
       const allowsEval2 = allowsEval;
       const fastEnabled = jit && allowsEval2.value;
@@ -44838,7 +46103,7 @@ var init_schemas = __esm({
       inst._zod.parse = (payload, ctx) => {
         value ?? (value = _normalized.value);
         const input = payload.value;
-        if (!isObject3(input)) {
+        if (!isObject4(input)) {
           payload.issues.push({
             expected: "object",
             code: "invalid_type",
@@ -46157,24 +47422,24 @@ var init_to_json_schema = __esm({
             const _json = result.schema;
             switch (def2.type) {
               case "string": {
-                const json = _json;
-                json.type = "string";
+                const json2 = _json;
+                json2.type = "string";
                 const { minimum, maximum, format, patterns, contentEncoding } = schema2._zod.bag;
                 if (typeof minimum === "number")
-                  json.minLength = minimum;
+                  json2.minLength = minimum;
                 if (typeof maximum === "number")
-                  json.maxLength = maximum;
+                  json2.maxLength = maximum;
                 if (format) {
-                  json.format = formatMap[format] ?? format;
-                  if (json.format === "")
-                    delete json.format;
+                  json2.format = formatMap[format] ?? format;
+                  if (json2.format === "")
+                    delete json2.format;
                 }
                 if (contentEncoding)
-                  json.contentEncoding = contentEncoding;
+                  json2.contentEncoding = contentEncoding;
                 if (patterns && patterns.size > 0) {
                   const regexes = [...patterns];
                   if (regexes.length === 1)
-                    json.pattern = regexes[0].source;
+                    json2.pattern = regexes[0].source;
                   else if (regexes.length > 1) {
                     result.schema.allOf = [
                       ...regexes.map((regex) => ({
@@ -46187,41 +47452,41 @@ var init_to_json_schema = __esm({
                 break;
               }
               case "number": {
-                const json = _json;
+                const json2 = _json;
                 const { minimum, maximum, format, multipleOf, exclusiveMaximum, exclusiveMinimum } = schema2._zod.bag;
                 if (typeof format === "string" && format.includes("int"))
-                  json.type = "integer";
+                  json2.type = "integer";
                 else
-                  json.type = "number";
+                  json2.type = "number";
                 if (typeof exclusiveMinimum === "number")
-                  json.exclusiveMinimum = exclusiveMinimum;
+                  json2.exclusiveMinimum = exclusiveMinimum;
                 if (typeof minimum === "number") {
-                  json.minimum = minimum;
+                  json2.minimum = minimum;
                   if (typeof exclusiveMinimum === "number") {
                     if (exclusiveMinimum >= minimum)
-                      delete json.minimum;
+                      delete json2.minimum;
                     else
-                      delete json.exclusiveMinimum;
+                      delete json2.exclusiveMinimum;
                   }
                 }
                 if (typeof exclusiveMaximum === "number")
-                  json.exclusiveMaximum = exclusiveMaximum;
+                  json2.exclusiveMaximum = exclusiveMaximum;
                 if (typeof maximum === "number") {
-                  json.maximum = maximum;
+                  json2.maximum = maximum;
                   if (typeof exclusiveMaximum === "number") {
                     if (exclusiveMaximum <= maximum)
-                      delete json.maximum;
+                      delete json2.maximum;
                     else
-                      delete json.exclusiveMaximum;
+                      delete json2.exclusiveMaximum;
                   }
                 }
                 if (typeof multipleOf === "number")
-                  json.multipleOf = multipleOf;
+                  json2.multipleOf = multipleOf;
                 break;
               }
               case "boolean": {
-                const json = _json;
-                json.type = "boolean";
+                const json2 = _json;
+                json2.type = "boolean";
                 break;
               }
               case "bigint": {
@@ -46269,23 +47534,23 @@ var init_to_json_schema = __esm({
                 break;
               }
               case "array": {
-                const json = _json;
+                const json2 = _json;
                 const { minimum, maximum } = schema2._zod.bag;
                 if (typeof minimum === "number")
-                  json.minItems = minimum;
+                  json2.minItems = minimum;
                 if (typeof maximum === "number")
-                  json.maxItems = maximum;
-                json.type = "array";
-                json.items = this.process(def2.element, { ...params, path: [...params.path, "items"] });
+                  json2.maxItems = maximum;
+                json2.type = "array";
+                json2.items = this.process(def2.element, { ...params, path: [...params.path, "items"] });
                 break;
               }
               case "object": {
-                const json = _json;
-                json.type = "object";
-                json.properties = {};
+                const json2 = _json;
+                json2.type = "object";
+                json2.properties = {};
                 const shape = def2.shape;
                 for (const key in shape) {
-                  json.properties[key] = this.process(shape[key], {
+                  json2.properties[key] = this.process(shape[key], {
                     ...params,
                     path: [...params.path, "properties", key]
                   });
@@ -46300,15 +47565,15 @@ var init_to_json_schema = __esm({
                   }
                 }));
                 if (requiredKeys.size > 0) {
-                  json.required = Array.from(requiredKeys);
+                  json2.required = Array.from(requiredKeys);
                 }
                 if (def2.catchall?._zod.def.type === "never") {
-                  json.additionalProperties = false;
+                  json2.additionalProperties = false;
                 } else if (!def2.catchall) {
                   if (this.io === "output")
-                    json.additionalProperties = false;
+                    json2.additionalProperties = false;
                 } else if (def2.catchall) {
-                  json.additionalProperties = this.process(def2.catchall, {
+                  json2.additionalProperties = this.process(def2.catchall, {
                     ...params,
                     path: [...params.path, "additionalProperties"]
                   });
@@ -46316,15 +47581,15 @@ var init_to_json_schema = __esm({
                 break;
               }
               case "union": {
-                const json = _json;
-                json.anyOf = def2.options.map((x, i2) => this.process(x, {
+                const json2 = _json;
+                json2.anyOf = def2.options.map((x, i2) => this.process(x, {
                   ...params,
                   path: [...params.path, "anyOf", i2]
                 }));
                 break;
               }
               case "intersection": {
-                const json = _json;
+                const json2 = _json;
                 const a = this.process(def2.left, {
                   ...params,
                   path: [...params.path, "allOf", 0]
@@ -46338,17 +47603,17 @@ var init_to_json_schema = __esm({
                   ...isSimpleIntersection(a) ? a.allOf : [a],
                   ...isSimpleIntersection(b2) ? b2.allOf : [b2]
                 ];
-                json.allOf = allOf;
+                json2.allOf = allOf;
                 break;
               }
               case "tuple": {
-                const json = _json;
-                json.type = "array";
+                const json2 = _json;
+                json2.type = "array";
                 const prefixItems = def2.items.map((x, i2) => this.process(x, { ...params, path: [...params.path, "prefixItems", i2] }));
                 if (this.target === "draft-2020-12") {
-                  json.prefixItems = prefixItems;
+                  json2.prefixItems = prefixItems;
                 } else {
-                  json.items = prefixItems;
+                  json2.items = prefixItems;
                 }
                 if (def2.rest) {
                   const rest = this.process(def2.rest, {
@@ -46356,29 +47621,29 @@ var init_to_json_schema = __esm({
                     path: [...params.path, "items"]
                   });
                   if (this.target === "draft-2020-12") {
-                    json.items = rest;
+                    json2.items = rest;
                   } else {
-                    json.additionalItems = rest;
+                    json2.additionalItems = rest;
                   }
                 }
                 if (def2.rest) {
-                  json.items = this.process(def2.rest, {
+                  json2.items = this.process(def2.rest, {
                     ...params,
                     path: [...params.path, "items"]
                   });
                 }
                 const { minimum, maximum } = schema2._zod.bag;
                 if (typeof minimum === "number")
-                  json.minItems = minimum;
+                  json2.minItems = minimum;
                 if (typeof maximum === "number")
-                  json.maxItems = maximum;
+                  json2.maxItems = maximum;
                 break;
               }
               case "record": {
-                const json = _json;
-                json.type = "object";
-                json.propertyNames = this.process(def2.keyType, { ...params, path: [...params.path, "propertyNames"] });
-                json.additionalProperties = this.process(def2.valueType, {
+                const json2 = _json;
+                json2.type = "object";
+                json2.propertyNames = this.process(def2.keyType, { ...params, path: [...params.path, "propertyNames"] });
+                json2.additionalProperties = this.process(def2.valueType, {
                   ...params,
                   path: [...params.path, "additionalProperties"]
                 });
@@ -46397,17 +47662,17 @@ var init_to_json_schema = __esm({
                 break;
               }
               case "enum": {
-                const json = _json;
+                const json2 = _json;
                 const values2 = getEnumValues(def2.entries);
                 if (values2.every((v) => typeof v === "number"))
-                  json.type = "number";
+                  json2.type = "number";
                 if (values2.every((v) => typeof v === "string"))
-                  json.type = "string";
-                json.enum = values2;
+                  json2.type = "string";
+                json2.enum = values2;
                 break;
               }
               case "literal": {
-                const json = _json;
+                const json2 = _json;
                 const vals = [];
                 for (const val of def2.values) {
                   if (val === void 0) {
@@ -46428,23 +47693,23 @@ var init_to_json_schema = __esm({
                 if (vals.length === 0) {
                 } else if (vals.length === 1) {
                   const val = vals[0];
-                  json.type = val === null ? "null" : typeof val;
-                  json.const = val;
+                  json2.type = val === null ? "null" : typeof val;
+                  json2.const = val;
                 } else {
                   if (vals.every((v) => typeof v === "number"))
-                    json.type = "number";
+                    json2.type = "number";
                   if (vals.every((v) => typeof v === "string"))
-                    json.type = "string";
+                    json2.type = "string";
                   if (vals.every((v) => typeof v === "boolean"))
-                    json.type = "string";
+                    json2.type = "string";
                   if (vals.every((v) => v === null))
-                    json.type = "null";
-                  json.enum = vals;
+                    json2.type = "null";
+                  json2.enum = vals;
                 }
                 break;
               }
               case "file": {
-                const json = _json;
+                const json2 = _json;
                 const file = {
                   type: "string",
                   format: "binary",
@@ -46458,15 +47723,15 @@ var init_to_json_schema = __esm({
                 if (mime) {
                   if (mime.length === 1) {
                     file.contentMediaType = mime[0];
-                    Object.assign(json, file);
+                    Object.assign(json2, file);
                   } else {
-                    json.anyOf = mime.map((m) => {
+                    json2.anyOf = mime.map((m) => {
                       const mFile = { ...file, contentMediaType: m };
                       return mFile;
                     });
                   }
                 } else {
-                  Object.assign(json, file);
+                  Object.assign(json2, file);
                 }
                 break;
               }
@@ -46487,8 +47752,8 @@ var init_to_json_schema = __esm({
                 break;
               }
               case "success": {
-                const json = _json;
-                json.type = "boolean";
+                const json2 = _json;
+                json2.type = "boolean";
                 break;
               }
               case "default": {
@@ -46523,12 +47788,12 @@ var init_to_json_schema = __esm({
                 break;
               }
               case "template_literal": {
-                const json = _json;
+                const json2 = _json;
                 const pattern = schema2._zod.pattern;
                 if (!pattern)
                   throw new Error("Pattern not found in template literal");
-                json.type = "string";
-                json.pattern = pattern.source;
+                json2.type = "string";
+                json2.pattern = pattern.source;
                 break;
               }
               case "pipe": {
@@ -46769,289 +48034,16 @@ var init_core2 = __esm({
   }
 });
 
-// node_modules/zod/v4/mini/parse.js
-var init_parse2 = __esm({
-  "node_modules/zod/v4/mini/parse.js"() {
-    init_core2();
-  }
-});
-
-// node_modules/zod/v4/mini/schemas.js
-function object(shape, params) {
-  const def2 = {
-    type: "object",
-    get shape() {
-      util_exports.assignProp(this, "shape", { ...shape });
-      return this.shape;
-    },
-    ...util_exports.normalizeParams(params)
-  };
-  return new ZodMiniObject(def2);
-}
-var ZodMiniType, ZodMiniObject;
-var init_schemas2 = __esm({
-  "node_modules/zod/v4/mini/schemas.js"() {
-    init_core2();
-    init_core2();
-    init_parse2();
-    ZodMiniType = /* @__PURE__ */ $constructor("ZodMiniType", (inst, def2) => {
-      if (!inst._zod)
-        throw new Error("Uninitialized schema in ZodMiniType.");
-      $ZodType.init(inst, def2);
-      inst.def = def2;
-      inst.parse = (data, params) => parse3(inst, data, params, { callee: inst.parse });
-      inst.safeParse = (data, params) => safeParse(inst, data, params);
-      inst.parseAsync = async (data, params) => parseAsync(inst, data, params, { callee: inst.parseAsync });
-      inst.safeParseAsync = async (data, params) => safeParseAsync(inst, data, params);
-      inst.check = (...checks) => {
-        return inst.clone(
-          {
-            ...def2,
-            checks: [
-              ...def2.checks ?? [],
-              ...checks.map((ch) => typeof ch === "function" ? { _zod: { check: ch, def: { check: "custom" }, onattach: [] } } : ch)
-            ]
-          }
-          // { parent: true }
-        );
-      };
-      inst.clone = (_def, params) => clone(inst, _def, params);
-      inst.brand = () => inst;
-      inst.register = ((reg, meta) => {
-        reg.add(inst, meta);
-        return inst;
-      });
-    });
-    ZodMiniObject = /* @__PURE__ */ $constructor("ZodMiniObject", (inst, def2) => {
-      $ZodObject.init(inst, def2);
-      ZodMiniType.init(inst, def2);
-      util_exports.defineLazy(inst, "shape", () => def2.shape);
-    });
-  }
-});
-
-// node_modules/zod/v4/mini/checks.js
-var init_checks2 = __esm({
-  "node_modules/zod/v4/mini/checks.js"() {
-  }
-});
-
-// node_modules/zod/v4/mini/iso.js
-var init_iso = __esm({
-  "node_modules/zod/v4/mini/iso.js"() {
-  }
-});
-
-// node_modules/zod/v4/mini/coerce.js
-var init_coerce = __esm({
-  "node_modules/zod/v4/mini/coerce.js"() {
-  }
-});
-
-// node_modules/zod/v4/mini/external.js
-var init_external2 = __esm({
-  "node_modules/zod/v4/mini/external.js"() {
-    init_core2();
-    init_parse2();
-    init_schemas2();
-    init_checks2();
-    init_core2();
-    init_locales();
-    init_iso();
-    init_coerce();
-  }
-});
-
-// node_modules/zod/v4/mini/index.js
-var init_mini = __esm({
-  "node_modules/zod/v4/mini/index.js"() {
-    init_external2();
-  }
-});
-
-// node_modules/zod/v4-mini/index.js
-var init_v4_mini = __esm({
-  "node_modules/zod/v4-mini/index.js"() {
-    init_mini();
-  }
-});
-
-// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
-function isZ4Schema(s) {
-  const schema2 = s;
-  return !!schema2._zod;
-}
-function objectFromShape(shape) {
-  const values2 = Object.values(shape);
-  if (values2.length === 0)
-    return object({});
-  const allV4 = values2.every(isZ4Schema);
-  const allV3 = values2.every((s) => !isZ4Schema(s));
-  if (allV4)
-    return object(shape);
-  if (allV3)
-    return objectType(shape);
-  throw new Error("Mixed Zod versions detected in object shape.");
-}
-function safeParse2(schema2, data) {
-  if (isZ4Schema(schema2)) {
-    const result2 = safeParse(schema2, data);
-    return result2;
-  }
-  const v3Schema = schema2;
-  const result = v3Schema.safeParse(data);
-  return result;
-}
-async function safeParseAsync2(schema2, data) {
-  if (isZ4Schema(schema2)) {
-    const result2 = await safeParseAsync(schema2, data);
-    return result2;
-  }
-  const v3Schema = schema2;
-  const result = await v3Schema.safeParseAsync(data);
-  return result;
-}
-function getObjectShape(schema2) {
-  if (!schema2)
-    return void 0;
-  let rawShape;
-  if (isZ4Schema(schema2)) {
-    const v4Schema = schema2;
-    rawShape = v4Schema._zod?.def?.shape;
-  } else {
-    const v3Schema = schema2;
-    rawShape = v3Schema.shape;
-  }
-  if (!rawShape)
-    return void 0;
-  if (typeof rawShape === "function") {
-    try {
-      return rawShape();
-    } catch {
-      return void 0;
-    }
-  }
-  return rawShape;
-}
-function normalizeObjectSchema(schema2) {
-  if (!schema2)
-    return void 0;
-  if (typeof schema2 === "object") {
-    const asV3 = schema2;
-    const asV4 = schema2;
-    if (!asV3._def && !asV4._zod) {
-      const values2 = Object.values(schema2);
-      if (values2.length > 0 && values2.every((v) => typeof v === "object" && v !== null && (v._def !== void 0 || v._zod !== void 0 || typeof v.parse === "function"))) {
-        return objectFromShape(schema2);
-      }
-    }
-  }
-  if (isZ4Schema(schema2)) {
-    const v4Schema = schema2;
-    const def2 = v4Schema._zod?.def;
-    if (def2 && (def2.type === "object" || def2.shape !== void 0)) {
-      return schema2;
-    }
-  } else {
-    const v3Schema = schema2;
-    if (v3Schema.shape !== void 0) {
-      return schema2;
-    }
-  }
-  return void 0;
-}
-function getDotPath(path10) {
-  if (path10.length === 0) {
-    return "object root";
-  }
-  return path10.reduce((acc, seg, index) => {
-    if (index === 0) {
-      return String(seg);
-    }
-    if (typeof seg === "number") {
-      return `${acc}[${seg}]`;
-    }
-    return `${acc}.${seg}`;
-  }, "");
-}
-function getParseErrorMessage(error2) {
-  if (error2 && typeof error2 === "object") {
-    if ("issues" in error2 && Array.isArray(error2.issues) && error2.issues.length > 0) {
-      return error2.issues.map((i2) => {
-        if (!i2.path?.length) {
-          return i2.message;
-        }
-        return `${i2.message} at ${getDotPath(i2.path)}`;
-      }).join("\n");
-    }
-    if ("message" in error2 && typeof error2.message === "string") {
-      return error2.message;
-    }
-    try {
-      return JSON.stringify(error2);
-    } catch {
-      return String(error2);
-    }
-  }
-  return String(error2);
-}
-function getSchemaDescription(schema2) {
-  return schema2.description;
-}
-function isSchemaOptional(schema2) {
-  if (isZ4Schema(schema2)) {
-    const v4Schema = schema2;
-    return v4Schema._zod?.def?.type === "optional";
-  }
-  const v3Schema = schema2;
-  if (typeof schema2.isOptional === "function") {
-    return schema2.isOptional();
-  }
-  return v3Schema._def?.typeName === "ZodOptional";
-}
-function getLiteralValue(schema2) {
-  if (isZ4Schema(schema2)) {
-    const v4Schema = schema2;
-    const def3 = v4Schema._zod?.def;
-    if (def3) {
-      if (def3.value !== void 0)
-        return def3.value;
-      if (Array.isArray(def3.values) && def3.values.length > 0) {
-        return def3.values[0];
-      }
-    }
-  }
-  const v3Schema = schema2;
-  const def2 = v3Schema._def;
-  if (def2) {
-    if (def2.value !== void 0)
-      return def2.value;
-    if (Array.isArray(def2.values) && def2.values.length > 0) {
-      return def2.values[0];
-    }
-  }
-  const directValue = schema2.value;
-  if (directValue !== void 0)
-    return directValue;
-  return void 0;
-}
-var init_zod_compat = __esm({
-  "node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js"() {
-    init_v3();
-    init_v4_mini();
-  }
-});
-
 // node_modules/zod/v4/classic/checks.js
-var init_checks3 = __esm({
+var init_checks2 = __esm({
   "node_modules/zod/v4/classic/checks.js"() {
     init_core2();
   }
 });
 
 // node_modules/zod/v4/classic/iso.js
-var iso_exports2 = {};
-__export(iso_exports2, {
+var iso_exports = {};
+__export(iso_exports, {
   ZodISODate: () => ZodISODate,
   ZodISODateTime: () => ZodISODateTime,
   ZodISODuration: () => ZodISODuration,
@@ -47074,10 +48066,10 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 var ZodISODateTime, ZodISODate, ZodISOTime, ZodISODuration;
-var init_iso2 = __esm({
+var init_iso = __esm({
   "node_modules/zod/v4/classic/iso.js"() {
     init_core2();
-    init_schemas3();
+    init_schemas2();
     ZodISODateTime = /* @__PURE__ */ $constructor("ZodISODateTime", (inst, def2) => {
       $ZodISODateTime.init(inst, def2);
       ZodStringFormat.init(inst, def2);
@@ -47139,15 +48131,15 @@ var init_errors5 = __esm({
 });
 
 // node_modules/zod/v4/classic/parse.js
-var parse4, parseAsync2, safeParse3, safeParseAsync3;
-var init_parse3 = __esm({
+var parse3, parseAsync2, safeParse2, safeParseAsync2;
+var init_parse2 = __esm({
   "node_modules/zod/v4/classic/parse.js"() {
     init_core2();
     init_errors5();
-    parse4 = /* @__PURE__ */ _parse(ZodRealError);
+    parse3 = /* @__PURE__ */ _parse(ZodRealError);
     parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
-    safeParse3 = /* @__PURE__ */ _safeParse(ZodRealError);
-    safeParseAsync3 = /* @__PURE__ */ _safeParseAsync(ZodRealError);
+    safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
+    safeParseAsync2 = /* @__PURE__ */ _safeParseAsync(ZodRealError);
   }
 });
 
@@ -47176,7 +48168,7 @@ function never(params) {
 function array(element, params) {
   return _array(ZodArray2, element, params);
 }
-function object2(shape, params) {
+function object(shape, params) {
   const def2 = {
     type: "object",
     get shape() {
@@ -47345,13 +48337,13 @@ function preprocess(fn, schema2) {
   return pipe(transform(fn), schema2);
 }
 var ZodType2, _ZodString, ZodString2, ZodStringFormat, ZodEmail, ZodGUID, ZodUUID, ZodURL, ZodEmoji, ZodNanoID, ZodCUID, ZodCUID2, ZodULID, ZodXID, ZodKSUID, ZodIPv4, ZodIPv6, ZodCIDRv4, ZodCIDRv6, ZodBase64, ZodBase64URL, ZodE164, ZodJWT, ZodNumber2, ZodNumberFormat, ZodBoolean2, ZodNull2, ZodUnknown2, ZodNever2, ZodArray2, ZodObject2, ZodUnion2, ZodDiscriminatedUnion2, ZodIntersection2, ZodRecord2, ZodEnum2, ZodLiteral2, ZodTransform, ZodOptional2, ZodNullable2, ZodDefault2, ZodPrefault, ZodNonOptional, ZodCatch2, ZodPipe, ZodReadonly2, ZodCustom;
-var init_schemas3 = __esm({
+var init_schemas2 = __esm({
   "node_modules/zod/v4/classic/schemas.js"() {
     init_core2();
     init_core2();
-    init_checks3();
-    init_iso2();
-    init_parse3();
+    init_checks2();
+    init_iso();
+    init_parse2();
     ZodType2 = /* @__PURE__ */ $constructor("ZodType", (inst, def2) => {
       $ZodType.init(inst, def2);
       inst.def = def2;
@@ -47374,10 +48366,10 @@ var init_schemas3 = __esm({
         reg.add(inst, meta);
         return inst;
       });
-      inst.parse = (data, params) => parse4(inst, data, params, { callee: inst.parse });
-      inst.safeParse = (data, params) => safeParse3(inst, data, params);
+      inst.parse = (data, params) => parse3(inst, data, params, { callee: inst.parse });
+      inst.safeParse = (data, params) => safeParse2(inst, data, params);
       inst.parseAsync = async (data, params) => parseAsync2(inst, data, params, { callee: inst.parseAsync });
-      inst.safeParseAsync = async (data, params) => safeParseAsync3(inst, data, params);
+      inst.safeParseAsync = async (data, params) => safeParseAsync2(inst, data, params);
       inst.spa = inst.safeParseAsync;
       inst.refine = (check2, params) => inst.check(refine(check2, params));
       inst.superRefine = (refinement) => inst.check(superRefine(refinement));
@@ -47779,25 +48771,25 @@ var init_compat = __esm({
 });
 
 // node_modules/zod/v4/classic/coerce.js
-var init_coerce2 = __esm({
+var init_coerce = __esm({
   "node_modules/zod/v4/classic/coerce.js"() {
   }
 });
 
 // node_modules/zod/v4/classic/external.js
-var init_external3 = __esm({
+var init_external2 = __esm({
   "node_modules/zod/v4/classic/external.js"() {
     init_core2();
-    init_schemas3();
-    init_checks3();
+    init_schemas2();
+    init_checks2();
     init_errors5();
-    init_parse3();
+    init_parse2();
     init_compat();
     init_core2();
     init_en2();
     init_locales();
-    init_iso2();
-    init_coerce2();
+    init_iso();
+    init_coerce();
     config(en_default2());
   }
 });
@@ -47805,7 +48797,7 @@ var init_external3 = __esm({
 // node_modules/zod/v4/classic/index.js
 var init_classic = __esm({
   "node_modules/zod/v4/classic/index.js"() {
-    init_external3();
+    init_external2();
   }
 });
 
@@ -47829,11 +48821,12 @@ function assertCompleteRequestResourceTemplate(request) {
   }
   void request;
 }
-var LATEST_PROTOCOL_VERSION, SUPPORTED_PROTOCOL_VERSIONS, RELATED_TASK_META_KEY, JSONRPC_VERSION, AssertObjectSchema, ProgressTokenSchema, CursorSchema, TaskCreationParamsSchema, TaskMetadataSchema, RelatedTaskMetadataSchema, RequestMetaSchema, BaseRequestParamsSchema, TaskAugmentedRequestParamsSchema, isTaskAugmentedRequestParams, RequestSchema, NotificationsParamsSchema, NotificationSchema, ResultSchema, RequestIdSchema, JSONRPCRequestSchema, isJSONRPCRequest, JSONRPCNotificationSchema, isJSONRPCNotification, JSONRPCResultResponseSchema, isJSONRPCResultResponse, ErrorCode, JSONRPCErrorResponseSchema, isJSONRPCErrorResponse, JSONRPCMessageSchema, JSONRPCResponseSchema, EmptyResultSchema, CancelledNotificationParamsSchema, CancelledNotificationSchema, IconSchema, IconsSchema, BaseMetadataSchema, ImplementationSchema, FormElicitationCapabilitySchema, ElicitationCapabilitySchema, ClientTasksCapabilitySchema, ServerTasksCapabilitySchema, ClientCapabilitiesSchema, InitializeRequestParamsSchema, InitializeRequestSchema, ServerCapabilitiesSchema, InitializeResultSchema, InitializedNotificationSchema, PingRequestSchema, ProgressSchema, ProgressNotificationParamsSchema, ProgressNotificationSchema, PaginatedRequestParamsSchema, PaginatedRequestSchema, PaginatedResultSchema, TaskStatusSchema, TaskSchema, CreateTaskResultSchema, TaskStatusNotificationParamsSchema, TaskStatusNotificationSchema, GetTaskRequestSchema, GetTaskResultSchema, GetTaskPayloadRequestSchema, GetTaskPayloadResultSchema, ListTasksRequestSchema, ListTasksResultSchema, CancelTaskRequestSchema, CancelTaskResultSchema, ResourceContentsSchema, TextResourceContentsSchema, Base64Schema, BlobResourceContentsSchema, RoleSchema, AnnotationsSchema, ResourceSchema, ResourceTemplateSchema, ListResourcesRequestSchema, ListResourcesResultSchema, ListResourceTemplatesRequestSchema, ListResourceTemplatesResultSchema, ResourceRequestParamsSchema, ReadResourceRequestParamsSchema, ReadResourceRequestSchema, ReadResourceResultSchema, ResourceListChangedNotificationSchema, SubscribeRequestParamsSchema, SubscribeRequestSchema, UnsubscribeRequestParamsSchema, UnsubscribeRequestSchema, ResourceUpdatedNotificationParamsSchema, ResourceUpdatedNotificationSchema, PromptArgumentSchema, PromptSchema, ListPromptsRequestSchema, ListPromptsResultSchema, GetPromptRequestParamsSchema, GetPromptRequestSchema, TextContentSchema, ImageContentSchema, AudioContentSchema, ToolUseContentSchema, EmbeddedResourceSchema, ResourceLinkSchema, ContentBlockSchema, PromptMessageSchema, GetPromptResultSchema, PromptListChangedNotificationSchema, ToolAnnotationsSchema, ToolExecutionSchema, ToolSchema, ListToolsRequestSchema, ListToolsResultSchema, CallToolResultSchema, CompatibilityCallToolResultSchema, CallToolRequestParamsSchema, CallToolRequestSchema, ToolListChangedNotificationSchema, ListChangedOptionsBaseSchema, LoggingLevelSchema, SetLevelRequestParamsSchema, SetLevelRequestSchema, LoggingMessageNotificationParamsSchema, LoggingMessageNotificationSchema, ModelHintSchema, ModelPreferencesSchema, ToolChoiceSchema, ToolResultContentSchema, SamplingContentSchema, SamplingMessageContentBlockSchema, SamplingMessageSchema, CreateMessageRequestParamsSchema, CreateMessageRequestSchema, CreateMessageResultSchema, CreateMessageResultWithToolsSchema, BooleanSchemaSchema, StringSchemaSchema, NumberSchemaSchema, UntitledSingleSelectEnumSchemaSchema, TitledSingleSelectEnumSchemaSchema, LegacyTitledEnumSchemaSchema, SingleSelectEnumSchemaSchema, UntitledMultiSelectEnumSchemaSchema, TitledMultiSelectEnumSchemaSchema, MultiSelectEnumSchemaSchema, EnumSchemaSchema, PrimitiveSchemaDefinitionSchema, ElicitRequestFormParamsSchema, ElicitRequestURLParamsSchema, ElicitRequestParamsSchema, ElicitRequestSchema, ElicitationCompleteNotificationParamsSchema, ElicitationCompleteNotificationSchema, ElicitResultSchema, ResourceTemplateReferenceSchema, PromptReferenceSchema, CompleteRequestParamsSchema, CompleteRequestSchema, CompleteResultSchema, RootSchema, ListRootsRequestSchema, ListRootsResultSchema, RootsListChangedNotificationSchema, ClientRequestSchema, ClientNotificationSchema, ClientResultSchema, ServerRequestSchema, ServerNotificationSchema, ServerResultSchema, McpError, UrlElicitationRequiredError;
+var LATEST_PROTOCOL_VERSION, DEFAULT_NEGOTIATED_PROTOCOL_VERSION, SUPPORTED_PROTOCOL_VERSIONS, RELATED_TASK_META_KEY, JSONRPC_VERSION, AssertObjectSchema, ProgressTokenSchema, CursorSchema, TaskCreationParamsSchema, TaskMetadataSchema, RelatedTaskMetadataSchema, RequestMetaSchema, BaseRequestParamsSchema, TaskAugmentedRequestParamsSchema, isTaskAugmentedRequestParams, RequestSchema, NotificationsParamsSchema, NotificationSchema, ResultSchema, RequestIdSchema, JSONRPCRequestSchema, isJSONRPCRequest, JSONRPCNotificationSchema, isJSONRPCNotification, JSONRPCResultResponseSchema, isJSONRPCResultResponse, ErrorCode, JSONRPCErrorResponseSchema, isJSONRPCErrorResponse, JSONRPCMessageSchema, JSONRPCResponseSchema, EmptyResultSchema, CancelledNotificationParamsSchema, CancelledNotificationSchema, IconSchema, IconsSchema, BaseMetadataSchema, ImplementationSchema, FormElicitationCapabilitySchema, ElicitationCapabilitySchema, ClientTasksCapabilitySchema, ServerTasksCapabilitySchema, ClientCapabilitiesSchema, InitializeRequestParamsSchema, InitializeRequestSchema, isInitializeRequest, ServerCapabilitiesSchema, InitializeResultSchema, InitializedNotificationSchema, PingRequestSchema, ProgressSchema, ProgressNotificationParamsSchema, ProgressNotificationSchema, PaginatedRequestParamsSchema, PaginatedRequestSchema, PaginatedResultSchema, TaskStatusSchema, TaskSchema, CreateTaskResultSchema, TaskStatusNotificationParamsSchema, TaskStatusNotificationSchema, GetTaskRequestSchema, GetTaskResultSchema, GetTaskPayloadRequestSchema, GetTaskPayloadResultSchema, ListTasksRequestSchema, ListTasksResultSchema, CancelTaskRequestSchema, CancelTaskResultSchema, ResourceContentsSchema, TextResourceContentsSchema, Base64Schema, BlobResourceContentsSchema, RoleSchema, AnnotationsSchema, ResourceSchema, ResourceTemplateSchema, ListResourcesRequestSchema, ListResourcesResultSchema, ListResourceTemplatesRequestSchema, ListResourceTemplatesResultSchema, ResourceRequestParamsSchema, ReadResourceRequestParamsSchema, ReadResourceRequestSchema, ReadResourceResultSchema, ResourceListChangedNotificationSchema, SubscribeRequestParamsSchema, SubscribeRequestSchema, UnsubscribeRequestParamsSchema, UnsubscribeRequestSchema, ResourceUpdatedNotificationParamsSchema, ResourceUpdatedNotificationSchema, PromptArgumentSchema, PromptSchema, ListPromptsRequestSchema, ListPromptsResultSchema, GetPromptRequestParamsSchema, GetPromptRequestSchema, TextContentSchema, ImageContentSchema, AudioContentSchema, ToolUseContentSchema, EmbeddedResourceSchema, ResourceLinkSchema, ContentBlockSchema, PromptMessageSchema, GetPromptResultSchema, PromptListChangedNotificationSchema, ToolAnnotationsSchema, ToolExecutionSchema, ToolSchema, ListToolsRequestSchema, ListToolsResultSchema, CallToolResultSchema, CompatibilityCallToolResultSchema, CallToolRequestParamsSchema, CallToolRequestSchema, ToolListChangedNotificationSchema, ListChangedOptionsBaseSchema, LoggingLevelSchema, SetLevelRequestParamsSchema, SetLevelRequestSchema, LoggingMessageNotificationParamsSchema, LoggingMessageNotificationSchema, ModelHintSchema, ModelPreferencesSchema, ToolChoiceSchema, ToolResultContentSchema, SamplingContentSchema, SamplingMessageContentBlockSchema, SamplingMessageSchema, CreateMessageRequestParamsSchema, CreateMessageRequestSchema, CreateMessageResultSchema, CreateMessageResultWithToolsSchema, BooleanSchemaSchema, StringSchemaSchema, NumberSchemaSchema, UntitledSingleSelectEnumSchemaSchema, TitledSingleSelectEnumSchemaSchema, LegacyTitledEnumSchemaSchema, SingleSelectEnumSchemaSchema, UntitledMultiSelectEnumSchemaSchema, TitledMultiSelectEnumSchemaSchema, MultiSelectEnumSchemaSchema, EnumSchemaSchema, PrimitiveSchemaDefinitionSchema, ElicitRequestFormParamsSchema, ElicitRequestURLParamsSchema, ElicitRequestParamsSchema, ElicitRequestSchema, ElicitationCompleteNotificationParamsSchema, ElicitationCompleteNotificationSchema, ElicitResultSchema, ResourceTemplateReferenceSchema, PromptReferenceSchema, CompleteRequestParamsSchema, CompleteRequestSchema, CompleteResultSchema, RootSchema, ListRootsRequestSchema, ListRootsResultSchema, RootsListChangedNotificationSchema, ClientRequestSchema, ClientNotificationSchema, ClientResultSchema, ServerRequestSchema, ServerNotificationSchema, ServerResultSchema, McpError, UrlElicitationRequiredError;
 var init_types5 = __esm({
   "node_modules/@modelcontextprotocol/sdk/dist/esm/types.js"() {
     init_v4();
     LATEST_PROTOCOL_VERSION = "2025-11-25";
+    DEFAULT_NEGOTIATED_PROTOCOL_VERSION = "2025-03-26";
     SUPPORTED_PROTOCOL_VERSIONS = [LATEST_PROTOCOL_VERSION, "2025-06-18", "2025-03-26", "2024-11-05", "2024-10-07"];
     RELATED_TASK_META_KEY = "io.modelcontextprotocol/related-task";
     JSONRPC_VERSION = "2.0";
@@ -47850,10 +48843,10 @@ var init_types5 = __esm({
        */
       pollInterval: number2().optional()
     });
-    TaskMetadataSchema = object2({
+    TaskMetadataSchema = object({
       ttl: number2().optional()
     });
-    RelatedTaskMetadataSchema = object2({
+    RelatedTaskMetadataSchema = object({
       taskId: string2()
     });
     RequestMetaSchema = looseObject({
@@ -47866,7 +48859,7 @@ var init_types5 = __esm({
        */
       [RELATED_TASK_META_KEY]: RelatedTaskMetadataSchema.optional()
     });
-    BaseRequestParamsSchema = object2({
+    BaseRequestParamsSchema = object({
       /**
        * See [General fields: `_meta`](/specification/draft/basic/index#meta) for notes on `_meta` usage.
        */
@@ -47884,18 +48877,18 @@ var init_types5 = __esm({
       task: TaskMetadataSchema.optional()
     });
     isTaskAugmentedRequestParams = (value) => TaskAugmentedRequestParamsSchema.safeParse(value).success;
-    RequestSchema = object2({
+    RequestSchema = object({
       method: string2(),
       params: BaseRequestParamsSchema.loose().optional()
     });
-    NotificationsParamsSchema = object2({
+    NotificationsParamsSchema = object({
       /**
        * See [MCP specification](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/47339c03c143bb4ec01a26e721a1b8fe66634ebe/docs/specification/draft/basic/index.mdx#general-fields)
        * for notes on _meta usage.
        */
       _meta: RequestMetaSchema.optional()
     });
-    NotificationSchema = object2({
+    NotificationSchema = object({
       method: string2(),
       params: NotificationsParamsSchema.loose().optional()
     });
@@ -47907,18 +48900,18 @@ var init_types5 = __esm({
       _meta: RequestMetaSchema.optional()
     });
     RequestIdSchema = union([string2(), number2().int()]);
-    JSONRPCRequestSchema = object2({
+    JSONRPCRequestSchema = object({
       jsonrpc: literal(JSONRPC_VERSION),
       id: RequestIdSchema,
       ...RequestSchema.shape
     }).strict();
     isJSONRPCRequest = (value) => JSONRPCRequestSchema.safeParse(value).success;
-    JSONRPCNotificationSchema = object2({
+    JSONRPCNotificationSchema = object({
       jsonrpc: literal(JSONRPC_VERSION),
       ...NotificationSchema.shape
     }).strict();
     isJSONRPCNotification = (value) => JSONRPCNotificationSchema.safeParse(value).success;
-    JSONRPCResultResponseSchema = object2({
+    JSONRPCResultResponseSchema = object({
       jsonrpc: literal(JSONRPC_VERSION),
       id: RequestIdSchema,
       result: ResultSchema
@@ -47934,10 +48927,10 @@ var init_types5 = __esm({
       ErrorCode2[ErrorCode2["InternalError"] = -32603] = "InternalError";
       ErrorCode2[ErrorCode2["UrlElicitationRequired"] = -32042] = "UrlElicitationRequired";
     })(ErrorCode || (ErrorCode = {}));
-    JSONRPCErrorResponseSchema = object2({
+    JSONRPCErrorResponseSchema = object({
       jsonrpc: literal(JSONRPC_VERSION),
       id: RequestIdSchema.optional(),
-      error: object2({
+      error: object({
         /**
          * The error type that occurred.
          */
@@ -47977,7 +48970,7 @@ var init_types5 = __esm({
       method: literal("notifications/cancelled"),
       params: CancelledNotificationParamsSchema
     });
-    IconSchema = object2({
+    IconSchema = object({
       /**
        * URL or data URI for the icon.
        */
@@ -48002,7 +48995,7 @@ var init_types5 = __esm({
        */
       theme: _enum(["light", "dark"]).optional()
     });
-    IconsSchema = object2({
+    IconsSchema = object({
       /**
        * Optional set of sized icons that the client can display in a user interface.
        *
@@ -48016,7 +49009,7 @@ var init_types5 = __esm({
        */
       icons: array(IconSchema).optional()
     });
-    BaseMetadataSchema = object2({
+    BaseMetadataSchema = object({
       /** Intended for programmatic or logical use, but used as a display name in past specs or fallback */
       name: string2(),
       /**
@@ -48046,7 +49039,7 @@ var init_types5 = __esm({
        */
       description: string2().optional()
     });
-    FormElicitationCapabilitySchema = intersection(object2({
+    FormElicitationCapabilitySchema = intersection(object({
       applyDefaults: boolean2().optional()
     }), record(string2(), unknown()));
     ElicitationCapabilitySchema = preprocess((value) => {
@@ -48056,7 +49049,7 @@ var init_types5 = __esm({
         }
       }
       return value;
-    }, intersection(object2({
+    }, intersection(object({
       form: FormElicitationCapabilitySchema.optional(),
       url: AssertObjectSchema.optional()
     }), record(string2(), unknown()).optional()));
@@ -48108,7 +49101,7 @@ var init_types5 = __esm({
         }).optional()
       }).optional()
     });
-    ClientCapabilitiesSchema = object2({
+    ClientCapabilitiesSchema = object({
       /**
        * Experimental, non-standard capabilities that the client supports.
        */
@@ -48116,7 +49109,7 @@ var init_types5 = __esm({
       /**
        * Present if the client supports sampling from an LLM.
        */
-      sampling: object2({
+      sampling: object({
         /**
          * Present if the client supports context inclusion via includeContext parameter.
          * If not declared, servers SHOULD only use `includeContext: "none"` (or omit it).
@@ -48134,7 +49127,7 @@ var init_types5 = __esm({
       /**
        * Present if the client supports listing roots.
        */
-      roots: object2({
+      roots: object({
         /**
          * Whether the client supports issuing notifications for changes to the roots list.
          */
@@ -48161,7 +49154,8 @@ var init_types5 = __esm({
       method: literal("initialize"),
       params: InitializeRequestParamsSchema
     });
-    ServerCapabilitiesSchema = object2({
+    isInitializeRequest = (value) => InitializeRequestSchema.safeParse(value).success;
+    ServerCapabilitiesSchema = object({
       /**
        * Experimental, non-standard capabilities that the server supports.
        */
@@ -48177,7 +49171,7 @@ var init_types5 = __esm({
       /**
        * Present if the server offers any prompt templates.
        */
-      prompts: object2({
+      prompts: object({
         /**
          * Whether this server supports issuing notifications for changes to the prompt list.
          */
@@ -48186,7 +49180,7 @@ var init_types5 = __esm({
       /**
        * Present if the server offers any resources to read.
        */
-      resources: object2({
+      resources: object({
         /**
          * Whether this server supports clients subscribing to resource updates.
          */
@@ -48199,7 +49193,7 @@ var init_types5 = __esm({
       /**
        * Present if the server offers any tools to call.
        */
-      tools: object2({
+      tools: object({
         /**
          * Whether this server supports issuing notifications for changes to the tool list.
          */
@@ -48236,7 +49230,7 @@ var init_types5 = __esm({
       method: literal("ping"),
       params: BaseRequestParamsSchema.optional()
     });
-    ProgressSchema = object2({
+    ProgressSchema = object({
       /**
        * The progress thus far. This should increase every time progress is made, even if the total is unknown.
        */
@@ -48250,7 +49244,7 @@ var init_types5 = __esm({
        */
       message: optional(string2())
     });
-    ProgressNotificationParamsSchema = object2({
+    ProgressNotificationParamsSchema = object({
       ...NotificationsParamsSchema.shape,
       ...ProgressSchema.shape,
       /**
@@ -48280,7 +49274,7 @@ var init_types5 = __esm({
       nextCursor: CursorSchema.optional()
     });
     TaskStatusSchema = _enum(["working", "input_required", "completed", "failed", "cancelled"]);
-    TaskSchema = object2({
+    TaskSchema = object({
       taskId: string2(),
       status: TaskStatusSchema,
       /**
@@ -48337,7 +49331,7 @@ var init_types5 = __esm({
       })
     });
     CancelTaskResultSchema = ResultSchema.merge(TaskSchema);
-    ResourceContentsSchema = object2({
+    ResourceContentsSchema = object({
       /**
        * The URI of this resource.
        */
@@ -48373,7 +49367,7 @@ var init_types5 = __esm({
       blob: Base64Schema
     });
     RoleSchema = _enum(["user", "assistant"]);
-    AnnotationsSchema = object2({
+    AnnotationsSchema = object({
       /**
        * Intended audience(s) for the resource.
        */
@@ -48385,9 +49379,9 @@ var init_types5 = __esm({
       /**
        * ISO 8601 timestamp for the most recent modification.
        */
-      lastModified: iso_exports2.datetime({ offset: true }).optional()
+      lastModified: iso_exports.datetime({ offset: true }).optional()
     });
-    ResourceSchema = object2({
+    ResourceSchema = object({
       ...BaseMetadataSchema.shape,
       ...IconsSchema.shape,
       /**
@@ -48420,7 +49414,7 @@ var init_types5 = __esm({
        */
       _meta: optional(looseObject({}))
     });
-    ResourceTemplateSchema = object2({
+    ResourceTemplateSchema = object({
       ...BaseMetadataSchema.shape,
       ...IconsSchema.shape,
       /**
@@ -48499,7 +49493,7 @@ var init_types5 = __esm({
       method: literal("notifications/resources/updated"),
       params: ResourceUpdatedNotificationParamsSchema
     });
-    PromptArgumentSchema = object2({
+    PromptArgumentSchema = object({
       /**
        * The name of the argument.
        */
@@ -48513,7 +49507,7 @@ var init_types5 = __esm({
        */
       required: optional(boolean2())
     });
-    PromptSchema = object2({
+    PromptSchema = object({
       ...BaseMetadataSchema.shape,
       ...IconsSchema.shape,
       /**
@@ -48550,7 +49544,7 @@ var init_types5 = __esm({
       method: literal("prompts/get"),
       params: GetPromptRequestParamsSchema
     });
-    TextContentSchema = object2({
+    TextContentSchema = object({
       type: literal("text"),
       /**
        * The text content of the message.
@@ -48566,7 +49560,7 @@ var init_types5 = __esm({
        */
       _meta: record(string2(), unknown()).optional()
     });
-    ImageContentSchema = object2({
+    ImageContentSchema = object({
       type: literal("image"),
       /**
        * The base64-encoded image data.
@@ -48586,7 +49580,7 @@ var init_types5 = __esm({
        */
       _meta: record(string2(), unknown()).optional()
     });
-    AudioContentSchema = object2({
+    AudioContentSchema = object({
       type: literal("audio"),
       /**
        * The base64-encoded audio data.
@@ -48606,7 +49600,7 @@ var init_types5 = __esm({
        */
       _meta: record(string2(), unknown()).optional()
     });
-    ToolUseContentSchema = object2({
+    ToolUseContentSchema = object({
       type: literal("tool_use"),
       /**
        * The name of the tool to invoke.
@@ -48629,7 +49623,7 @@ var init_types5 = __esm({
        */
       _meta: record(string2(), unknown()).optional()
     });
-    EmbeddedResourceSchema = object2({
+    EmbeddedResourceSchema = object({
       type: literal("resource"),
       resource: union([TextResourceContentsSchema, BlobResourceContentsSchema]),
       /**
@@ -48652,7 +49646,7 @@ var init_types5 = __esm({
       ResourceLinkSchema,
       EmbeddedResourceSchema
     ]);
-    PromptMessageSchema = object2({
+    PromptMessageSchema = object({
       role: RoleSchema,
       content: ContentBlockSchema
     });
@@ -48667,7 +49661,7 @@ var init_types5 = __esm({
       method: literal("notifications/prompts/list_changed"),
       params: NotificationsParamsSchema.optional()
     });
-    ToolAnnotationsSchema = object2({
+    ToolAnnotationsSchema = object({
       /**
        * A human-readable title for the tool.
        */
@@ -48706,7 +49700,7 @@ var init_types5 = __esm({
        */
       openWorldHint: boolean2().optional()
     });
-    ToolExecutionSchema = object2({
+    ToolExecutionSchema = object({
       /**
        * Indicates the tool's preference for task-augmented execution.
        * - "required": Clients MUST invoke the tool as a task
@@ -48717,7 +49711,7 @@ var init_types5 = __esm({
        */
       taskSupport: _enum(["required", "optional", "forbidden"]).optional()
     });
-    ToolSchema = object2({
+    ToolSchema = object({
       ...BaseMetadataSchema.shape,
       ...IconsSchema.shape,
       /**
@@ -48728,7 +49722,7 @@ var init_types5 = __esm({
        * A JSON Schema 2020-12 object defining the expected parameters for the tool.
        * Must have type: 'object' at the root level per MCP spec.
        */
-      inputSchema: object2({
+      inputSchema: object({
         type: literal("object"),
         properties: record(string2(), AssertObjectSchema).optional(),
         required: array(string2()).optional()
@@ -48738,7 +49732,7 @@ var init_types5 = __esm({
        * returned in the structuredContent field of a CallToolResult.
        * Must have type: 'object' at the root level per MCP spec.
        */
-      outputSchema: object2({
+      outputSchema: object({
         type: literal("object"),
         properties: record(string2(), AssertObjectSchema).optional(),
         required: array(string2()).optional()
@@ -48814,7 +49808,7 @@ var init_types5 = __esm({
       method: literal("notifications/tools/list_changed"),
       params: NotificationsParamsSchema.optional()
     });
-    ListChangedOptionsBaseSchema = object2({
+    ListChangedOptionsBaseSchema = object({
       /**
        * If true, the list will be refreshed automatically when a list changed notification is received.
        * The callback will be called with the updated list.
@@ -48863,13 +49857,13 @@ var init_types5 = __esm({
       method: literal("notifications/message"),
       params: LoggingMessageNotificationParamsSchema
     });
-    ModelHintSchema = object2({
+    ModelHintSchema = object({
       /**
        * A hint for a model name.
        */
       name: string2().optional()
     });
-    ModelPreferencesSchema = object2({
+    ModelPreferencesSchema = object({
       /**
        * Optional hints to use for model selection.
        */
@@ -48887,7 +49881,7 @@ var init_types5 = __esm({
        */
       intelligencePriority: number2().min(0).max(1).optional()
     });
-    ToolChoiceSchema = object2({
+    ToolChoiceSchema = object({
       /**
        * Controls when tools are used:
        * - "auto": Model decides whether to use tools (default)
@@ -48896,11 +49890,11 @@ var init_types5 = __esm({
        */
       mode: _enum(["auto", "required", "none"]).optional()
     });
-    ToolResultContentSchema = object2({
+    ToolResultContentSchema = object({
       type: literal("tool_result"),
       toolUseId: string2().describe("The unique identifier for the corresponding tool call."),
       content: array(ContentBlockSchema).default([]),
-      structuredContent: object2({}).loose().optional(),
+      structuredContent: object({}).loose().optional(),
       isError: boolean2().optional(),
       /**
        * See [MCP specification](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/47339c03c143bb4ec01a26e721a1b8fe66634ebe/docs/specification/draft/basic/index.mdx#general-fields)
@@ -48916,7 +49910,7 @@ var init_types5 = __esm({
       ToolUseContentSchema,
       ToolResultContentSchema
     ]);
-    SamplingMessageSchema = object2({
+    SamplingMessageSchema = object({
       role: RoleSchema,
       content: union([SamplingMessageContentBlockSchema, array(SamplingMessageContentBlockSchema)]),
       /**
@@ -49016,13 +50010,13 @@ var init_types5 = __esm({
        */
       content: union([SamplingMessageContentBlockSchema, array(SamplingMessageContentBlockSchema)])
     });
-    BooleanSchemaSchema = object2({
+    BooleanSchemaSchema = object({
       type: literal("boolean"),
       title: string2().optional(),
       description: string2().optional(),
       default: boolean2().optional()
     });
-    StringSchemaSchema = object2({
+    StringSchemaSchema = object({
       type: literal("string"),
       title: string2().optional(),
       description: string2().optional(),
@@ -49031,7 +50025,7 @@ var init_types5 = __esm({
       format: _enum(["email", "uri", "date", "date-time"]).optional(),
       default: string2().optional()
     });
-    NumberSchemaSchema = object2({
+    NumberSchemaSchema = object({
       type: _enum(["number", "integer"]),
       title: string2().optional(),
       description: string2().optional(),
@@ -49039,24 +50033,24 @@ var init_types5 = __esm({
       maximum: number2().optional(),
       default: number2().optional()
     });
-    UntitledSingleSelectEnumSchemaSchema = object2({
+    UntitledSingleSelectEnumSchemaSchema = object({
       type: literal("string"),
       title: string2().optional(),
       description: string2().optional(),
       enum: array(string2()),
       default: string2().optional()
     });
-    TitledSingleSelectEnumSchemaSchema = object2({
+    TitledSingleSelectEnumSchemaSchema = object({
       type: literal("string"),
       title: string2().optional(),
       description: string2().optional(),
-      oneOf: array(object2({
+      oneOf: array(object({
         const: string2(),
         title: string2()
       })),
       default: string2().optional()
     });
-    LegacyTitledEnumSchemaSchema = object2({
+    LegacyTitledEnumSchemaSchema = object({
       type: literal("string"),
       title: string2().optional(),
       description: string2().optional(),
@@ -49065,26 +50059,26 @@ var init_types5 = __esm({
       default: string2().optional()
     });
     SingleSelectEnumSchemaSchema = union([UntitledSingleSelectEnumSchemaSchema, TitledSingleSelectEnumSchemaSchema]);
-    UntitledMultiSelectEnumSchemaSchema = object2({
+    UntitledMultiSelectEnumSchemaSchema = object({
       type: literal("array"),
       title: string2().optional(),
       description: string2().optional(),
       minItems: number2().optional(),
       maxItems: number2().optional(),
-      items: object2({
+      items: object({
         type: literal("string"),
         enum: array(string2())
       }),
       default: array(string2()).optional()
     });
-    TitledMultiSelectEnumSchemaSchema = object2({
+    TitledMultiSelectEnumSchemaSchema = object({
       type: literal("array"),
       title: string2().optional(),
       description: string2().optional(),
       minItems: number2().optional(),
       maxItems: number2().optional(),
-      items: object2({
-        anyOf: array(object2({
+      items: object({
+        anyOf: array(object({
           const: string2(),
           title: string2()
         }))
@@ -49109,7 +50103,7 @@ var init_types5 = __esm({
        * A restricted subset of JSON Schema.
        * Only top-level properties are allowed, without nesting.
        */
-      requestedSchema: object2({
+      requestedSchema: object({
         type: literal("object"),
         properties: record(string2(), PrimitiveSchemaDefinitionSchema),
         required: array(string2()).optional()
@@ -49165,14 +50159,14 @@ var init_types5 = __esm({
        */
       content: preprocess((val) => val === null ? void 0 : val, record(string2(), union([string2(), number2(), boolean2(), array(string2())])).optional())
     });
-    ResourceTemplateReferenceSchema = object2({
+    ResourceTemplateReferenceSchema = object({
       type: literal("ref/resource"),
       /**
        * The URI or URI template of the resource.
        */
       uri: string2()
     });
-    PromptReferenceSchema = object2({
+    PromptReferenceSchema = object({
       type: literal("ref/prompt"),
       /**
        * The name of the prompt or prompt template
@@ -49184,7 +50178,7 @@ var init_types5 = __esm({
       /**
        * The argument's information
        */
-      argument: object2({
+      argument: object({
         /**
          * The name of the argument
          */
@@ -49194,7 +50188,7 @@ var init_types5 = __esm({
          */
         value: string2()
       }),
-      context: object2({
+      context: object({
         /**
          * Previously-resolved variables in a URI template or prompt.
          */
@@ -49221,7 +50215,7 @@ var init_types5 = __esm({
         hasMore: optional(boolean2())
       })
     });
-    RootSchema = object2({
+    RootSchema = object({
       /**
        * The URI identifying the root. This *must* start with file:// for now.
        */
@@ -49320,8 +50314,8 @@ var init_types5 = __esm({
       CreateTaskResultSchema
     ]);
     McpError = class _McpError extends Error {
-      constructor(code, message, data) {
-        super(`MCP error ${code}: ${message}`);
+      constructor(code, message2, data) {
+        super(`MCP error ${code}: ${message2}`);
         this.code = code;
         this.data = data;
         this.name = "McpError";
@@ -49329,19 +50323,19 @@ var init_types5 = __esm({
       /**
        * Factory method to create the appropriate error type based on the error code and data
        */
-      static fromError(code, message, data) {
+      static fromError(code, message2, data) {
         if (code === ErrorCode.UrlElicitationRequired && data) {
           const errorData = data;
           if (errorData.elicitations) {
-            return new UrlElicitationRequiredError(errorData.elicitations, message);
+            return new UrlElicitationRequiredError(errorData.elicitations, message2);
           }
         }
-        return new _McpError(code, message, data);
+        return new _McpError(code, message2, data);
       }
     };
     UrlElicitationRequiredError = class extends McpError {
-      constructor(elicitations, message = `URL elicitation${elicitations.length > 1 ? "s" : ""} required`) {
-        super(ErrorCode.UrlElicitationRequired, message, {
+      constructor(elicitations, message2 = `URL elicitation${elicitations.length > 1 ? "s" : ""} required`) {
+        super(ErrorCode.UrlElicitationRequired, message2, {
           elicitations
         });
       }
@@ -49349,6 +50343,2327 @@ var init_types5 = __esm({
         return this.data?.elicitations ?? [];
       }
     };
+  }
+});
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js
+var WebStandardStreamableHTTPServerTransport;
+var init_webStandardStreamableHttp = __esm({
+  "node_modules/@modelcontextprotocol/sdk/dist/esm/server/webStandardStreamableHttp.js"() {
+    init_mediaType();
+    init_requestBody();
+    init_sseKeepAlive();
+    init_types5();
+    WebStandardStreamableHTTPServerTransport = class {
+      constructor(options = {}) {
+        this._started = false;
+        this._hasHandledRequest = false;
+        this._streamMapping = /* @__PURE__ */ new Map();
+        this._requestToStreamMapping = /* @__PURE__ */ new Map();
+        this._resumableStreams = /* @__PURE__ */ new Set();
+        this._requestResponseMap = /* @__PURE__ */ new Map();
+        this._initialized = false;
+        this._enableJsonResponse = false;
+        this._standaloneSseStreamId = "_GET_stream";
+        this._closed = false;
+        this.sessionIdGenerator = options.sessionIdGenerator;
+        this._enableJsonResponse = options.enableJsonResponse ?? false;
+        this._eventStore = options.eventStore;
+        this._onsessioninitialized = options.onsessioninitialized;
+        this._onsessionclosed = options.onsessionclosed;
+        this._allowedHosts = options.allowedHosts;
+        this._allowedOrigins = options.allowedOrigins;
+        this._enableDnsRebindingProtection = options.enableDnsRebindingProtection ?? false;
+        this._retryInterval = options.retryInterval;
+        this._keepAliveMs = options.keepAliveMs ?? DEFAULT_SSE_KEEP_ALIVE_MS;
+        this._maxRequestBodySize = resolveMaxRequestBodySize(options.maxRequestBodySize);
+      }
+      /**
+       * Arms a keep-alive interval for an SSE stream that periodically writes an SSE
+       * comment frame so intermediaries and idle timeouts don't kill the connection.
+       * The returned timer is owned by the stream it was armed for: the stream's
+       * cancel/cleanup callbacks must clear it. The interval clears itself if a
+       * write fails (stream already closed/cancelled).
+       */
+      startKeepAlive(controller, encoder2) {
+        if (this._closed)
+          return void 0;
+        const timer2 = armSseKeepAlive(this._keepAliveMs, () => {
+          try {
+            controller.enqueue(encoder2.encode(": keepalive\n\n"));
+          } catch {
+            if (timer2 !== void 0)
+              clearInterval(timer2);
+          }
+        });
+        return timer2;
+      }
+      /**
+       * Starts the transport. This is required by the Transport interface but is a no-op
+       * for the Streamable HTTP transport as connections are managed per-request.
+       */
+      async start() {
+        if (this._started) {
+          throw new Error("Transport already started");
+        }
+        this._started = true;
+      }
+      /**
+       * Helper to create a JSON error response
+       */
+      createJsonErrorResponse(status, code, message2, options) {
+        const error2 = { code, message: message2 };
+        if (options?.data !== void 0) {
+          error2.data = options.data;
+        }
+        return new Response(JSON.stringify({
+          jsonrpc: "2.0",
+          error: error2,
+          id: null
+        }), {
+          status,
+          headers: {
+            "Content-Type": "application/json",
+            ...options?.headers
+          }
+        });
+      }
+      /**
+       * Validates request headers for DNS rebinding protection.
+       * @returns Error response if validation fails, undefined if validation passes.
+       */
+      validateRequestHeaders(req) {
+        if (!this._enableDnsRebindingProtection) {
+          return void 0;
+        }
+        if (this._allowedHosts && this._allowedHosts.length > 0) {
+          const hostHeader = req.headers.get("host");
+          if (!hostHeader || !this._allowedHosts.includes(hostHeader)) {
+            const error2 = `Invalid Host header: ${hostHeader}`;
+            this.onerror?.(new Error(error2));
+            return this.createJsonErrorResponse(403, -32e3, error2);
+          }
+        }
+        if (this._allowedOrigins && this._allowedOrigins.length > 0) {
+          const originHeader = req.headers.get("origin");
+          if (originHeader && !this._allowedOrigins.includes(originHeader)) {
+            const error2 = `Invalid Origin header: ${originHeader}`;
+            this.onerror?.(new Error(error2));
+            return this.createJsonErrorResponse(403, -32e3, error2);
+          }
+        }
+        return void 0;
+      }
+      /**
+       * Handles an incoming HTTP request, whether GET, POST, or DELETE
+       * Returns a Response object (Web Standard)
+       */
+      async handleRequest(req, options) {
+        if (this._closed) {
+          return this.createJsonErrorResponse(404, -32001, "Session not found");
+        }
+        if (!this.sessionIdGenerator && this._hasHandledRequest) {
+          throw new Error("Stateless transport cannot be reused across requests. Create a new transport per request.");
+        }
+        this._hasHandledRequest = true;
+        const validationError = this.validateRequestHeaders(req);
+        if (validationError) {
+          return validationError;
+        }
+        switch (req.method) {
+          case "POST":
+            return this.handlePostRequest(req, options);
+          case "GET":
+            return this.handleGetRequest(req);
+          case "DELETE":
+            return this.handleDeleteRequest(req);
+          default:
+            return this.handleUnsupportedRequest();
+        }
+      }
+      /**
+       * Writes a priming event to establish resumption capability.
+       * Only sends if eventStore is configured (opt-in for resumability) and
+       * the client's protocol version supports empty SSE data (>= 2025-11-25).
+       */
+      async writePrimingEvent(controller, encoder2, streamId, protocolVersion) {
+        if (!this._eventStore) {
+          return;
+        }
+        if (protocolVersion < "2025-11-25") {
+          return;
+        }
+        const primingEventId = await this._eventStore.storeEvent(streamId, {});
+        let primingEvent = `id: ${primingEventId}
+data: 
+
+`;
+        if (this._retryInterval !== void 0) {
+          primingEvent = `id: ${primingEventId}
+retry: ${this._retryInterval}
+data: 
+
+`;
+        }
+        controller.enqueue(encoder2.encode(primingEvent));
+        this._resumableStreams.add(streamId);
+      }
+      /**
+       * Handles GET requests for SSE stream
+       */
+      async handleGetRequest(req) {
+        const acceptHeader = req.headers.get("accept");
+        if (!acceptHeader?.includes("text/event-stream")) {
+          this.onerror?.(new Error("Not Acceptable: Client must accept text/event-stream"));
+          return this.createJsonErrorResponse(406, -32e3, "Not Acceptable: Client must accept text/event-stream");
+        }
+        const sessionError = this.validateSession(req);
+        if (sessionError) {
+          return sessionError;
+        }
+        const protocolError = this.validateProtocolVersion(req);
+        if (protocolError) {
+          return protocolError;
+        }
+        if (this._eventStore) {
+          const lastEventId = req.headers.get("last-event-id");
+          if (lastEventId) {
+            return this.replayEvents(lastEventId);
+          }
+        }
+        if (this._streamMapping.get(this._standaloneSseStreamId) !== void 0) {
+          this.onerror?.(new Error("Conflict: Only one SSE stream is allowed per session"));
+          return this.createJsonErrorResponse(409, -32e3, "Conflict: Only one SSE stream is allowed per session");
+        }
+        const encoder2 = new TextEncoder();
+        let streamController;
+        let keepAliveTimer = void 0;
+        const readable = new ReadableStream({
+          start: (controller) => {
+            streamController = controller;
+          },
+          cancel: () => {
+            if (keepAliveTimer !== void 0) {
+              clearInterval(keepAliveTimer);
+            }
+            if (this._streamMapping.get(this._standaloneSseStreamId)?.controller === streamController) {
+              this._streamMapping.delete(this._standaloneSseStreamId);
+            }
+          }
+        });
+        const headers = {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache, no-transform",
+          Connection: "keep-alive",
+          "X-Accel-Buffering": "no"
+        };
+        if (this.sessionId !== void 0) {
+          headers["mcp-session-id"] = this.sessionId;
+        }
+        this._streamMapping.set(this._standaloneSseStreamId, {
+          controller: streamController,
+          encoder: encoder2,
+          cleanup: () => {
+            if (keepAliveTimer !== void 0) {
+              clearInterval(keepAliveTimer);
+            }
+            this._streamMapping.delete(this._standaloneSseStreamId);
+            try {
+              streamController.close();
+            } catch {
+            }
+          }
+        });
+        keepAliveTimer = this.startKeepAlive(streamController, encoder2);
+        return new Response(readable, { headers });
+      }
+      /**
+       * Replays events that would have been sent after the specified event ID
+       * Only used when resumability is enabled
+       */
+      async replayEvents(lastEventId) {
+        if (!this._eventStore) {
+          this.onerror?.(new Error("Event store not configured"));
+          return this.createJsonErrorResponse(400, -32e3, "Event store not configured");
+        }
+        try {
+          let streamId;
+          if (this._eventStore.getStreamIdForEventId) {
+            streamId = await this._eventStore.getStreamIdForEventId(lastEventId);
+            if (!streamId) {
+              this.onerror?.(new Error("Invalid event ID format"));
+              return this.createJsonErrorResponse(400, -32e3, "Invalid event ID format");
+            }
+            if (this._streamMapping.get(streamId) !== void 0) {
+              this.onerror?.(new Error("Conflict: Stream already has an active connection"));
+              return this.createJsonErrorResponse(409, -32e3, "Conflict: Stream already has an active connection");
+            }
+          }
+          const headers = {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache, no-transform",
+            Connection: "keep-alive",
+            "X-Accel-Buffering": "no"
+          };
+          if (this.sessionId !== void 0) {
+            headers["mcp-session-id"] = this.sessionId;
+          }
+          const encoder2 = new TextEncoder();
+          let streamController;
+          let keepAliveTimer = void 0;
+          let replayedStreamId = void 0;
+          let cancelled = false;
+          const readable = new ReadableStream({
+            start: (controller) => {
+              streamController = controller;
+            },
+            cancel: () => {
+              cancelled = true;
+              if (keepAliveTimer !== void 0) {
+                clearInterval(keepAliveTimer);
+              }
+              if (replayedStreamId !== void 0 && this._streamMapping.get(replayedStreamId)?.controller === streamController) {
+                this._streamMapping.delete(replayedStreamId);
+              }
+            }
+          });
+          const replayedEventIds = /* @__PURE__ */ new Set();
+          replayedStreamId = await this._eventStore.replayEventsAfter(lastEventId, {
+            send: async (eventId, message2) => {
+              const success = this.writeSSEEvent(streamController, encoder2, message2, eventId);
+              if (!success) {
+                this.onerror?.(new Error("Failed replay events"));
+                try {
+                  streamController.close();
+                } catch {
+                }
+              } else {
+                replayedEventIds.add(eventId);
+              }
+            }
+          });
+          if (this._closed || cancelled) {
+            try {
+              streamController.close();
+            } catch {
+            }
+            return this.createJsonErrorResponse(404, -32001, "Session not found");
+          }
+          this._streamMapping.get(replayedStreamId)?.cleanup();
+          this._streamMapping.set(replayedStreamId, {
+            controller: streamController,
+            encoder: encoder2,
+            replayedEventIds,
+            cleanup: () => {
+              if (keepAliveTimer !== void 0) {
+                clearInterval(keepAliveTimer);
+              }
+              this._streamMapping.delete(replayedStreamId);
+              try {
+                streamController.close();
+              } catch {
+              }
+            }
+          });
+          this._resumableStreams.add(replayedStreamId);
+          keepAliveTimer = this.startKeepAlive(streamController, encoder2);
+          return new Response(readable, { headers });
+        } catch (error2) {
+          this.onerror?.(error2);
+          return this.createJsonErrorResponse(500, -32e3, "Error replaying events");
+        }
+      }
+      /**
+       * Writes an event to an SSE stream via controller with proper formatting
+       */
+      writeSSEEvent(controller, encoder2, message2, eventId) {
+        try {
+          let eventData = `event: message
+`;
+          if (eventId) {
+            eventData += `id: ${eventId}
+`;
+          }
+          eventData += `data: ${JSON.stringify(message2)}
+
+`;
+          controller.enqueue(encoder2.encode(eventData));
+          return true;
+        } catch (error2) {
+          this.onerror?.(error2);
+          return false;
+        }
+      }
+      /**
+       * Handles unsupported requests (PUT, PATCH, etc.)
+       */
+      handleUnsupportedRequest() {
+        this.onerror?.(new Error("Method not allowed."));
+        return new Response(JSON.stringify({
+          jsonrpc: "2.0",
+          error: {
+            code: -32e3,
+            message: "Method not allowed."
+          },
+          id: null
+        }), {
+          status: 405,
+          headers: {
+            Allow: "GET, POST, DELETE",
+            "Content-Type": "application/json"
+          }
+        });
+      }
+      /**
+       * Handles POST requests containing JSON-RPC messages
+       */
+      async handlePostRequest(req, options) {
+        try {
+          const acceptHeader = req.headers.get("accept");
+          if (!acceptHeader?.includes("application/json") || !acceptHeader.includes("text/event-stream")) {
+            this.onerror?.(new Error("Not Acceptable: Client must accept both application/json and text/event-stream"));
+            return this.createJsonErrorResponse(406, -32e3, "Not Acceptable: Client must accept both application/json and text/event-stream");
+          }
+          const ct = req.headers.get("content-type");
+          if (!isJsonContentType(ct)) {
+            this.onerror?.(new Error("Unsupported Media Type: Content-Type must be application/json"));
+            return this.createJsonErrorResponse(415, -32e3, "Unsupported Media Type: Content-Type must be application/json");
+          }
+          const requestInfo = {
+            headers: Object.fromEntries(req.headers.entries()),
+            url: new URL(req.url)
+          };
+          let rawMessage;
+          if (options?.parsedBody !== void 0) {
+            rawMessage = options.parsedBody;
+          } else {
+            try {
+              const body2 = await readRequestBody(req, this._maxRequestBodySize);
+              if (body2.tooLarge) {
+                const message2 = requestBodyTooLargeMessage(this._maxRequestBodySize);
+                this.onerror?.(new Error(message2));
+                return this.createJsonErrorResponse(413, -32e3, message2);
+              }
+              rawMessage = JSON.parse(body2.text);
+            } catch {
+              this.onerror?.(new Error("Parse error: Invalid JSON"));
+              return this.createJsonErrorResponse(400, -32700, "Parse error: Invalid JSON");
+            }
+          }
+          if (Array.isArray(rawMessage) && rawMessage.length > MAX_BATCH_SIZE) {
+            this.onerror?.(new Error(`Invalid Request: Batch must not exceed ${MAX_BATCH_SIZE} messages`));
+            return this.createJsonErrorResponse(400, -32600, `Invalid Request: Batch must not exceed ${MAX_BATCH_SIZE} messages`);
+          }
+          let messages2;
+          try {
+            if (Array.isArray(rawMessage)) {
+              messages2 = rawMessage.map((msg) => JSONRPCMessageSchema.parse(msg));
+            } else {
+              messages2 = [JSONRPCMessageSchema.parse(rawMessage)];
+            }
+          } catch {
+            this.onerror?.(new Error("Parse error: Invalid JSON-RPC message"));
+            return this.createJsonErrorResponse(400, -32700, "Parse error: Invalid JSON-RPC message");
+          }
+          if (this._closed) {
+            return this.createJsonErrorResponse(404, -32001, "Session not found");
+          }
+          const isInitializationRequest = messages2.some(isInitializeRequest);
+          if (isInitializationRequest) {
+            if (this._initialized && this.sessionId !== void 0) {
+              this.onerror?.(new Error("Invalid Request: Server already initialized"));
+              return this.createJsonErrorResponse(400, -32600, "Invalid Request: Server already initialized");
+            }
+            if (messages2.length > 1) {
+              this.onerror?.(new Error("Invalid Request: Only one initialization request is allowed"));
+              return this.createJsonErrorResponse(400, -32600, "Invalid Request: Only one initialization request is allowed");
+            }
+            this.sessionId = this.sessionIdGenerator?.();
+            this._initialized = true;
+            if (this.sessionId && this._onsessioninitialized) {
+              await Promise.resolve(this._onsessioninitialized(this.sessionId));
+            }
+          }
+          if (!isInitializationRequest) {
+            const sessionError = this.validateSession(req);
+            if (sessionError) {
+              return sessionError;
+            }
+            const protocolError = this.validateProtocolVersion(req);
+            if (protocolError) {
+              return protocolError;
+            }
+          }
+          if (this._closed) {
+            return this.createJsonErrorResponse(404, -32001, "Session not found");
+          }
+          const hasRequests = messages2.some(isJSONRPCRequest);
+          if (!hasRequests) {
+            for (const message2 of messages2) {
+              this.onmessage?.(message2, { authInfo: options?.authInfo, requestInfo });
+            }
+            return new Response(null, { status: 202 });
+          }
+          const streamId = crypto.randomUUID();
+          const initRequest = messages2.find((m) => isInitializeRequest(m));
+          const clientProtocolVersion = initRequest ? initRequest.params.protocolVersion : req.headers.get("mcp-protocol-version") ?? DEFAULT_NEGOTIATED_PROTOCOL_VERSION;
+          if (this._enableJsonResponse) {
+            return new Promise((resolve) => {
+              this._streamMapping.set(streamId, {
+                resolveJson: resolve,
+                cleanup: () => {
+                  this._streamMapping.delete(streamId);
+                }
+              });
+              for (const message2 of messages2) {
+                if (isJSONRPCRequest(message2)) {
+                  this._requestToStreamMapping.set(message2.id, streamId);
+                }
+              }
+              for (const message2 of messages2) {
+                this.onmessage?.(message2, { authInfo: options?.authInfo, requestInfo });
+              }
+            });
+          }
+          const encoder2 = new TextEncoder();
+          let streamController;
+          let keepAliveTimer = void 0;
+          const readable = new ReadableStream({
+            start: (controller) => {
+              streamController = controller;
+            },
+            cancel: () => {
+              if (keepAliveTimer !== void 0) {
+                clearInterval(keepAliveTimer);
+              }
+              if (this._streamMapping.get(streamId)?.controller === streamController) {
+                this._streamMapping.delete(streamId);
+              }
+            }
+          });
+          const headers = {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache, no-transform",
+            Connection: "keep-alive",
+            "X-Accel-Buffering": "no"
+          };
+          if (this.sessionId !== void 0) {
+            headers["mcp-session-id"] = this.sessionId;
+          }
+          for (const message2 of messages2) {
+            if (isJSONRPCRequest(message2)) {
+              this._streamMapping.set(streamId, {
+                controller: streamController,
+                encoder: encoder2,
+                cleanup: () => {
+                  if (keepAliveTimer !== void 0) {
+                    clearInterval(keepAliveTimer);
+                  }
+                  this._streamMapping.delete(streamId);
+                  try {
+                    streamController.close();
+                  } catch {
+                  }
+                }
+              });
+              this._requestToStreamMapping.set(message2.id, streamId);
+            }
+          }
+          try {
+            await this.writePrimingEvent(streamController, encoder2, streamId, clientProtocolVersion);
+            for (const message2 of messages2) {
+              let closeSSEStream;
+              let closeStandaloneSSEStream;
+              if (isJSONRPCRequest(message2) && this._eventStore && clientProtocolVersion >= "2025-11-25") {
+                closeSSEStream = () => {
+                  this.closeSSEStream(message2.id);
+                };
+                closeStandaloneSSEStream = () => {
+                  this.closeStandaloneSSEStream();
+                };
+              }
+              this.onmessage?.(message2, { authInfo: options?.authInfo, requestInfo, closeSSEStream, closeStandaloneSSEStream });
+            }
+          } catch (error2) {
+            this._streamMapping.get(streamId)?.cleanup();
+            this._resumableStreams.delete(streamId);
+            for (const message2 of messages2) {
+              if (isJSONRPCRequest(message2)) {
+                this._requestToStreamMapping.delete(message2.id);
+              }
+            }
+            throw error2;
+          }
+          if (this._streamMapping.get(streamId)?.controller === streamController) {
+            keepAliveTimer = this.startKeepAlive(streamController, encoder2);
+          }
+          return new Response(readable, { status: 200, headers });
+        } catch (error2) {
+          this.onerror?.(error2);
+          return this.createJsonErrorResponse(400, -32700, "Parse error", { data: String(error2) });
+        }
+      }
+      /**
+       * Handles DELETE requests to terminate sessions
+       */
+      async handleDeleteRequest(req) {
+        const sessionError = this.validateSession(req);
+        if (sessionError) {
+          return sessionError;
+        }
+        const protocolError = this.validateProtocolVersion(req);
+        if (protocolError) {
+          return protocolError;
+        }
+        try {
+          await Promise.resolve(this._onsessionclosed?.(this.sessionId));
+          return new Response(null, { status: 200 });
+        } finally {
+          await this.close();
+        }
+      }
+      /**
+       * Validates session ID for non-initialization requests.
+       * Returns Response error if invalid, undefined otherwise
+       */
+      validateSession(req) {
+        if (this.sessionIdGenerator === void 0) {
+          return void 0;
+        }
+        if (!this._initialized) {
+          this.onerror?.(new Error("Bad Request: Server not initialized"));
+          return this.createJsonErrorResponse(400, -32e3, "Bad Request: Server not initialized");
+        }
+        const sessionId = req.headers.get("mcp-session-id");
+        if (!sessionId) {
+          this.onerror?.(new Error("Bad Request: Mcp-Session-Id header is required"));
+          return this.createJsonErrorResponse(400, -32e3, "Bad Request: Mcp-Session-Id header is required");
+        }
+        if (sessionId !== this.sessionId) {
+          this.onerror?.(new Error("Session not found"));
+          return this.createJsonErrorResponse(404, -32001, "Session not found");
+        }
+        return void 0;
+      }
+      /**
+       * Validates the MCP-Protocol-Version header on incoming requests.
+       *
+       * For initialization: Version negotiation handles unknown versions gracefully
+       * (server responds with its supported version).
+       *
+       * For subsequent requests with MCP-Protocol-Version header:
+       * - Accept if in supported list
+       * - 400 if unsupported
+       *
+       * For HTTP requests without the MCP-Protocol-Version header:
+       * - Accept and default to the version negotiated at initialization
+       */
+      validateProtocolVersion(req) {
+        const protocolVersion = req.headers.get("mcp-protocol-version");
+        if (protocolVersion !== null && !SUPPORTED_PROTOCOL_VERSIONS.includes(protocolVersion)) {
+          this.onerror?.(new Error(`Bad Request: Unsupported protocol version: ${protocolVersion} (supported versions: ${SUPPORTED_PROTOCOL_VERSIONS.join(", ")})`));
+          return this.createJsonErrorResponse(400, -32e3, `Bad Request: Unsupported protocol version: ${protocolVersion} (supported versions: ${SUPPORTED_PROTOCOL_VERSIONS.join(", ")})`);
+        }
+        return void 0;
+      }
+      async close() {
+        if (this._closed) {
+          return;
+        }
+        this._closed = true;
+        this._streamMapping.forEach(({ cleanup }) => {
+          cleanup();
+        });
+        this._streamMapping.clear();
+        this._requestResponseMap.clear();
+        this._resumableStreams.clear();
+        this.onclose?.();
+      }
+      /**
+       * Close an SSE stream for a specific request, triggering client reconnection.
+       * Use this to implement polling behavior during long-running operations -
+       * client will reconnect after the retry interval specified in the priming event.
+       */
+      closeSSEStream(requestId) {
+        const streamId = this._requestToStreamMapping.get(requestId);
+        if (!streamId)
+          return;
+        const stream = this._streamMapping.get(streamId);
+        if (stream) {
+          stream.cleanup();
+        }
+      }
+      /**
+       * Close the standalone GET SSE stream, triggering client reconnection.
+       * Use this to implement polling behavior for server-initiated notifications.
+       */
+      closeStandaloneSSEStream() {
+        const stream = this._streamMapping.get(this._standaloneSseStreamId);
+        if (stream) {
+          stream.cleanup();
+        }
+      }
+      async send(message2, options) {
+        let requestId = options?.relatedRequestId;
+        if (isJSONRPCResultResponse(message2) || isJSONRPCErrorResponse(message2)) {
+          requestId = message2.id;
+        }
+        if (requestId === void 0) {
+          if (isJSONRPCResultResponse(message2) || isJSONRPCErrorResponse(message2)) {
+            throw new Error("Cannot send a response on a standalone SSE stream unless resuming a previous client request");
+          }
+          let eventId;
+          if (this._eventStore) {
+            eventId = await this._eventStore.storeEvent(this._standaloneSseStreamId, message2);
+          }
+          const standaloneSse = this._streamMapping.get(this._standaloneSseStreamId);
+          if (standaloneSse === void 0) {
+            return;
+          }
+          if (standaloneSse.controller && standaloneSse.encoder && (eventId === void 0 || !standaloneSse.replayedEventIds?.has(eventId))) {
+            this.writeSSEEvent(standaloneSse.controller, standaloneSse.encoder, message2, eventId);
+          }
+          return;
+        }
+        const streamId = this._requestToStreamMapping.get(requestId);
+        if (!streamId) {
+          throw new Error(`No connection established for request ID: ${String(requestId)}`);
+        }
+        let stream = this._streamMapping.get(streamId);
+        if (!this._enableJsonResponse) {
+          let eventId;
+          if (this._eventStore) {
+            eventId = await this._eventStore.storeEvent(streamId, message2);
+            stream = this._streamMapping.get(streamId);
+          }
+          if (stream?.controller && stream?.encoder && (eventId === void 0 || !stream.replayedEventIds?.has(eventId))) {
+            const written = this.writeSSEEvent(stream.controller, stream.encoder, message2, eventId);
+            if (written && eventId !== void 0) {
+              this._resumableStreams.add(streamId);
+            }
+          }
+        }
+        if (isJSONRPCResultResponse(message2) || isJSONRPCErrorResponse(message2)) {
+          this._requestResponseMap.set(requestId, message2);
+          const relatedIds = Array.from(this._requestToStreamMapping.entries()).filter(([_, sid]) => sid === streamId).map(([id]) => id);
+          const allResponsesReady = relatedIds.every((id) => this._requestResponseMap.has(id));
+          if (allResponsesReady) {
+            if (!stream) {
+              if (this._closed) {
+                for (const id of relatedIds) {
+                  this._requestResponseMap.delete(id);
+                  this._requestToStreamMapping.delete(id);
+                }
+                return;
+              }
+              if (!this._enableJsonResponse && this._eventStore && this._resumableStreams.has(streamId)) {
+                for (const id of relatedIds) {
+                  this._requestResponseMap.delete(id);
+                  this._requestToStreamMapping.delete(id);
+                }
+                this._resumableStreams.delete(streamId);
+                return;
+              }
+              for (const id of relatedIds) {
+                this._requestResponseMap.delete(id);
+                this._requestToStreamMapping.delete(id);
+              }
+              throw new Error(`No connection established for request ID: ${String(requestId)}`);
+            }
+            if (this._enableJsonResponse && stream.resolveJson) {
+              const headers = {
+                "Content-Type": "application/json"
+              };
+              if (this.sessionId !== void 0) {
+                headers["mcp-session-id"] = this.sessionId;
+              }
+              const responses = relatedIds.map((id) => this._requestResponseMap.get(id));
+              if (responses.length === 1) {
+                stream.resolveJson(new Response(JSON.stringify(responses[0]), { status: 200, headers }));
+              } else {
+                stream.resolveJson(new Response(JSON.stringify(responses), { status: 200, headers }));
+              }
+            } else {
+              stream.cleanup();
+            }
+            for (const id of relatedIds) {
+              this._requestResponseMap.delete(id);
+              this._requestToStreamMapping.delete(id);
+            }
+            this._resumableStreams.delete(streamId);
+          }
+        }
+      }
+    };
+  }
+});
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/streamableHttp.js
+var StreamableHTTPServerTransport;
+var init_streamableHttp = __esm({
+  "node_modules/@modelcontextprotocol/sdk/dist/esm/server/streamableHttp.js"() {
+    init_dist();
+    init_webStandardStreamableHttp();
+    StreamableHTTPServerTransport = class {
+      constructor(options = {}) {
+        this._requestContext = /* @__PURE__ */ new WeakMap();
+        this._webStandardTransport = new WebStandardStreamableHTTPServerTransport(options);
+        this._requestListener = getRequestListener(async (webRequest) => {
+          const context = this._requestContext.get(webRequest);
+          return this._webStandardTransport.handleRequest(webRequest, {
+            authInfo: context?.authInfo,
+            parsedBody: context?.parsedBody
+          });
+        }, { overrideGlobalObjects: false });
+      }
+      /**
+       * Gets the session ID for this transport instance.
+       */
+      get sessionId() {
+        return this._webStandardTransport.sessionId;
+      }
+      /**
+       * Sets callback for when the transport is closed.
+       */
+      set onclose(handler) {
+        this._webStandardTransport.onclose = handler;
+      }
+      get onclose() {
+        return this._webStandardTransport.onclose;
+      }
+      /**
+       * Sets callback for transport errors.
+       */
+      set onerror(handler) {
+        this._webStandardTransport.onerror = handler;
+      }
+      get onerror() {
+        return this._webStandardTransport.onerror;
+      }
+      /**
+       * Sets callback for incoming messages.
+       */
+      set onmessage(handler) {
+        this._webStandardTransport.onmessage = handler;
+      }
+      get onmessage() {
+        return this._webStandardTransport.onmessage;
+      }
+      /**
+       * Starts the transport. This is required by the Transport interface but is a no-op
+       * for the Streamable HTTP transport as connections are managed per-request.
+       */
+      async start() {
+        return this._webStandardTransport.start();
+      }
+      /**
+       * Closes the transport and all active connections.
+       */
+      async close() {
+        return this._webStandardTransport.close();
+      }
+      /**
+       * Sends a JSON-RPC message through the transport.
+       */
+      async send(message2, options) {
+        return this._webStandardTransport.send(message2, options);
+      }
+      /**
+       * Handles an incoming HTTP request, whether GET or POST.
+       *
+       * This method converts Node.js HTTP objects to Web Standard Request/Response
+       * and delegates to the underlying WebStandardStreamableHTTPServerTransport.
+       *
+       * @param req - Node.js IncomingMessage, optionally with auth property from middleware
+       * @param res - Node.js ServerResponse
+       * @param parsedBody - Optional pre-parsed body from body-parser middleware
+       */
+      async handleRequest(req, res, parsedBody) {
+        const authInfo = req.auth;
+        const handler = getRequestListener(async (webRequest) => {
+          return this._webStandardTransport.handleRequest(webRequest, {
+            authInfo,
+            parsedBody
+          });
+        }, { overrideGlobalObjects: false });
+        await handler(req, res);
+      }
+      /**
+       * Close an SSE stream for a specific request, triggering client reconnection.
+       * Use this to implement polling behavior during long-running operations -
+       * client will reconnect after the retry interval specified in the priming event.
+       */
+      closeSSEStream(requestId) {
+        this._webStandardTransport.closeSSEStream(requestId);
+      }
+      /**
+       * Close the standalone GET SSE stream, triggering client reconnection.
+       * Use this to implement polling behavior for server-initiated notifications.
+       */
+      closeStandaloneSSEStream() {
+        this._webStandardTransport.closeStandaloneSSEStream();
+      }
+    };
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/buffer_utils.js
+function concat(...buffers) {
+  const size2 = buffers.reduce((acc, { length }) => acc + length, 0), buf = new Uint8Array(size2);
+  let i2 = 0;
+  for (const buffer2 of buffers)
+    buf.set(buffer2, i2), i2 += buffer2.length;
+  return buf;
+}
+function encode(string3) {
+  if (typeof string3 == "string" && string3.length >= 128) {
+    if (NON_ASCII.test(string3))
+      throw new TypeError("non-ASCII string encountered in encode()");
+    return encoder.encode(string3);
+  }
+  const bytes = new Uint8Array(string3.length);
+  for (let i2 = 0; i2 < string3.length; i2++) {
+    const code = string3.charCodeAt(i2);
+    if (code > 127)
+      throw new TypeError("non-ASCII string encountered in encode()");
+    bytes[i2] = code;
+  }
+  return bytes;
+}
+function decodeBase64(encoded, url = false) {
+  if (Uint8Array.fromBase64)
+    return Uint8Array.fromBase64(encoded, { alphabet: url ? "base64url" : "base64" });
+  if (url) {
+    if (encoded.includes("+") || encoded.includes("/"))
+      throw new TypeError("Invalid base64url");
+    encoded = encoded.replace(/-/g, "+").replace(/_/g, "/");
+  }
+  const binary2 = atob(encoded), bytes = new Uint8Array(binary2.length);
+  for (let i2 = 0; i2 < binary2.length; i2++)
+    bytes[i2] = binary2.charCodeAt(i2);
+  return bytes;
+}
+var encoder, decoder, strictDecoder, MAX_INT32, NON_ASCII;
+var init_buffer_utils = __esm({
+  "node_modules/jose/dist/webapi/lib/buffer_utils.js"() {
+    encoder = new TextEncoder();
+    decoder = new TextDecoder();
+    strictDecoder = new TextDecoder("utf-8", { fatal: true });
+    MAX_INT32 = 2 ** 32;
+    NON_ASCII = /[^\x00-\x7f]/;
+  }
+});
+
+// node_modules/jose/dist/webapi/util/errors.js
+var JOSEError, JWTClaimValidationFailed, JWTExpired, JOSEAlgNotAllowed, JOSENotSupported, JWSInvalid, JWTInvalid, JWKSInvalid, JWKSNoMatchingKey, JWKSMultipleMatchingKeys, JWKSTimeout, JWSSignatureVerificationFailed;
+var init_errors6 = __esm({
+  "node_modules/jose/dist/webapi/util/errors.js"() {
+    JOSEError = class extends Error {
+      static code = "ERR_JOSE_GENERIC";
+      code = "ERR_JOSE_GENERIC";
+      constructor(message2, options) {
+        super(message2, options), this.name = this.constructor.name, Error.captureStackTrace?.(this, this.constructor);
+      }
+    };
+    JWTClaimValidationFailed = class extends JOSEError {
+      static code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
+      code = "ERR_JWT_CLAIM_VALIDATION_FAILED";
+      claim;
+      reason;
+      payload;
+      constructor(message2, payload, claim = "unspecified", reason = "unspecified") {
+        super(message2, { cause: { claim, reason, payload } }), this.claim = claim, this.reason = reason, this.payload = payload;
+      }
+    };
+    JWTExpired = class extends JOSEError {
+      static code = "ERR_JWT_EXPIRED";
+      code = "ERR_JWT_EXPIRED";
+      claim;
+      reason;
+      payload;
+      constructor(message2, payload, claim = "unspecified", reason = "unspecified") {
+        super(message2, { cause: { claim, reason, payload } }), this.claim = claim, this.reason = reason, this.payload = payload;
+      }
+    };
+    JOSEAlgNotAllowed = class extends JOSEError {
+      static code = "ERR_JOSE_ALG_NOT_ALLOWED";
+      code = "ERR_JOSE_ALG_NOT_ALLOWED";
+    };
+    JOSENotSupported = class extends JOSEError {
+      static code = "ERR_JOSE_NOT_SUPPORTED";
+      code = "ERR_JOSE_NOT_SUPPORTED";
+    };
+    JWSInvalid = class extends JOSEError {
+      static code = "ERR_JWS_INVALID";
+      code = "ERR_JWS_INVALID";
+    };
+    JWTInvalid = class extends JOSEError {
+      static code = "ERR_JWT_INVALID";
+      code = "ERR_JWT_INVALID";
+    };
+    JWKSInvalid = class extends JOSEError {
+      static code = "ERR_JWKS_INVALID";
+      code = "ERR_JWKS_INVALID";
+    };
+    JWKSNoMatchingKey = class extends JOSEError {
+      static code = "ERR_JWKS_NO_MATCHING_KEY";
+      code = "ERR_JWKS_NO_MATCHING_KEY";
+      constructor(message2 = "no applicable key found in the JSON Web Key Set", options) {
+        super(message2, options);
+      }
+    };
+    JWKSMultipleMatchingKeys = class extends JOSEError {
+      [Symbol.asyncIterator] = async function* () {
+      };
+      static code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
+      code = "ERR_JWKS_MULTIPLE_MATCHING_KEYS";
+      constructor(message2 = "multiple matching keys found in the JSON Web Key Set", options) {
+        super(message2, options);
+      }
+    };
+    JWKSTimeout = class extends JOSEError {
+      static code = "ERR_JWKS_TIMEOUT";
+      code = "ERR_JWKS_TIMEOUT";
+      constructor(message2 = "request timed out", options) {
+        super(message2, options);
+      }
+    };
+    JWSSignatureVerificationFailed = class extends JOSEError {
+      static code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
+      code = "ERR_JWS_SIGNATURE_VERIFICATION_FAILED";
+      constructor(message2 = "signature verification failed", options) {
+        super(message2, options);
+      }
+    };
+  }
+});
+
+// node_modules/jose/dist/webapi/util/base64url.js
+function decode(input) {
+  try {
+    return decodeBase64(typeof input == "string" ? input : decoder.decode(input), true);
+  } catch (cause) {
+    throw new TypeError(invalid, { cause });
+  }
+}
+var invalid;
+var init_base64url = __esm({
+  "node_modules/jose/dist/webapi/util/base64url.js"() {
+    init_buffer_utils();
+    invalid = "The input to be decoded is not correctly encoded.";
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/validate.js
+function isObject3(input) {
+  if (typeof input != "object" || input === null || Object.prototype.toString.call(input) !== "[object Object]")
+    return false;
+  const prototype = Object.getPrototypeOf(input);
+  return prototype === null || Object.getPrototypeOf(prototype) === null;
+}
+function isJwkSet(input) {
+  return isObject3(input) && Array.isArray(input.keys) && Array.from(input.keys).every(isObject3);
+}
+function isDisjoint(...headers) {
+  const parameters = /* @__PURE__ */ new Set();
+  for (const header of headers)
+    if (header)
+      for (const parameter of Object.keys(header)) {
+        if (parameters.has(parameter))
+          return false;
+        parameters.add(parameter);
+      }
+  return true;
+}
+function decodeBase64url(value, label, ErrorClass) {
+  try {
+    return decode(value);
+  } catch {
+    throw new ErrorClass(`Failed to base64url decode the ${label}`);
+  }
+}
+function encodeBase64url(value, label, ErrorClass) {
+  try {
+    return encode(value);
+  } catch {
+    throw new ErrorClass(`The ${label} is not a valid base64url string`);
+  }
+}
+function parseJoseHeader(b64, ErrorClass, message2) {
+  let parsed;
+  try {
+    parsed = JSON.parse(strictDecoder.decode(decode(b64)));
+  } catch {
+    throw new ErrorClass(message2);
+  }
+  if (!isObject3(parsed))
+    throw new ErrorClass(message2);
+  return parsed;
+}
+function validateAlgorithms(option, algorithms) {
+  if (algorithms !== void 0 && (!Array.isArray(algorithms) || algorithms.some((s) => typeof s != "string")))
+    throw new TypeError(`"${option}" option must be an array of strings`);
+  return algorithms === void 0 ? void 0 : new Set(algorithms);
+}
+function validateCrit(Err, recognizedDefault, recognizedOption, protectedHeader, joseHeader) {
+  if (joseHeader.crit !== void 0 && protectedHeader?.crit === void 0)
+    throw new Err('"crit" (Critical) Header Parameter MUST be integrity protected');
+  if (!protectedHeader || protectedHeader.crit === void 0)
+    return [];
+  if (!Array.isArray(protectedHeader.crit) || protectedHeader.crit.length === 0 || protectedHeader.crit.some((input) => typeof input != "string" || input.length === 0))
+    throw new Err('"crit" (Critical) Header Parameter MUST be an array of non-empty strings when present');
+  const recognized = recognizedOption === void 0 ? recognizedDefault : { __proto__: null, ...recognizedOption, ...recognizedDefault };
+  for (const parameter of protectedHeader.crit) {
+    if (!(parameter in recognized))
+      throw new JOSENotSupported(`Extension Header Parameter "${parameter}" is not recognized`);
+    if (!Object.hasOwn(joseHeader, parameter) || joseHeader[parameter] === void 0)
+      throw new Err(`Extension Header Parameter "${parameter}" is missing`);
+    if (recognized[parameter] && (!Object.hasOwn(protectedHeader, parameter) || protectedHeader[parameter] === void 0))
+      throw new Err(`Extension Header Parameter "${parameter}" MUST be integrity protected`);
+  }
+  return protectedHeader.crit;
+}
+function validateB64(protectedHeader, extensions) {
+  if (extensions.includes("b64")) {
+    const b64 = protectedHeader.b64;
+    if (typeof b64 != "boolean")
+      throw new JWSInvalid('The "b64" (base64url-encode payload) Header Parameter must be a boolean');
+    return b64;
+  }
+  return true;
+}
+var JWS_RECOGNIZED;
+var init_validate = __esm({
+  "node_modules/jose/dist/webapi/lib/validate.js"() {
+    init_errors6();
+    init_base64url();
+    init_buffer_utils();
+    JWS_RECOGNIZED = { __proto__: null, b64: true };
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/key.js
+async function prepareKey(entry, key, usage) {
+  const { alg, secret } = entry, privateKey = usage === "decrypt" || usage === "sign";
+  if (secret && key instanceof Uint8Array)
+    return key;
+  let normalized, keyObject;
+  if (isObject3(key)) {
+    if (normalized = normalizeJwk(key), typeof normalized.kty != "string")
+      throw invalidKeyType(alg, key, secret);
+    if (!(secret ? normalized.kty === "oct" && typeof normalized.k == "string" : normalized.kty !== "oct" && (privateKey ? normalized.kty === "AKP" && typeof normalized.priv == "string" || typeof normalized.d == "string" : normalized.d === void 0 && normalized.priv === void 0)))
+      throw new TypeError(secret ? 'JSON Web Key for symmetric algorithms must have JWK "kty" (Key Type) equal to "oct" and the JWK "k" (Key Value) present' : `JSON Web Key for this operation must be a ${privateKey ? "private" : "public"} JWK`);
+    if (jwkMatchesOp(entry, normalized, usage), normalized.kty === "oct")
+      return decode(normalized.k);
+    if (!Object.isFrozen(key)) {
+      const { key_ops } = key;
+      Array.isArray(key_ops) && Object.freeze(key_ops), Object.freeze(key);
+    }
+  } else {
+    if (!isKeyLike(key))
+      throw invalidKeyType(alg, key, secret);
+    const expectedType = secret ? "secret" : privateKey ? "private" : "public";
+    if (key.type !== expectedType && (secret || ["secret", "public", "private"].includes(key.type)))
+      throw new TypeError(`${tag(key)} instances must be of type "${expectedType}" for the ${alg} algorithm`);
+    if (isCryptoKey(key))
+      return key;
+    if (keyObject = key, keyObject.type === "secret")
+      return keyObject.export();
+  }
+  cache ||= /* @__PURE__ */ new WeakMap();
+  const cacheKey2 = key;
+  let cached2 = cache.get(cacheKey2);
+  if (cached2?.[alg])
+    return cached2[alg];
+  if (cached2 || cache.set(cacheKey2, cached2 = {}), keyObject && typeof keyObject.toCryptoKey == "function") {
+    const isPublic = keyObject.type === "public", crv = nist[keyObject.asymmetricKeyDetails?.namedCurve], params = entry.resolve?.({ crv, asymmetricKeyType: keyObject.asymmetricKeyType }) ?? entry.subtle;
+    return cached2[alg] = keyObject.toCryptoKey(params, isPublic, entry.usages[isPublic ? 0 : 1]);
+  }
+  return normalized ??= keyObject.export({ format: "jwk" }), normalized.alg = alg, cached2[alg] = await jwkToKey(entry, normalized);
+}
+function message(msg, actual, ...types2) {
+  if (types2.length > 2) {
+    const last = types2.pop();
+    msg += `one of type ${types2.join(", ")}, or ${last}.`;
+  } else types2.length === 2 ? msg += `one of type ${types2[0]} or ${types2[1]}.` : msg += `of type ${types2[0]}.`;
+  return actual == null ? msg += ` Received ${actual}` : typeof actual == "function" && actual.name ? msg += ` Received function ${actual.name}` : typeof actual == "object" && actual != null && actual.constructor?.name && (msg += ` Received an instance of ${actual.constructor.name}`), msg;
+}
+function invalidKeyType(alg, actual, secret) {
+  const types2 = ["CryptoKey", "KeyObject", "JSON Web Key"];
+  return secret && types2.push("Uint8Array"), new TypeError(message(`Key for the ${alg} algorithm must be `, actual, ...types2));
+}
+function checkUsage(key, usage) {
+  if (usage && !key.usages.includes(usage))
+    throw new TypeError(`CryptoKey does not support this operation, its usages must include ${usage}.`);
+}
+function checkModulusLength(alg, key) {
+  const { modulusLength } = key.algorithm;
+  if (typeof modulusLength != "number" || modulusLength < 2048)
+    throw new TypeError(`${alg} requires key modulusLength to be 2048 bits or larger`);
+}
+function checkCryptoKey(key, expected, usage) {
+  const algorithm = key.algorithm;
+  if (algorithm.name !== expected.name)
+    throw unusable(expected.name);
+  if (expected.hash && algorithm.hash?.name !== expected.hash)
+    throw unusable(expected.hash, "algorithm.hash");
+  if (expected.namedCurve && algorithm.namedCurve !== expected.namedCurve)
+    throw unusable(expected.namedCurve, "algorithm.namedCurve");
+  if (expected.length !== void 0 && algorithm.length !== expected.length)
+    throw unusable(expected.length, "algorithm.length");
+  checkUsage(key, usage);
+}
+function snapshotJwk(jwk) {
+  return { __proto__: null, ...jwk };
+}
+function normalizeJwk(jwk) {
+  const normalized = snapshotJwk(jwk);
+  if (normalized.ext !== void 0 && typeof normalized.ext != "boolean")
+    throw new TypeError('"ext" (Extractable) Parameter must be a boolean');
+  if (normalized.key_ops !== void 0) {
+    const value = normalized.key_ops, keyOps = Array.isArray(value) ? [...value] : void 0;
+    if (!keyOps || keyOps.some((operation) => typeof operation != "string") || new Set(keyOps).size !== keyOps.length)
+      throw new TypeError('"key_ops" (Key Operations) Parameter must be an array of unique strings');
+    normalized.key_ops = keyOps;
+  }
+  return normalized;
+}
+function validateExtractableOption(extractable) {
+  if (extractable !== void 0 && typeof extractable != "boolean")
+    throw new TypeError('"extractable" option must be a boolean');
+  return extractable;
+}
+async function jwkToKey(entry, jwk, extractable) {
+  if (!entry.kty.includes(jwk.kty))
+    throw new JOSENotSupported('Invalid or unsupported JWK "alg" (Algorithm) Parameter value');
+  const algorithm = entry.resolve?.({ kty: jwk.kty, crv: jwk.crv }) ?? entry.subtle, isPrivate = !!(jwk.d || jwk.priv), keyData = { ...jwk, ext: extractable ?? jwk.ext };
+  return keyData.kty !== "AKP" && delete keyData.alg, delete keyData.use, crypto.subtle.importKey("jwk", keyData, algorithm, keyData.ext ?? !isPrivate, jwk.key_ops ?? entry.usages[isPrivate ? 1 : 0]);
+}
+async function rawKey(key, expected, usage, extractable = false) {
+  return key instanceof Uint8Array && (key = await crypto.subtle.importKey("raw", key, expected, extractable, [usage])), checkCryptoKey(key, expected, usage), key;
+}
+var tag, jwkMatchesOp, cache, nist, isCryptoKey, isKeyObject, isKeyLike, unusable;
+var init_key = __esm({
+  "node_modules/jose/dist/webapi/lib/key.js"() {
+    init_validate();
+    init_base64url();
+    init_errors6();
+    tag = (key) => key[Symbol.toStringTag];
+    jwkMatchesOp = (entry, key, usage) => {
+      const { alg } = entry;
+      if (key.use !== void 0) {
+        const expected = usage === "sign" || usage === "verify" ? "sig" : "enc";
+        if (key.use !== expected)
+          throw new TypeError(`Invalid key for this operation, its "use" must be "${expected}" when present`);
+      }
+      if (key.alg !== void 0 && key.alg !== alg)
+        throw new TypeError(`Invalid key for this operation, its "alg" must be "${alg}" when present`);
+      if (Array.isArray(key.key_ops)) {
+        const expectedKeyOp = usage === "encrypt" || usage === "decrypt" ? entry.ops?.[usage === "encrypt" ? 0 : 1] : usage;
+        if (expectedKeyOp && !key.key_ops.includes(expectedKeyOp))
+          throw new TypeError(`Invalid key for this operation, its "key_ops" must include "${expectedKeyOp}" when present`);
+      }
+    };
+    nist = {
+      __proto__: null,
+      prime256v1: "P-256",
+      secp384r1: "P-384",
+      secp521r1: "P-521"
+    };
+    isCryptoKey = (key) => {
+      if (key?.[Symbol.toStringTag] === "CryptoKey")
+        return true;
+      try {
+        return key instanceof CryptoKey;
+      } catch {
+        return false;
+      }
+    };
+    isKeyObject = (key) => key?.[Symbol.toStringTag] === "KeyObject";
+    isKeyLike = (key) => isCryptoKey(key) || isKeyObject(key);
+    unusable = (name2, prop = "algorithm.name") => new TypeError(`CryptoKey does not support this operation, its ${prop} must be ${name2}`);
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/key_descriptor.js
+function table(entries) {
+  const out2 = { __proto__: null };
+  for (const alg in entries)
+    out2[alg] = { ...entries[alg], alg };
+  return out2;
+}
+var init_key_descriptor = __esm({
+  "node_modules/jose/dist/webapi/lib/key_descriptor.js"() {
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/jwe_algorithms.js
+function rsaes(bits) {
+  return {
+    kty: ["RSA"],
+    mode: "key-encryption",
+    subtle: { name: "RSA-OAEP", hash: `SHA-${bits}` },
+    usages: wrap,
+    ops: ["wrapKey", "unwrapKey"]
+  };
+}
+function ecdh(mode) {
+  return {
+    kty: ["EC", "OKP"],
+    mode,
+    subtle: { name: "ECDH" },
+    resolve: ({ kty, crv, asymmetricKeyType }) => {
+      if (crv === "X25519" || asymmetricKeyType === "x25519")
+        return { name: "X25519" };
+      if (kty === "OKP")
+        throw new JOSENotSupported('Invalid or unsupported JWK "alg" (Algorithm) Parameter value');
+      return { name: "ECDH", namedCurve: crv };
+    },
+    usages: derive,
+    ops: [void 0, "deriveBits"]
+  };
+}
+function aeskw(bits, gcm = false) {
+  return {
+    kty: ["oct"],
+    mode: "key-wrapping",
+    secret: true,
+    subtle: { name: gcm ? "AES-GCM" : "AES-KW", length: bits },
+    usages: none,
+    ops: gcm ? ["encrypt", "decrypt"] : ["wrapKey", "unwrapKey"]
+  };
+}
+function pbes2() {
+  return {
+    kty: ["oct"],
+    mode: "key-wrapping",
+    secret: true,
+    subtle: { name: "PBKDF2" },
+    usages: none,
+    ops: ["deriveBits", "deriveBits"]
+  };
+}
+function contentEncryption(bits, cbc = false) {
+  return {
+    kty: ["oct"],
+    secret: true,
+    subtle: { name: cbc ? "AES-CBC" : "AES-GCM", length: bits },
+    usages: none,
+    ops: contentOps,
+    cekBits: bits,
+    ivBits: cbc ? 128 : 96,
+    cbc
+  };
+}
+var wrap, derive, none, JWE, contentOps, ENC;
+var init_jwe_algorithms = __esm({
+  "node_modules/jose/dist/webapi/lib/jwe_algorithms.js"() {
+    init_errors6();
+    init_key_descriptor();
+    wrap = [
+      ["encrypt", "wrapKey"],
+      ["decrypt", "unwrapKey"]
+    ];
+    derive = [[], ["deriveBits"]];
+    none = [[], []];
+    JWE = table({
+      dir: {
+        kty: ["oct"],
+        mode: "direct-encryption",
+        secret: true,
+        subtle: { name: "AES-GCM" },
+        usages: none,
+        ops: ["encrypt", "decrypt"]
+      },
+      "RSA-OAEP": rsaes(1),
+      "RSA-OAEP-256": rsaes(256),
+      "RSA-OAEP-384": rsaes(384),
+      "RSA-OAEP-512": rsaes(512),
+      "ECDH-ES": ecdh("direct-key-agreement"),
+      "ECDH-ES+A128KW": ecdh("key-agreement-with-key-wrapping"),
+      "ECDH-ES+A192KW": ecdh("key-agreement-with-key-wrapping"),
+      "ECDH-ES+A256KW": ecdh("key-agreement-with-key-wrapping"),
+      A128KW: aeskw(128),
+      A192KW: aeskw(192),
+      A256KW: aeskw(256),
+      A128GCMKW: aeskw(128, true),
+      A192GCMKW: aeskw(192, true),
+      A256GCMKW: aeskw(256, true),
+      "PBES2-HS256+A128KW": pbes2(),
+      "PBES2-HS384+A192KW": pbes2(),
+      "PBES2-HS512+A256KW": pbes2()
+    });
+    contentOps = ["encrypt", "decrypt"];
+    ENC = table({
+      A128GCM: contentEncryption(128),
+      A192GCM: contentEncryption(192),
+      A256GCM: contentEncryption(256),
+      "A128CBC-HS256": contentEncryption(256, true),
+      "A192CBC-HS384": contentEncryption(384, true),
+      "A256CBC-HS512": contentEncryption(512, true)
+    });
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/jws_algorithms.js
+function hmac2(bits) {
+  const subtle = { name: "HMAC", hash: `SHA-${bits}` };
+  return { kty: ["oct"], secret: true, subtle, signing: subtle, usages: sig };
+}
+function rsa(bits, saltLength) {
+  const subtle = { name: saltLength ? "RSA-PSS" : "RSASSA-PKCS1-v1_5", hash: `SHA-${bits}` };
+  return {
+    kty: ["RSA"],
+    subtle,
+    signing: saltLength ? { ...subtle, saltLength } : subtle,
+    usages: sig,
+    minRsaBits: 2048
+  };
+}
+function ecdsa(crv, bits) {
+  return {
+    kty: ["EC"],
+    crv,
+    subtle: { name: "ECDSA", namedCurve: crv },
+    signing: { name: "ECDSA", hash: `SHA-${bits}` },
+    usages: sig
+  };
+}
+function eddsa() {
+  const subtle = { name: "Ed25519" };
+  return {
+    kty: ["OKP"],
+    crv: "Ed25519",
+    subtle,
+    signing: subtle,
+    usages: sig
+  };
+}
+function mldsa(bits) {
+  const subtle = { name: `ML-DSA-${bits}` };
+  return {
+    kty: ["AKP"],
+    subtle,
+    signing: subtle,
+    usages: sig
+  };
+}
+function jwsAlgorithm(alg) {
+  const entry = typeof alg == "string" ? JWS[alg] : void 0;
+  if (!entry)
+    throw new JOSENotSupported(`alg ${alg} is not supported either by JOSE or your javascript runtime`);
+  return entry;
+}
+var sig, JWS;
+var init_jws_algorithms = __esm({
+  "node_modules/jose/dist/webapi/lib/jws_algorithms.js"() {
+    init_errors6();
+    init_key_descriptor();
+    sig = [["verify"], ["sign"]];
+    JWS = table({
+      HS256: hmac2(256),
+      HS384: hmac2(384),
+      HS512: hmac2(512),
+      RS256: rsa(256),
+      RS384: rsa(384),
+      RS512: rsa(512),
+      PS256: rsa(256, 32),
+      PS384: rsa(384, 48),
+      PS512: rsa(512, 64),
+      ES256: ecdsa("P-256", 256),
+      ES384: ecdsa("P-384", 384),
+      ES512: ecdsa("P-521", 512),
+      EdDSA: eddsa(),
+      Ed25519: eddsa(),
+      "ML-DSA-44": mldsa(44),
+      "ML-DSA-65": mldsa(65),
+      "ML-DSA-87": mldsa(87)
+    });
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/jws_verify.js
+function prepareVerify(options) {
+  return [options && validateAlgorithms("algorithms", options.algorithms), options?.crit];
+}
+function parseProtectedHeader(encodedProtected) {
+  return encodedProtected === void 0 ? {} : parseJoseHeader(encodedProtected, JWSInvalid, "JWS Protected Header is invalid");
+}
+function encodeCompactUnencodedPayload(payload) {
+  try {
+    return encode(payload);
+  } catch {
+    throw new JWSInvalid("JWS Compact Serialization payload must use only ASCII characters");
+  }
+}
+async function verifySignature(jws, shared2, key, encodeUnencodedPayload, parsedProtected) {
+  const { protected: encodedProtected, header, payload: inputPayload } = jws, parsedProt = parsedProtected ?? parseProtectedHeader(encodedProtected);
+  if (!isDisjoint(parsedProt, header))
+    throw new JWSInvalid("JWS Protected and JWS Unprotected Header Parameter names must be disjoint");
+  const joseHeader = { ...parsedProt, ...header }, b64 = validateB64(parsedProt, validateCrit(JWSInvalid, JWS_RECOGNIZED, shared2[1], parsedProt, joseHeader)), { alg } = joseHeader;
+  if (typeof alg != "string" || !alg)
+    throw new JWSInvalid('JWS "alg" (Algorithm) Header Parameter missing or invalid');
+  if (shared2[0] && !shared2[0].has(alg))
+    throw new JOSEAlgNotAllowed('"alg" (Algorithm) Header Parameter value not allowed');
+  if (b64) {
+    if (typeof inputPayload != "string")
+      throw new JWSInvalid("JWS Payload must be a string");
+  } else if (typeof inputPayload != "string" && !(inputPayload instanceof Uint8Array))
+    throw new JWSInvalid("JWS Payload must be a string or an Uint8Array instance");
+  const signingPayload = b64 || typeof inputPayload != "string" ? inputPayload : encodeUnencodedPayload(inputPayload);
+  let resolvedKey = false;
+  typeof key == "function" && (key = await key(parsedProt, jws), resolvedKey = true);
+  const entry = jwsAlgorithm(alg), data = concat(encodedProtected !== void 0 ? encode(encodedProtected) : new Uint8Array(), encode("."), typeof signingPayload == "string" ? shared2[2] ??= encodeBase64url(signingPayload, "payload", JWSInvalid) : signingPayload), signature = decodeBase64url(jws.signature, "signature", JWSInvalid), k = await prepareKey(entry, key, "verify"), cryptoKey = await rawKey(k, entry.subtle, "verify");
+  entry.minRsaBits && checkModulusLength(entry.alg, cryptoKey);
+  let verified = false;
+  try {
+    verified = await crypto.subtle.verify(entry.signing, cryptoKey, signature, data);
+  } catch {
+  }
+  if (!verified)
+    throw new JWSSignatureVerificationFailed();
+  const result = { payload: typeof signingPayload == "string" ? decodeBase64url(signingPayload, "payload", JWSInvalid) : signingPayload };
+  return encodedProtected !== void 0 && (result.protectedHeader = parsedProt), header !== void 0 && (result.unprotectedHeader = header), resolvedKey ? [{ ...result, key: k }, b64] : [result, b64];
+}
+async function verifyCompact(jws, shared2, key) {
+  if (jws instanceof Uint8Array && (jws = decoder.decode(jws)), typeof jws != "string")
+    throw new JWSInvalid("Compact JWS must be a string or Uint8Array");
+  const { 0: protectedHeader, 1: payload, 2: signature, length } = jws.split(".");
+  if (length !== 3)
+    throw new JWSInvalid("Invalid Compact JWS");
+  return verifySignature({ payload, protected: protectedHeader, signature }, shared2, key, encodeCompactUnencodedPayload);
+}
+var init_jws_verify = __esm({
+  "node_modules/jose/dist/webapi/lib/jws_verify.js"() {
+    init_jws_algorithms();
+    init_errors6();
+    init_buffer_utils();
+    init_validate();
+    init_key();
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/jwt_claims_set.js
+function invalidDuration() {
+  throw new TypeError("Invalid time period format");
+}
+function secs(str) {
+  typeof str != "string" && invalidDuration();
+  const matched = REGEX.exec(str);
+  (!matched || matched[4] && matched[1]) && invalidDuration();
+  const value = parseFloat(matched[2]), numericDate2 = Math.round(value * multipliers[matched[3][0].toLowerCase()]);
+  return Number.isFinite(numericDate2) || invalidDuration(), matched[1] === "-" || matched[4] === "ago" ? -numericDate2 : numericDate2;
+}
+function validateInput(label, input) {
+  if (!Number.isFinite(input))
+    throw new TypeError(`Invalid ${label} input`);
+  return input;
+}
+function validateNumericDate(payload, claim, required2 = false) {
+  const value = payload[claim];
+  if (!(value === void 0 && !required2)) {
+    if (typeof value != "number")
+      throw new JWTClaimValidationFailed(`"${claim}" claim must be a number`, payload, claim, "invalid");
+    return value;
+  }
+}
+function unexpectedClaim(payload, claim) {
+  throw new JWTClaimValidationFailed(`unexpected "${claim}" claim value`, payload, claim, checkFailed);
+}
+function validateClaimsSet(protectedHeader, encodedPayload, options = {}) {
+  let payload;
+  try {
+    payload = JSON.parse(strictDecoder.decode(encodedPayload));
+  } catch {
+  }
+  if (!isObject3(payload))
+    throw new JWTInvalid("JWT Claims Set must be a top-level JSON object");
+  const { typ } = options;
+  if (typ !== void 0 && (typeof protectedHeader.typ != "string" || normalizeTyp(protectedHeader.typ) !== normalizeTyp(typ)))
+    throw new JWTClaimValidationFailed('unexpected "typ" JWT header value', payload, "typ", checkFailed);
+  const { requiredClaims = [], issuer, subject, audience, maxTokenAge } = options, presenceCheck = [...requiredClaims];
+  maxTokenAge !== void 0 && presenceCheck.push("iat"), audience !== void 0 && presenceCheck.push("aud"), subject !== void 0 && presenceCheck.push("sub"), issuer !== void 0 && presenceCheck.push("iss");
+  for (const claim of new Set(presenceCheck.reverse()))
+    if (!Object.hasOwn(payload, claim))
+      throw new JWTClaimValidationFailed(`missing required "${claim}" claim`, payload, claim, "missing");
+  issuer !== void 0 && !(Array.isArray(issuer) ? issuer : [issuer]).includes(payload.iss) && unexpectedClaim(payload, "iss"), subject !== void 0 && payload.sub !== subject && unexpectedClaim(payload, "sub"), audience !== void 0 && !checkAudiencePresence(payload.aud, typeof audience == "string" ? [audience] : audience) && unexpectedClaim(payload, "aud");
+  const { clockTolerance } = options;
+  let tolerance = 0;
+  if (typeof clockTolerance == "string")
+    tolerance = secs(clockTolerance);
+  else if (clockTolerance !== void 0) {
+    if (typeof clockTolerance != "number")
+      throw new TypeError("Invalid clockTolerance option type");
+    tolerance = clockTolerance;
+  }
+  validateInput("clockTolerance option", tolerance);
+  const { currentDate } = options, now = validateInput("currentDate option", epoch(currentDate === void 0 ? /* @__PURE__ */ new Date() : currentDate)), iat = validateNumericDate(payload, "iat", maxTokenAge !== void 0), nbf = validateNumericDate(payload, "nbf");
+  if (nbf !== void 0 && nbf > now + tolerance)
+    throw new JWTClaimValidationFailed('"nbf" claim timestamp check failed', payload, "nbf", checkFailed);
+  const exp = validateNumericDate(payload, "exp");
+  if (exp !== void 0 && exp <= now - tolerance)
+    throw new JWTExpired('"exp" claim timestamp check failed', payload, "exp", checkFailed);
+  if (maxTokenAge !== void 0) {
+    const age = now - iat, max = validateInput("maxTokenAge option", typeof maxTokenAge == "number" ? maxTokenAge : secs(maxTokenAge));
+    if (age - tolerance > max)
+      throw new JWTExpired('"iat" claim timestamp check failed (too far in the past)', payload, "iat", checkFailed);
+    if (age < -tolerance)
+      throw new JWTClaimValidationFailed('"iat" claim timestamp check failed (it should be in the past)', payload, "iat", checkFailed);
+  }
+  return payload;
+}
+var epoch, multipliers, REGEX, checkFailed, normalizeTyp, checkAudiencePresence;
+var init_jwt_claims_set = __esm({
+  "node_modules/jose/dist/webapi/lib/jwt_claims_set.js"() {
+    init_errors6();
+    init_buffer_utils();
+    init_validate();
+    epoch = (date3) => Math.floor(date3.getTime() / 1e3);
+    multipliers = {
+      s: 1,
+      m: 60,
+      h: 3600,
+      d: 86400,
+      w: 604800,
+      y: 31557600
+    };
+    REGEX = /^(\+|\-)? ?(\d+|\d+\.\d+) ?(seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)(?: (ago|from now))?$/i;
+    checkFailed = "check_failed";
+    normalizeTyp = (value) => {
+      const normalized = value.toLowerCase();
+      return value.includes("/") ? normalized : `application/${normalized}`;
+    };
+    checkAudiencePresence = (audPayload, audOption) => typeof audPayload == "string" ? audOption.includes(audPayload) : Array.isArray(audPayload) ? audOption.some((aud) => audPayload.includes(aud)) : false;
+  }
+});
+
+// node_modules/jose/dist/webapi/jwt/verify.js
+async function jwtVerify(jwt, key, options) {
+  const [verified, b64] = await verifyCompact(jwt, prepareVerify(options), key);
+  if (!b64)
+    throw new JWTInvalid("JWTs MUST NOT use unencoded payload");
+  const payload = validateClaimsSet(verified.protectedHeader, verified.payload, options);
+  return { ...verified, payload };
+}
+var init_verify = __esm({
+  "node_modules/jose/dist/webapi/jwt/verify.js"() {
+    init_jws_verify();
+    init_jwt_claims_set();
+    init_errors6();
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/key_algorithm.js
+function unsupportedAlg(source = 'JWK "alg" (Algorithm) Parameter') {
+  throw new JOSENotSupported(`Invalid or unsupported ${source} value`);
+}
+function keyAlgorithm(alg, source) {
+  return (typeof alg == "string" ? JWS[alg] ?? JWE[alg] : void 0) ?? unsupportedAlg(source);
+}
+var algArgument;
+var init_key_algorithm = __esm({
+  "node_modules/jose/dist/webapi/lib/key_algorithm.js"() {
+    init_errors6();
+    init_jws_algorithms();
+    init_jwe_algorithms();
+    algArgument = '"alg" (Algorithm)';
+  }
+});
+
+// node_modules/jose/dist/webapi/lib/asn1.js
+function parseKeyHeader(state, keyFormat) {
+  if (expectTag(state, 48, `Invalid ${keyFormat === "spki" ? "SPKI" : "PKCS#8"} structure`), parseLength(state), keyFormat === "pkcs8") {
+    expectTag(state, 2, "Expected version field");
+    const length = parseLength(state);
+    state.pos += length;
+  }
+  expectTag(state, 48, "Expected algorithm identifier"), parseLength(state);
+}
+var bytesEqual, createASN1State, readByte, parseLength, expectTag, getSubarray, parseAlgorithmOID, parseECAlgorithmIdentifier, genericImport, processPEMData, fromSPKI;
+var init_asn1 = __esm({
+  "node_modules/jose/dist/webapi/lib/asn1.js"() {
+    init_key();
+    init_buffer_utils();
+    init_errors6();
+    init_key_algorithm();
+    bytesEqual = (a, b2) => {
+      if (a.byteLength !== b2.length)
+        return false;
+      for (let i2 = 0; i2 < a.byteLength; i2++)
+        if (a[i2] !== b2[i2])
+          return false;
+      return true;
+    };
+    createASN1State = (data) => ({ data, pos: 0 });
+    readByte = (state) => {
+      const byte = state.data[state.pos++];
+      if (byte === void 0)
+        throw new Error("Unexpected end of ASN.1 input");
+      return byte;
+    };
+    parseLength = (state) => {
+      const first = readByte(state);
+      if (first & 128) {
+        const lengthOfLen = first & 127;
+        let length = 0;
+        for (let i2 = 0; i2 < lengthOfLen; i2++)
+          length = length << 8 | readByte(state);
+        return length;
+      }
+      return first;
+    };
+    expectTag = (state, expectedTag, errorMessage2) => {
+      if (readByte(state) !== expectedTag)
+        throw new Error(errorMessage2);
+    };
+    getSubarray = (state, length) => {
+      if (length < 0 || state.pos + length > state.data.length)
+        throw new Error("Unexpected end of ASN.1 input");
+      const result = state.data.subarray(state.pos, state.pos + length);
+      return state.pos += length, result;
+    };
+    parseAlgorithmOID = (state) => {
+      expectTag(state, 6, "Expected algorithm OID");
+      const oidLen = parseLength(state);
+      return getSubarray(state, oidLen);
+    };
+    parseECAlgorithmIdentifier = (state) => {
+      const algOid = parseAlgorithmOID(state);
+      if (bytesEqual(algOid, [43, 101, 110]))
+        return "X25519";
+      if (!bytesEqual(algOid, [42, 134, 72, 206, 61, 2, 1]))
+        throw new Error("Unsupported key algorithm");
+      expectTag(state, 6, "Expected curve OID");
+      const curveOidLen = parseLength(state), curveOid = getSubarray(state, curveOidLen);
+      if (bytesEqual(curveOid, [42, 134, 72, 206, 61, 3, 1, 7]))
+        return "P-256";
+      if (bytesEqual(curveOid, [43, 129, 4, 0, 34]))
+        return "P-384";
+      if (bytesEqual(curveOid, [43, 129, 4, 0, 35]))
+        return "P-521";
+      throw new Error("Unsupported named curve");
+    };
+    genericImport = async (keyFormat, keyData, alg, options) => {
+      const extractable = validateExtractableOption(options?.extractable), entry = keyAlgorithm(alg, algArgument);
+      entry.secret && unsupportedAlg(algArgument);
+      const isPublic = keyFormat === "spki";
+      let algorithm;
+      if (entry.resolve)
+        try {
+          const state = createASN1State(keyData);
+          parseKeyHeader(state, keyFormat), algorithm = entry.resolve({ crv: parseECAlgorithmIdentifier(state) });
+        } catch {
+          throw new JOSENotSupported("Invalid or unsupported key format");
+        }
+      else
+        algorithm = entry.subtle;
+      return crypto.subtle.importKey(keyFormat, keyData, algorithm, extractable ?? isPublic, entry.usages[isPublic ? 0 : 1]);
+    };
+    processPEMData = (pem, pattern) => decodeBase64(pem.replace(pattern, ""));
+    fromSPKI = (pem, alg, options) => {
+      const keyData = processPEMData(pem, /(?:-----(?:BEGIN|END) PUBLIC KEY-----|\s)/g);
+      return genericImport("spki", keyData, alg, options);
+    };
+  }
+});
+
+// node_modules/jose/dist/webapi/jwks/local.js
+function isUsableJWK(jwk, entry, alg, kid) {
+  const { kty, key_ops: keyOps, ext, kid: jwkKid, alg: jwkAlg, use, crv } = jwk;
+  return (ext === void 0 || typeof ext == "boolean") && (keyOps === void 0 || Array.isArray(keyOps) && keyOps.every((operation, index) => typeof operation == "string" && keyOps.indexOf(operation) === index) && keyOps.includes("verify")) && entry.kty.includes(kty) && (kid === void 0 || typeof kid == "string" && kid === jwkKid) && (jwkAlg === void 0 ? kty !== "AKP" : alg === jwkAlg) && (use === void 0 || use === "sig") && (!entry.crv || crv === entry.crv);
+}
+async function importWithAlgCache(cache2, jwk, entry) {
+  const cached2 = cache2.get(jwk) || cache2.set(jwk, {}).get(jwk), { alg } = entry;
+  if (cached2[alg] === void 0) {
+    const pending = jwkToKey(entry, jwk, true).then((key) => {
+      if (key.type !== "public")
+        throw new JWKSInvalid("JSON Web Key Set members must be public keys");
+      return cached2[alg] = key, key;
+    }).catch((error2) => {
+      throw cached2[alg] === pending && delete cached2[alg], error2;
+    });
+    cached2[alg] = pending;
+  }
+  return cached2[alg];
+}
+function createLocalJWKSet(jwks) {
+  let snapshot;
+  try {
+    snapshot = structuredClone(jwks);
+  } catch {
+  }
+  if (!isJwkSet(snapshot))
+    throw new JWKSInvalid("JSON Web Key Set malformed");
+  const metadata2 = snapshot.keys.map((jwk) => {
+    const normalized = snapshotJwk(jwk);
+    return Array.isArray(normalized.key_ops) && (normalized.key_ops = [...normalized.key_ops]), normalized;
+  }), cached2 = /* @__PURE__ */ new WeakMap();
+  return Object.defineProperty(async (protectedHeader, token) => {
+    const { alg, kid } = { ...protectedHeader, ...token?.header }, entry = typeof alg == "string" ? JWS[alg] : void 0;
+    if (!entry || entry.secret)
+      throw new JOSENotSupported('Unsupported "alg" value for a JSON Web Key Set');
+    const candidates = snapshot.keys.filter((_, index) => isUsableJWK(metadata2[index], entry, alg, kid)), { 0: jwk, length } = candidates;
+    if (!length)
+      throw new JWKSNoMatchingKey();
+    if (length !== 1) {
+      const error2 = new JWKSMultipleMatchingKeys();
+      throw error2[Symbol.asyncIterator] = async function* () {
+        for (const jwk2 of candidates)
+          try {
+            yield await importWithAlgCache(cached2, jwk2, entry);
+          } catch {
+          }
+      }, error2;
+    }
+    return importWithAlgCache(cached2, jwk, entry);
+  }, "jwks", {
+    value: () => structuredClone(snapshot)
+  });
+}
+var init_local = __esm({
+  "node_modules/jose/dist/webapi/jwks/local.js"() {
+    init_key();
+    init_jws_algorithms();
+    init_errors6();
+    init_validate();
+  }
+});
+
+// node_modules/jose/dist/webapi/jwks/remote.js
+function isCloudflareWorkers() {
+  return typeof WebSocketPair < "u" || typeof navigator < "u" && navigator.userAgent === "Cloudflare-Workers" || typeof EdgeRuntime < "u" && EdgeRuntime === "vercel";
+}
+async function fetchJwks(url, headers, signal, fetchImpl = fetch) {
+  const response = await fetchImpl(url, {
+    method: "GET",
+    signal,
+    redirect: "manual",
+    headers
+  }).catch((err2) => {
+    throw err2.name === "TimeoutError" ? new JWKSTimeout() : err2;
+  });
+  if (response.status !== 200)
+    throw new JOSEError("Expected 200 OK from the JSON Web Key Set HTTP response");
+  try {
+    return await response.json();
+  } catch {
+    throw new JOSEError("Failed to parse the JSON Web Key Set HTTP response as JSON");
+  }
+}
+function isFreshFor(timestamp, duration3) {
+  return Number.isFinite(timestamp) && Date.now() < timestamp + duration3;
+}
+function validateDuration(value, fallback, option) {
+  if (Number.isNaN(value))
+    throw new TypeError(`"${option}" option must not be NaN`);
+  return typeof value == "number" ? value : fallback;
+}
+function createRemoteJWKSet(url, options) {
+  if (!(url instanceof URL))
+    throw new TypeError("url must be an instance of URL");
+  const href = new URL(url.href).href, opts = options ?? {}, timeoutOption = opts.timeoutDuration;
+  if (typeof timeoutOption == "number" && (!Number.isInteger(timeoutOption) || timeoutOption < 0))
+    throw new TypeError('"timeoutDuration" option must be a non-negative integer');
+  const timeoutDuration = typeof timeoutOption == "number" ? timeoutOption : 5e3, cooldownDuration = validateDuration(opts.cooldownDuration, 3e4, "cooldownDuration"), cacheMaxAge = validateDuration(opts.cacheMaxAge, 6e5, "cacheMaxAge"), headers = new Headers(opts.headers);
+  USER_AGENT && !headers.has("User-Agent") && headers.set("User-Agent", USER_AGENT), headers.has("accept") || headers.set("accept", "application/json, application/jwk-set+json");
+  const fetchImpl = opts[customFetch], cache2 = opts[jwksCache];
+  let jwksTimestamp, pendingFetch, reloadSequence = 0, appliedSequence = 0, local;
+  if (cache2 && typeof cache2 == "object") {
+    const { uat, jwks } = cache2;
+    isFreshFor(uat, cacheMaxAge) && isJwkSet(jwks) && (jwksTimestamp = uat, local = createLocalJWKSet(jwks));
+  }
+  const reload = async () => {
+    if (pendingFetch && isCloudflareWorkers() && (pendingFetch = void 0), !pendingFetch) {
+      const sequence = ++reloadSequence, current = pendingFetch = fetchJwks(href, headers, AbortSignal.timeout(timeoutDuration), fetchImpl).then((json2) => {
+        const next = createLocalJWKSet(json2);
+        if (sequence <= appliedSequence)
+          return;
+        local = next;
+        const updatedAt = Date.now();
+        cache2 && (cache2.uat = updatedAt, cache2.jwks = json2), jwksTimestamp = updatedAt, appliedSequence = sequence;
+      }).finally(() => {
+        pendingFetch === current && (pendingFetch = void 0);
+      });
+    }
+    await pendingFetch;
+  };
+  return Object.defineProperties(async (protectedHeader, token) => {
+    (!local || !isFreshFor(jwksTimestamp, cacheMaxAge)) && await reload();
+    try {
+      return await local(protectedHeader, token);
+    } catch (err2) {
+      if (err2 instanceof JWKSNoMatchingKey && !isFreshFor(jwksTimestamp, cooldownDuration))
+        return await reload(), local(protectedHeader, token);
+      throw err2;
+    }
+  }, {
+    coolingDown: {
+      get: () => isFreshFor(jwksTimestamp, cooldownDuration),
+      enumerable: true
+    },
+    fresh: {
+      get: () => isFreshFor(jwksTimestamp, cacheMaxAge),
+      enumerable: true
+    },
+    reload: {
+      value: reload,
+      enumerable: true
+    },
+    reloading: {
+      get: () => !!pendingFetch,
+      enumerable: true
+    },
+    jwks: {
+      value: () => local?.jwks(),
+      enumerable: true
+    }
+  });
+}
+var USER_AGENT, customFetch, jwksCache;
+var init_remote = __esm({
+  "node_modules/jose/dist/webapi/jwks/remote.js"() {
+    init_errors6();
+    init_local();
+    init_validate();
+    (typeof navigator > "u" || !navigator.userAgent?.startsWith?.("Mozilla/5.0 ")) && (USER_AGENT = "jose/v6.2.12");
+    customFetch = /* @__PURE__ */ Symbol();
+    jwksCache = /* @__PURE__ */ Symbol();
+  }
+});
+
+// node_modules/jose/dist/webapi/key/import.js
+async function importSPKI(spki, alg, options) {
+  if (typeof spki != "string" || spki.indexOf("-----BEGIN PUBLIC KEY-----") !== 0)
+    throw new TypeError('"spki" must be SPKI formatted string');
+  return fromSPKI(spki, alg, options);
+}
+async function importJWK(jwk, alg, options) {
+  if (!isObject3(jwk))
+    throw new TypeError("JWK must be an object");
+  const normalized = normalizeJwk(jwk), extractable = validateExtractableOption(options?.extractable), { alg: jwkAlg } = normalized;
+  if (alg ??= jwkAlg, normalized.kty !== "oct" && !alg)
+    throw new TypeError('"alg" argument is required when "jwk.alg" is not present');
+  switch (normalized.kty) {
+    case "oct":
+      if (typeof normalized.k != "string")
+        throw new TypeError('missing "k" (Key Value) Parameter value');
+      return decode(normalized.k);
+    case "AKP": {
+      if (typeof jwkAlg != "string" || !jwkAlg)
+        throw new TypeError('missing "alg" (Algorithm) Parameter value');
+      if (alg !== jwkAlg)
+        throw new TypeError("JWK alg and alg option value mismatch");
+      return jwkToKey(keyAlgorithm(alg), normalized, extractable);
+    }
+    case "RSA":
+    case "EC":
+    case "OKP":
+      return jwkToKey(keyAlgorithm(alg), normalized, extractable);
+    default:
+      throw new JOSENotSupported('Unsupported "kty" (Key Type) Parameter value');
+  }
+}
+var init_import = __esm({
+  "node_modules/jose/dist/webapi/key/import.js"() {
+    init_base64url();
+    init_asn1();
+    init_key();
+    init_key_algorithm();
+    init_errors6();
+    init_validate();
+  }
+});
+
+// node_modules/jose/dist/webapi/index.js
+var init_webapi = __esm({
+  "node_modules/jose/dist/webapi/index.js"() {
+    init_verify();
+    init_remote();
+    init_import();
+  }
+});
+
+// src/auth.ts
+import { createHash as createHash3, timingSafeEqual } from "node:crypto";
+function resourceMetadata(auth) {
+  if (auth.mode !== "jwt") return null;
+  return {
+    resource: auth.audience,
+    authorization_servers: [auth.issuer],
+    scopes_supported: [auth.scope],
+    bearer_methods_supported: ["header"],
+    resource_name: "repo-vector code search"
+  };
+}
+function challenge(auth, error2) {
+  const params = [];
+  if (auth.mode === "jwt") params.push(`resource_metadata="${new URL(RESOURCE_METADATA_PATH, auth.audience).href}"`, `scope="${auth.scope}"`);
+  if (error2) params.push(`error="${error2.code}"`, `error_description="${error2.description.replace(/"/g, "'")}"`);
+  return { "WWW-Authenticate": params.length > 0 ? `Bearer ${params.join(", ")}` : "Bearer" };
+}
+async function createAuthenticator(auth, repo) {
+  if (auth.mode === "none") return async () => ({ sub: "anonymous", via: "none", scopes: [] });
+  if (auth.mode === "token") {
+    const expected = createHash3("sha256").update(auth.token).digest();
+    return async (header) => {
+      const given = bearerOf(header);
+      if (given === "" || !timingSafeEqual(createHash3("sha256").update(given).digest(), expected)) {
+        throw new HttpError(401, "Missing or wrong bearer token", challenge(auth));
+      }
+      return { sub: "shared-token", via: "token", scopes: [] };
+    };
+  }
+  const key = await verificationKey(auth);
+  return async (header) => {
+    const token = bearerOf(header);
+    if (token === "") throw new HttpError(401, 'Sign-in required: send an access token as "Authorization: Bearer <token>"', challenge(auth));
+    let payload;
+    try {
+      ({ payload } = await jwtVerify(token, key, { issuer: auth.issuer, audience: auth.audience, algorithms: ALGORITHMS, clockTolerance: CLOCK_TOLERANCE_SECONDS, requiredClaims: ["exp", "sub"] }));
+    } catch (err2) {
+      const description = describeJwtFailure(err2);
+      throw new HttpError(401, `Access token rejected: ${description}`, challenge(auth, { code: "invalid_token", description }));
+    }
+    const scopes = scopesOf(payload);
+    if (!scopes.includes(auth.scope)) {
+      throw new HttpError(403, `Access token lacks the "${auth.scope}" scope`, challenge(auth, { code: "insufficient_scope", description: `requires ${auth.scope}` }));
+    }
+    if (auth.reposClaim && repo) {
+      const allowed = listClaim(payload[auth.reposClaim]);
+      if (!allowed.some((r) => r.toLowerCase() === repo.toLowerCase())) {
+        throw new HttpError(403, `Access token does not grant repository ${repo}`, challenge(auth, { code: "insufficient_scope", description: `no access to ${repo}` }));
+      }
+    }
+    return { sub: String(payload.sub), via: "jwt", scopes };
+  };
+}
+async function verificationKey(auth) {
+  if (auth.jwksUrl) return createRemoteJWKSet(new URL(auth.jwksUrl), { cacheMaxAge: 10 * 6e4, cooldownDuration: 3e4 });
+  const raw = auth.publicKey.trim();
+  try {
+    if (raw.startsWith("-----BEGIN")) return await importSPKI(raw.replace(/\\n/g, "\n"), auth.publicKeyAlg ?? "RS256");
+    const jwk = JSON.parse(raw);
+    if (jwk.d !== void 0) throw new ConfigError("REPO_VECTOR_JWT_PUBLIC_KEY holds a private key; give the server only the public half");
+    const imported = await importJWK(jwk, jwk.alg ?? auth.publicKeyAlg ?? (jwk.kty === "OKP" ? "EdDSA" : "RS256"));
+    if (imported instanceof Uint8Array) throw new ConfigError("REPO_VECTOR_JWT_PUBLIC_KEY is a symmetric key; only asymmetric (RSA, EC, Ed25519) keys are accepted");
+    return imported;
+  } catch (err2) {
+    if (err2 instanceof ConfigError) throw err2;
+    throw new ConfigError(`REPO_VECTOR_JWT_PUBLIC_KEY is not a usable public key (PEM or JWK JSON): ${err2.message}`);
+  }
+}
+function scopesOf(payload) {
+  return [...listClaim(payload.scope), ...listClaim(payload.scp)];
+}
+function listClaim(value) {
+  if (Array.isArray(value)) return value.map(String);
+  if (typeof value === "string") return value.split(/[\s,]+/).filter(Boolean);
+  return [];
+}
+function describeJwtFailure(err2) {
+  const code = err2.code ?? "";
+  const claim = err2.claim;
+  if (code === "ERR_JWT_EXPIRED") return "it has expired; sign in again";
+  if (code === "ERR_JWT_CLAIM_VALIDATION_FAILED" && claim === "aud") return "it was issued for a different service (audience)";
+  if (code === "ERR_JWT_CLAIM_VALIDATION_FAILED" && claim === "iss") return "it was issued by an untrusted issuer";
+  if (code === "ERR_JWT_CLAIM_VALIDATION_FAILED" && claim === "nbf") return "it is not valid yet";
+  if (code === "ERR_JWT_CLAIM_VALIDATION_FAILED") return `claim "${claim}" is missing or invalid`;
+  if (code === "ERR_JWS_SIGNATURE_VERIFICATION_FAILED" || code === "ERR_JWKS_NO_MATCHING_KEY") return "the signature does not match a trusted key";
+  if (code === "ERR_JOSE_ALG_NOT_ALLOWED") return "it is signed with an algorithm this server does not accept";
+  if (code === "ERR_JWS_INVALID" || code === "ERR_JWT_INVALID") return "it is not a well-formed JWT";
+  if (code === "ERR_JWKS_TIMEOUT" || code === "ERR_JOSE_GENERIC") return "the identity provider keys could not be fetched";
+  return "it could not be verified";
+}
+var ALGORITHMS, CLOCK_TOLERANCE_SECONDS, RESOURCE_METADATA_PATH, bearerOf;
+var init_auth = __esm({
+  "src/auth.ts"() {
+    "use strict";
+    init_webapi();
+    init_errors2();
+    ALGORITHMS = ["RS256", "RS384", "RS512", "PS256", "ES256", "ES384", "EdDSA"];
+    CLOCK_TOLERANCE_SECONDS = 30;
+    RESOURCE_METADATA_PATH = "/.well-known/oauth-protected-resource";
+    bearerOf = (header) => header?.startsWith("Bearer ") ? header.slice(7).trim() : "";
+  }
+});
+
+// node_modules/zod/v3/index.js
+var init_v3 = __esm({
+  "node_modules/zod/v3/index.js"() {
+    init_external();
+  }
+});
+
+// node_modules/zod/v4/mini/parse.js
+var init_parse3 = __esm({
+  "node_modules/zod/v4/mini/parse.js"() {
+    init_core2();
+  }
+});
+
+// node_modules/zod/v4/mini/schemas.js
+function object2(shape, params) {
+  const def2 = {
+    type: "object",
+    get shape() {
+      util_exports.assignProp(this, "shape", { ...shape });
+      return this.shape;
+    },
+    ...util_exports.normalizeParams(params)
+  };
+  return new ZodMiniObject(def2);
+}
+var ZodMiniType, ZodMiniObject;
+var init_schemas3 = __esm({
+  "node_modules/zod/v4/mini/schemas.js"() {
+    init_core2();
+    init_core2();
+    init_parse3();
+    ZodMiniType = /* @__PURE__ */ $constructor("ZodMiniType", (inst, def2) => {
+      if (!inst._zod)
+        throw new Error("Uninitialized schema in ZodMiniType.");
+      $ZodType.init(inst, def2);
+      inst.def = def2;
+      inst.parse = (data, params) => parse2(inst, data, params, { callee: inst.parse });
+      inst.safeParse = (data, params) => safeParse(inst, data, params);
+      inst.parseAsync = async (data, params) => parseAsync(inst, data, params, { callee: inst.parseAsync });
+      inst.safeParseAsync = async (data, params) => safeParseAsync(inst, data, params);
+      inst.check = (...checks) => {
+        return inst.clone(
+          {
+            ...def2,
+            checks: [
+              ...def2.checks ?? [],
+              ...checks.map((ch) => typeof ch === "function" ? { _zod: { check: ch, def: { check: "custom" }, onattach: [] } } : ch)
+            ]
+          }
+          // { parent: true }
+        );
+      };
+      inst.clone = (_def, params) => clone(inst, _def, params);
+      inst.brand = () => inst;
+      inst.register = ((reg, meta) => {
+        reg.add(inst, meta);
+        return inst;
+      });
+    });
+    ZodMiniObject = /* @__PURE__ */ $constructor("ZodMiniObject", (inst, def2) => {
+      $ZodObject.init(inst, def2);
+      ZodMiniType.init(inst, def2);
+      util_exports.defineLazy(inst, "shape", () => def2.shape);
+    });
+  }
+});
+
+// node_modules/zod/v4/mini/checks.js
+var init_checks3 = __esm({
+  "node_modules/zod/v4/mini/checks.js"() {
+  }
+});
+
+// node_modules/zod/v4/mini/iso.js
+var init_iso2 = __esm({
+  "node_modules/zod/v4/mini/iso.js"() {
+  }
+});
+
+// node_modules/zod/v4/mini/coerce.js
+var init_coerce2 = __esm({
+  "node_modules/zod/v4/mini/coerce.js"() {
+  }
+});
+
+// node_modules/zod/v4/mini/external.js
+var init_external3 = __esm({
+  "node_modules/zod/v4/mini/external.js"() {
+    init_core2();
+    init_parse3();
+    init_schemas3();
+    init_checks3();
+    init_core2();
+    init_locales();
+    init_iso2();
+    init_coerce2();
+  }
+});
+
+// node_modules/zod/v4/mini/index.js
+var init_mini = __esm({
+  "node_modules/zod/v4/mini/index.js"() {
+    init_external3();
+  }
+});
+
+// node_modules/zod/v4-mini/index.js
+var init_v4_mini = __esm({
+  "node_modules/zod/v4-mini/index.js"() {
+    init_mini();
+  }
+});
+
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
+function isZ4Schema(s) {
+  const schema2 = s;
+  return !!schema2._zod;
+}
+function objectFromShape(shape) {
+  const values2 = Object.values(shape);
+  if (values2.length === 0)
+    return object2({});
+  const allV4 = values2.every(isZ4Schema);
+  const allV3 = values2.every((s) => !isZ4Schema(s));
+  if (allV4)
+    return object2(shape);
+  if (allV3)
+    return objectType(shape);
+  throw new Error("Mixed Zod versions detected in object shape.");
+}
+function safeParse3(schema2, data) {
+  if (isZ4Schema(schema2)) {
+    const result2 = safeParse(schema2, data);
+    return result2;
+  }
+  const v3Schema = schema2;
+  const result = v3Schema.safeParse(data);
+  return result;
+}
+async function safeParseAsync3(schema2, data) {
+  if (isZ4Schema(schema2)) {
+    const result2 = await safeParseAsync(schema2, data);
+    return result2;
+  }
+  const v3Schema = schema2;
+  const result = await v3Schema.safeParseAsync(data);
+  return result;
+}
+function getObjectShape(schema2) {
+  if (!schema2)
+    return void 0;
+  let rawShape;
+  if (isZ4Schema(schema2)) {
+    const v4Schema = schema2;
+    rawShape = v4Schema._zod?.def?.shape;
+  } else {
+    const v3Schema = schema2;
+    rawShape = v3Schema.shape;
+  }
+  if (!rawShape)
+    return void 0;
+  if (typeof rawShape === "function") {
+    try {
+      return rawShape();
+    } catch {
+      return void 0;
+    }
+  }
+  return rawShape;
+}
+function normalizeObjectSchema(schema2) {
+  if (!schema2)
+    return void 0;
+  if (typeof schema2 === "object") {
+    const asV3 = schema2;
+    const asV4 = schema2;
+    if (!asV3._def && !asV4._zod) {
+      const values2 = Object.values(schema2);
+      if (values2.length > 0 && values2.every((v) => typeof v === "object" && v !== null && (v._def !== void 0 || v._zod !== void 0 || typeof v.parse === "function"))) {
+        return objectFromShape(schema2);
+      }
+    }
+  }
+  if (isZ4Schema(schema2)) {
+    const v4Schema = schema2;
+    const def2 = v4Schema._zod?.def;
+    if (def2 && (def2.type === "object" || def2.shape !== void 0)) {
+      return schema2;
+    }
+  } else {
+    const v3Schema = schema2;
+    if (v3Schema.shape !== void 0) {
+      return schema2;
+    }
+  }
+  return void 0;
+}
+function getDotPath(path10) {
+  if (path10.length === 0) {
+    return "object root";
+  }
+  return path10.reduce((acc, seg, index) => {
+    if (index === 0) {
+      return String(seg);
+    }
+    if (typeof seg === "number") {
+      return `${acc}[${seg}]`;
+    }
+    return `${acc}.${seg}`;
+  }, "");
+}
+function getParseErrorMessage(error2) {
+  if (error2 && typeof error2 === "object") {
+    if ("issues" in error2 && Array.isArray(error2.issues) && error2.issues.length > 0) {
+      return error2.issues.map((i2) => {
+        if (!i2.path?.length) {
+          return i2.message;
+        }
+        return `${i2.message} at ${getDotPath(i2.path)}`;
+      }).join("\n");
+    }
+    if ("message" in error2 && typeof error2.message === "string") {
+      return error2.message;
+    }
+    try {
+      return JSON.stringify(error2);
+    } catch {
+      return String(error2);
+    }
+  }
+  return String(error2);
+}
+function getSchemaDescription(schema2) {
+  return schema2.description;
+}
+function isSchemaOptional(schema2) {
+  if (isZ4Schema(schema2)) {
+    const v4Schema = schema2;
+    return v4Schema._zod?.def?.type === "optional";
+  }
+  const v3Schema = schema2;
+  if (typeof schema2.isOptional === "function") {
+    return schema2.isOptional();
+  }
+  return v3Schema._def?.typeName === "ZodOptional";
+}
+function getLiteralValue(schema2) {
+  if (isZ4Schema(schema2)) {
+    const v4Schema = schema2;
+    const def3 = v4Schema._zod?.def;
+    if (def3) {
+      if (def3.value !== void 0)
+        return def3.value;
+      if (Array.isArray(def3.values) && def3.values.length > 0) {
+        return def3.values[0];
+      }
+    }
+  }
+  const v3Schema = schema2;
+  const def2 = v3Schema._def;
+  if (def2) {
+    if (def2.value !== void 0)
+      return def2.value;
+    if (Array.isArray(def2.values) && def2.values.length > 0) {
+      return def2.values[0];
+    }
+  }
+  const directValue = schema2.value;
+  if (directValue !== void 0)
+    return directValue;
+  return void 0;
+}
+var init_zod_compat = __esm({
+  "node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js"() {
+    init_v3();
+    init_v4_mini();
   }
 });
 
@@ -49914,7 +53229,7 @@ function escapeNonAlphaNumeric(source) {
   }
   return result;
 }
-function addFormat(schema2, value, message, refs) {
+function addFormat(schema2, value, message2, refs) {
   if (schema2.format || schema2.anyOf?.some((x) => x.format)) {
     if (!schema2.anyOf) {
       schema2.anyOf = [];
@@ -49936,13 +53251,13 @@ function addFormat(schema2, value, message, refs) {
     }
     schema2.anyOf.push({
       format: value,
-      ...message && refs.errorMessages && { errorMessage: { format: message } }
+      ...message2 && refs.errorMessages && { errorMessage: { format: message2 } }
     });
   } else {
-    setResponseValueAndErrors(schema2, "format", value, message, refs);
+    setResponseValueAndErrors(schema2, "format", value, message2, refs);
   }
 }
-function addPattern(schema2, regex, message, refs) {
+function addPattern(schema2, regex, message2, refs) {
   if (schema2.pattern || schema2.allOf?.some((x) => x.pattern)) {
     if (!schema2.allOf) {
       schema2.allOf = [];
@@ -49964,10 +53279,10 @@ function addPattern(schema2, regex, message, refs) {
     }
     schema2.allOf.push({
       pattern: stringifyRegExpWithFlags(regex, refs),
-      ...message && refs.errorMessages && { errorMessage: { pattern: message } }
+      ...message2 && refs.errorMessages && { errorMessage: { pattern: message2 } }
     });
   } else {
-    setResponseValueAndErrors(schema2, "pattern", stringifyRegExpWithFlags(regex, refs), message, refs);
+    setResponseValueAndErrors(schema2, "pattern", stringifyRegExpWithFlags(regex, refs), message2, refs);
   }
 }
 function stringifyRegExpWithFlags(regex, refs) {
@@ -50969,7 +54284,7 @@ function getMethodLiteral(schema2) {
   return value;
 }
 function parseWithCompat(schema2, data) {
-  const result = safeParse2(schema2, data);
+  const result = safeParse3(schema2, data);
   if (!result.success) {
     throw result.error;
   }
@@ -51057,15 +54372,15 @@ var init_protocol = __esm({
                 let queuedMessage;
                 while (queuedMessage = await this._taskMessageQueue.dequeue(taskId, extra.sessionId)) {
                   if (queuedMessage.type === "response" || queuedMessage.type === "error") {
-                    const message = queuedMessage.message;
-                    const requestId = message.id;
+                    const message2 = queuedMessage.message;
+                    const requestId = message2.id;
                     const resolver = this._requestResolvers.get(requestId);
                     if (resolver) {
                       this._requestResolvers.delete(requestId);
                       if (queuedMessage.type === "response") {
-                        resolver(message);
+                        resolver(message2);
                       } else {
-                        const errorMessage2 = message;
+                        const errorMessage2 = message2;
                         const error2 = new McpError(errorMessage2.error.code, errorMessage2.error.message, errorMessage2.error.data);
                         resolver(error2);
                       }
@@ -51204,16 +54519,16 @@ var init_protocol = __esm({
           this._onerror(error2);
         };
         const _onmessage = this._transport?.onmessage;
-        this._transport.onmessage = (message, extra) => {
-          _onmessage?.(message, extra);
-          if (isJSONRPCResultResponse(message) || isJSONRPCErrorResponse(message)) {
-            this._onresponse(message);
-          } else if (isJSONRPCRequest(message)) {
-            this._onrequest(message, extra);
-          } else if (isJSONRPCNotification(message)) {
-            this._onnotification(message);
+        this._transport.onmessage = (message2, extra) => {
+          _onmessage?.(message2, extra);
+          if (isJSONRPCResultResponse(message2) || isJSONRPCErrorResponse(message2)) {
+            this._onresponse(message2);
+          } else if (isJSONRPCRequest(message2)) {
+            this._onrequest(message2, extra);
+          } else if (isJSONRPCNotification(message2)) {
+            this._onnotification(message2);
           } else {
-            this._onerror(new Error(`Unknown message type: ${JSON.stringify(message)}`));
+            this._onerror(new Error(`Unknown message type: ${JSON.stringify(message2)}`));
           }
         };
         await this._transport.start();
@@ -51622,7 +54937,7 @@ var init_protocol = __esm({
               return reject(response);
             }
             try {
-              const parseResult = safeParse2(resultSchema, response.result);
+              const parseResult = safeParse3(resultSchema, response.result);
               if (!parseResult.success) {
                 reject(parseResult.error);
               } else {
@@ -51842,12 +55157,12 @@ var init_protocol = __esm({
        * the error appropriately (e.g., by failing the task, logging, etc.). The Protocol layer
        * simply propagates the error.
        */
-      async _enqueueTaskMessage(taskId, message, sessionId) {
+      async _enqueueTaskMessage(taskId, message2, sessionId) {
         if (!this._taskStore || !this._taskMessageQueue) {
           throw new Error("Cannot enqueue task message: taskStore and taskMessageQueue are not configured");
         }
         const maxQueueSize = this._options?.maxTaskQueueSize;
-        await this._taskMessageQueue.enqueue(taskId, message, sessionId ?? this._transport?.sessionId, maxQueueSize);
+        await this._taskMessageQueue.enqueue(taskId, message2, sessionId ?? this._transport?.sessionId, maxQueueSize);
       }
       /**
        * Clears the message queue for a task and rejects any pending request resolvers.
@@ -51857,9 +55172,9 @@ var init_protocol = __esm({
       async _clearTaskQueue(taskId, sessionId) {
         if (this._taskMessageQueue) {
           const messages2 = await this._taskMessageQueue.dequeueAll(taskId, sessionId);
-          for (const message of messages2) {
-            if (message.type === "request" && isJSONRPCRequest(message.message)) {
-              const requestId = message.message.id;
+          for (const message2 of messages2) {
+            if (message2.type === "request" && isJSONRPCRequest(message2.message)) {
+              const requestId = message2.message.id;
               const resolver = this._requestResolvers.get(requestId);
               if (resolver) {
                 resolver(new McpError(ErrorCode.InternalError, "Task cancelled or completed"));
@@ -52346,11 +55661,11 @@ var require_codegen = __commonJS({
         const rhs = this.rhs === void 0 ? "" : ` = ${this.rhs}`;
         return `${varKind} ${this.name}${rhs};` + _n;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names, constants2) {
         if (!names[this.name.str])
           return;
         if (this.rhs)
-          this.rhs = optimizeExpr(this.rhs, names, constants);
+          this.rhs = optimizeExpr(this.rhs, names, constants2);
         return this;
       }
       get names() {
@@ -52367,10 +55682,10 @@ var require_codegen = __commonJS({
       render({ _n }) {
         return `${this.lhs} = ${this.rhs};` + _n;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names, constants2) {
         if (this.lhs instanceof code_1.Name && !names[this.lhs.str] && !this.sideEffects)
           return;
-        this.rhs = optimizeExpr(this.rhs, names, constants);
+        this.rhs = optimizeExpr(this.rhs, names, constants2);
         return this;
       }
       get names() {
@@ -52431,8 +55746,8 @@ var require_codegen = __commonJS({
       optimizeNodes() {
         return `${this.code}` ? this : void 0;
       }
-      optimizeNames(names, constants) {
-        this.code = optimizeExpr(this.code, names, constants);
+      optimizeNames(names, constants2) {
+        this.code = optimizeExpr(this.code, names, constants2);
         return this;
       }
       get names() {
@@ -52461,12 +55776,12 @@ var require_codegen = __commonJS({
         }
         return nodes.length > 0 ? this : void 0;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names, constants2) {
         const { nodes } = this;
         let i2 = nodes.length;
         while (i2--) {
           const n = nodes[i2];
-          if (n.optimizeNames(names, constants))
+          if (n.optimizeNames(names, constants2))
             continue;
           subtractNames(names, n.names);
           nodes.splice(i2, 1);
@@ -52519,12 +55834,12 @@ var require_codegen = __commonJS({
           return void 0;
         return this;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names, constants2) {
         var _a;
-        this.else = (_a = this.else) === null || _a === void 0 ? void 0 : _a.optimizeNames(names, constants);
-        if (!(super.optimizeNames(names, constants) || this.else))
+        this.else = (_a = this.else) === null || _a === void 0 ? void 0 : _a.optimizeNames(names, constants2);
+        if (!(super.optimizeNames(names, constants2) || this.else))
           return;
-        this.condition = optimizeExpr(this.condition, names, constants);
+        this.condition = optimizeExpr(this.condition, names, constants2);
         return this;
       }
       get names() {
@@ -52547,10 +55862,10 @@ var require_codegen = __commonJS({
       render(opts) {
         return `for(${this.iteration})` + super.render(opts);
       }
-      optimizeNames(names, constants) {
-        if (!super.optimizeNames(names, constants))
+      optimizeNames(names, constants2) {
+        if (!super.optimizeNames(names, constants2))
           return;
-        this.iteration = optimizeExpr(this.iteration, names, constants);
+        this.iteration = optimizeExpr(this.iteration, names, constants2);
         return this;
       }
       get names() {
@@ -52586,10 +55901,10 @@ var require_codegen = __commonJS({
       render(opts) {
         return `for(${this.varKind} ${this.name} ${this.loop} ${this.iterable})` + super.render(opts);
       }
-      optimizeNames(names, constants) {
-        if (!super.optimizeNames(names, constants))
+      optimizeNames(names, constants2) {
+        if (!super.optimizeNames(names, constants2))
           return;
-        this.iterable = optimizeExpr(this.iterable, names, constants);
+        this.iterable = optimizeExpr(this.iterable, names, constants2);
         return this;
       }
       get names() {
@@ -52631,11 +55946,11 @@ var require_codegen = __commonJS({
         (_b = this.finally) === null || _b === void 0 ? void 0 : _b.optimizeNodes();
         return this;
       }
-      optimizeNames(names, constants) {
+      optimizeNames(names, constants2) {
         var _a, _b;
-        super.optimizeNames(names, constants);
-        (_a = this.catch) === null || _a === void 0 ? void 0 : _a.optimizeNames(names, constants);
-        (_b = this.finally) === null || _b === void 0 ? void 0 : _b.optimizeNames(names, constants);
+        super.optimizeNames(names, constants2);
+        (_a = this.catch) === null || _a === void 0 ? void 0 : _a.optimizeNames(names, constants2);
+        (_b = this.finally) === null || _b === void 0 ? void 0 : _b.optimizeNames(names, constants2);
         return this;
       }
       get names() {
@@ -52936,7 +56251,7 @@ var require_codegen = __commonJS({
     function addExprNames(names, from) {
       return from instanceof code_1._CodeOrName ? addNames(names, from.names) : names;
     }
-    function optimizeExpr(expr, names, constants) {
+    function optimizeExpr(expr, names, constants2) {
       if (expr instanceof code_1.Name)
         return replaceName(expr);
       if (!canOptimize(expr))
@@ -52951,14 +56266,14 @@ var require_codegen = __commonJS({
         return items;
       }, []));
       function replaceName(n) {
-        const c = constants[n.str];
+        const c = constants2[n.str];
         if (c === void 0 || names[n.str] !== 1)
           return n;
         delete names[n.str];
         return c;
       }
       function canOptimize(e) {
-        return e instanceof code_1._Code && e._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
+        return e instanceof code_1._Code && e._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants2[c.str] !== void 0);
       }
     }
     function subtractNames(names, from) {
@@ -53300,12 +56615,12 @@ var require_errors2 = __commonJS({
       }
       return [E.schemaPath, schPath];
     }
-    function extraErrorProps(cxt, { params, message }, keyValues) {
+    function extraErrorProps(cxt, { params, message: message2 }, keyValues) {
       const { keyword, data, schemaValue, it } = cxt;
       const { opts, propertyName, topSchemaRef, schemaPath } = it;
       keyValues.push([E.keyword, keyword], [E.params, typeof params == "function" ? params(cxt) : params || (0, codegen_1._)`{}`]);
       if (opts.messages) {
-        keyValues.push([E.message, typeof message == "function" ? message(cxt) : message]);
+        keyValues.push([E.message, typeof message2 == "function" ? message2(cxt) : message2]);
       }
       if (opts.verbose) {
         keyValues.push([E.schema, schemaValue], [E.parentSchema, (0, codegen_1._)`${topSchemaRef}${schemaPath}`], [names_1.default.data, data]);
@@ -56435,11 +59750,11 @@ var require_core = __commonJS({
         }
         const valid = this.validate($schema, schema2);
         if (!valid && throwOrLogError) {
-          const message = "schema is invalid: " + this.errorsText();
+          const message2 = "schema is invalid: " + this.errorsText();
           if (this.opts.validateSchema === "log")
-            this.logger.error(message);
+            this.logger.error(message2);
           else
-            throw new Error(message);
+            throw new Error(message2);
         }
         return valid;
       }
@@ -56484,8 +59799,8 @@ var require_core = __commonJS({
             return this;
           }
           case "object": {
-            const cacheKey = schemaKeyRef;
-            this._cache.delete(cacheKey);
+            const cacheKey2 = schemaKeyRef;
+            this._cache.delete(cacheKey2);
             let id = schemaKeyRef[this.opts.schemaId];
             if (id) {
               id = (0, resolve_1.normalizeId)(id);
@@ -56990,8 +60305,8 @@ var require_multipleOf = __commonJS({
         const { gen, data, schemaCode, it } = cxt;
         const prec = it.opts.multipleOfPrecision;
         const res = gen.let("res");
-        const invalid = prec ? (0, codegen_1._)`Math.abs(Math.round(${res}) - ${res}) > 1e-${prec}` : (0, codegen_1._)`${res} !== parseInt(${res})`;
-        cxt.fail$data((0, codegen_1._)`(${schemaCode} === 0 || (${res} = ${data}/${schemaCode}, ${invalid}))`);
+        const invalid2 = prec ? (0, codegen_1._)`Math.abs(Math.round(${res}) - ${res}) > 1e-${prec}` : (0, codegen_1._)`${res} !== parseInt(${res})`;
+        cxt.fail$data((0, codegen_1._)`(${schemaCode} === 0 || (${res} = ${data}/${schemaCode}, ${invalid2}))`);
       }
     };
     exports.default = def2;
@@ -58498,7 +61813,7 @@ var require_discriminator = __commonJS({
     var util_1 = require_util();
     var error2 = {
       message: ({ params: { discrError, tagName } }) => discrError === types_1.DiscrError.Tag ? `tag "${tagName}" must be string` : `value of tag "${tagName}" must be in oneOf`,
-      params: ({ params: { discrError, tag, tagName } }) => (0, codegen_1._)`{error: ${discrError}, tag: ${tagName}, tagValue: ${tag}}`
+      params: ({ params: { discrError, tag: tag2, tagName } }) => (0, codegen_1._)`{error: ${discrError}, tag: ${tagName}, tagValue: ${tag2}}`
     };
     var def2 = {
       keyword: "discriminator",
@@ -58519,18 +61834,18 @@ var require_discriminator = __commonJS({
         if (!oneOf)
           throw new Error("discriminator: requires oneOf keyword");
         const valid = gen.let("valid", false);
-        const tag = gen.const("tag", (0, codegen_1._)`${data}${(0, codegen_1.getProperty)(tagName)}`);
-        gen.if((0, codegen_1._)`typeof ${tag} == "string"`, () => validateMapping(), () => cxt.error(false, { discrError: types_1.DiscrError.Tag, tag, tagName }));
+        const tag2 = gen.const("tag", (0, codegen_1._)`${data}${(0, codegen_1.getProperty)(tagName)}`);
+        gen.if((0, codegen_1._)`typeof ${tag2} == "string"`, () => validateMapping(), () => cxt.error(false, { discrError: types_1.DiscrError.Tag, tag: tag2, tagName }));
         cxt.ok(valid);
         function validateMapping() {
           const mapping = getMapping();
           gen.if(false);
           for (const tagValue in mapping) {
-            gen.elseIf((0, codegen_1._)`${tag} === ${tagValue}`);
+            gen.elseIf((0, codegen_1._)`${tag2} === ${tagValue}`);
             gen.assign(valid, applyTagSchema(mapping[tagValue]));
           }
           gen.else();
-          cxt.error(false, { discrError: types_1.DiscrError.Mapping, tag, tagName });
+          cxt.error(false, { discrError: types_1.DiscrError.Mapping, tag: tag2, tagName });
           gen.endIf();
         }
         function applyTagSchema(schemaProp) {
@@ -58997,9 +62312,9 @@ var require_formats = __commonJS({
       return BYTE.test(str);
     }
     var MIN_INT32 = -(2 ** 31);
-    var MAX_INT32 = 2 ** 31 - 1;
+    var MAX_INT322 = 2 ** 31 - 1;
     function validateInt32(value) {
-      return Number.isInteger(value) && value <= MAX_INT32 && value >= MIN_INT32;
+      return Number.isInteger(value) && value <= MAX_INT322 && value >= MIN_INT32;
     }
     function validateInt64(value) {
       return Number.isInteger(value);
@@ -59210,7 +62525,7 @@ var init_ajv_provider = __esm({
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
 var ExperimentalServerTasks;
-var init_server2 = __esm({
+var init_server = __esm({
   "node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js"() {
     init_types5();
     ExperimentalServerTasks = class {
@@ -59468,13 +62783,13 @@ var init_helpers = __esm({
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
 var Server;
-var init_server3 = __esm({
+var init_server2 = __esm({
   "node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js"() {
     init_protocol();
     init_types5();
     init_ajv_provider();
     init_zod_compat();
-    init_server2();
+    init_server();
     init_helpers();
     Server = class extends Protocol {
       /**
@@ -59548,7 +62863,7 @@ var init_server3 = __esm({
         const method = methodValue;
         if (method === "tools/call") {
           const wrappedHandler = async (request, extra) => {
-            const validatedRequest = safeParse2(CallToolRequestSchema, request);
+            const validatedRequest = safeParse3(CallToolRequestSchema, request);
             if (!validatedRequest.success) {
               const errorMessage2 = validatedRequest.error instanceof Error ? validatedRequest.error.message : String(validatedRequest.error);
               throw new McpError(ErrorCode.InvalidParams, `Invalid tools/call request: ${errorMessage2}`);
@@ -59556,14 +62871,14 @@ var init_server3 = __esm({
             const { params } = validatedRequest.data;
             const result = await Promise.resolve(handler(request, extra));
             if (params.task) {
-              const taskValidationResult = safeParse2(CreateTaskResultSchema, result);
+              const taskValidationResult = safeParse3(CreateTaskResultSchema, result);
               if (!taskValidationResult.success) {
                 const errorMessage2 = taskValidationResult.error instanceof Error ? taskValidationResult.error.message : String(taskValidationResult.error);
                 throw new McpError(ErrorCode.InvalidParams, `Invalid task creation result: ${errorMessage2}`);
               }
               return taskValidationResult.data;
             }
-            const validationResult = safeParse2(CallToolResultSchema, result);
+            const validationResult = safeParse3(CallToolResultSchema, result);
             if (!validationResult.success) {
               const errorMessage2 = validationResult.error instanceof Error ? validationResult.error.message : String(validationResult.error);
               throw new McpError(ErrorCode.InvalidParams, `Invalid tools/call result: ${errorMessage2}`);
@@ -60060,7 +63375,7 @@ function createCompletionResult(suggestions) {
 var McpServer, EMPTY_OBJECT_JSON_SCHEMA, EMPTY_COMPLETION_RESULT;
 var init_mcp = __esm({
   "node_modules/@modelcontextprotocol/sdk/dist/esm/server/mcp.js"() {
-    init_server3();
+    init_server2();
     init_zod_compat();
     init_zod_json_schema_compat();
     init_types5();
@@ -60219,7 +63534,7 @@ var init_mcp = __esm({
         }
         const inputObj = normalizeObjectSchema(tool.inputSchema);
         const schemaToParse = inputObj ?? tool.inputSchema;
-        const parseResult = await safeParseAsync2(schemaToParse, args2 ?? {});
+        const parseResult = await safeParseAsync3(schemaToParse, args2 ?? {});
         if (!parseResult.success) {
           const error2 = "error" in parseResult ? parseResult.error : "Unknown error";
           const errorMessage2 = getParseErrorMessage(error2);
@@ -60244,7 +63559,7 @@ var init_mcp = __esm({
           throw new McpError(ErrorCode.InvalidParams, `Output validation error: Tool ${toolName} has an output schema but no structured content was provided`);
         }
         const outputObj = normalizeObjectSchema(tool.outputSchema);
-        const parseResult = await safeParseAsync2(outputObj, result.structuredContent);
+        const parseResult = await safeParseAsync3(outputObj, result.structuredContent);
         if (!parseResult.success) {
           const error2 = "error" in parseResult ? parseResult.error : "Unknown error";
           const errorMessage2 = getParseErrorMessage(error2);
@@ -60457,7 +63772,7 @@ var init_mcp = __esm({
           }
           if (prompt.argsSchema) {
             const argsObj = normalizeObjectSchema(prompt.argsSchema);
-            const parseResult = await safeParseAsync2(argsObj, request.params.arguments ?? {});
+            const parseResult = await safeParseAsync3(argsObj, request.params.arguments ?? {});
             if (!parseResult.success) {
               const error2 = "error" in parseResult ? parseResult.error : "Unknown error";
               const errorMessage2 = getParseErrorMessage(error2);
@@ -60805,8 +64120,8 @@ var init_mcp = __esm({
 function deserializeMessage(line) {
   return JSONRPCMessageSchema.parse(JSON.parse(line));
 }
-function serializeMessage(message) {
-  return JSON.stringify(message) + "\n";
+function serializeMessage(message2) {
+  return JSON.stringify(message2) + "\n";
 }
 var STDIO_DEFAULT_MAX_BUFFER_SIZE, ReadBuffer;
 var init_stdio = __esm({
@@ -60884,11 +64199,11 @@ var init_stdio2 = __esm({
       processReadBuffer() {
         while (true) {
           try {
-            const message = this._readBuffer.readMessage();
-            if (message === null) {
+            const message2 = this._readBuffer.readMessage();
+            if (message2 === null) {
               break;
             }
-            this.onmessage?.(message);
+            this.onmessage?.(message2);
           } catch (error2) {
             this.onerror?.(error2);
           }
@@ -60904,10 +64219,10 @@ var init_stdio2 = __esm({
         this._readBuffer.clear();
         this.onclose?.();
       }
-      send(message) {
+      send(message2) {
         return new Promise((resolve) => {
-          const json = serializeMessage(message);
-          if (this._stdout.write(json)) {
+          const json2 = serializeMessage(message2);
+          if (this._stdout.write(json2)) {
             resolve();
           } else {
             this._stdout.once("drain", resolve);
@@ -60997,6 +64312,207 @@ var init_mcp2 = __esm({
     init_run();
     init_report();
     FIRST_HOP = "Semantic search is a first hop: use the paths and line ranges it returns, then open and read those files (and grep) for the exhaustive answer.";
+  }
+});
+
+// src/server.ts
+var server_exports = {};
+__export(server_exports, {
+  createHandler: () => createHandler,
+  serve: () => serve
+});
+import { createServer as createServer2 } from "node:http";
+function lazyClient(source) {
+  if (typeof source !== "function") return { get: async () => source, peek: () => ({ client: source, error: null }) };
+  let client = null;
+  let error2 = null;
+  let lastAttempt = 0;
+  let pending = null;
+  const get = async () => {
+    if (client) return client;
+    if (error2 && Date.now() - lastAttempt < RECONNECT_MS) throw new HttpError(503, error2);
+    pending ??= source().then((c) => {
+      client = c;
+      error2 = null;
+      return c;
+    }).catch((err2) => {
+      error2 = errorMessage(err2);
+      throw new HttpError(503, error2);
+    }).finally(() => {
+      lastAttempt = Date.now();
+      pending = null;
+    });
+    return pending;
+  };
+  return { get, peek: () => ({ client, error: error2 }) };
+}
+function createHandler({ client, config: config2, authenticate, log }) {
+  const clients = lazyClient(client);
+  const handler = (req, res) => {
+    const started = performance.now();
+    const url = new URL(req.url ?? "/", "http://localhost");
+    res.on("finish", () => log.info(`${req.method} ${url.pathname} ${res.statusCode} ${Math.round(performance.now() - started)}ms`));
+    if (config2.server.corsOrigin) {
+      res.setHeader("Access-Control-Allow-Origin", config2.server.corsOrigin);
+      res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, Mcp-Protocol-Version, Mcp-Session-Id");
+      res.setHeader("Access-Control-Expose-Headers", "WWW-Authenticate, Mcp-Session-Id");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+      res.setHeader("Vary", "Origin");
+    }
+    route(req, res, url, clients.get, config2, authenticate, log).then((body2) => {
+      if (body2 !== HANDLED) send(res, 200, body2);
+    }).catch((err2) => {
+      const status = err2 instanceof HttpError ? err2.status : err2 instanceof ConfigError ? 400 : 500;
+      if (!(err2 instanceof HttpError) && status >= 500) log.error(`${req.method} ${url.pathname}: ${errorMessage(err2)}`);
+      if (err2 instanceof HttpError && (status === 401 || status === 403)) log.warn(`${req.method} ${url.pathname} refused: ${errorMessage(err2)}`);
+      const headers = err2 instanceof HttpError ? err2.headers : {};
+      send(res, status, { error: status >= 500 && !(err2 instanceof HttpError) ? "Internal error; see the server log" : errorMessage(err2) }, headers);
+    });
+  };
+  return Object.assign(handler, {
+    warm: async () => {
+      await clients.get().catch(() => null);
+      return clients.peek();
+    },
+    close: async () => {
+      await clients.peek().client?.close();
+    }
+  });
+}
+async function route(req, res, url, getClient, config2, authenticate, log) {
+  const method = req.method ?? "GET";
+  if (method === "OPTIONS") return {};
+  if (url.pathname === "/health" && method === "GET") {
+    const client2 = await getClient();
+    return { ok: true, store: config2.store, index: client2.identity.index, namespace: client2.identity.namespace };
+  }
+  if (url.pathname === RESOURCE_METADATA_PATH || url.pathname.startsWith(`${RESOURCE_METADATA_PATH}/`)) {
+    const metadata2 = resourceMetadata(config2.server.auth);
+    if (!metadata2 || method !== "GET") throw new HttpError(404, `No route ${url.pathname}`);
+    return metadata2;
+  }
+  const known = ["/status", "/search", "/history/search", "/mcp"];
+  if (!known.includes(url.pathname)) throw new HttpError(404, `No route ${url.pathname}`);
+  const principal = await authenticate(req.headers.authorization);
+  const client = await getClient();
+  if (url.pathname === "/mcp") return mcp(req, res, method, client, principal, log);
+  audit(log, principal, url.pathname);
+  if (url.pathname === "/status") {
+    if (method !== "GET") throw new HttpError(405, "Use GET");
+    return client.status();
+  }
+  if (method !== "POST") throw new HttpError(405, "Use POST");
+  const body2 = await readJson(req);
+  if (url.pathname === "/search") return client.search(parse4(SearchBody, body2));
+  return client.searchHistory(parse4(HistoryBody, body2));
+}
+async function mcp(req, res, method, client, principal, log) {
+  if (method !== "POST") throw new HttpError(405, "This MCP endpoint is stateless: use POST", { Allow: "POST" });
+  const body2 = await readJson(req);
+  for (const message2 of Array.isArray(body2) ? body2 : [body2]) {
+    const m = message2;
+    if (m?.method === "tools/call") audit(log, principal, `mcp ${m.params?.name ?? "?"}`);
+  }
+  const server = createMcpServer(client);
+  const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: void 0, enableJsonResponse: true });
+  res.on("close", () => {
+    void transport.close();
+    void server.close();
+  });
+  await server.connect(transport);
+  await transport.handleRequest(req, res, body2);
+  return HANDLED;
+}
+function audit(log, principal, operation) {
+  if (principal.via === "none") return;
+  log.info(`audit sub=${JSON.stringify(principal.sub)} via=${principal.via} op=${operation}`);
+}
+async function readJson(req) {
+  const type = req.headers["content-type"] ?? "";
+  if (!type.includes("application/json")) throw new HttpError(415, "Send Content-Type: application/json");
+  const chunks = [];
+  let size2 = 0;
+  for await (const chunk of req) {
+    size2 += chunk.length;
+    if (size2 > MAX_BODY_BYTES) throw new HttpError(413, `Body larger than ${MAX_BODY_BYTES} bytes`);
+    chunks.push(chunk);
+  }
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  } catch {
+    throw new HttpError(400, "Body is not valid JSON");
+  }
+}
+function parse4(schema2, body2) {
+  const result = schema2.safeParse(body2);
+  if (!result.success) throw new HttpError(400, result.error.issues.map((i2) => `${i2.path.join(".") || "body"}: ${i2.message}`).join("; "));
+  return result.data;
+}
+function send(res, status, body2, headers = {}) {
+  if (res.headersSent) return;
+  const json2 = JSON.stringify(body2);
+  res.writeHead(status, { ...headers, "Content-Type": "application/json; charset=utf-8", "Content-Length": Buffer.byteLength(json2), "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
+  res.end(json2);
+}
+async function serve(env = process.env) {
+  const log = createLogger(env);
+  const config2 = loadConfig(env);
+  if (config2.server.auth.mode === "none" && !isLoopback(config2.server.host)) {
+    throw new ConfigError(`Refusing to listen on ${config2.server.host} without authentication; set REPO_VECTOR_SERVER_TOKEN or REPO_VECTOR_AUTH=jwt, or REPO_VECTOR_SERVER_HOST=127.0.0.1`);
+  }
+  const authenticate = await createAuthenticator(config2.server.auth, config2.repo);
+  const handler = createHandler({ client: () => createClient({ env, root: null, readOnly: true }), config: config2, authenticate, log });
+  const server = createServer2(handler);
+  await new Promise((resolve) => server.listen(config2.server.port, config2.server.host, resolve));
+  log.info(`repo-vector API on http://${config2.server.host}:${config2.server.port} (${config2.store}; auth ${config2.server.auth.mode}; MCP at /mcp)`);
+  const { client, error: error2 } = await handler.warm();
+  if (client) log.info(`Serving index ${client.identity.index}, namespace ${client.identity.namespace}`);
+  else log.warn(`Not ready yet: ${error2}. /health answers 503 until it is; retrying on request.`);
+  const stop2 = () => {
+    server.close();
+    void handler.close();
+  };
+  process.once("SIGTERM", stop2);
+  process.once("SIGINT", stop2);
+  return server;
+}
+var MAX_BODY_BYTES, filterValue, SearchBody, HistoryBody, HANDLED, RECONNECT_MS, isLoopback;
+var init_server3 = __esm({
+  "src/server.ts"() {
+    "use strict";
+    init_streamableHttp();
+    init_zod();
+    init_auth();
+    init_client2();
+    init_config();
+    init_errors2();
+    init_log();
+    init_mcp2();
+    MAX_BODY_BYTES = 64 * 1024;
+    filterValue = external_exports.union([external_exports.string(), external_exports.number(), external_exports.boolean(), external_exports.record(external_exports.unknown()), external_exports.array(external_exports.unknown())]);
+    SearchBody = external_exports.object({
+      query: external_exports.string().trim().min(1).max(2e3),
+      topK: external_exports.number().int().min(1).optional(),
+      branch: external_exports.string().max(200).optional(),
+      language: external_exports.string().max(50).optional(),
+      ext: external_exports.string().max(20).optional(),
+      fileName: external_exports.string().max(300).optional(),
+      symbolKind: external_exports.string().max(100).optional(),
+      pathPrefix: external_exports.string().max(500).optional(),
+      filter: external_exports.record(filterValue).optional(),
+      rerank: external_exports.boolean().optional()
+    }).strict();
+    HistoryBody = external_exports.object({
+      query: external_exports.string().trim().min(1).max(2e3),
+      topK: external_exports.number().int().min(1).optional(),
+      branch: external_exports.string().max(200).optional(),
+      since: external_exports.string().max(40).optional(),
+      until: external_exports.string().max(40).optional(),
+      author: external_exports.string().max(200).optional()
+    }).strict();
+    HANDLED = /* @__PURE__ */ Symbol("handled");
+    RECONNECT_MS = 5e3;
+    isLoopback = (host) => host === "127.0.0.1" || host === "::1" || host === "localhost";
   }
 });
 
@@ -61168,7 +64684,7 @@ async function main(argv) {
     case "status":
       return statusCommand(rest);
     case "serve": {
-      const { serve: serve2 } = await Promise.resolve().then(() => (init_server(), server_exports));
+      const { serve: serve2 } = await Promise.resolve().then(() => (init_server3(), server_exports));
       await serve2();
       return -1;
     }
